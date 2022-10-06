@@ -1,0 +1,6 @@
+10/2 18:08:14.549  vendor: AuthenticAMD
+10/2 18:08:14.549  branding: AMD Ryzen 5 1600X Six-Core Processor           
+10/2 18:08:14.549  features: lahf64 cmpxchg16b sse sse2 sse3 ssse3 sse41 sse42 avx avx2 aesni clmul sha rdrand 
+10/2 18:08:14.549  sockets: 1
+10/2 18:08:14.549  cores: 6
+10/2 18:08:14.549  threads: 12

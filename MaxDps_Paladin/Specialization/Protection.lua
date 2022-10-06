@@ -59,7 +59,11 @@ function Paladin:Protection()
 		MaxDps:GlowCooldown(PR.GuardianOfAncientKings, cooldown[PR.GuardianOfAncientKings].ready);
 	end
 	
-	if buff[PR.ShiningLight].up then
+	if buff[PR.ShiningLight].up and healthPercent <= 75 then
+		MaxDps:GlowCooldown(PR.WordOfGlory, cooldown[PR.WordOfGlory].ready);
+	end
+	
+	if healthPercent <= 65 and holyPower > 2 then
 		MaxDps:GlowCooldown(PR.WordOfGlory, cooldown[PR.WordOfGlory].ready);
 	end
 	
@@ -72,6 +76,10 @@ function Paladin:Protection()
 	if holyPower > 2 then
 		MaxDps:GlowCooldown(PR.ShieldOfTheRighteous, not buff[PR.ShieldOfTheRighteousAura].up);
 	end
+	
+	if holyPower > 4 then
+		MaxDps:GlowCooldown(PR.ShieldOfTheRighteous, cooldown[PR.ShieldOfTheRighteous].ready);
+	end
 		
 	--Paladin:ProtectionCooldowns();
 		
@@ -79,9 +87,9 @@ function Paladin:Protection()
 		return PR.Consecration;
 	end
 	
-	if cooldown[PR.DivineToll].ready then
-		return PR.DivineToll;
-	end
+	--if cooldown[PR.DivineToll].ready then
+		--return PR.DivineToll;
+	--end
 	
 	if cooldown[PR.Judgment].ready then
 		return PR.Judgment;

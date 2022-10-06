@@ -85,7 +85,7 @@ function Monk:Brewmaster()
 		MaxDps:GlowCooldown(BR.FortifyingBrew, cooldown[BR.FortifyingBrew].ready);
 	end
 	
-	MaxDps:GlowCooldown(BR.WeaponsOfOrder, cooldown[BR.WeaponsOfOrder].ready);
+	--MaxDps:GlowCooldown(BR.WeaponsOfOrder, cooldown[BR.WeaponsOfOrder].ready);
 	MaxDps:GlowCooldown(BR.LegSweep, cooldown[BR.LegSweep].ready);
 
 	if cooldown[BR.KegSmash].ready then

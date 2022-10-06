@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# WowAddOnStudio Solution File, Format Version 11.00
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E6E1D386-69D8-4755-9E61-0950293915FC}") = "WowAddon1", "WowAddon1\WowAddon1.wowproj", "{937FA47D-3551-4C0D-83E3-01A4E08334C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Default|Any CPU = Default|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{937FA47D-3551-4C0D-83E3-01A4E08334C6}.Default|Any CPU.ActiveCfg = Default|Any CPU
+		{937FA47D-3551-4C0D-83E3-01A4E08334C6}.Default|Any CPU.Build.0 = Default|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEC481A0-CD13-4D96-BC46-68D9EE1DA46F}
+	EndGlobalSection
+EndGlobal

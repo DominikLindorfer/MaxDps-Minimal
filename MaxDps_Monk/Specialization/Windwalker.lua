@@ -30,12 +30,14 @@ local WW = {
 	FlyingSerpentKick       = 101545,
 	BlackoutKick            = 100784,
 	TouchOfDeath			= 322109,
+	--InvokeXuenTheWhiteTiger = 123904,
 	InvokeXuenTheWhiteTiger = 123904,
 	StormEarthAndFire       = 137639,
 	SwiftRoundhouse         = 277669,
 	BokProc                 = 116768,
 	DanceChiJiTalent = 325201,
-	DanceChiJiBuff = 325202
+	DanceChiJiBuff = 325202,
+	WeaponsOfOrder = 310454
 };
 
 setmetatable(WW, Monk.spellMeta);
@@ -64,13 +66,18 @@ function Monk:Windwalker()
 	
 	MaxDps:GlowEssences();
 	
-	if talents[WW.InvokeXuenTheWhiteTiger] then
+	--Xuen on CD
+	if cooldown[WW.InvokeXuenTheWhiteTiger].ready then
+		--return WW.InvokeXuenTheWhiteTiger;
 		MaxDps:GlowCooldown(WW.InvokeXuenTheWhiteTiger, cooldown[WW.InvokeXuenTheWhiteTiger].ready);
 	end
 	
 	--TOD on CD
 	MaxDps:GlowCooldown(WW.TouchOfDeath,cooldown[WW.TouchOfDeath].ready and targetHealthPercent < 15 and targetHealth < health and targetHealth > 0);
-
+	
+	--Weapons of Order on CD
+	--MaxDps:GlowCooldown(WW.WeaponsOfOrder, cooldown[WW.WeaponsOfOrder].ready);
+	
 	if not talents[WW.Serenity] then
 		-- storm_earth_and_fire,if=cooldown.storm_earth_and_fire.charges=2|(cooldown.fists_of_fury.remains<=6&chi>=3&cooldown.rising_sun_kick.remains<=1)|target.time_to_die<=15;
 		MaxDps:GlowCooldown(

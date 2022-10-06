@@ -59,14 +59,20 @@ function DemonHunter:Vengeance()
 	local cooldown = fd.cooldown;
 	local buff = fd.buff;
 	local talents = fd.talents;
-
+	local curentHP = UnitHealth('player');
+	local maxHP = UnitHealthMax('player');
+	local healthPerc = (curentHP / maxHP) * 100;
+	
 	-- variable,name=brand_build,value=talent.agonizing_flames.enabled&talent.burning_alive.enabled&talent.charred_flesh.enabled;
 	local brandBuild = talents[VG.AgonizingFlames] and talents[VG.BurningAlive] and talents[VG.CharredFlesh];
 
 	fd.brandBuild = brandBuild;
-
-	MaxDps:GlowCooldown(VG.Metamorphosis, cooldown[VG.Metamorphosis].ready);
-	-- demon_spikes;
+	
+	if healthPerc <= 45 then
+		MaxDps:GlowCooldown(VG.Metamorphosis, cooldown[VG.Metamorphosis].ready);
+	end
+	
+	-- demon_spike
 	MaxDps:GlowCooldown(VG.DemonSpikes, cooldown[VG.DemonSpikes].ready and buff[VG.DemonSpikesAura].remains < 1);
 
 	-- throw_glaive,if=buff.fel_bombardment.stack=5&(buff.immolation_aura.up|!buff.metamorphosis.up);
@@ -127,7 +133,7 @@ function DemonHunter:VengeanceCooldowns()
 	local covenantId = fd.covenant.covenantId;
 
 	-- sinful_brand,if=!dot.sinful_brand.ticking;
-	if covenantId == Venthyr and cooldown[VG.SinfulBrand].ready and not debuff[VG.SinfulBrand].up then
+	if covenantId == Venthyr and cooldown[VG.SinfulBrand].ready then
 		return VG.SinfulBrand;
 	end
 
@@ -146,6 +152,8 @@ function DemonHunter:VengeanceCooldowns()
 	if covenantId == Kyrian and cooldown[ElysianDecree].ready then
 		return ElysianDecree;
 	end
+
+	
 end
 
 function DemonHunter:VengeanceDefensives()
@@ -196,7 +204,7 @@ function DemonHunter:VengeanceNormal()
 	then
 		return VG.SpiritBomb;
 	end
-
+	
 	-- fel_devastation;
 	if fury >= 50 and cooldown[VG.FelDevastation].ready then
 		return VG.FelDevastation;
