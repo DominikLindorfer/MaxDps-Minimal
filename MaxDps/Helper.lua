@@ -113,7 +113,7 @@ function MaxDps:IntUnitAura(unit, nameOrId, filter, timeShift)
 end
 
 function MaxDps:CollectAura(unit, timeShift, output, filter)
-	filter = filter and filter or (unit == 'target' and 'PLAYER|HARMFUL' or nil);
+	-- filter = filter and filter or (unit == 'target' and 'PLAYER|HARMFUL' or nil);
 
 	local t = GetTime();
 	local i = 1;

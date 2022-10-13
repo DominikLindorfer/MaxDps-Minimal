@@ -9,12 +9,14 @@ local UnitPower = UnitPower;
 local UnitPowerMax = UnitPowerMax;
 
 local RR = {
-	Mangle               = 33917,
+	Mangle = 33917,
 	Renewal = 108238,
-	Rejuvenation = 774,
+	Rejuvenation = 3627,
+	RejuvenationBuff = 774,
 	Lifebloom = 33763,
 	Regrowth = 8936,
-	Nourish = 289022,
+	Nourish = 50464,
+	WildGrowth = 48438,
 	Overgrowth = 203651,
 	Swiftmend = 18562,
 	Ironbark = 102342,
@@ -31,7 +33,8 @@ function Druid:Restoration()
 	local debuff = fd.debuff;
 	local talents = fd.talents;
 	local targets = fd.targets;
-	local buff = fd.buff;
+	-- local buff = fd.buff;
+	local buff = fd.debuff;
 	
 	local targetHp = MaxDps:TargetPercentHealth() * 100;
 	local health = UnitHealth('player');
@@ -46,9 +49,9 @@ function Druid:Restoration()
 	-- MaxDps:GlowEssences();
 
 	-- Cooldowns
-	if manaPercent <= 95 then
-		MaxDps:GlowCooldown(RR.Innervate, cooldown[RR.Innervate].ready);
-	end
+	-- if manaPercent <= 55 then
+	-- 	MaxDps:GlowCooldown(RR.Innervate, cooldown[RR.Innervate].ready);
+	-- end
 
 	if talents[RR.Incarnation] then
 		if targetHp <= 30 then
@@ -71,12 +74,6 @@ function Druid:Restoration()
 	if targetHp <= 70 then
 		MaxDps:GlowCooldown(RR.Swiftmend, cooldown[RR.Swiftmend].ready);
 	end
-
-	if targetHp < 95 then
-		if not buff[RR.Rejuvenation].up then
-			return RR.Rejuvenation
-		end
-	end
 	
 	if targetHp < 95 then
 		if not buff[RR.Lifebloom].up then
@@ -90,12 +87,24 @@ function Druid:Restoration()
 		end
 	end
 	
+	if targetHp < 90 then
+		if not buff[RR.RejuvenationBuff].up then
+			return RR.Mangle
+		end
+	end
+	
 	if targetHp < 85 then
+		if not buff[RR.WildGrowth].up then
+			return RR.WildGrowth
+		end
+	end
+
+	if targetHp < 65 then
 		if not buff[RR.Nourish].up then
 			return RR.Nourish
 		end
 	end
-
+	
 
 end
 

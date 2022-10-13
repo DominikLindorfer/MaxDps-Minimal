@@ -1,10 +1,5 @@
 -- WoW Addon to mimic DataToColor Addon
 
--- local name = UnitName("player")
--- local health = UnitHealth("player")
--- local enemyhealth = UnitHealth("target")
--- print(name, health, enemyhealth)
-
 -- Automatic Modulo function for Lua 5 and earlier
 function Modulo(val, by)
     return val - math.floor(val / by) * by
@@ -49,20 +44,20 @@ function(s,e)
     if f.t>.025 then 
         f.t=0 
         
-        p = UnitHealth("player") / UnitHealthMax("player") * 10000
-        col1 = integerToColor(p)
+        p = UnitHealth("player") / (UnitHealthMax("player")+1)
+        col1 = fixedDecimalToColor(p)
         frameP:SetBackdropColor(col1[1], col1[2], col1[3], 1)
-        print(col1[1], col1[2], col1[3]) 
+        -- print(col1[1], col1[2], col1[3]) 
         
-        p1 = UnitHealth("party1") / (UnitHealthMax("party1")+1) * 10000
-        p2 = UnitHealth("party2") / (UnitHealthMax("party2")+1) * 10000
-        p3 = UnitHealth("party3") / (UnitHealthMax("party3")+1) * 10000
-        p4 = UnitHealth("party4") / (UnitHealthMax("party4")+1) * 10000
+        p1 = UnitHealth("party1") / (UnitHealthMax("party1")+1) 
+        p2 = UnitHealth("party2") / (UnitHealthMax("party2")+1) 
+        p3 = UnitHealth("party3") / (UnitHealthMax("party3")+1) 
+        p4 = UnitHealth("party4") / (UnitHealthMax("party4")+1) 
 
-        col1 = integerToColor(p1)
-        col2 = integerToColor(p2)
-        col3 = integerToColor(p3)
-        col4 = integerToColor(p4)
+        col1 = fixedDecimalToColor(p1)
+        col2 = fixedDecimalToColor(p2)
+        col3 = fixedDecimalToColor(p3)
+        col4 = fixedDecimalToColor(p4)
 
         frames[1]:SetBackdropColor(col1[1], col1[2], col1[3], 1)
         frames[2]:SetBackdropColor(col2[1], col2[2], col2[3], 1)
@@ -86,7 +81,7 @@ function integerToColor(i)
         error("Integer too big to encode as color")
     end
     
-    print(i)
+    -- print(i)
     -- r,g,b are integers in range 0-255
     local b = Modulo(i, 256)
     i = math.floor(i / 256)
