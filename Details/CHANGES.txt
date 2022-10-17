@@ -1,0 +1,10 @@
+tag 3810854f1e0505c3cea465d67536650ef91e7e95 Details.DF.SL.Wrath.10136.146
+Author:	Tercio Jose <terciob19@hotmail.com>
+Date:	Sun Oct 9 20:49:31 2022 -0300
+
+commit b588d5e30cec44d78125022adcfdf76c760f825b
+Author: Tercio Jose <terciob19@hotmail.com>
+Date:   Sun Oct 9 20:48:47 2022 -0300
+
+    Fixed an error while trying to move the window by clicking and holding on a window line
+
