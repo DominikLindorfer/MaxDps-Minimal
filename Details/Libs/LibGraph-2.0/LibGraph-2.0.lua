@@ -11,7 +11,7 @@ Description: Allows for easy creation of graphs
 --Thanks to Nelson Minar for catching several errors where width was being used instead of height (damn copy and paste >_>)
 
 local major = "LibGraph-2.0"
-local minor = 90000 + tonumber(("$Revision: 57 $"):match("(%d+)"))
+local minor = 90000 + tonumber(("$Revision: 58 $"):match("(%d+)"))
 
 
 --Search for just Addon\\ at the front since the interface part often gets trimmed
@@ -30,6 +30,8 @@ do
 		end
 	end
 end
+
+TextureDirectory = "Interface\\Addons\\Details\\Libs\\LibGraph-2.0"
 
 
 if not LibStub then error(major .. " requires LibStub") end
@@ -685,7 +687,7 @@ function GraphFunctions:AddDataSeries(points, color, n2, linetexture)
 	end
 
 	if linetexture then
-		if not linetexture:find ("\\") and not linetexture:find ("//") then 
+		if not linetexture:find("\\") and not linetexture:find("//") then 
 			linetexture = TextureDirectory..linetexture
 		end
 	end
@@ -1293,11 +1295,11 @@ end
 
 function GraphFunctions:SetLineTexture(texture)
 	if (type(texture) ~= "string") then
-		return assert (false, "Parameter 1 for SetLineTexture must be a string")
+		return assert(false, "Parameter 1 for SetLineTexture must be a string")
 	end
 
 	--full path
-	if (texture:find ("\\") or texture:find ("//")) then 
+	if (texture:find("\\") or texture:find("//")) then 
 		self.CustomLine = texture
 	--using an image inside lib-graph folder
 	else 
@@ -1306,10 +1308,10 @@ function GraphFunctions:SetLineTexture(texture)
 end
 
 function GraphFunctions:SetBorderSize(border, size)
-	border = string.lower (border)
+	border = string.lower(border)
 	
 	if (type(size) ~= "number") then
-		return assert (false, "Parameter 2 for SetBorderSize must be a number")
+		return assert(false, "Parameter 2 for SetBorderSize must be a number")
 	end
 	
 	if (border == "left") then
@@ -1326,7 +1328,7 @@ function GraphFunctions:SetBorderSize(border, size)
 		return true
 	end
 	
-	return assert (false, "Usage: GraphObject:SetBorderSize (LEFT RIGHT TOP BOTTOM, SIZE)")
+	return assert(false, "Usage: GraphObject:SetBorderSize (LEFT RIGHT TOP BOTTOM, SIZE)")
 end
 
 function GraphFunctions:CreateGridlines()
