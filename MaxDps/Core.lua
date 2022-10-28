@@ -54,14 +54,7 @@ MaxDps.Classes = {
 function MaxDps:OnInitialize()
 	print("OnInitialize() activated!")
 	self.db = LibStub('AceDB-3.0'):New('MaxDpsOptions', self.defaultOptions);
-
 	-- self:RegisterChatCommand('maxdps', 'ShowMainWindow');
-
-	-- if not self.db.global.customRotations then
-		-- self.db.global.customRotations = {};
-	-- end
-
-	-- self:AddToBlizzardOptions();
 end
 
 function MaxDps:ShowMainWindow()
@@ -118,19 +111,6 @@ end
 
 function MaxDps:EnableRotation()
 	print("EnableRotation() activated!")
-	-- if self.NextSpell == nil or self.rotationEnabled then
-	-- 	self:Print(self.Colors.Error .. 'Failed to enable addon!');
-	-- 	return
-	-- end
-
-	-- self:Fetch();
-	-- self:UpdateButtonGlow();
-	-- self:GetAzeriteTraits()	
-	-- self:GetAzeriteEssences();
-	-- self:GetLegendaryEffects();
-	-- if self.ModuleOnEnable then
-	-- 	self.ModuleOnEnable();
-	-- end
 	
 	self:CheckTalents();
 	self:GetCovenantInfo();
@@ -145,14 +125,14 @@ function MaxDps:EnableRotationTimer()
 	-- self.RotationTimer = self:ScheduleRepeatingTimer("TimerFeedback", 0.1)
 end
 
-function MaxDps:TimerFeedback()
-  self.timerCount = self.timerCount + 1
-  print(("%d seconds passed"):format(5 * self.timerCount))
-  -- run 30 seconds in total
-  if self.timerCount == 6 then
-    self:CancelTimer(self.testTimer)
-  end
-end
+-- function MaxDps:TimerFeedback()
+--   self.timerCount = self.timerCount + 1
+--   print(("%d seconds passed"):format(5 * self.timerCount))
+--   -- run 30 seconds in total
+--   if self.timerCount == 6 then
+--     self:CancelTimer(self.testTimer)
+--   end
+-- end
 
 function MaxDps:DisableRotation()
 	if not self.rotationEnabled then
@@ -185,26 +165,8 @@ function MaxDps:OnEnable()
 	end
 
 	-- self:RegisterEvent('PLAYER_TARGET_CHANGED');
-	-- self:RegisterEvent('PLAYER_TALENT_UPDATE');
-	-- self:RegisterEvent('PLAYER_REGEN_DISABLED');
-	-- self:RegisterEvent('PLAYER_ENTERING_WORLD');
-	-- self:RegisterEvent('AZERITE_ESSENCE_ACTIVATED');
-	-- self:RegisterEvent('ACTIONBAR_SLOT_CHANGED', 'ButtonFetch');
-	-- self:RegisterEvent('ACTIONBAR_HIDEGRID', 'ButtonFetch');
-	-- self:RegisterEvent('ACTIONBAR_PAGE_CHANGED', 'ButtonFetch');
-	-- self:RegisterEvent('LEARNED_SPELL_IN_TAB', 'ButtonFetch');
-	-- self:RegisterEvent('CHARACTER_POINTS_CHANGED', 'ButtonFetch');
-	-- self:RegisterEvent('ACTIVE_TALENT_GROUP_CHANGED', 'ButtonFetch');
-	-- self:RegisterEvent('PLAYER_SPECIALIZATION_CHANGED', 'ButtonFetch');
-	-- self:RegisterEvent('UPDATE_MACROS', 'ButtonFetch');
-	-- self:RegisterEvent('VEHICLE_UPDATE', 'ButtonFetch');
-	-- self:RegisterEvent('UPDATE_STEALTH', 'ButtonFetch');
-	-- self:RegisterEvent('UNIT_ENTERED_VEHICLE');
-	-- self:RegisterEvent('UNIT_EXITED_VEHICLE');
-
 	self:RegisterEvent('NAME_PLATE_UNIT_ADDED');
 	self:RegisterEvent('NAME_PLATE_UNIT_REMOVED');
-	--	self:RegisterEvent('PLAYER_REGEN_ENABLED');
 
 	if not self.playerUnitFrame then
 		self.spellHistory = {};
@@ -242,27 +204,6 @@ function MaxDps:NAME_PLATE_UNIT_REMOVED(_, nameplateUnit)
 	end
 end
 
-function MaxDps:PLAYER_TALENT_UPDATE()
-	self:DisableRotation();
-end
-
-function MaxDps:AZERITE_ESSENCE_ACTIVATED()
-	self:DisableRotation();
-end
-
-function MaxDps:UNIT_ENTERED_VEHICLE(_, unit)
-	if unit == 'player' and self.rotationEnabled then
-		self:DisableRotation();
-	end
-end
-
-function MaxDps:UNIT_EXITED_VEHICLE(_, unit)
-	if unit == 'player' then
-		self:InitRotations();
-		self:EnableRotation();
-	end
-end
-
 function MaxDps:PLAYER_TARGET_CHANGED()
 	if self.rotationEnabled then
 		if UnitIsFriend('player', 'target') then
@@ -270,24 +211,6 @@ function MaxDps:PLAYER_TARGET_CHANGED()
 		else
 			self:InvokeNextSpell();
 		end
-	end
-end
-
-function MaxDps:PLAYER_REGEN_DISABLED()
-	if self.db.global.onCombatEnter and not self.rotationEnabled then
-		self:Print(self.Colors.Success .. 'Auto enable on combat!');
-		print("PLAYER_REGEN_DISABLED() activated!")
-		self:InitRotations();
-		self:EnableRotation();
-	end
-end
-
-function MaxDps:ButtonFetch()
-	if self.rotationEnabled then
-		if self.fetchTimer then
-			self:CancelTimer(self.fetchTimer);
-		end
-		self.fetchTimer = self:ScheduleTimer('Fetch', 0.5);
 	end
 end
 
@@ -312,7 +235,6 @@ function MaxDps:PrepareFrameData()
 end
 
 function MaxDps:InvokeNextSpell()
-	-- invoke spell check
 	local oldSkill = self.Spell;
 	local oldCD = self.Cooldown;
 
@@ -321,42 +243,13 @@ function MaxDps:InvokeNextSpell()
 	-- Function Alias set in MaxDps Submodules
 	self.Spell = self:NextSpell();
 	self.Cooldown = self:NextCooldown();
-
-	print(self.Spell)
-	print(self.Cooldown)
+	-- print(self.Spell)
+	-- print(self.Cooldown)
 
 	if WeakAuras then
 			WeakAuras.ScanEvents('MAXDPS_SPELL_UPDATE', self.Spell);
 			WeakAuras.ScanEvents('MAXDPS_COOLDOWN_UPDATE2', self.Cooldown);
 	end
-
-	-- if (oldSkill ~= self.Spell or oldSkill == nil) and self.Spell ~= nil then
-	-- 	self:GlowNextSpell(self.Spell);
-	-- 	if WeakAuras then
-	-- 		WeakAuras.ScanEvents('MAXDPS_SPELL_UPDATE', self.Spell);
-	-- 	end
-	-- end
-
-	-- if self.Spell == nil and oldSkill ~= nil then
-	-- 	self:GlowClear();
-	-- 	if WeakAuras then
-	-- 		WeakAuras.ScanEvents('MAXDPS_SPELL_UPDATE', nil);
-	-- 	end
-	-- end
-	
-	-- if (oldSkill ~= self.Spell or oldSkill == nil) and self.Cooldown ~= nil then
-	-- 	self:GlowNextSpell(self.Spell);
-	-- 	if WeakAuras then
-	-- 		WeakAuras.ScanEvents('MAXDPS_COOLDOWN_UPDATE2', self.Cooldown);
-	-- 	end
-	-- end
-
-	-- if self.Spell == nil and oldSkill ~= nil then
-	-- 	self:GlowClear();
-	-- 	if WeakAuras then
-	-- 		WeakAuras.ScanEvents('MAXDPS_COOLDOWN_UPDATE2', nil);
-	-- 	end
-	-- end
 end
 
 function MaxDps:InitRotations()
@@ -370,21 +263,6 @@ function MaxDps:InitRotations()
 
 
 	self:LoadModule();
-
-	-- if not self.Custom then
-	-- 	self.Custom = self:GetModule('Custom');
-	-- end
-
-	-- self.Custom:LoadCustomRotations();
-	-- local customRotation = self.Custom:GetCustomRotation(classId, spec);
-
-	-- if customRotation then
-	-- 	self.NextSpell = customRotation.fn;
-
-	-- 	self:Print(self.Colors.Success .. 'Loaded Custom Rotation: ' .. customRotation.name);
-	-- else
-	-- 	self:LoadModule();
-	-- end
 end
 
 function MaxDps:LoadModule()

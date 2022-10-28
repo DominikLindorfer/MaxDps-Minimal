@@ -22,10 +22,10 @@ Libs\ForAllIndentsAndPurposes.lua
 Libs\StdUi\StdUi.xml
 
 Core.lua
-Options.lua
+# Options.lua
 Buttons.lua
 Helper.lua
 TimeToDie.lua
-Modules/Custom.lua
-Modules/Window.lua
-Modules/Profiler.lua
+# Modules/Custom.lua
+# Modules/Window.lua
+# Modules/Profiler.lua
