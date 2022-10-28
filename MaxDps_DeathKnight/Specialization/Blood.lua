@@ -49,8 +49,7 @@ setmetatable(BL, DeathKnight.spellMeta);
 
 function DeathKnight:Blood()
 
-	print("Blood() function was just called!")
-
+	
 	local fd = MaxDps.FrameData;
 	local cooldown = fd.cooldown;
 	local buff = fd.buff;
@@ -121,6 +120,34 @@ function DeathKnight:Blood()
 	end
 end
 
+function DeathKnight:BloodCooldowns()
+	
+	local fd = MaxDps.FrameData;
+	local cooldown = fd.cooldown;
+	local buff = fd.buff;
+	local currentSpell = fd.currentSpell;
+	local talents = fd.talents;
+	local covenantId = fd.covenant.covenantId;
+	local runes = DeathKnight:Runes(fd.timeShift);
+	local runicPower = UnitPower('player', RunicPower);
+	local targets = MaxDps:SmartAoe();
+
+	fd.targets = targets;
+	fd.runes = runes;
+	fd.runicPower = runicPower;
+
+	if covenantId == NightFae then
+		BL.DeathAndDecay = BL.DeathAndDecay;
+	end
+	
+	-- death_strike,if=fight_remains<3;
+	if runicPower >= 45	then
+		return BL.Bonestorm;
+	end
+
+	return BL.DancingRuneWeapon
+
+end
 function DeathKnight:BloodGlowCooldowns()
 	local fd = MaxDps.FrameData;
 	local cooldown = fd.cooldown;

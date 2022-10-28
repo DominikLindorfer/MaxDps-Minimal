@@ -32,11 +32,12 @@ DeathKnight.hasEnchant = {};
 
 function DeathKnight:Enable()
 	DeathKnight:InitializeDatabase();
-	DeathKnight:CreateConfig();
+	-- DeathKnight:CreateConfig();
 	DeathKnight:InitializeWeaponRunes();
 
 	if MaxDps.Spec == 1 then
 		MaxDps.NextSpell = DeathKnight.Blood;
+		MaxDps.NextCooldown = DeathKnight.BloodCooldowns;
 		MaxDps:Print(MaxDps.Colors.Info .. 'Death Knight Blood');
 	elseif MaxDps.Spec == 2 then
 		MaxDps.NextSpell = DeathKnight.Frost;

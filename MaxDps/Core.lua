@@ -23,17 +23,45 @@ local spellHistoryBlacklist = {
 	[75] = true; -- Auto shot
 };
 
+MaxDps.Textures = {
+	{text = 'Ping', value = 'Interface\\Cooldown\\ping4'},
+	{text = 'Star', value = 'Interface\\Cooldown\\star4'},
+	{text = 'Starburst', value = 'Interface\\Cooldown\\starburst'},
+};
+MaxDps.FinalTexture = nil;
+
+MaxDps.Colors = {
+	Info = '|cFF1394CC',
+	Error = '|cFFF0563D',
+	Success = '|cFFBCCF02',
+}
+
+MaxDps.Classes = {
+	[1] = 'Warrior',
+	[2] = 'Paladin',
+	[3] = 'Hunter',
+	[4] = 'Rogue',
+	[5] = 'Priest',
+	[6] = 'DeathKnight',
+	[7] = 'Shaman',
+	[8] = 'Mage',
+	[9] = 'Warlock',
+	[10] = 'Monk',
+	[11] = 'Druid',
+	[12] = 'DemonHunter',
+}
+
 function MaxDps:OnInitialize()
 	print("OnInitialize() activated!")
 	self.db = LibStub('AceDB-3.0'):New('MaxDpsOptions', self.defaultOptions);
 
-	self:RegisterChatCommand('maxdps', 'ShowMainWindow');
+	-- self:RegisterChatCommand('maxdps', 'ShowMainWindow');
 
-	if not self.db.global.customRotations then
-		self.db.global.customRotations = {};
-	end
+	-- if not self.db.global.customRotations then
+		-- self.db.global.customRotations = {};
+	-- end
 
-	self:AddToBlizzardOptions();
+	-- self:AddToBlizzardOptions();
 end
 
 function MaxDps:ShowMainWindow()
@@ -90,26 +118,24 @@ end
 
 function MaxDps:EnableRotation()
 	print("EnableRotation() activated!")
-	if self.NextSpell == nil or self.rotationEnabled then
-		self:Print(self.Colors.Error .. 'Failed to enable addon!');
-		return
-	end
+	-- if self.NextSpell == nil or self.rotationEnabled then
+	-- 	self:Print(self.Colors.Error .. 'Failed to enable addon!');
+	-- 	return
+	-- end
 
-	self:Fetch();
-	self:UpdateButtonGlow();
-
+	-- self:Fetch();
+	-- self:UpdateButtonGlow();
+	-- self:GetAzeriteTraits()	
+	-- self:GetAzeriteEssences();
+	-- self:GetLegendaryEffects();
+	-- if self.ModuleOnEnable then
+	-- 	self.ModuleOnEnable();
+	-- end
+	
 	self:CheckTalents();
-	self:GetAzeriteTraits();
-	self:GetAzeriteEssences();
 	self:GetCovenantInfo();
-	self:GetLegendaryEffects();
 	self:CheckIsPlayerMelee();
-	if self.ModuleOnEnable then
-		self.ModuleOnEnable();
-	end
-
 	self:EnableRotationTimer();
-
 	self.rotationEnabled = true;
 end
 
@@ -119,14 +145,14 @@ function MaxDps:EnableRotationTimer()
 	-- self.RotationTimer = self:ScheduleRepeatingTimer("TimerFeedback", 0.1)
 end
 
--- function MaxDps:TimerFeedback()
---   self.timerCount = self.timerCount + 1
---   print(("%d seconds passed"):format(5 * self.timerCount))
---   -- run 30 seconds in total
---   if self.timerCount == 6 then
---     self:CancelTimer(self.testTimer)
---   end
--- end
+function MaxDps:TimerFeedback()
+  self.timerCount = self.timerCount + 1
+  print(("%d seconds passed"):format(5 * self.timerCount))
+  -- run 30 seconds in total
+  if self.timerCount == 6 then
+    self:CancelTimer(self.testTimer)
+  end
+end
 
 function MaxDps:DisableRotation()
 	if not self.rotationEnabled then
@@ -150,25 +176,31 @@ end
 
 function MaxDps:OnEnable()
 	print("OnEnable() activated!")
-	self:RegisterEvent('PLAYER_TARGET_CHANGED');
-	self:RegisterEvent('PLAYER_TALENT_UPDATE');
-	self:RegisterEvent('PLAYER_REGEN_DISABLED');
+
+	if not self.rotationEnabled then
+		self:Print(self.Colors.Success .. 'Auto enable on combat!');
+		print("Enable Rotations on OnEnable()!")
+		self:InitRotations();
+		self:EnableRotation();
+	end
+
+	-- self:RegisterEvent('PLAYER_TARGET_CHANGED');
+	-- self:RegisterEvent('PLAYER_TALENT_UPDATE');
+	-- self:RegisterEvent('PLAYER_REGEN_DISABLED');
 	-- self:RegisterEvent('PLAYER_ENTERING_WORLD');
-	self:RegisterEvent('AZERITE_ESSENCE_ACTIVATED');
-
-	self:RegisterEvent('ACTIONBAR_SLOT_CHANGED', 'ButtonFetch');
-	self:RegisterEvent('ACTIONBAR_HIDEGRID', 'ButtonFetch');
-	self:RegisterEvent('ACTIONBAR_PAGE_CHANGED', 'ButtonFetch');
-	self:RegisterEvent('LEARNED_SPELL_IN_TAB', 'ButtonFetch');
-	self:RegisterEvent('CHARACTER_POINTS_CHANGED', 'ButtonFetch');
-	self:RegisterEvent('ACTIVE_TALENT_GROUP_CHANGED', 'ButtonFetch');
-	self:RegisterEvent('PLAYER_SPECIALIZATION_CHANGED', 'ButtonFetch');
-	self:RegisterEvent('UPDATE_MACROS', 'ButtonFetch');
-	self:RegisterEvent('VEHICLE_UPDATE', 'ButtonFetch');
-	self:RegisterEvent('UPDATE_STEALTH', 'ButtonFetch');
-
-	self:RegisterEvent('UNIT_ENTERED_VEHICLE');
-	self:RegisterEvent('UNIT_EXITED_VEHICLE');
+	-- self:RegisterEvent('AZERITE_ESSENCE_ACTIVATED');
+	-- self:RegisterEvent('ACTIONBAR_SLOT_CHANGED', 'ButtonFetch');
+	-- self:RegisterEvent('ACTIONBAR_HIDEGRID', 'ButtonFetch');
+	-- self:RegisterEvent('ACTIONBAR_PAGE_CHANGED', 'ButtonFetch');
+	-- self:RegisterEvent('LEARNED_SPELL_IN_TAB', 'ButtonFetch');
+	-- self:RegisterEvent('CHARACTER_POINTS_CHANGED', 'ButtonFetch');
+	-- self:RegisterEvent('ACTIVE_TALENT_GROUP_CHANGED', 'ButtonFetch');
+	-- self:RegisterEvent('PLAYER_SPECIALIZATION_CHANGED', 'ButtonFetch');
+	-- self:RegisterEvent('UPDATE_MACROS', 'ButtonFetch');
+	-- self:RegisterEvent('VEHICLE_UPDATE', 'ButtonFetch');
+	-- self:RegisterEvent('UPDATE_STEALTH', 'ButtonFetch');
+	-- self:RegisterEvent('UNIT_ENTERED_VEHICLE');
+	-- self:RegisterEvent('UNIT_EXITED_VEHICLE');
 
 	self:RegisterEvent('NAME_PLATE_UNIT_ADDED');
 	self:RegisterEvent('NAME_PLATE_UNIT_REMOVED');
@@ -282,29 +314,50 @@ end
 function MaxDps:InvokeNextSpell()
 	-- invoke spell check
 	local oldSkill = self.Spell;
+	local oldCD = self.Cooldown;
 
 	self:PrepareFrameData();
-
-	self:GlowConsumables();
+	-- self:GlowConsumables();
 
 	-- Function Alias set in MaxDps Submodules
 	self.Spell = self:NextSpell();
+	self.Cooldown = self:NextCooldown();
 
 	print(self.Spell)
+	print(self.Cooldown)
 
-	if (oldSkill ~= self.Spell or oldSkill == nil) and self.Spell ~= nil then
-		self:GlowNextSpell(self.Spell);
-		if WeakAuras then
+	if WeakAuras then
 			WeakAuras.ScanEvents('MAXDPS_SPELL_UPDATE', self.Spell);
-		end
+			WeakAuras.ScanEvents('MAXDPS_COOLDOWN_UPDATE2', self.Cooldown);
 	end
 
-	if self.Spell == nil and oldSkill ~= nil then
-		self:GlowClear();
-		if WeakAuras then
-			WeakAuras.ScanEvents('MAXDPS_SPELL_UPDATE', nil);
-		end
-	end
+	-- if (oldSkill ~= self.Spell or oldSkill == nil) and self.Spell ~= nil then
+	-- 	self:GlowNextSpell(self.Spell);
+	-- 	if WeakAuras then
+	-- 		WeakAuras.ScanEvents('MAXDPS_SPELL_UPDATE', self.Spell);
+	-- 	end
+	-- end
+
+	-- if self.Spell == nil and oldSkill ~= nil then
+	-- 	self:GlowClear();
+	-- 	if WeakAuras then
+	-- 		WeakAuras.ScanEvents('MAXDPS_SPELL_UPDATE', nil);
+	-- 	end
+	-- end
+	
+	-- if (oldSkill ~= self.Spell or oldSkill == nil) and self.Cooldown ~= nil then
+	-- 	self:GlowNextSpell(self.Spell);
+	-- 	if WeakAuras then
+	-- 		WeakAuras.ScanEvents('MAXDPS_COOLDOWN_UPDATE2', self.Cooldown);
+	-- 	end
+	-- end
+
+	-- if self.Spell == nil and oldSkill ~= nil then
+	-- 	self:GlowClear();
+	-- 	if WeakAuras then
+	-- 		WeakAuras.ScanEvents('MAXDPS_COOLDOWN_UPDATE2', nil);
+	-- 	end
+	-- end
 end
 
 function MaxDps:InitRotations()
@@ -316,20 +369,23 @@ function MaxDps:InitRotations()
 	self.ClassId = classId;
 	self.Spec = spec;
 
-	if not self.Custom then
-		self.Custom = self:GetModule('Custom');
-	end
 
-	self.Custom:LoadCustomRotations();
-	local customRotation = self.Custom:GetCustomRotation(classId, spec);
+	self:LoadModule();
 
-	if customRotation then
-		self.NextSpell = customRotation.fn;
+	-- if not self.Custom then
+	-- 	self.Custom = self:GetModule('Custom');
+	-- end
 
-		self:Print(self.Colors.Success .. 'Loaded Custom Rotation: ' .. customRotation.name);
-	else
-		self:LoadModule();
-	end
+	-- self.Custom:LoadCustomRotations();
+	-- local customRotation = self.Custom:GetCustomRotation(classId, spec);
+
+	-- if customRotation then
+	-- 	self.NextSpell = customRotation.fn;
+
+	-- 	self:Print(self.Colors.Success .. 'Loaded Custom Rotation: ' .. customRotation.name);
+	-- else
+	-- 	self:LoadModule();
+	-- end
 end
 
 function MaxDps:LoadModule()
