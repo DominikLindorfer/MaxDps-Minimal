@@ -88,27 +88,6 @@ function MaxDps:Print(...)
 	MaxDps:DefaultPrint(...);
 end
 
-MaxDps.profilerStatus = 0;
-function MaxDps:ProfilerStart()
-	local profiler = self:GetModule('Profiler');
-	profiler:StartProfiler();
-	self.profilerStatus = 1;
-end
-
-function MaxDps:ProfilerStop()
-	local profiler = self:GetModule('Profiler');
-	profiler:StopProfiler();
-	self.profilerStatus = 0;
-end
-
-function MaxDps:ProfilerToggle()
-	if self.profilerStatus == 0 then
-		self:ProfilerStart();
-	else
-		self:ProfilerStop();
-	end
-end
-
 function MaxDps:EnableRotation()
 	print("EnableRotation() activated!")
 	

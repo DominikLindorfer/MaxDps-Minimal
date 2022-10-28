@@ -158,16 +158,16 @@ function DeathKnight:BloodGlowCooldowns()
 	local abominationLimbReady = DeathKnight.db.abominationLimbAsCooldown and covenantId == Necrolord and cooldown[BL.AbominationLimb].ready;
 	local dancingRuneWeaponReady = DeathKnight.db.bloodDancingRuneWeaponAsCooldown and cooldown[BL.DancingRuneWeapon].ready;
 
-	if DeathKnight.db.alwaysGlowCooldowns then
-		MaxDps:GlowCooldown(BL.AbominationLimb, abominationLimbReady);
-		MaxDps:GlowCooldown(BL.DancingRuneWeapon, dancingRuneWeaponReady);
-	else
-		local abominationLimbCooldownTrigger = abominationLimbReady and not buff[BL.DancingRuneWeapon].up;
-		local dancingRuneWeaponCooldownTrigger = dancingRuneWeaponReady and (not talents[BL.Blooddrinker] or not cooldown[BL.Blooddrinker].ready)
+	-- if DeathKnight.db.alwaysGlowCooldowns then
+	-- 	MaxDps:GlowCooldown(BL.AbominationLimb, abominationLimbReady);
+	-- 	MaxDps:GlowCooldown(BL.DancingRuneWeapon, dancingRuneWeaponReady);
+	-- else
+	-- 	local abominationLimbCooldownTrigger = abominationLimbReady and not buff[BL.DancingRuneWeapon].up;
+	-- 	local dancingRuneWeaponCooldownTrigger = dancingRuneWeaponReady and (not talents[BL.Blooddrinker] or not cooldown[BL.Blooddrinker].ready)
 
-		MaxDps:GlowCooldown(BL.AbominationLimb, abominationLimbCooldownTrigger);
-		MaxDps:GlowCooldown(BL.DancingRuneWeapon, dancingRuneWeaponCooldownTrigger);
-	end
+	-- 	MaxDps:GlowCooldown(BL.AbominationLimb, abominationLimbCooldownTrigger);
+	-- 	MaxDps:GlowCooldown(BL.DancingRuneWeapon, dancingRuneWeaponCooldownTrigger);
+	-- end
 end
 
 function DeathKnight:BloodCovenants()
