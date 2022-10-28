@@ -24,6 +24,7 @@ local spellHistoryBlacklist = {
 };
 
 function MaxDps:OnInitialize()
+	print("OnInitialize() activated!")
 	self.db = LibStub('AceDB-3.0'):New('MaxDpsOptions', self.defaultOptions);
 
 	self:RegisterChatCommand('maxdps', 'ShowMainWindow');
@@ -88,6 +89,7 @@ function MaxDps:ProfilerToggle()
 end
 
 function MaxDps:EnableRotation()
+	print("EnableRotation() activated!")
 	if self.NextSpell == nil or self.rotationEnabled then
 		self:Print(self.Colors.Error .. 'Failed to enable addon!');
 		return
@@ -113,7 +115,18 @@ end
 
 function MaxDps:EnableRotationTimer()
 	self.RotationTimer = self:ScheduleRepeatingTimer('InvokeNextSpell', self.db.global.interval);
+  	-- self.timerCount = 0
+	-- self.RotationTimer = self:ScheduleRepeatingTimer("TimerFeedback", 0.1)
 end
+
+-- function MaxDps:TimerFeedback()
+--   self.timerCount = self.timerCount + 1
+--   print(("%d seconds passed"):format(5 * self.timerCount))
+--   -- run 30 seconds in total
+--   if self.timerCount == 6 then
+--     self:CancelTimer(self.testTimer)
+--   end
+-- end
 
 function MaxDps:DisableRotation()
 	if not self.rotationEnabled then
@@ -136,6 +149,7 @@ function MaxDps:DisableRotationTimer()
 end
 
 function MaxDps:OnEnable()
+	print("OnEnable() activated!")
 	self:RegisterEvent('PLAYER_TARGET_CHANGED');
 	self:RegisterEvent('PLAYER_TALENT_UPDATE');
 	self:RegisterEvent('PLAYER_REGEN_DISABLED');
@@ -176,6 +190,8 @@ function MaxDps:OnEnable()
 			end
 		end);
 	end
+
+	print("Enabling Done!")
 
 	self:Print(self.Colors.Info .. 'Initialized');
 end
@@ -228,6 +244,7 @@ end
 function MaxDps:PLAYER_REGEN_DISABLED()
 	if self.db.global.onCombatEnter and not self.rotationEnabled then
 		self:Print(self.Colors.Success .. 'Auto enable on combat!');
+		print("PLAYER_REGEN_DISABLED() activated!")
 		self:InitRotations();
 		self:EnableRotation();
 	end
@@ -270,8 +287,10 @@ function MaxDps:InvokeNextSpell()
 
 	self:GlowConsumables();
 
-	-- Removed backward compatibility
+	-- Function Alias set in MaxDps Submodules
 	self.Spell = self:NextSpell();
+
+	print(self.Spell)
 
 	if (oldSkill ~= self.Spell or oldSkill == nil) and self.Spell ~= nil then
 		self:GlowNextSpell(self.Spell);
@@ -289,6 +308,7 @@ function MaxDps:InvokeNextSpell()
 end
 
 function MaxDps:InitRotations()
+	print("InitRotations() activated!")
 	self:Print(self.Colors.Info .. 'Initializing rotations');
 
 	local _, _, classId = UnitClass('player');
@@ -313,6 +333,10 @@ function MaxDps:InitRotations()
 end
 
 function MaxDps:LoadModule()
+
+	print("LoadModule() activated!")
+	print(self.ClassId, self.Spec, self.Classes[self.ClassId])
+
 	if self.Classes[self.ClassId] == nil then
 		self:Print(self.Colors.Error .. 'Invalid player class, please contact author of addon.');
 		return

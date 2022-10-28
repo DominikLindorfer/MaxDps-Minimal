@@ -513,6 +513,9 @@ function MaxDps:GlowCooldown(spellId, condition, color)
 end
 
 function MaxDps:GlowSpell(spellId)
+	
+	print("GlowSpell(spellId) sets next Spell!")
+	
 	if self.Spells[spellId] ~= nil then
 		for _, button in pairs(self.Spells[spellId]) do
 			self:Glow(button, 'next', nil, 'normal');

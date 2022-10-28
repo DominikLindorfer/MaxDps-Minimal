@@ -48,6 +48,9 @@ local BL = {
 setmetatable(BL, DeathKnight.spellMeta);
 
 function DeathKnight:Blood()
+
+	print("Blood() function was just called!")
+
 	local fd = MaxDps.FrameData;
 	local cooldown = fd.cooldown;
 	local buff = fd.buff;
