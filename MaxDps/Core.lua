@@ -317,7 +317,6 @@ function MaxDps:InvokeNextSpell()
 	local oldCD = self.Cooldown;
 
 	self:PrepareFrameData();
-	-- self:GlowConsumables();
 
 	-- Function Alias set in MaxDps Submodules
 	self.Spell = self:NextSpell();
