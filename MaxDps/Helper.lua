@@ -54,6 +54,33 @@ local GetActiveCovenantID = C_Covenants.GetActiveCovenantID;
 local GetActiveSoulbindID = C_Soulbinds.GetActiveSoulbindID;
 local GetSoulbindData = C_Soulbinds.GetSoulbindData;
 
+MaxDps.Textures = {
+	{text = 'Ping', value = 'Interface\\Cooldown\\ping4'},
+	{text = 'Star', value = 'Interface\\Cooldown\\star4'},
+	{text = 'Starburst', value = 'Interface\\Cooldown\\starburst'},
+};
+MaxDps.FinalTexture = nil;
+
+MaxDps.Colors = {
+	Info = '|cFF1394CC',
+	Error = '|cFFF0563D',
+	Success = '|cFFBCCF02',
+}
+
+MaxDps.Classes = {
+	[1] = 'Warrior',
+	[2] = 'Paladin',
+	[3] = 'Hunter',
+	[4] = 'Rogue',
+	[5] = 'Priest',
+	[6] = 'DeathKnight',
+	[7] = 'Shaman',
+	[8] = 'Mage',
+	[9] = 'Warlock',
+	[10] = 'Monk',
+	[11] = 'Druid',
+	[12] = 'DemonHunter',
+}
 
 -----------------------------------------------------------------
 --- Internal replacement for UnitAura that no longer has ability

@@ -23,60 +23,10 @@ local spellHistoryBlacklist = {
 	[75] = true; -- Auto shot
 };
 
-MaxDps.Textures = {
-	{text = 'Ping', value = 'Interface\\Cooldown\\ping4'},
-	{text = 'Star', value = 'Interface\\Cooldown\\star4'},
-	{text = 'Starburst', value = 'Interface\\Cooldown\\starburst'},
-};
-MaxDps.FinalTexture = nil;
-
-MaxDps.Colors = {
-	Info = '|cFF1394CC',
-	Error = '|cFFF0563D',
-	Success = '|cFFBCCF02',
-}
-
-MaxDps.Classes = {
-	[1] = 'Warrior',
-	[2] = 'Paladin',
-	[3] = 'Hunter',
-	[4] = 'Rogue',
-	[5] = 'Priest',
-	[6] = 'DeathKnight',
-	[7] = 'Shaman',
-	[8] = 'Mage',
-	[9] = 'Warlock',
-	[10] = 'Monk',
-	[11] = 'Druid',
-	[12] = 'DemonHunter',
-}
-
 function MaxDps:OnInitialize()
 	print("OnInitialize() activated!")
 	self.db = LibStub('AceDB-3.0'):New('MaxDpsOptions', self.defaultOptions);
 	-- self:RegisterChatCommand('maxdps', 'ShowMainWindow');
-end
-
-function MaxDps:ShowMainWindow()
-	if not self.Window then
-		self.Window = self:GetModule('Window');
-	end
-
-	self.Window:ShowWindow();
-end
-
-function MaxDps:GetTexture()
-	if self.db.global.customTexture ~= '' and self.db.global.customTexture ~= nil then
-		self.FinalTexture = self.db.global.customTexture;
-		return self.FinalTexture;
-	end
-
-	self.FinalTexture = self.db.global.texture;
-	if self.FinalTexture == '' or self.FinalTexture == nil then
-		self.FinalTexture = 'Interface\\Cooldown\\ping4';
-	end
-
-	return self.FinalTexture;
 end
 
 MaxDps.DefaultPrint = MaxDps.Print;
