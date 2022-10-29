@@ -78,10 +78,10 @@ function DeathKnight:Blood()
 	end
 
 	-- Death and Decay
+	if cooldown[BL.DeathAndDecay].ready and not buff[BL.DeathAndDecayBuff].up then
+		return BL.DeathAndDecay
+	end
 	
-	-- if talents[BL.Tombstone] and cooldown[BL.Tombstone].ready and buff[BL.BoneShield].count >= 6 and cooldown[BL.DancingRuneWeapon].remains > 20 then
-	-- 	return BL.Tombstone;
-	-- end
 	if cooldown[BL.Tombstone].ready and buff[BL.BoneShield].count >= 6 and cooldown[BL.DancingRuneWeapon].remains > 20 then
 		return BL.Tombstone;
 	end
