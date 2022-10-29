@@ -78,18 +78,6 @@ function DeathKnight:Blood()
 	end
 
 	-- Death and Decay
-
-	if cooldown[BL.RaiseDead].ready then
-		return BL.RaiseDead;
-	end
-	
-	if cooldown[BL.EmpowerRuneWeapon].ready then
-		return BL.EmpowerRuneWeapon;
-	end
-
-	if cooldown[BL.DancingRuneWeapon].ready then
-		return BL.DancingRuneWeapon;
-	end
 	
 	-- if talents[BL.Tombstone] and cooldown[BL.Tombstone].ready and buff[BL.BoneShield].count >= 6 and cooldown[BL.DancingRuneWeapon].remains > 20 then
 	-- 	return BL.Tombstone;
@@ -155,6 +143,18 @@ function DeathKnight:BloodCooldowns()
 		BL.DeathAndDecay = BL.DeathAndDecay;
 	end
 	
+	if cooldown[BL.RaiseDead].ready then
+		return BL.RaiseDead;
+	end
+	
+	if cooldown[BL.EmpowerRuneWeapon].ready then
+		return BL.EmpowerRuneWeapon;
+	end
+
+	if cooldown[BL.DancingRuneWeapon].ready then
+		return BL.DancingRuneWeapon;
+	end
+
 	if healthPercent < 65 and cooldown[BL.Lichborn].ready then
 		return BL.Lichborn
 	end
