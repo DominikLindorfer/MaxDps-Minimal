@@ -52,8 +52,7 @@ local L = WeakAuras.L
 	L["%s Keep Aspect Ratio"] = "%s 保持宽高比"
 	L["%s Name Function"] = "%s 名称函数"
 	L["%s Stacks Function"] = "%s 层数函数"
-	--[[Translation missing --]]
-	L["%s stores around %s KB of data"] = "%s stores around %s KB of data"
+	L["%s stores around %s KB of data"] = "%s已储存约%s KB数据"
 	L["%s Texture"] = "%s 材质"
 	L["%s Texture Function"] = "%s 材质函数"
 	L["%s total auras"] = "共%s个光环"
@@ -133,7 +132,6 @@ Enable this setting if you want this timer to be hidden, or when using a WeakAur
 	L["Align"] = "对齐"
 	L["Alignment"] = "对齐"
 	L["All of"] = "全部"
-	L["Allow Full Rotation"] = "允许完全旋转"
 	L["Alpha"] = "透明度"
 	L["Anchor"] = "锚点"
 	L["Anchor Point"] = "锚点指向"
@@ -170,6 +168,8 @@ Enable this setting if you want this timer to be hidden, or when using a WeakAur
 Off Screen]=] ] = "光环在屏幕外"
 	L["Aura Name"] = "光环名称"
 	L["Aura Name Pattern"] = "光环名称规则匹配"
+	--[[Translation missing --]]
+	L["Aura Order"] = "Aura Order"
 	L["Aura received from: %s"] = "从%s处接收光环"
 	L["Aura Type"] = "光环类型"
 	L["Aura: '%s'"] = "光环：'%s'"
@@ -226,8 +226,7 @@ Off Screen]=] ] = "光环在屏幕外"
 	L["Choose"] = "选择"
 	L["Class"] = "职业"
 	L["Clear Debug Logs"] = "清除调试日志"
-	--[[Translation missing --]]
-	L["Clear Saved Data"] = "Clear Saved Data"
+	L["Clear Saved Data"] = "清空已储存数据"
 	L["Clip Overlays"] = "裁剪覆盖层"
 	L["Clipped by Progress"] = "被进度条遮挡"
 	L["Close"] = "关闭"
@@ -255,6 +254,8 @@ Off Screen]=] ] = "光环在屏幕外"
 	L["Control-click to select multiple displays"] = "按住 Control 并点击来选择多个光环"
 	L["Controls the positioning and configuration of multiple displays at the same time"] = "同时控制多个图示的位置和设定"
 	L["Convert to..."] = "转换为..."
+	--[[Translation missing --]]
+	L["Cooldown Numbers might be added by WoW. You can configure these in the game settings."] = "Cooldown Numbers might be added by WoW. You can configure these in the game settings."
 	L["Cooldown Reduction changes the duration of seconds instead of showing the real time seconds."] = "冷却速度提高将改变每秒的持续时间，而并非显示真实的冷却时间。"
 	L["Copy"] = "拷贝"
 	L["Copy settings..."] = "拷贝设置"
@@ -280,22 +281,20 @@ Off Screen]=] ] = "光环在屏幕外"
 	L["Custom Grow"] = "自定义生长"
 	L["Custom Options"] = "自定义选项"
 	L["Custom Sort"] = "自定义排序"
-	L["Custom Trigger"] = "自定义生效触发器"
-	L["Custom trigger event tooltip"] = [=[选择用于检查自订触发的事件。
+	L["Custom Trigger"] = "自定义触发器"
+	L["Custom trigger event tooltip"] = [=[选择用于检查自定义触发器的事件。
 如果有多个事件,可以用逗号或空白分隔。
 
 |cFF4444FF例：|r
 UNIT_POWER, UNIT_AURA PLAYER_TARGET_CHANGED]=]
-	L["Custom trigger status tooltip"] = [=[选择用于检查自订触发的事件。
+	L["Custom trigger status tooltip"] = [=[选择用于检查自定义触发器的事件。
 因为这一个是状态触发器, 指定的事件 可以被 WeakAuras 调用, 而不需指定参数.
 如果有多个事件,可以用逗号或空白分隔。
 
 |cFF4444FF例：|r
 UNIT_POWER, UNIT_AURA PLAYER_TARGET_CHANGED]=]
-	--[[Translation missing --]]
-	L["Custom Trigger: Ignore Lua Errors on OPTIONS event"] = "Custom Trigger: Ignore Lua Errors on OPTIONS event"
-	--[[Translation missing --]]
-	L["Custom Trigger: Send fake events instead of STATUS event"] = "Custom Trigger: Send fake events instead of STATUS event"
+	L["Custom Trigger: Ignore Lua Errors on OPTIONS event"] = "自定义触发器：忽略OPTIONS事件的Lua错误"
+	L["Custom Trigger: Send fake events instead of STATUS event"] = "自定义触发器：发送虚假事件而不是STATUS事件"
 	L["Custom Untrigger"] = "自定义取消触发器"
 	L["Custom Variables"] = "自定义变量"
 	L["Debuff Type"] = "减益类型"
@@ -314,7 +313,6 @@ UNIT_POWER, UNIT_AURA PLAYER_TARGET_CHANGED]=]
 	L["Differences"] = "差异"
 	L["Disabled"] = "禁用"
 	L["Disallow Entry Reordering"] = "不允许重新排列条目"
-	L["Discrete Rotation"] = "离散旋转"
 	L["Display"] = "图示"
 	L["Display Name"] = "显示的名字"
 	L["Display Text"] = "图示文字"
@@ -444,7 +442,7 @@ Can use \ to escape -.]=] ] = [=[过滤格式：'名称'，'名称-服务器'，
 	L["Glow Frame Type"] = "发光框体类型"
 	L["Glow Type"] = "发光类型"
 	L["Green Rune"] = "绿色符文"
-	L["Grid direction"] = "表格方向"
+	L["Grid direction"] = "盒方向"
 	L["Group"] = "组"
 	L["Group (verb)"] = "加入组"
 	L[ [=[Group and anchor each auras by frame.
@@ -551,9 +549,11 @@ Can use \ to escape -.]=] ] = [=[过滤格式：'名称'，'名称-服务器'，
 	L["Keep your Wago imports up to date with the Companion App."] = "利用Companion应用程序保持你的Wago导入最新。"
 	L["Large Input"] = "大输入框"
 	L["Leaf"] = "叶子"
-	L["Left"] = "左方"
+	L["Left"] = "左"
 	L["Left 2 HUD position"] = "左侧第二 HUD 位置"
 	L["Left HUD position"] = "左侧 HUD 位置"
+	--[[Translation missing --]]
+	L["Legacy Zoom Out"] = "Legacy Zoom Out"
 	L["Length"] = "长度"
 	L["Length of |cFFFF0000%s|r"] = "长度|cFFFF0000%s|r"
 	L["Limit"] = "限制"
@@ -695,7 +695,7 @@ Can use \ to escape -.]=] ] = [=[过滤格式：'名称'，'名称-服务器'，
 	L["Reset all options to their default values."] = "重置所有选项为默认值"
 	L["Reset Entry"] = "重置条目"
 	L["Reset to Defaults"] = "重置为默认"
-	L["Right"] = "右方"
+	L["Right"] = "右"
 	L["Right 2 HUD position"] = "右侧第二 HUD 位置"
 	L["Right HUD position"] = "右侧 HUD 位置"
 	L["Right-click for more options"] = "右键点击获得更多选项"
@@ -703,6 +703,8 @@ Can use \ to escape -.]=] ] = [=[过滤格式：'名称'，'名称-服务器'，
 	L["Rotate In"] = "旋转进入"
 	L["Rotate Out"] = "旋转退出"
 	L["Rotate Text"] = "旋转文字"
+	--[[Translation missing --]]
+	L["Rotating a texture around arbitary angles used to require a zoom out. This is no longer required, this option only exist for compatibility with previous behaviour."] = "Rotating a texture around arbitary angles used to require a zoom out. This is no longer required, this option only exist for compatibility with previous behaviour."
 	L["Rotation"] = "旋转"
 	L["Rotation Mode"] = "旋转模式"
 	L["Row Space"] = "列空间"
@@ -710,8 +712,7 @@ Can use \ to escape -.]=] ] = [=[过滤格式：'名称'，'名称-服务器'，
 	L["Rows"] = "行"
 	L["Same"] = "相同"
 	L["Same texture as Foreground"] = "与前景材质相同"
-	--[[Translation missing --]]
-	L["Saved Data"] = "Saved Data"
+	L["Saved Data"] = "已储存数据"
 	L["Scale"] = "缩放"
 	L["Search"] = "搜索"
 	L["Select Talent"] = "选择天赋"
@@ -808,8 +809,14 @@ Can use \ to escape -.]=] ] = [=[过滤格式：'名称'，'名称-服务器'，
 	L["Text Settings"] = "文本设置"
 	L["Texture"] = "材质"
 	L["Texture Info"] = "材质信息"
+	--[[Translation missing --]]
+	L["Texture Rotation"] = "Texture Rotation"
 	L["Texture Settings"] = "材质设置"
 	L["Texture Wrap"] = "材质折叠"
+	--[[Translation missing --]]
+	L["The addon ElvUI is enabled. It might add cooldown numbers to the swipe. You can configure these in the ElvUI settings"] = "The addon ElvUI is enabled. It might add cooldown numbers to the swipe. You can configure these in the ElvUI settings"
+	--[[Translation missing --]]
+	L["The addon OmniCC is enabled. It might add cooldown numbers to the swipe. You can configure these in the OmniCC settings"] = "The addon OmniCC is enabled. It might add cooldown numbers to the swipe. You can configure these in the OmniCC settings"
 	L["The duration of the animation in seconds."] = "动画持续秒数"
 	L["The duration of the animation in seconds. The finish animation does not start playing until after the display would normally be hidden."] = "动画时长秒时。直到显示内容可以被正常隐藏之后，结束动画才会播放。"
 	L["The type of trigger"] = "触发器类型"
@@ -826,8 +833,7 @@ It might not work correctly!]=] ] = "此光环在一个不同版本（%s）的�
 It might not work correctly with your version!]=] ] = "此光环由更新版本的WeakAuras创建。它可能无法在已安装的WeakAuras版本下正常工作！"
 	L["This display is currently loaded"] = "此显示内容已加载"
 	L["This display is not currently loaded"] = "此显示内容未加载"
-	--[[Translation missing --]]
-	L["This enables the collection of debug logs. Custom code can add debug information to the log through the function DebugPrint."] = "This enables the collection of debug logs. Custom code can add debug information to the log through the function DebugPrint."
+	L["This enables the collection of debug logs. Custom code can add debug information to the log through the function DebugPrint."] = "启用调试日志的收集。自定义代码可以使用DebugPrint函数向日志添加调试信息。"
 	L["This is a modified version of your aura, |cff9900FF%s.|r"] = "这是一个你光环的修改版本，|cff9900FF%s.|r"
 	L["This is a modified version of your group: |cff9900FF%s|r"] = "这是一个你群组的修改版本，|cff9900FF%s.|r"
 	L["This region of type \"%s\" is not supported."] = "不支持域类型\"%s\"。"
@@ -883,6 +889,8 @@ It might not work correctly with your version!]=] ] = "此光环由更新版本�
 	L["Use Texture"] = "使用材质"
 	L["Used in Auras:"] = "在下列光环中被使用："
 	L["Used in auras:"] = "在下列光环中被使用："
+	--[[Translation missing --]]
+	L["Uses Texture Coordinates to rotate the texture."] = "Uses Texture Coordinates to rotate the texture."
 	L["Uses UnitIsVisible() to check if in range. This is polled every second."] = "使用UnitIsVisible()检查是否在范围内，每秒检查一次。"
 	L["Value %i"] = "值 %i"
 	L["Values are in normalized rgba format."] = "数值为标准化的 RGBA 格式"
