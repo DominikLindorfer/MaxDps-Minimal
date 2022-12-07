@@ -1,0 +1,41 @@
+## Interface: 90100
+## Title:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff0055FFRaid Lead Tools|r
+## Title-zhCN:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff0055FF团长工具箱|r
+## Title-zhTW:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff0055FF團長工具箱|r
+## Title-koKR:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff0055FFRaid 관리 툴|r
+## Title-frFR:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff0055FFRaid Lead Tools|r
+## Title-ruRU:|cffffe00a<|r|cffff7d0aDBM|r|cffffe00a>|r |cff0055FFИнструменты рейд лидера|r
+## Notes: Raidlead tools for Deadly Boss Mods (BidBot, StandByBot, ...)
+## Notes-zhCN: DBM团长工具箱 (竞拍助手, DKP助手, 待命助手, 邀请助手)
+## Notes-zhTW: DBM團長工具箱 (競拍助手, DKP助手, 候補助手, 邀請助手)
+## Notes-koKR: Deadly Boss Mods를 이용한 레이드 관리 툴 (BidBot, StandByBot, ...)
+## Notes-frFR: Outils de Raid pour Deadly Boss Mods (BidBot, StandByBot, ...)
+## LoadOnDemand: 0
+## RequiredDeps: DBM-Core
+## DefaultState: enabled
+## Author: Nitra/Tandanu/Developaws
+## SavedVariables: DBM_BidBot_ItemHistory, DBMRaidLeadTools_AllSavedVars
+## X-DBM-Mod: 1
+## X-DBM-Mod-Type: OTHER
+## X-DBM-Mod-Category: OTHER
+## X-DBM-Mod-No-Statistics: 1
+## X-DBM-Mod-Name: RaidLeadTools
+## X-DBM-Mod-MinCoreRevision: 20200524142133
+## X-DBM-Mod-Sort: 1500
+## X-Curse-Project-ID: 21364
+## Version: r127
+
+localization.en.lua
+localization.ru.lua
+localization.de.lua
+localization.fr.lua
+localization.cn.lua
+localization.kr.lua
+localization.tw.lua
+
+Modules\AutoInvite.lua
+Modules\BidBot.lua
+Modules\DKP.lua
+Modules\StandByBot.lua
+Modules\StickyIcons.lua
+Modules\WarnForLootmaster.lua

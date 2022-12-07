@@ -217,7 +217,7 @@ function Monk:BrewmasterCooldowns()
 		return BR.BonedustBrew;
 	end
 
-	if cooldown[BR.ExpelHarm].ready then
+	if cooldown[BR.ExpelHarm].ready and healthPercent <= 50 then
 		return BR.ExpelHarm;
 	end
 

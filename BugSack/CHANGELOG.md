@@ -1,7 +1,9 @@
 # BugSack
 
-## [v9.2.6](https://github.com/funkydude/BugSack/tree/v9.2.6) (2022-09-24)
-[Full Changelog](https://github.com/funkydude/BugSack/compare/v9.2.5...v9.2.6) [Previous Releases](https://github.com/funkydude/BugSack/releases)
+## [v10.0.2](https://github.com/funkydude/BugSack/tree/v10.0.2) (2022-11-15)
+[Full Changelog](https://github.com/funkydude/BugSack/compare/v10.0.1...v10.0.2) [Previous Releases](https://github.com/funkydude/BugSack/releases)
 
-- Fix templates for Dragonflight (#71)  
-- Hold position on the current bug displayed if the user is scrolling through the bugs. (#69)  
+- UI tweaks (#80)  
+    - title bar doubleclick search now has a background  
+    - main window is now wider  
+    - backslashes replaced with forward slashes in path matching  
