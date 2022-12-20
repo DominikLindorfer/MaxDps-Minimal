@@ -12,7 +12,7 @@ local icons = {
 			name = COUNTDOWN_FOR_COOLDOWNS_TEXT,
 			desc = format("%s\n\n|cffff2020%s",
 			L["Toggle the cooldown numbers. Spells with charges only show cooldown numbers at 0 charge"],
-			L["Show Numbers for Cooldowns must be enabled in Blizzard's Interface/ActionBars menu."]),
+			L["[Show Numbers for Cooldowns] must be enabled in Blizzard's \'Options/Action Bars\' menu when using Blizzard's cooldown numbers."]),
 			order = 1,
 			type = "toggle",
 		},
@@ -134,12 +134,14 @@ local icons = {
 						P:ConfigIcons(key, "borderColor")
 					end,
 				},
+				--[[
 				borderPixels = {
 					name = L["Border Thickness"],
 					order = 2,
 					type = "select",
 					values = {1,2,3,4,5},
 				},
+				]]
 			}
 		},
 	}

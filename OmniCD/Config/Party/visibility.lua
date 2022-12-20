@@ -1,8 +1,6 @@
 local E, L = select(2, ...):unpack()
 local P = E.Party
 
-
-
 local sliderTimer
 
 local visibility = {
@@ -18,7 +16,6 @@ local visibility = {
 			type = "multiselect",
 			width = "full",
 			values = E.L_ALL_ZONE,
-
 			get = function(_, k) return E.profile.Party.visibility[k] end,
 			set = function(_, k, value)
 				E.profile.Party.visibility[k] = value

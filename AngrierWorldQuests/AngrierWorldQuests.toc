@@ -2,10 +2,10 @@
 ## Title: Angrier World Quests
 ## Notes: Adds World Quests to the quest list
 ## Author: GurliGebis
-## Version: v0.40.1
+## Version: v0.40.2
 ## SavedVariables: AngrierWorldQuests_Config
 ## SavedVariablesPerCharacter: AngierWorldQuests_CharacterConfig
-## X-Packaged-Version: v0.40.1
+## X-Packaged-Version: v0.40.2
 
 Core.lua
 

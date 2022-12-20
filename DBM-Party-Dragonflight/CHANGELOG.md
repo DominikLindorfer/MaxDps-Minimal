@@ -1,19 +1,18 @@
 # <DBM> Dungeons (Dragonflight)
 
-## [r46](https://github.com/DeadlyBossMods/DBM-Dungeons/tree/r46) (2022-11-28)
-[Full Changelog](https://github.com/DeadlyBossMods/DBM-Dungeons/compare/r45...r46) [Previous Releases](https://github.com/DeadlyBossMods/DBM-Dungeons/releases)
+## [r50](https://github.com/DeadlyBossMods/DBM-Dungeons/tree/r50) (2022-12-17)
+[Full Changelog](https://github.com/DeadlyBossMods/DBM-Dungeons/compare/r49...r50) [Previous Releases](https://github.com/DeadlyBossMods/DBM-Dungeons/releases)
 
-- Full azurevault pass with latest data from M+ testing  
-- Full pass on Nokhud Offensive from latest M+ data  
-- apparently forgot to hit save on this one  
-- Algethar academy M+ updated pass  
-- court of stars M+ pass  
-- Update localization.cn.lua (#72)  
-- Halls of Valor pass from M+ testing  
-- Fix more stupid  
-- Small jade temple pass from M+ logs  
-- SMBG update from M+ testing  
-- Fix stupid  
-- Ruby life pools updates from last test weekend  
-- Fix sound settings.  
-- remove abilities deleted from game on Wratheye  
+- Ruby Lots of M+ Death pools Update:  
+     - Added Lightning Storm  
+     - Added Blaze of Glory  
+     - Added Cinderbolt  
+     - Added Tempest Stormshield  
+    Azure Vault  
+     - Added Wild Eruption  
+    Hall of Valor  
+     - Changed Claw frenzy to be on for everyone by default instead of just tanks.  
+- Update Granyth mythic add timers post hotfix  
+    Changed Aegis pickup alert on Skovald to be non filtered alert  
+    Changed breath alert color on hymdall to red.  
+- Update rending strike to post hotfix value, which basically just changes it back to what it was before last hotfix, but then added 2 seconds on it so it matches other tank ability  

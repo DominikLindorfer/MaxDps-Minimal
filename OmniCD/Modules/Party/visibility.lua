@@ -1,6 +1,8 @@
 local E = select(2, ...):unpack()
 local P, CM, CD = E.Party, E.Comm, E.Cooldowns
 
+local pairs, type = pairs, type
+local UnitExists, UnitGUID, UnitClass, UnitIsDeadOrGhost, UnitIsConnected, GetRaidRosterInfo, UnitRace, GetUnitName, UnitLevel = UnitExists, UnitGUID, UnitClass, UnitIsDeadOrGhost, UnitIsConnected, GetRaidRosterInfo, UnitRace, GetUnitName, UnitLevel
 local UPDATE_ROSTER_DELAY = 2
 local MSG_INFO_REQUEST_DELAY = UPDATE_ROSTER_DELAY + 1
 
@@ -15,13 +17,13 @@ P.userInfo.class = E.userClass
 P.userInfo.raceID = E.userRaceID
 P.userInfo.name = E.userName
 P.userInfo.level = E.userLevel
-P.userInfo.spellIcons = {}
 P.userInfo.preactiveIcons = {}
+P.userInfo.spellIcons = {}
 P.userInfo.glowIcons = {}
 P.userInfo.active = {}
 P.userInfo.auras = {}
-P.userInfo.talentData = {}
 P.userInfo.itemData = {}
+P.userInfo.talentData = {}
 P.userInfo.shadowlandsData = {}
 P.userInfo.callbackTimers = {}
 P.userInfo.spellModRates = {}
@@ -41,31 +43,32 @@ local PARTY_UNIT = {
 local INSTANCETYPE_EVENTS = E.preCata and {
 	arena = {
 		'PLAYER_REGEN_DISABLED',
-		'UPDATE_UI_WIDGET'
+		'UPDATE_UI_WIDGET',
 	},
 	pvp = {
 		'CHAT_MSG_BG_SYSTEM_NEUTRAL',
 		'PLAYER_REGEN_DISABLED',
-		'UPDATE_UI_WIDGET'
+		'UPDATE_UI_WIDGET',
 	}
 } or {
 	party = {
-		'CHALLENGE_MODE_START'
+		'CHALLENGE_MODE_START',
 	},
 	raid  = {
-		'ENCOUNTER_END'
+		'ENCOUNTER_END',
 	},
 	none = {
-		'PLAYER_FLAGS_CHANGED'
+		'PLAYER_FLAGS_CHANGED',
 	},
 	arena = {
 		'PLAYER_REGEN_DISABLED',
-		'UPDATE_UI_WIDGET'
+		'UPDATE_UI_WIDGET',
+		'PVP_MATCH_ACTIVE',
 	},
 	pvp = {
 		'CHAT_MSG_BG_SYSTEM_NEUTRAL',
 		'UPDATE_UI_WIDGET',
-		'PLAYER_REGEN_DISABLED'
+		'PLAYER_REGEN_DISABLED',
 	}
 }
 
@@ -88,6 +91,18 @@ function P:RegisterZoneEvents(currentZoneEvents)
 		end
 	end
 	self.currentZoneEvents = currentZoneEvents
+end
+
+local function IsInShadowlands()
+	local mapID = C_Map and C_Map.GetBestMapForUnit("player")
+	if mapID then
+		local mapInfo = C_Map.GetMapInfo(mapID)
+		while mapInfo.mapType > 2 do
+			mapID = mapInfo.parentMapID
+			mapInfo =  C_Map.GetMapInfo(mapID)
+		end
+		return mapID == 1550
+	end
 end
 
 local function AnchorFix()
@@ -136,13 +151,17 @@ local function UpdateRosterInfo(force)
 		force = true
 	end
 
+	if force then
+		P.isInShadowlands = E.isSL or (E.postBFA and not P.isInPvPInstance and IsInShadowlands())
+	end
+
 	E.Libs.CBH:Fire("OnStartup")
 
 
 	for guid, info in pairs(P.groupInfo) do
 		if not UnitExists(info.name) or (guid == E.userGUID and P.isUserDisabled) then
 			for _, timer in pairs(info.callbackTimers) do
-				if type(timer) == "function" then
+				if type(timer) == "table" then
 					timer:Cancel()
 				end
 			end
@@ -165,7 +184,6 @@ local function UpdateRosterInfo(force)
 	end
 
 	local isInRaid = IsInRaid()
-	local hasWarlockInGroup
 	for i = 1, size do
 		local index = not isInRaid and i == size and 5 or i
 		local unit = isInRaid and RAID_UNIT[index] or PARTY_UNIT[index]
@@ -192,7 +210,6 @@ local function UpdateRosterInfo(force)
 				CD.petGUIDS[petGUID] = guid
 			end
 		end
-		hasWarlockInGroup = isWarlock
 
 		if info then
 			local frame = info.bar
@@ -226,7 +243,7 @@ local function UpdateRosterInfo(force)
 				if isDead then
 					frame:RegisterUnitEvent('UNIT_HEALTH', unit)
 				end
-				if not E.isClassicEra then
+				if not E.isClassic then
 					frame:RegisterUnitEvent('UNIT_SPELLCAST_SUCCEEDED', unit, E.UNIT_TO_PET[unit])
 				end
 				frame:RegisterUnitEvent('UNIT_CONNECTION', unit)
@@ -250,28 +267,20 @@ local function UpdateRosterInfo(force)
 			local level = UnitLevel(unit)
 			level = level > 0 and level or 200
 			info = {
-				guid = guid,
-				class = class,
-				raceID = race,
-				name = name,
-				level = level,
-				index = index,
-				unit = unit,
-				petGUID = pet,
-				spellIcons = {},
+				guid = guid, class = class, raceID = race, name = name, level = level,
+				index = index, unit = unit, petGUID = pet,
+				isDead = isDead, isDeadOrOffline = isDeadOrOffline, isAdminObsForMDI = isAdminObsForMDI,
 				preactiveIcons = {},
+				spellIcons = {},
 				glowIcons = {},
 				active = {},
 				auras = {},
-				talentData = {},
 				itemData = {},
+				talentData = {},
 				shadowlandsData = {},
 				callbackTimers = {},
 				spellModRates = {},
 				queuedCdrOnStart = {},
-				isDead = isDead,
-				isDeadOrOffline = isDeadOrOffline,
-				isAdminObsForMDI = isAdminObsForMDI,
 			}
 			P.groupInfo[guid] = info
 
@@ -294,13 +303,6 @@ local function UpdateRosterInfo(force)
 	P:UpdateExBars()
 	CM:EnqueueInspect()
 
-
-
-
-
-
-
-
 	if P.joinedNewGroup or force then
 		if P.callbackTimers.syncTimer then
 			P.callbackTimers.syncTimer:Cancel()
@@ -315,7 +317,6 @@ local function UpdateRosterInfo(force)
 
 	CM:ToggleCooldownSync()
 end
-
 
 
 
@@ -371,7 +372,6 @@ function P:PLAYER_ENTERING_WORLD(isInitialLogin, isReloadingUi, isRefresh)
 		self:ResetModule()
 		return
 	end
-
 
 	local key = self.isInTestMode and self.testZone or instanceType
 	key = key == "none" and E.profile.Party.noneZoneSetting or (key == "scenario" and E.profile.Party.scenarioZoneSetting) or key
@@ -441,9 +441,13 @@ function P:PLAYER_REGEN_DISABLED()
 	self:UnregisterEvent("PLAYER_REGEN_DISABLED")
 end
 
+function P:PVP_MATCH_ACTIVE()
+
+	self:ResetAllIcons("joinedPvP")
+end
+
 function P:PLAYER_FLAGS_CHANGED(unitTarget)
 	if unitTarget ~= "player" or InCombatLockdown() then return end
-
 	local oldpvp = self.isPvP
 	self.isPvP = C_PvP.IsWarModeDesired()
 	if oldpvp ~= self.isPvP then

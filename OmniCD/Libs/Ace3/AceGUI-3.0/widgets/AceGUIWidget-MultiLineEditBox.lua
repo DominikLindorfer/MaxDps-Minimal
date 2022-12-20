@@ -10,10 +10,6 @@ local GetCursorInfo, GetSpellInfo, ClearCursor = GetCursorInfo, GetSpellInfo, Cl
 local CreateFrame, UIParent = CreateFrame, UIParent
 local _G = _G
 
--- Global vars/functions that we don't upvalue since they might get hooked, or upgraded
--- List them here for Mikk's FindGlobals script
--- GLOBALS: ACCEPT, ChatFontNormal
-
 --[[-----------------------------------------------------------------------------
 Support functions
 -------------------------------------------------------------------------------]]
@@ -55,7 +51,7 @@ end
 --[[-----------------------------------------------------------------------------
 Scripts
 -------------------------------------------------------------------------------]]
-local function OnClick(self)													 -- Button
+local function OnClick(self)							 -- Button
 	self = self.obj
 	self.editBox:ClearFocus()
 	if not self:Fire("OnEnterPressed", self.editBox:GetText()) then
@@ -63,7 +59,7 @@ local function OnClick(self)													 -- Button
 	end
 end
 
-local function OnCursorChanged(self, _, y, _, cursorHeight)						 -- EditBox
+local function OnCursorChanged(self, _, y, _, cursorHeight)			 -- EditBox
 	self, y = self.obj.scrollFrame, -y
 	local offset = self:GetVerticalScroll()
 	if y < offset then
@@ -76,12 +72,12 @@ local function OnCursorChanged(self, _, y, _, cursorHeight)						 -- EditBox
 	end
 end
 
-local function OnEditFocusLost(self)											 -- EditBox
+local function OnEditFocusLost(self)						 -- EditBox
 	self:HighlightText(0, 0)
 	self.obj:Fire("OnEditFocusLost")
 end
 
-local function OnEnter(self)													 -- EditBox / ScrollFrame
+local function OnEnter(self)							 -- EditBox / ScrollFrame
 	self = self.obj
 	if not self.entered then
 		self.entered = true
@@ -89,7 +85,7 @@ local function OnEnter(self)													 -- EditBox / ScrollFrame
 	end
 end
 
-local function OnLeave(self)													 -- EditBox / ScrollFrame
+local function OnLeave(self)							 -- EditBox / ScrollFrame
 	self = self.obj
 	if self.entered then
 		self.entered = nil
@@ -97,13 +93,13 @@ local function OnLeave(self)													 -- EditBox / ScrollFrame
 	end
 end
 
-local function OnMouseUp(self)													 -- ScrollFrame
+local function OnMouseUp(self)							 -- ScrollFrame
 	self = self.obj.editBox
 	self:SetFocus()
 	self:SetCursorPosition(self:GetNumLetters())
 end
 
-local function OnReceiveDrag(self)												 -- EditBox / ScrollFrame
+local function OnReceiveDrag(self)						 -- EditBox / ScrollFrame
 	local type, id, info = GetCursorInfo()
 	if type == "spell" then
 		info = GetSpellInfo(id, info)
@@ -121,11 +117,11 @@ local function OnReceiveDrag(self)												 -- EditBox / ScrollFrame
 	self.button:Enable()
 end
 
-local function OnSizeChanged(self, width, height)								 -- ScrollFrame
+local function OnSizeChanged(self, width, height)				 -- ScrollFrame
 	self.obj.editBox:SetWidth(width)
 end
 
-local function OnTextChanged(self, userInput)									 -- EditBox
+local function OnTextChanged(self, userInput)					 -- EditBox
 	if userInput then
 		self = self.obj
 		self:Fire("OnTextChanged", self.editBox:GetText())
@@ -133,14 +129,14 @@ local function OnTextChanged(self, userInput)									 -- EditBox
 	end
 end
 
-local function OnTextSet(self)													 -- EditBox
+local function OnTextSet(self)							 -- EditBox
 	self:HighlightText(0, 0)
 	self:SetCursorPosition(self:GetNumLetters())
 	self:SetCursorPosition(0)
 	self.obj.button:Disable()
 end
 
-local function OnVerticalScroll(self, offset)									 -- ScrollFrame
+local function OnVerticalScroll(self, offset)					 -- ScrollFrame
 	local editBox = self.obj.editBox
 	editBox:SetHitRectInsets(0, 0, offset, editBox:GetHeight() - offset - self:GetHeight())
 end
@@ -351,16 +347,16 @@ local function Constructor()
 	scrollFrame:SetScrollChild(editBox)
 
 	local widget = {
-		button		= button,
-		editBox		= editBox,
-		frame		= frame,
-		label		= label,
+		button	    = button,
+		editBox	    = editBox,
+		frame	    = frame,
+		label	    = label,
 		labelHeight = 10,
-		numlines	= 4,
-		scrollBar	= scrollBar,
-		scrollBG	= scrollBG,
+		numlines    = 4,
+		scrollBar   = scrollBar,
+		scrollBG    = scrollBG,
 		scrollFrame = scrollFrame,
-		type		= Type
+		type	    = Type
 	}
 	for method, func in pairs(methods) do
 		widget[method] = func

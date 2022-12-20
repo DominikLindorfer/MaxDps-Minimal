@@ -9,15 +9,16 @@ E.spell_marked = {
 	[287250] = true,
 
 	[198589] = 205411,
-	[196718] = 357419,
+
 	[217832] = 205596,
 	[187650] = 203340,
 	[122470] = 280195,
+	[853] = 234299,
 	[228049] = true,
 	[199452] = true,
 	[62618]	 = 197590,
 	[88625]	 = 200199,
-	[213602] = true,
+
 	[1966]	 = 79008,
 	[79206]	 = 290254,
 
@@ -73,4 +74,16 @@ function E:ProcessSpellDB()
 	for k in self.pairs(self.spell_linked, self.spell_merged, self.spellcast_shared_cdstart, self.spellcast_cdreset, self.spellcast_cdr, self.spellcast_cdr_powerspender, self.covenant_abilities, self.spellcast_cdr_azerite) do
 		self.spell_modifiers[k] = true
 	end
+end
+
+if E.preCata then
+	E.spell_cxmod_azerite = E.BLANK
+	E.spellcast_cdr_azerite = E.BLANK
+	E.spell_damage_cdr_azerite = E.BLANK
+	E.spell_cdmod_essrank23 = E.BLANK
+	E.spell_chargemod_essrank3 = E.BLANK
+	E.essMajorConflict = E.BLANK
+	E.pvpTalentsByEssMajorConflict = E.BLANK
+	E.essMinorStrive = E.BLANK
+	E.spell_cdmod_ess_strive_mult = E.BLANK
 end

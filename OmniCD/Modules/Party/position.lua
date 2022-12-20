@@ -1,7 +1,8 @@
 local E = select(2, ...):unpack()
 local P = E.Party
 
-local UnitGUID = UnitGUID
+local _G = _G
+local IsInRaid, IsInGroup, UnitGUID = IsInRaid, IsInGroup, UnitGUID
 local isColdStartDC = true
 
 local COMPACT_RAID = {
@@ -81,7 +82,7 @@ function P:FindRelativeFrame(guid)
 	if E.isDF then
 
 		local compactFrame = nil
-		if isInRaid then
+		if isInRaid and not self.isInArena then
 			compactFrame = self.isCompactFrameSetShown and (self.keepGroupsTogether and COMPACT_RAID_KGT or COMPACT_RAID)
 		elseif IsInGroup() then
 			compactFrame = self.useRaidStylePartyFrames and COMPACT_PARTY or false
@@ -161,6 +162,7 @@ function P:UpdatePosition()
 	self:HideBars()
 
 	local showRange = E.db.general.showRange
+	local point, relPoint = self.point, self.relativePoint
 	for guid, info in pairs(self.groupInfo) do
 		local frame = info.bar
 		if E.db.position.detached then
@@ -177,7 +179,7 @@ function P:UpdatePosition()
 					frame:SetParent(UIParent)
 				end
 				frame:ClearAllPoints()
-				frame:SetPoint(self.point, relFrame, self.relativePoint)
+				frame:SetPoint(point, relFrame, relPoint)
 				frame:Show()
 			end
 		end
@@ -206,17 +208,15 @@ do
 		hookTimer = nil
 	end
 
-
 	function P:HookFunc()
 		if self.enabled and not E.db.position.detached and not hookTimer then
 			hookTimer = C_Timer.NewTimer(0.5, UpdatePosition_OnTimerEnd)
 		end
-		if E.isDF and not E.customUF.active and self.isInTestMode and not EditModeManagerFrame:IsEditModeActive() then
+		if E.isDF and not E.db.position.detached and not E.customUF.active and self.isInTestMode and not EditModeManagerFrame:IsEditModeActive() then
 			self:Test()
+			E:ACR_NotifyChange()
 		end
 	end
-
-
 
 	function P:CVAR_UPDATE(cvar, value)
 		if cvar == "USE_RAID_STYLE_PARTY_FRAMES" then

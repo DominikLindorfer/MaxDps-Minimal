@@ -14,5 +14,5 @@
 	<Include file="LibSharedMedia-3.0\lib.xml"/>
 	<Include file="LibDeflate\lib.xml"/>
 	<Include file="UTF8\utf8.xml"/>
-	<!--Script file="LibDualSpec-1.0\LibDualSpec-1.0.lua"/-->
+	<Script file="LibDualSpec-1.0\LibDualSpec-1.0.lua"/>
 </Ui>

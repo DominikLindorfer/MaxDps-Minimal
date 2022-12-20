@@ -3,6 +3,8 @@ local L = LibStub("AceLocale-3.0"):NewLocale("OmniCD", "deDE")
 L = L or {}
 L[ [=[%d: spellID.
 %d-%d: spellID-talentID (Mark spell if talent is selected).]=] ] = "%d: spellID. %d-%d: spellID-talentID (Zauber markieren, wenn Talent ausgewählt ist)."
+--[[Translation missing --]]
+L["[Show Numbers for Cooldowns] must be enabled in Blizzard's 'Options/Action Bars' menu when using Blizzard's cooldown numbers."] = "[Show Numbers for Cooldowns] must be enabled in Blizzard's 'Options/Action Bars' menu when using Blizzard's cooldown numbers."
 L["|cff9d9d9d * Scenarios and Outdoor Zones will use Arena settings."] = "|cff9d9d9d * Szenarien und Outdoor-Zonen verwenden die Arena-Einstellungen."
 L["|cffff2020Friendly CD module must be enabled for the corresponding instance zone."] = "|cffff2020Das freundliche CD Modul muss für die entsprechende Instanzzone aktiviert sein."
 L["|cffff2020Glow and Highlights are never applied on cropped icons. \"Border\" must be enabled."] = "|cffff2020Glühende und hervorgehobene Rahmen werden nie auf beschnittene Symbole angewendet. Die Option \"Rahmen\" muss aktiviert sein."
@@ -18,6 +20,10 @@ L["Add spell to Spell Alerts"] = "Zauber zu den Zauberalarmen hinzufügen"
 L["Add Spells"] = "Zauber hinzufügen"
 L["Add to Alerts"] = "Zu Warnungen hinzufügen"
 L["Addons with raid frame scaling will also cause the icons to scale."] = "Bei Addons mit Raid-Frame-Skalierung werden auch die Symbole skaliert."
+--[[Translation missing --]]
+L[ [=[Adjust value until the truncate symbol [...] disappears.
+|cffff20200: Disable option]=] ] = [=[Adjust value until the truncate symbol [...] disappears.
+|cffff20200: Disable option]=]
 L["Alerts"] = "Alerts"
 L["All user set values will be lost. Do you want to proceed?"] = "Alle eingestellten Werte gehen verloren. Möchtest Du fortfahren?"
 L["Always attach to Blizzard frames. By default, bars attach to whichever frame is visible, and if both are visible UF addon take precedence over Blizzard"] = "Immer an Blizzard-UI anhängen. Standardmäßig werden die Leisten an den Rahmen angehängt, der sichtbar ist, und wenn beide sichtbar sind, hat das Unit-Frame Addon Vorrang vor der Blizzard-UI"
@@ -31,6 +37,8 @@ L["Animate"] = "Animieren"
 L["Apply 'Icons' alpha settings to the status bar"] = "Anwenden der Alpha-Einstellungen von 'Symbole' auf die Statusleiste"
 L["Ascending"] = "Aufsteigend"
 L["Assign Raid Cooldowns."] = "Abklingzeiten für Schlachtzüge zuweisen."
+--[[Translation missing --]]
+L["Attach Name Bar to the left of icon"] = "Attach Name Bar to the left of icon"
 L["Attach to Blizzard Frames"] = "An Blizzard-Rahmen anbringen"
 L["Attachment Point"] = "Befestigungspunkt"
 L["Author"] = "Autor"
@@ -86,6 +94,8 @@ L["Credits"] = "Impressum"
 L["Crop"] = "Zuschnitt"
 L["Crop Icons 1.5:1."] = "Symbole im Verhältnis 1,5:1 zuschneiden."
 L["Crowd Control"] = "Kontrollzauber"
+--[[Translation missing --]]
+L["CTRL+click to edit spell."] = "CTRL+click to edit spell."
 L["Current Profile"] = "Aktuelles Profil"
 L["Current Unit Frame Addon"] = "Aktuelles UI Addon"
 L["Custom Priority"] = "Benutzerdefinierte Priorität"
@@ -184,6 +194,8 @@ L["Interrupted Target Marker"] = "Unterbrochene Zielmarkierung"
 L["Interrupts"] = "Unterbrechungen"
 L["Invalid ID"] = "Ungültige ID"
 L["Invalid Profile"] = "Ungültiges Profil"
+--[[Translation missing --]]
+L["Invert Name Bar"] = "Invert Name Bar"
 L["Item ID (Optional)"] = "Gegenstands-ID (Optional)"
 L["Jump to Extra Bars settings"] = "Zu den Einstellungen von Extra Leisten springen"
 L["Layout"] = "Layout"
@@ -253,6 +265,8 @@ L["Reload addon."] = "Addon neu laden."
 L["Reload UI?"] = "UI neu laden?"
 L["Replace default timers with a status bar timer."] = "Ersetze die Standard-Timer durch einen Statusleisten-Timer."
 L["Reset all cooldown timers."] = "Alle Abklingzeiten zurücksetzen."
+--[[Translation missing --]]
+L["Reset current bar settings to default"] = "Reset current bar settings to default"
 L["Reset current zone settings to default"] = "Aktuelle Zoneneinstellungen auf Standard zurücksetzen"
 L["Reset frame position"] = "Rahmenposition zurücksetzen"
 L["Reset Status Bar Timer settings to default"] = "Timer-Einstellungen der Statusleiste auf Standard zurücksetzen"
@@ -304,6 +318,8 @@ L["Settings"] = "Einstellungen"
 L["Show Anchor"] = "Ankerpunkt anzeigen"
 L["Show anchor with party/raid numbers"] = "Ankerpunkt mit Gruppen-/Raidnummern anzeigen"
 L["Show Forbearance CD"] = "Vorahnung CD anzeigen"
+--[[Translation missing --]]
+L["Show Name"] = "Show Name"
 L["Show name on icons"] = "Name auf Symbolen anzeigen"
 L["Show Player"] = "Spieler anzeigen"
 L["Show Player in Extra Bars"] = "Spieler in Extra Leisten anzeigen"
@@ -351,11 +367,15 @@ L["Toggle the grow direction of icon columns"] = "Umschalten der Wachstumsrichtu
 L["Toggle the grow direction of icon rows"] = "Umschalten der Wachstumsrichtung von Symbolreihen"
 L["Tool to copy portions of a profile to another existing profile."] = [=[Werkzeug zum Kopieren von Teilen eines Profils in ein anderes bestehendes Profil.
 ]=]
+--[[Translation missing --]]
+L["Tooltips will be enabled for this login session only."] = "Tooltips will be enabled for this login session only."
 L["TOP"] = "OBEN"
 L["TOPLEFT"] = "OBENLINKS"
 L["TOPRIGHT"] = "OBENRECHTS"
 L["Trinket and Racial abilities are excluded from sorting"] = "Schmuckstücke und Rassenfähigkeiten sind von der Sortierung ausgeschlossen."
 L["Trinket Items"] = "Schmuckstücke"
+--[[Translation missing --]]
+L["Truncate Name"] = "Truncate Name"
 L["UI Scale Changed."] = "UI-Skala geändert."
 L["Unit CD bars are limited to 5 man groups unless Blizzard Raid Frames are used."] = "Die CD-Leisten der Spieler sind auf 5-Mann-Gruppen beschränkt, es sei denn, Blizzard Schlachtzug-Frames werden verwendet."
 L["Usage:"] = "Verwendung:"
@@ -378,3 +398,5 @@ L["Vertical + CD Groups"] = "Vertikal + CD Gruppen"
 L["Vertical Groups"] = "Vertikale Gruppen"
 L["Visibility"] = "Sichtbarkeit"
 L["Weak Purple Glow"] = "Schwaches violettes Leuchten"
+--[[Translation missing --]]
+L["You must manually enable either the 'Party Frames' or 'Raid Frames' in Blizzard's 'HUD Edit Mode'."] = "You must manually enable either the 'Party Frames' or 'Raid Frames' in Blizzard's 'HUD Edit Mode'."

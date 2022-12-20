@@ -1,0 +1,2 @@
+- Added Vault of the Incarnates tier set tokens
+- Handle need-before-green with masterlooter like personal loot for now

@@ -6,6 +6,8 @@ L[ [=[%d: spellID.
 %d-%d: spellID-talentID (Mark spell if talent is selected).]=] ] = [=[%d: spellID.
 %d-%d: spellID-talentID (Mark spell if talent is selected).]=]
 --[[Translation missing --]]
+L["[Show Numbers for Cooldowns] must be enabled in Blizzard's 'Options/Action Bars' menu when using Blizzard's cooldown numbers."] = "[Show Numbers for Cooldowns] must be enabled in Blizzard's 'Options/Action Bars' menu when using Blizzard's cooldown numbers."
+--[[Translation missing --]]
 L["|cff9d9d9d * Scenarios and Outdoor Zones will use Arena settings."] = "|cff9d9d9d * Scenarios and Outdoor Zones will use Arena settings."
 --[[Translation missing --]]
 L["|cffff2020Friendly CD module must be enabled for the corresponding instance zone."] = "|cffff2020Friendly CD module must be enabled for the corresponding instance zone."
@@ -26,6 +28,10 @@ L["Add Spells"] = "Ajouter des sorts"
 L["Add to Alerts"] = "Ajouter aux alertes"
 --[[Translation missing --]]
 L["Addons with raid frame scaling will also cause the icons to scale."] = "Addons with raid frame scaling will also cause the icons to scale."
+--[[Translation missing --]]
+L[ [=[Adjust value until the truncate symbol [...] disappears.
+|cffff20200: Disable option]=] ] = [=[Adjust value until the truncate symbol [...] disappears.
+|cffff20200: Disable option]=]
 L["Alerts"] = "Alertes"
 L["All user set values will be lost. Do you want to proceed?"] = "Toutes les valeurs définies par l'utilisateur seront perdues. Souhaitez-vous continuer ?"
 L["Always attach to Blizzard frames. By default, bars attach to whichever frame is visible, and if both are visible UF addon take precedence over Blizzard"] = "Toujours attacher aux cadres Blizzard. Par défaut, les barres s'attachent à n'importe quel cadre visible, et si les deux sont visibles, l'addon UF a priorité sur Blizzard"
@@ -41,6 +47,8 @@ L["Animate"] = "Animer"
 L["Apply 'Icons' alpha settings to the status bar"] = "Apply 'Icons' alpha settings to the status bar"
 L["Ascending"] = "Vers le haut"
 L["Assign Raid Cooldowns."] = "Attribuer les Cooldowns de raid."
+--[[Translation missing --]]
+L["Attach Name Bar to the left of icon"] = "Attach Name Bar to the left of icon"
 L["Attach to Blizzard Frames"] = "Attacher aux cadres Blizzard"
 --[[Translation missing --]]
 L["Attachment Point"] = "Attachment Point"
@@ -123,6 +131,8 @@ L["Crop"] = "Recadrer"
 L["Crop Icons 1.5:1."] = "Recadrer les icônes au format 1.5:1"
 --[[Translation missing --]]
 L["Crowd Control"] = "Crowd Control"
+--[[Translation missing --]]
+L["CTRL+click to edit spell."] = "CTRL+click to edit spell."
 L["Current Profile"] = "Profil actuel"
 --[[Translation missing --]]
 L["Current Unit Frame Addon"] = "Current Unit Frame Addon"
@@ -269,6 +279,8 @@ L["Interrupts"] = "Interruptions"
 L["Invalid ID"] = "ID invalide"
 L["Invalid Profile"] = "Profil invalide"
 --[[Translation missing --]]
+L["Invert Name Bar"] = "Invert Name Bar"
+--[[Translation missing --]]
 L["Item ID (Optional)"] = "Item ID (Optional)"
 --[[Translation missing --]]
 L["Jump to Extra Bars settings"] = "Jump to Extra Bars settings"
@@ -366,6 +378,8 @@ L["Replace default timers with a status bar timer."] = "Replace default timers w
 --[[Translation missing --]]
 L["Reset all cooldown timers."] = "Reset all cooldown timers."
 --[[Translation missing --]]
+L["Reset current bar settings to default"] = "Reset current bar settings to default"
+--[[Translation missing --]]
 L["Reset current zone settings to default"] = "Reset current zone settings to default"
 L["Reset frame position"] = "Réinitialiser l'emplacement du cadre"
 --[[Translation missing --]]
@@ -446,6 +460,8 @@ L["Show Anchor"] = "Montrer l'ancrage"
 L["Show anchor with party/raid numbers"] = "Show anchor with party/raid numbers"
 --[[Translation missing --]]
 L["Show Forbearance CD"] = "Show Forbearance CD"
+--[[Translation missing --]]
+L["Show Name"] = "Show Name"
 L["Show name on icons"] = "Afficher le nom sur les icônes"
 L["Show Player"] = "Afficher le joueur"
 --[[Translation missing --]]
@@ -515,6 +531,8 @@ L["Toggle the grow direction of icon columns"] = "Toggle the grow direction of i
 L["Toggle the grow direction of icon rows"] = "Toggle the grow direction of icon rows"
 --[[Translation missing --]]
 L["Tool to copy portions of a profile to another existing profile."] = "Tool to copy portions of a profile to another existing profile."
+--[[Translation missing --]]
+L["Tooltips will be enabled for this login session only."] = "Tooltips will be enabled for this login session only."
 L["TOP"] = "HAUT"
 L["TOPLEFT"] = "HAUTGAUCHE"
 L["TOPRIGHT"] = "HAUTDROIT"
@@ -522,6 +540,8 @@ L["TOPRIGHT"] = "HAUTDROIT"
 L["Trinket and Racial abilities are excluded from sorting"] = "Trinket and Racial abilities are excluded from sorting"
 --[[Translation missing --]]
 L["Trinket Items"] = "Trinket Items"
+--[[Translation missing --]]
+L["Truncate Name"] = "Truncate Name"
 L["UI Scale Changed."] = "L'échelle de l'interface a été modifiée."
 L["Unit CD bars are limited to 5 man groups unless Blizzard Raid Frames are used."] = "Les barres de CD sont limitées à groupes de 5 personnes, sauf si des barres de raid Blizzard sont utilisées."
 L["Usage:"] = "Utilisation : "
@@ -545,3 +565,5 @@ L["Vertical + CD Groups"] = "Vertical + CD Groups"
 L["Vertical Groups"] = "Groupes verticaux"
 L["Visibility"] = "Visibilité"
 L["Weak Purple Glow"] = "Lueur violette faible"
+--[[Translation missing --]]
+L["You must manually enable either the 'Party Frames' or 'Raid Frames' in Blizzard's 'HUD Edit Mode'."] = "You must manually enable either the 'Party Frames' or 'Raid Frames' in Blizzard's 'HUD Edit Mode'."

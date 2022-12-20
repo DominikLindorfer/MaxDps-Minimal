@@ -125,7 +125,7 @@ local function Constructor()
 	dropdown.frame:Show()
 	dropdown:SetLabel("")
 
-	local border = CreateFrame("Frame", nil, frame, BackdropTemplateMixin and "BackdropTemplate" or nil)
+	local border = CreateFrame("Frame", nil, frame, "BackdropTemplate")
 	border:SetPoint("TOPLEFT", 0, -26)
 	border:SetPoint("BOTTOMRIGHT", 0, 3)
 	border:SetBackdrop(PaneBackdrop)
@@ -138,13 +138,13 @@ local function Constructor()
 	content:SetPoint("BOTTOMRIGHT", -10, 10)
 
 	local widget = {
-		frame       = frame,
+		frame	    = frame,
 		localstatus = {},
 		titletext   = titletext,
 		dropdown    = dropdown,
-		border      = border,
-		content     = content,
-		type        = Type
+		border	    = border,
+		content	    = content,
+		type	    = Type
 	}
 	for method, func in pairs(methods) do
 		widget[method] = func

@@ -15,7 +15,7 @@ GNU General Public License for more details.
 This file is part of Unfit.
 --]]
 
-local Lib = LibStub:NewLibrary('Unfit-1.0', 12)
+local Lib = LibStub:NewLibrary('Unfit-1.0', 13)
 if not Lib then return end
 
 
@@ -114,9 +114,9 @@ end
 
 --[[ API ]]--
 
-function Lib:IsItemUnusable(...)
-	if ... then
-		local slot, _,_, class, subclass = select(9, GetItemInfo(...))
+function Lib:IsItemUnusable(item)
+	if item then
+		local slot, _,_, class, subclass = select(9, GetItemInfo(item))
 		return Lib:IsClassUnusable(class, subclass, slot)
 	end
 end

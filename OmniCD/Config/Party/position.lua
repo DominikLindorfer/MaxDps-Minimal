@@ -96,8 +96,7 @@ local position = {
 		},
 		preset = {
 			name = L["Position"],
-			desc = format("%s\n\n%s", L["Set the spell bar position"],
-			L["CENTER will keep the rows centered and grow icons bidirectionally."]),
+			desc = L["Set the spell bar position"],
 			order = 2,
 			type = "select",
 			values = {
@@ -255,8 +254,9 @@ local position = {
 						end
 
 						if E.isDF and P.isInTestMode then
+							local testZone = P.testZone
 							P:Test()
-							P:Test()
+							P:Test(testZone)
 						end
 					end,
 				},

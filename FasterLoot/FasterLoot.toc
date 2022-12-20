@@ -1,0 +1,6 @@
+## Interface: 100002
+## Title: FasterLoot
+## Notes: Makes the loot frame instant
+## Version: 10.0.2
+## Author: Xarano
+FasterLoot.lua

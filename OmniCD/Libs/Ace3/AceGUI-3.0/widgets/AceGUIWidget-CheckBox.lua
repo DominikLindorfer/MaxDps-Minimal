@@ -2,6 +2,9 @@
 
 -- Customized for OmniCD by permission of the copyright owner.
 
+-- Parameters to Edit on CTRL + mouse click
+-- arg = spellID (number), func DND
+
 ---------------------------------------------------------------------------------
 
 --[[-----------------------------------------------------------------------------
@@ -21,10 +24,6 @@ local select, pairs = select, pairs
 -- WoW APIs
 local PlaySound = PlaySound
 local CreateFrame, UIParent = CreateFrame, UIParent
-
--- Global vars/functions that we don't upvalue since they might get hooked, or upgraded
--- List them here for Mikk's FindGlobals script
--- GLOBALS: SetDesaturation, GameFontHighlight
 
 -- s b
 local USE_ICON_CROP = false
@@ -341,17 +340,17 @@ local methods = {
 		if desc then
 			if not self.desc then
 				--[[ s r
-				local desc = self.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
+				local f = self.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
 				]]
-				local desc = self.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall-OmniCD")
+				local f = self.frame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall-OmniCD")
 				-- e
-				desc:ClearAllPoints()
-				desc:SetPoint("TOPLEFT", self.checkbg, "TOPRIGHT", 5, -21)
-				desc:SetWidth(self.frame.width - 30)
-				desc:SetPoint("RIGHT", self.frame, "RIGHT", -30, 0)
-				desc:SetJustifyH("LEFT")
-				desc:SetJustifyV("TOP")
-				self.desc = desc
+				f:ClearAllPoints()
+				f:SetPoint("TOPLEFT", self.checkbg, "TOPRIGHT", 5, -21)
+				f:SetWidth(self.frame.width - 30)
+				f:SetPoint("RIGHT", self.frame, "RIGHT", -30, 0)
+				f:SetJustifyH("LEFT")
+				f:SetJustifyV("TOP")
+				self.desc = f
 			end
 			self.desc:Show()
 			--self.text:SetFontObject(GameFontNormal)
@@ -383,7 +382,7 @@ local methods = {
 						image:SetTexCoord(0.05, 0.95, 0.1, CROP_BOTTOM_TEXCOORD)
 					else
 						self.imagebg:SetHeight(DEFAULT_ICON_SIZE)
-						image:SetTexCoord(0.07, 0.93, 0.07, 0.93)
+						image:SetTexCoord(...)
 					end
 				else
 					if USE_ICON_CROP then

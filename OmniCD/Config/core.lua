@@ -128,7 +128,7 @@ local function GetOptions()
 							type = "description",
 						},
 						notice1 = {
-							name = (E.isClassicEra and "|cffff2020* Talent detection require Sync Mode.")
+							name = (E.isClassic and "|cffff2020* Talent detection require Sync Mode.")
 							or (E.isWOTLKC and "|cffff2020* Coodown reduction by Glyphs require Sync Mode.")
 							or (E.isSL and "|cffff2020* Coodown reduction by Soulbind Conduits and RNG modifiers (% chance to X, etc) require Sync Mode.")
 							or (E.isDF and "|cffff2020* RNG cooldown modifiers (% chance to X, etc) require Sync Mode." )
@@ -286,13 +286,11 @@ function E:SetupOptions()
 	self.optionsFrames.profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.DB)
 	self.optionsFrames.profiles.order = 1000
 
-
-
-
-
-
-
-
+	if not self.preCata then
+		local LDS = LibStub("LibDualSpec-1.0")
+		LDS:EnhanceDatabase(self.DB, "OmniCDDB")
+		LDS:EnhanceOptions(self.optionsFrames.profiles, self.DB)
+	end
 
 	self.SetupOptions = nil
 end
@@ -310,7 +308,6 @@ end
 
 function E:RefreshProfile(currentProfile)
 	currentProfile = currentProfile or self.DB:GetCurrentProfile()
-
 	self.DB.keys.profile = currentProfile .. ":D"
 	self.DB:SetProfile(currentProfile)
 end

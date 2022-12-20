@@ -1,0 +1,6 @@
+## Interface: 11403
+## Title: FasterLoot
+## Notes: Makes the loot frame instant
+## Version: Vanilla-1.14.3
+## Author: Xarano
+FasterLoot.lua

@@ -55,11 +55,12 @@
 				<Texture name="$parentIcon" parentKey="icon"/>
 			</Layer>
 			<Layer level="ARTWORK" textureSubLevel="2">
-				<FontString name="$parentHotKey" inherits="NumberFontNormalSmallGray" parentKey="hotKey" justifyH="RIGHT">
+				<FontString name="$parentHotKey" inherits="NumberFontNormalSmallGray" parentKey="hotKey" justifyH="RIGHT" text="RANGE_INDICATOR">
 					<Size x="32" y="10"/>
 					<Anchors>
 						<Anchor point="TOPLEFT" x="3" y="-3"/>
 					</Anchors>
+					<Color r="0.6" g="1.0" b="0.804" a="1"/><!-- DF -->
 				</FontString>
 				<FontString name="$parentCount" inherits="NumberFontNormal" parentKey="count" justifyH="RIGHT">
 					<Anchors>
@@ -154,23 +155,47 @@
 					</Layer>
 				</Layers>
 				<Animations>
-					<AnimationGroup parentKey="Anim">
+					<AnimationGroup parentKey="animIn">
 						<Alpha childKey="OuterGlow" duration="0.15" fromAlpha="0" toAlpha="1" order="1"/>
 						<Alpha childKey="OuterGlow" duration="0.15" fromAlpha="1" toAlpha="0" order="2"/>
 						<Scale childKey="Transition" duration="0.2" scaleX="1.381" scaleY="1.381" order="2"/>
 						<Alpha childKey="Glow" fromAlpha="1" toAlpha="0" duration="0.2" order="2"/>
 						<Scripts>
+							<OnPlay>
+								local frame = self:GetParent();
+								frame:Show();
+							</OnPlay>
 							<OnFinished>
 								local frame = self:GetParent();
 								frame:Hide();
-								local icon = frame:GetParent()
-								if icon and icon.isHilightRemoved then
-									icon.isHighlighted = nil
-								end
+							</OnFinished>
+						</Scripts>
+					</AnimationGroup>
+					<AnimationGroup parentKey="animOut">
+						<Alpha childKey="OuterGlow" duration="0.15" fromAlpha="0" toAlpha="1" order="1"/>
+						<Alpha childKey="OuterGlow" duration="0.15" fromAlpha="1" toAlpha="0" order="2"/>
+						<Scale childKey="Transition" duration="0.2" scaleX="1.381" scaleY="1.381" order="2"/>
+						<Alpha childKey="Glow" fromAlpha="1" toAlpha="0" duration="0.2" order="2"/>
+						<Scripts>
+							<OnPlay>
+								local frame = self:GetParent();
+								frame:Show();
+							</OnPlay>
+							<OnFinished>
+								local frame = self:GetParent();
+								frame:Hide();
 							</OnFinished>
 						</Scripts>
 					</AnimationGroup>
 				</Animations>
+				<Scripts>
+					<OnHide>
+						if self.animOut:IsPlaying() then
+							self.animOut:Stop()
+							self:Hide()
+						end
+					</OnHide>
+				</Scripts>
 			</Frame>
 		</Frames>
 	</Button>
@@ -269,12 +294,23 @@
 				<Alpha target="$parentAnts" duration="0.2" fromAlpha="1" toAlpha="0" order="1"/>
 				<Alpha target="$parentOuterGlowOver" duration="0.2" fromAlpha="1" toAlpha="0" order="2"/>
 				<Alpha target="$parentOuterGlow" duration="0.2" fromAlpha="1" toAlpha="0" order="2"/>
+				<!--Scripts>
+					<OnFinished>
+						OmniCDOverlayGlow_AnimOutFinished(self);
+					</OnFinished>
+				</Scripts-->
 			</AnimationGroup>
 		</Animations>
 		<Scripts>
 			<OnUpdate>
 				AnimateTexCoords(self.ants, 256, 256, 48, 48, 22, elapsed, 0.01);
 			</OnUpdate>
+			<!--OnHide>
+				if ( self.animOut:IsPlaying() ) then
+					self.animOut:Stop();
+					OmniCDOverlayGlow_AnimOutFinished(self.animOut);
+				end
+			</OnHide-->
 		</Scripts>
 	</Frame>
 </Ui>

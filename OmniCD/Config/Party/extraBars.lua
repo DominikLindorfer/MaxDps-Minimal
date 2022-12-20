@@ -28,9 +28,14 @@ local isRaidCDBar = function(info)
 	return info[4] ~= "raidBar0"
 end
 
-local isDisabledOrNameBar = function(info)
+local isDisabledProgressBarOrNameBar = function(info)
 	local db = E.profile.Party[ info[2] ].extraBars[ info[4] ]
 	return not db.enabled or not db.progressBar or db.layout == "horizontal" or db.nameBar
+end
+
+local isEnabledProgressBar = function(info)
+	local db = E.profile.Party[ info[2] ].extraBars[ info[4] ]
+	return not db.enabled or (db.layout == "vertical" and db.progressBar)
 end
 
 local sortByValues = {
@@ -255,18 +260,16 @@ local extraBarsInfo = {
 			type = "toggle",
 		},
 		showName = {
-			disabled = function(info)
-				local db = E.profile.Party[ info[2] ].extraBars[ info[4] ]
-				return not db.enabled or db.progressBar
-			end,
+			disabled = isEnabledProgressBar,
 			name = L["Show Name"],
 			desc = L["Show name on icons"],
 			order = 33,
 			type = "toggle",
 		},
 		truncateIconName = {
+			disabled = isEnabledProgressBar,
 			name = L["Truncate Name"],
-			desc = L["Adjust value until the truncate symbol [...] disappears.\n\n|cffff20200: Disable option"],
+			desc = L["Adjust value until the truncate symbol [...] disappears.\n|cffff20200: Disable option"],
 			order = 34,
 			type = "range",
 			min = 0, max = 20, step = 1,
@@ -321,7 +324,7 @@ local extraBarsInfo = {
 					args = progressBarColorInfo,
 				},
 				barColors = {
-					disabled = isDisabledOrNameBar,
+					disabled = isDisabledProgressBarOrNameBar,
 					name = "",
 					order = 13,
 					type = "group",
@@ -331,7 +334,7 @@ local extraBarsInfo = {
 					args = progressBarColorInfo,
 				},
 				bgColors = {
-					disabled = isDisabledOrNameBar,
+					disabled = isDisabledProgressBarOrNameBar,
 					name = "",
 					order = 14,
 					type = "group",
@@ -349,25 +352,42 @@ local extraBarsInfo = {
 					order = 21,
 					type = "toggle",
 				},
-				reverseFill = {
-					disabled = isDisabledOrNameBar,
-					name = L["Reverse Fill"],
-					desc = L["Timer will progress from right to left"],
+				invertNameBar = {
+					disabled = function(info)
+						local db = E.profile.Party[ info[2] ].extraBars[ info[4] ]
+						return not db.enabled or not db.progressBar or db.layout == "horizontal" or not db.nameBar
+					end,
+					name = L["Invert Name Bar"],
+					desc = L["Attach Name Bar to the left of icon"],
 					order = 22,
 					type = "toggle",
 				},
+				reverseFill = {
+					disabled = isDisabledProgressBarOrNameBar,
+					name = L["Reverse Fill"],
+					desc = L["Timer will progress from right to left"],
+					order = 23,
+					type = "toggle",
+				},
 				hideSpark = {
-					disabled = isDisabledOrNameBar,
+					disabled = isDisabledProgressBarOrNameBar,
 					name = L["Hide Spark"],
 					desc = L["Hide the leading spark texture."],
 					order = 24,
+					type = "toggle",
+				},
+				hideBorder = {
+					disabled = isDisabledProgressBarOrNameBar,
+					name = L["Hide Border"],
+					desc = L["Hide status bar border"],
+					order = 25,
 					type = "toggle",
 				},
 				showInterruptedSpell = {
 					hidden = function(info)
 						return E.preCata or isRaidCDBar(info)
 					end,
-					disabled = isDisabledOrNameBar,
+					disabled = isDisabledProgressBarOrNameBar,
 					name = L["Interrupted Spell Icon"],
 					desc = format("%s\n\n|cffff2020%s",
 					L["Show the interrupted spell icon."],
@@ -379,7 +399,7 @@ local extraBarsInfo = {
 					hidden = function(info)
 						return E.preCata or isRaidCDBar(info)
 					end,
-					disabled = isDisabledOrNameBar,
+					disabled = isDisabledProgressBarOrNameBar,
 					name = L["Interrupted Target Marker"] .. E.RAID_TARGET_MARKERS[1],
 					desc = L["Show the interrupted unit's target marker if it exists."],
 					order = 27,
@@ -400,17 +420,17 @@ local extraBarsInfo = {
 					name = L["Name Offset X"],
 					order = 32,
 					type = "range",
-					min = 1, max = 20, step = 1,
+					min = 1, max = 30, step = 1,
 				},
 				textOfsY = {
 					name = L["Name Offset Y"],
 					order = 33,
 					type = "range",
-					min = -6, max = 6, step = 1,
+					min = -10, max = 10, step = 1,
 				},
 				truncateStatusBarName = {
 					name = L["Truncate Name"],
-					desc = L["Adjust value until the truncate symbol [...] disappears.\n\n|cffff20200: Disable option"],
+					desc = L["Adjust value until the truncate symbol [...] disappears.\n|cffff20200: Disable option"],
 					order = 34,
 					type = "range",
 					min = 0, max = 20, step = 1,
@@ -524,20 +544,22 @@ function P:ConfigExBar(key, arg)
 		elseif arg == "barColors" or arg == "bgColors" or arg == "textColors" or arg == "reverseFill" or arg == "hideSpark" then
 			self.CastingBarFrame_OnLoad(statusBar.CastingBar, db, icon)
 			self:SetExStatusBarColor(icon, key)
-		elseif arg == "statusBarWidth" or arg == "textOfsX" or arg == "textOfsY" then
+		elseif arg == "statusBarWidth" or arg == "textOfsX" or arg == "textOfsY" or arg == "invertNameBar" then
 			self:SetExStatusBarWidth(statusBar, key)
+		elseif arg == "hideBorder" then
+			P:SetExBorder(icon, key)
 		elseif arg == "nameBar" then
 			self:SetExBorder(icon, key)
 			self.CastingBarFrame_OnLoad(statusBar.CastingBar, db, icon)
 			self:SetExStatusBarColor(icon, key)
-			self:SetSwipe(icon)
-			self:SetCounter(icon)
+			self:SetSwipeCounter(icon)
+			self:SetExStatusBarWidth(statusBar, key)
 		end
 	end
 
 	local sortOrder = arg == "sortBy" or arg == "growUpward" or arg == "sortDirection" or arg == "layout" or arg == "growLeft"
 	if sortOrder or arg == "progressBar" or arg == "columns" or arg == "paddingX" or arg == "paddingY"
-		or arg == "statusBarWidth" or arg == "groupPadding" or arg == "groupDetached" then
+		or arg == "statusBarWidth" or arg == "groupPadding" then
 		self:UpdateExBarPositionValues()
 		self:SetExIconLayout(key, true, sortOrder, true)
 	end
@@ -572,6 +594,7 @@ function P:ConfigExSize(key, slider)
 		end
 	end
 end
+
 
 
 function P:SetExAnchor(key)
@@ -613,7 +636,7 @@ end
 function P:SetExBorder(icon, key)
 	local db = E.db.extraBars[key]
 	local db_icon = E.db.icons
-	local edgeSize = db_icon.borderPixels * E.PixelMult / db.scale
+	local edgeSize = E.PixelMult / db.scale
 	local r, g, b = db_icon.borderColor.r, db_icon.borderColor.g, db_icon.borderColor.b
 	local shouldShowProgressBar = db.layout == "vertical" and db.progressBar
 
@@ -648,25 +671,36 @@ function P:SetExBorder(icon, key)
 	end
 
 	local statusBar = icon.statusBar
-	if shouldShowProgressBar and not db.nameBar then
-		statusBar:EnableDrawLayer("BORDER")
-		statusBar.borderTop:ClearAllPoints()
-		statusBar.borderBottom:ClearAllPoints()
-		statusBar.borderRight:ClearAllPoints()
-		statusBar.borderTop:SetPoint("TOPLEFT", statusBar, "TOPLEFT")
-		statusBar.borderTop:SetPoint("BOTTOMRIGHT", statusBar, "TOPRIGHT", 0, -edgeSize)
-		statusBar.borderBottom:SetPoint("BOTTOMLEFT", statusBar, "BOTTOMLEFT")
-		statusBar.borderBottom:SetPoint("TOPRIGHT", statusBar, "BOTTOMRIGHT", 0, edgeSize)
-		statusBar.borderRight:SetPoint("TOPRIGHT", statusBar.borderTop, "BOTTOMRIGHT")
-		statusBar.borderRight:SetPoint("BOTTOMLEFT", statusBar.borderBottom, "TOPRIGHT", -edgeSize, 0)
-		statusBar.borderTop:SetColorTexture(r, g, b)
-		statusBar.borderBottom:SetColorTexture(r, g, b)
-		statusBar.borderRight:SetColorTexture(r, g, b)
-		statusBar.borderTop:Show()
-		statusBar.borderBottom:Show()
-		statusBar.borderRight:Show()
-	elseif shouldShowProgressBar then
-		statusBar:DisableDrawLayer("BORDER")
+	if shouldShowProgressBar then
+		if db.nameBar then
+			statusBar:DisableDrawLayer("BORDER")
+		else
+			statusBar:EnableDrawLayer("BORDER")
+			statusBar.borderTop:ClearAllPoints()
+			statusBar.borderBottom:ClearAllPoints()
+			statusBar.borderRight:ClearAllPoints()
+			statusBar.borderTop:SetPoint("TOPLEFT", statusBar, "TOPLEFT")
+			statusBar.borderTop:SetPoint("BOTTOMRIGHT", statusBar, "TOPRIGHT", 0, -edgeSize)
+			statusBar.borderBottom:SetPoint("BOTTOMLEFT", statusBar, "BOTTOMLEFT")
+			statusBar.borderBottom:SetPoint("TOPRIGHT", statusBar, "BOTTOMRIGHT", 0, edgeSize)
+			statusBar.borderRight:SetPoint("TOPRIGHT", statusBar.borderTop, "BOTTOMRIGHT")
+			statusBar.borderRight:SetPoint("BOTTOMLEFT", statusBar.borderBottom, "TOPRIGHT", -edgeSize, 0)
+			statusBar.borderTop:SetColorTexture(r, g, b)
+			statusBar.borderBottom:SetColorTexture(r, g, b)
+			statusBar.borderRight:SetColorTexture(r, g, b)
+			if db.hideBorder then
+				statusBar.borderTop:Hide()
+				statusBar.borderBottom:Hide()
+				statusBar.borderRight:Hide()
+			else
+				statusBar.borderTop:SetColorTexture(r, g, b)
+				statusBar.borderBottom:SetColorTexture(r, g, b)
+				statusBar.borderRight:SetColorTexture(r, g, b)
+				statusBar.borderTop:Show()
+				statusBar.borderBottom:Show()
+				statusBar.borderRight:Show()
+			end
+		end
 	end
 end
 
@@ -688,7 +722,13 @@ end
 function P:SetExStatusBarWidth(statusBar, key)
 	local db = E.db.extraBars[key]
 	statusBar:SetWidth(db.statusBarWidth)
-	statusBar.Text:SetPoint("LEFT", statusBar, db.textOfsX, db.textOfsY)
+
+	statusBar.Text:ClearAllPoints()
+	if db.nameBar and db.invertNameBar then
+		statusBar.Text:SetPoint("RIGHT", statusBar.icon, "LEFT", -db.textOfsX, db.textOfsY)
+	else
+		statusBar.Text:SetPoint("LEFT", statusBar, db.textOfsX, db.textOfsY)
+	end
 	statusBar.CastingBar.Text:SetPoint("LEFT", statusBar.CastingBar, db.textOfsX, db.textOfsY)
 	statusBar.CastingBar.Timer:SetPoint("RIGHT", statusBar.CastingBar, -3, db.textOfsY)
 end
