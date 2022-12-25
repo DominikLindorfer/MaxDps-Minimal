@@ -120,6 +120,8 @@ L["Detach from raid frames and set position manually"] = "레이드 프레임과
 L["Disable Popup"] = "팝업 차단"
 L["Disable Reload UI confirmation when using Pixel Perfect borders"] = "Pixel Perfect 사용시 활성화되는 UI 새로고침 팝업창 차단"
 L["Disable to make the icons click through"] = "아이콘이 마우스 클릭되지 않게 하려면 비활성 하십시오"
+--[[Translation missing --]]
+L["Disabled spells will not appear on your bars even if you have them selected here"] = "Disabled spells will not appear on your bars even if you have them selected here"
 L["Display a glow animation around an icon when it is activated"] = "주문 사용시 아이콘 활성화 애니메이션 효과 주기"
 L["Display custom border around icons"] = "아이콘 테두리 표시"
 L["Display default border around icons"] = "아이콘 기본 테두리 표시"
@@ -152,6 +154,14 @@ L["Font"] = "글꼴"
 L["Font Outline"] = "글자 윤곽선"
 L["Fonts"] = "폰트"
 L["Glow Icons"] = "아이콘 활성 효과"
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction by Glyphs."] = "Group member must have OmniCD to detect cooldown reduction by Glyphs."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect Talents."] = "Group member must have OmniCD to detect Talents."
 L["Group Padding"] = "그룹간 여백"
 L["Group Size"] = "파티 크기"
 L["Group Type"] = "파티 종류"
@@ -192,6 +202,8 @@ L["Inactive"] = "비활성"
 L["Inactive Icon Opacity"] = "비활성 아이콘 불투명도"
 L["INNER"] = "내측"
 L["Interrupt Bar"] = "차단 바"
+--[[Translation missing --]]
+L["Interrupt spell types are automatically added to this bar."] = "Interrupt spell types are automatically added to this bar."
 L["Interrupted Spell Icon"] = "차단된 주문 표시"
 L["Interrupted Target Marker"] = "차단 대상 징표 표시"
 L["Interrupts"] = "차단"
@@ -290,6 +302,12 @@ L["Select the highest priority spell type to use as the start of the 2nd row"] =
 L["Select the highest priority spell type to use as the start of the 3rd row"] = "세째줄부터 표기할 주문의 우선순위 선택"
 L["Select the icon layout"] = "아이콘 배열 선택"
 L["Select the spell types you want to display on this column."] = "이 그룹에 표시할 주문 유형 선택."
+--[[Translation missing --]]
+L["Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."] = "Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."
+--[[Translation missing --]]
+L["Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"] = "Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"
+--[[Translation missing --]]
+L["Select the spells you want to track."] = "Select the spells you want to track."
 L["Select the zone setting to use for this zone."] = "이 영역에 사용할 영역 설정을 선택."
 L["Select the zone you want to copy settings from."] = "복사할 영역 설정을 선택"
 L["Select your default party frame layout"] = "기본 파티 프레임의 배열 방향 선택"
@@ -309,7 +327,7 @@ L["Set the padding space between group columns"] = "그룹 간격 설정"
 L["Set the padding space between icon columns"] = "아이콘 열 간격 설정"
 L["Set the padding space between icon rows"] = "아이콘 행 간격 설정"
 L["Set the padding space between icons"] = "아이콘간 간격 설정"
-L["Set the prioirty of spell types for sorting."] = "아이콘 정렬시 사용할 주문 유형의 우선순위 설정."
+L["Set the priority of spell types for sorting."] = "아이콘 정렬시 사용할 주문 유형의 우선순위 설정."
 L["Set the size of charge numbers"] = "사용 가능 횟수 숫자 크기 설정"
 L["Set the size of cooldown numbers"] = "재사용 대기시간의 숫자 크기 설정"
 L["Set the size of icons"] = "아이콘 크기 설정"

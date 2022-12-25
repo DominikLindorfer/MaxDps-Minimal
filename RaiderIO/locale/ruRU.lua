@@ -208,22 +208,14 @@ L["RAID_BOSS_SOD_6"] = "Кузнец боли Разнал"
 L["RAID_BOSS_SOD_7"] = "Стражница Предвечных"
 L["RAID_BOSS_SOD_8"] = "Писарь Судьбы Ро-Кало"
 L["RAID_BOSS_SOD_9"] = "Кел'Тузад"
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_1"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_2"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_3"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_4"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_5"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_6"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_7"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_8"] = ""--]] 
+L["RAID_BOSS_VOTI_1"] = "Эраног"
+L["RAID_BOSS_VOTI_2"] = "Террос "
+L["RAID_BOSS_VOTI_3"] = "Совет стихий "
+L["RAID_BOSS_VOTI_4"] = "Сеннарт Дыхание Льда"
+L["RAID_BOSS_VOTI_5"] = "Дафия Перерождённая"
+L["RAID_BOSS_VOTI_6"] = "Курог Зловещий Тотем"
+L["RAID_BOSS_VOTI_7"] = "Хранительница стаи Денна"
+L["RAID_BOSS_VOTI_8"] = "Рашагет Пожирательница Бурь"
 L["RAID_DIFFICULTY_NAME_HEROIC"] = "Героический"
 L["RAID_DIFFICULTY_NAME_MYTHIC"] = "Эпохальный"
 L["RAID_DIFFICULTY_NAME_NORMAL"] = "Обычный"

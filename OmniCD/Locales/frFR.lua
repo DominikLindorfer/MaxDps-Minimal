@@ -166,6 +166,8 @@ L["Disable Popup"] = "Désactiver le popup"
 L["Disable Reload UI confirmation when using Pixel Perfect borders"] = "Disable Reload UI confirmation when using Pixel Perfect borders"
 L["Disable to make the icons click through"] = "Désactiver pour cliquer à travers les icônes"
 --[[Translation missing --]]
+L["Disabled spells will not appear on your bars even if you have them selected here"] = "Disabled spells will not appear on your bars even if you have them selected here"
+--[[Translation missing --]]
 L["Display a glow animation around an icon when it is activated"] = "Display a glow animation around an icon when it is activated"
 L["Display custom border around icons"] = "Afficher la bordure personnalisée autour des icônes"
 L["Display default border around icons"] = "Afficher la bordure par défaut autour des icônes"
@@ -216,6 +218,14 @@ L["Font Outline"] = "Font Outline"
 L["Fonts"] = "Polices"
 --[[Translation missing --]]
 L["Glow Icons"] = "Glow Icons"
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction by Glyphs."] = "Group member must have OmniCD to detect cooldown reduction by Glyphs."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect Talents."] = "Group member must have OmniCD to detect Talents."
 L["Group Padding"] = "Espacement de groupe"
 L["Group Size"] = "Taille de groupe"
 L["Group Type"] = "Type de groupe"
@@ -271,6 +281,8 @@ L["Inactive"] = "Inactive"
 L["Inactive Icon Opacity"] = "Inactive Icon Opacity"
 L["INNER"] = "INTÉRIEUR"
 L["Interrupt Bar"] = "Barre d'interruption"
+--[[Translation missing --]]
+L["Interrupt spell types are automatically added to this bar."] = "Interrupt spell types are automatically added to this bar."
 --[[Translation missing --]]
 L["Interrupted Spell Icon"] = "Interrupted Spell Icon"
 --[[Translation missing --]]
@@ -415,6 +427,12 @@ L["Select the icon layout"] = "Select the icon layout"
 --[[Translation missing --]]
 L["Select the spell types you want to display on this column."] = "Select the spell types you want to display on this column."
 --[[Translation missing --]]
+L["Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."] = "Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."
+--[[Translation missing --]]
+L["Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"] = "Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"
+--[[Translation missing --]]
+L["Select the spells you want to track."] = "Select the spells you want to track."
+--[[Translation missing --]]
 L["Select the zone setting to use for this zone."] = "Select the zone setting to use for this zone."
 --[[Translation missing --]]
 L["Select the zone you want to copy settings from."] = "Select the zone you want to copy settings from."
@@ -442,7 +460,7 @@ L["Set the padding space between icon rows"] = "Set the padding space between ic
 --[[Translation missing --]]
 L["Set the padding space between icons"] = "Set the padding space between icons"
 --[[Translation missing --]]
-L["Set the prioirty of spell types for sorting."] = "Set the prioirty of spell types for sorting."
+L["Set the priority of spell types for sorting."] = "Set the priority of spell types for sorting."
 --[[Translation missing --]]
 L["Set the size of charge numbers"] = "Set the size of charge numbers"
 L["Set the size of cooldown numbers"] = "Définir la taille des nombres sur les Cooldowns"

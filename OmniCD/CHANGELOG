@@ -1,13 +1,30 @@
 ------------------------------------------------------------------------------
 -- Dragonflight
 --
+v10.0.2.2734
+	New Features
+		Added option panel scaling. (replaces option panel font settings)
+	Interrupt Bar
+		Interrupt spell types are now automatically added to the Interrupt Bar if enabled in the Spells tab.
+	Spells
+		Added Psyfiend (Priest, PvP Talent).
+	Bug Fixes
+		Cooldowns will correctly reset inbetween Solo Shuffle rounds.
+		Fixed text wrapping on progressbar timers.
+		Trucate Name setting will correctly update without reloading UI.
+		Coldthirst (DK, Talent) will correctly reduce the cooldown of Mind Freeze by 3 sec instead of reducing it to 3 sec.
+		Sentinel (Prot Paladin, Talent) will correctly replace Avenging Wrath.
+		Incarnation: Chosen of Elune will correctly replace Celestial Alignment.
+	Blizzard Hotfixes
+		DECEMBER 14, 2022 Hotfix to Totemic Recall.
+		DECEMBER 20, 2022 Hotfix to Call Felhunter.
+
 v10.0.2.2733
 	1st Trinket slot item will correctly show.
 	Talent spells are no longer checked against character level.
 	Tweaked Healing Hands CDR to match the current bugged state.
 	Fixed Shadowfiend incorrectly showing when Mindbender talent is taken.
 	Fixed Shadowfiend icon.
-	Reset cooldowns inbetween solo shufffle rounds.
 	Border thickness for icons are now fixed at 1px.
 
 v10.0.2.2732

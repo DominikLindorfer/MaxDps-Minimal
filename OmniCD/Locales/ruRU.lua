@@ -112,6 +112,8 @@ L["Detach from raid frames and set position manually"] = "Открепить о�
 L["Disable Popup"] = "Выключить всплывающие подсказки"
 L["Disable Reload UI confirmation when using Pixel Perfect borders"] = "Выключить подтверждение перезагрузки интерфейса при использовании Pixel Perfect границ"
 L["Disable to make the icons click through"] = "Выключите для того, чтобы иконки прокликивались насквозь"
+--[[Translation missing --]]
+L["Disabled spells will not appear on your bars even if you have them selected here"] = "Disabled spells will not appear on your bars even if you have them selected here"
 L["Display a glow animation around an icon when it is activated"] = "Обозначить свечением готовность заклинания"
 L["Display custom border around icons"] = "Показывать модифицированные границы вокруг иконок"
 L["Display default border around icons"] = "Показывать стандартную границу вокруг иконок"
@@ -144,6 +146,14 @@ L["Font"] = "Шрифт"
 L["Font Outline"] = "Окантовка шрифта"
 L["Fonts"] = "Шрифты"
 L["Glow Icons"] = "Подсвечивать иконки"
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction by Glyphs."] = "Group member must have OmniCD to detect cooldown reduction by Glyphs."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect Talents."] = "Group member must have OmniCD to detect Talents."
 L["Group Padding"] = "Групповой промежуток"
 L["Group Size"] = "Размер группы"
 L["Group Type"] = "Тип группы"
@@ -184,6 +194,8 @@ L["Inactive"] = "Неактивно"
 L["Inactive Icon Opacity"] = "Прозрачность неактивной иконки"
 L["INNER"] = "ВНУТРИ"
 L["Interrupt Bar"] = "Полоса прерываний"
+--[[Translation missing --]]
+L["Interrupt spell types are automatically added to this bar."] = "Interrupt spell types are automatically added to this bar."
 L["Interrupted Spell Icon"] = "Иконка прервавшей способности"
 L["Interrupted Target Marker"] = "Иконка прерываний по метке"
 L["Interrupts"] = "Прерывания"
@@ -280,6 +292,12 @@ L["Select the highest priority spell type to use as the start of the 2nd row"] =
 L["Select the highest priority spell type to use as the start of the 3rd row"] = "Выбирает с какого типа способностей начинать третью строку иконок"
 L["Select the icon layout"] = "Выбирает расположение иконок"
 L["Select the spell types you want to display on this column."] = "Выбирает типы способностей, которые Вы хотите отображать на этой колонке."
+--[[Translation missing --]]
+L["Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."] = "Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."
+--[[Translation missing --]]
+L["Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"] = "Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"
+--[[Translation missing --]]
+L["Select the spells you want to track."] = "Select the spells you want to track."
 L["Select the zone setting to use for this zone."] = "Выбирает настройки зоны для этой зоны."
 L["Select the zone you want to copy settings from."] = "Выберите зону, из которой Вы хотите скопировать настройки."
 L["Select your default party frame layout"] = "Выбирает расположение фреймов группы по умолчанию"
@@ -299,7 +317,7 @@ L["Set the padding space between group columns"] = "Изменяет проме�
 L["Set the padding space between icon columns"] = "Изменяет промежуток между колонками иконок"
 L["Set the padding space between icon rows"] = "Изменяет промежуток между рядами иконок"
 L["Set the padding space between icons"] = "Задает промежуток между иконками"
-L["Set the prioirty of spell types for sorting."] = "Задать приоритет типов способностей для сортировки."
+L["Set the priority of spell types for sorting."] = "Задать приоритет типов способностей для сортировки."
 L["Set the size of charge numbers"] = "Изменяет размер цифр количества зарядов"
 L["Set the size of cooldown numbers"] = "Изменяет размер цифр времени перезарядки"
 L["Set the size of icons"] = "Изменяет размер иконок"

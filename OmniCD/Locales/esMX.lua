@@ -170,6 +170,8 @@ L["Disable Popup"] = "Disable Popup"
 --[[Translation missing --]]
 L["Disable Reload UI confirmation when using Pixel Perfect borders"] = "Disable Reload UI confirmation when using Pixel Perfect borders"
 L["Disable to make the icons click through"] = "Desactivar para hacer clic en los iconos"
+--[[Translation missing --]]
+L["Disabled spells will not appear on your bars even if you have them selected here"] = "Disabled spells will not appear on your bars even if you have them selected here"
 L["Display a glow animation around an icon when it is activated"] = "Mostrar una animación de resplandor alrededor de un icono cuando este activado"
 L["Display custom border around icons"] = "Mostrar borde personalizado alrededor de los iconos"
 L["Display default border around icons"] = "Mostrar borde por defecto alrededor de los iconos"
@@ -213,6 +215,14 @@ L["Font"] = "Fuente"
 L["Font Outline"] = "Contorno de fuente"
 L["Fonts"] = "Fuentes"
 L["Glow Icons"] = "Resplandor de iconos"
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction by Glyphs."] = "Group member must have OmniCD to detect cooldown reduction by Glyphs."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect Talents."] = "Group member must have OmniCD to detect Talents."
 --[[Translation missing --]]
 L["Group Padding"] = "Group Padding"
 L["Group Size"] = "Tamaño del grupo"
@@ -266,6 +276,8 @@ L["Inactive Icon Opacity"] = "Opacidad de icono inactivo"
 --[[Translation missing --]]
 L["INNER"] = "INNER"
 L["Interrupt Bar"] = "Barra de interrupciones"
+--[[Translation missing --]]
+L["Interrupt spell types are automatically added to this bar."] = "Interrupt spell types are automatically added to this bar."
 --[[Translation missing --]]
 L["Interrupted Spell Icon"] = "Interrupted Spell Icon"
 --[[Translation missing --]]
@@ -407,6 +419,12 @@ L["Select the icon layout"] = "Seleccione la distribución de los iconos"
 --[[Translation missing --]]
 L["Select the spell types you want to display on this column."] = "Select the spell types you want to display on this column."
 --[[Translation missing --]]
+L["Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."] = "Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."
+--[[Translation missing --]]
+L["Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"] = "Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"
+--[[Translation missing --]]
+L["Select the spells you want to track."] = "Select the spells you want to track."
+--[[Translation missing --]]
 L["Select the zone setting to use for this zone."] = "Select the zone setting to use for this zone."
 L["Select the zone you want to copy settings from."] = "Seleccione la zona de la que desea copiar la configuración."
 --[[Translation missing --]]
@@ -433,7 +451,7 @@ L["Set the padding space between group columns"] = "Set the padding space betwee
 L["Set the padding space between icon columns"] = "Establece el espaciado de los iconos en las columnas"
 L["Set the padding space between icon rows"] = "Establece el espaciado de los iconos en las filas"
 L["Set the padding space between icons"] = "Establece el espaciado entre iconos"
-L["Set the prioirty of spell types for sorting."] = "Establece la prioridad de los tipos de hechizos a ordenar."
+L["Set the priority of spell types for sorting."] = "Establece la prioridad de los tipos de hechizos a ordenar."
 L["Set the size of charge numbers"] = "Establece el tamaño de los números de cargas"
 L["Set the size of cooldown numbers"] = "Establece el tamaño de los números del tiempo de reutilización"
 L["Set the size of icons"] = "Establece el tamaño de los iconos"

@@ -117,6 +117,8 @@ L["Detach from raid frames and set position manually"] = "Ablösen vom Schlachtz
 L["Disable Popup"] = "Popup deaktivieren"
 L["Disable Reload UI confirmation when using Pixel Perfect borders"] = "Reload UI-Bestätigung bei Verwendung von Pixel Perfekt-Rändern deaktivieren"
 L["Disable to make the icons click through"] = "Deaktivieren, um die Symbole durchklickbar zu machen"
+--[[Translation missing --]]
+L["Disabled spells will not appear on your bars even if you have them selected here"] = "Disabled spells will not appear on your bars even if you have them selected here"
 L["Display a glow animation around an icon when it is activated"] = "Anzeige einer Leuchtanimation um ein Symbol, wenn es aktiviert wird"
 L["Display custom border around icons"] = "Benutzerdefinierten Rahmen um Symbole anzeigen"
 L["Display default border around icons"] = "Standardrahmen um Symbole anzeigen"
@@ -149,6 +151,14 @@ L["Font"] = "Schriftart"
 L["Font Outline"] = "Schriftumriss"
 L["Fonts"] = "Schriftarten"
 L["Glow Icons"] = "Leuchtende Symbole"
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction by Glyphs."] = "Group member must have OmniCD to detect cooldown reduction by Glyphs."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc."
+--[[Translation missing --]]
+L["Group member must have OmniCD to detect Talents."] = "Group member must have OmniCD to detect Talents."
 L["Group Padding"] = "Gruppenabstand"
 L["Group Size"] = "Gruppengröße"
 L["Group Type"] = "Gruppenart"
@@ -189,6 +199,8 @@ L["Inactive"] = "Inaktiv"
 L["Inactive Icon Opacity"] = "Deckkraft des inaktiven Symbols"
 L["INNER"] = "INNERE"
 L["Interrupt Bar"] = "Unterbrechungsleiste"
+--[[Translation missing --]]
+L["Interrupt spell types are automatically added to this bar."] = "Interrupt spell types are automatically added to this bar."
 L["Interrupted Spell Icon"] = "Unterbrochenes Zauber Symbol"
 L["Interrupted Target Marker"] = "Unterbrochene Zielmarkierung"
 L["Interrupts"] = "Unterbrechungen"
@@ -287,6 +299,12 @@ L["Select the highest priority spell type to use as the start of the 2nd row"] =
 L["Select the highest priority spell type to use as the start of the 3rd row"] = "Wähle die Zauberart mit der höchsten Priorität für den Beginn der 3. Reihe"
 L["Select the icon layout"] = "Wähle das Symbol-Layout"
 L["Select the spell types you want to display on this column."] = "Wähle die Zauberarten aus, die in dieser Spalte angezeigt werden sollen."
+--[[Translation missing --]]
+L["Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."] = "Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."
+--[[Translation missing --]]
+L["Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"] = "Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"
+--[[Translation missing --]]
+L["Select the spells you want to track."] = "Select the spells you want to track."
 L["Select the zone setting to use for this zone."] = "Wähle die Zoneneinstellung, die für diese Zone verwendet werden soll."
 L["Select the zone you want to copy settings from."] = "Wähle die Zone aus, deren Einstellungen Du kopieren möchtest."
 L["Select your default party frame layout"] = "Wähle dein Standard Gruppenrahmen Layout"
@@ -306,7 +324,7 @@ L["Set the padding space between group columns"] = "Einstellen des Abstandes zwi
 L["Set the padding space between icon columns"] = "Einstellen des Abstandes zwischen den Symbolspalten"
 L["Set the padding space between icon rows"] = "Einstellen des Abstandes zwischen den Symbolzeilen"
 L["Set the padding space between icons"] = "Einstellen des Abstandes zwischen den Symbolen"
-L["Set the prioirty of spell types for sorting."] = "Lege die Priorität der Zauber für die Sortierung fest."
+L["Set the priority of spell types for sorting."] = "Lege die Priorität der Zauber für die Sortierung fest."
 L["Set the size of charge numbers"] = "Einstellen der Größe der Aufladungsnummern"
 L["Set the size of cooldown numbers"] = "Legt die Größe der Abklingzeitzahlen fest"
 L["Set the size of icons"] = "Legt die Größe der Symbole fest"

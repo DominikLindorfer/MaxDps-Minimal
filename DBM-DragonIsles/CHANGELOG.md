@@ -1,25 +1,24 @@
 # <DBM> World Bosses (Dragonflight)
 
-## [10.0.10](https://github.com/DeadlyBossMods/DBM-Retail/tree/10.0.10) (2022-12-18)
-[Full Changelog](https://github.com/DeadlyBossMods/DBM-Retail/compare/10.0.9...10.0.10) [Previous Releases](https://github.com/DeadlyBossMods/DBM-Retail/releases)
+## [10.0.11](https://github.com/DeadlyBossMods/DBM-Retail/tree/10.0.11) (2022-12-20)
+[Full Changelog](https://github.com/DeadlyBossMods/DBM-Retail/compare/10.0.10...10.0.11) [Previous Releases](https://github.com/DeadlyBossMods/DBM-Retail/releases)
 
-- Prep new tag with bugfixes and improved M+ affix support  
-- Add buff expire timers to thundering while at it. if you want a countdown you can easily configure it via these timers as well.  
-    Also added a positive alert whe thundering has been removed.  
-- Fixed a bug on raszageth where polarity alerts used position warning with no position. should just be personal warnings with no extra scope.  
-    Added Preliminary Thundering support to M+ Affixes  
-    Pruned all old S4 stuff out of M+ Affixes  
-- Fixed chat yells on Raszageth for stormcharged  
-    Tweaked mythic timer code slightly on Dathea  
-- Raszageth Update  
-     - Staging updated so stage changes come earlier and can include additional timers possible (credits to justwait for alternate stage ideas)  
-     - in addition, include some phase change timers for stuff that's roughly consistent  
-     - Lastly, second intermission add alerts and timers will now aggregate (since they are synced together)  
-    Sennarth Update  
-     - Improved P2 trigger and initial timers. They are still subject to variations/inaccuracies until a bug is fixed on blizzards end, but I'm confident that will effect very few people and will likely be fixed  
-- Fixed another bug with M+ affix mod that was still keeping it from functioning on dragonflight content (Thundering will be added in next M+ update but I wanted to get fix for quaking and other stuff into alpha now)  
-- Fixed a bug where Fulminating charge timer would not restart after first cast on Raszageth  
-    Fixed mythic terros timers, which were actually all wrong because watching voz for timers on no sleep is prone to human error. My bad!. These use actual public WCLs  
-- Don't touch objective tracker on retail  
-- Fix some tank things  
-    Fix affix mods not loading in S1 dungeons, should once again provide alerts for M+ Affixes. Thundering to be added soon™  
+- Prep another release to get latest fixes out. probably be another tomorrow with LFR updates if it has changes.  
+- Convert thundering yell to repeat yell, eliminating need to run custom weak auras for thundering  
+- Fix stupid  
+- Bugfix magnetnc charge on rasageth which was broken and still using ai timers  
+    Bugfix Volatile current from showing bad timers after known timers completed.  
+- Fix error and move ground shatter back to combat log events  
+- Buf fixess and updates to Kurog  
+- Show notification that no dungeon mods are installed in M+ more aggressively (this check also still makes sure BW isn't installed either and only nags if you're in a M+ with NO MODS for that dungeon). No longer allow pve nag messages to be disabled for missing mods (for current content) as well. It's one thing for pvp or solo content, but don't be a liability to your dungeon groups, especially M+  
+- Update localization.ru.lua (#839)  
+- Push correct D mod, not unfinished brood mod  
+- Fix bug where blowbath didn't work on normal difficulty Dathea  
+- Improve debug to try and figure out why hymdall mod keeps premature ending combat.  
+- I wear i typed 5 there  
+- Ok now that it forced me to push broken code, push actual working code  
+- Git is so stupid at conflict resolution  
+- Fix typo on newCaastAnnounce  
+- Restore partial functionalty to ground shatter. Timer works again and pre cast will announce. No longer possible to get targets after spellid change  
+- Fixed a bug that caused shocking burst icons and alerts not to work correctly on Kurog  
+- bump alpha  
