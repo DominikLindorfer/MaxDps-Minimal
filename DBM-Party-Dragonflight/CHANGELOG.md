@@ -1,18 +1,11 @@
 # <DBM> Dungeons (Dragonflight)
 
-## [r50](https://github.com/DeadlyBossMods/DBM-Dungeons/tree/r50) (2022-12-17)
-[Full Changelog](https://github.com/DeadlyBossMods/DBM-Dungeons/compare/r49...r50) [Previous Releases](https://github.com/DeadlyBossMods/DBM-Dungeons/releases)
+## [r53](https://github.com/DeadlyBossMods/DBM-Dungeons/tree/r53) (2022-12-28)
+[Full Changelog](https://github.com/DeadlyBossMods/DBM-Dungeons/compare/r52...r53) [Previous Releases](https://github.com/DeadlyBossMods/DBM-Dungeons/releases)
 
-- Ruby Lots of M+ Death pools Update:  
-     - Added Lightning Storm  
-     - Added Blaze of Glory  
-     - Added Cinderbolt  
-     - Added Tempest Stormshield  
-    Azure Vault  
-     - Added Wild Eruption  
-    Hall of Valor  
-     - Changed Claw frenzy to be on for everyone by default instead of just tanks.  
-- Update Granyth mythic add timers post hotfix  
-    Changed Aegis pickup alert on Skovald to be non filtered alert  
-    Changed breath alert color on hymdall to red.  
-- Update rending strike to post hotfix value, which basically just changes it back to what it was before last hotfix, but then added 2 seconds on it so it matches other tank ability  
+- Add rp timer for Overgrown Ancient in Algethar Academy  
+- don't auto accuse in CoS, only auto gather clues  
+- Fixed a bug where wrong line was copy pasted into RP check for odyn, resulting in a bad RP timr  
+- Update koKR (#76)  
+- add deDE "found"-trigger for CoS (#75)  
+- Just make the send to chat option on by default. That way it at least gets more testing.  

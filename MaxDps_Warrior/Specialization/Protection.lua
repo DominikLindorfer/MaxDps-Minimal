@@ -39,6 +39,8 @@ local PR = {
 	Shieldwall = 871,
 	Execute = 163201,
 	Whirlwind = 1680,
+	ThunderousRoar = 384318,
+	RallyingCry = 97462,
 };
 
 setmetatable(PR, Warrior.spellMeta);
@@ -54,65 +56,81 @@ function Warrior:Protection()
 	local curentHP = UnitHealth('player');
 	local maxHP = UnitHealthMax('player');
 	local healthPerc = (curentHP / maxHP) * 100;
-	MaxDps:GlowEssences();
-	
-	if healthPerc <= 40 then
-		return MaxDps:GlowCooldown(PR.Shieldwall, cooldown[PR.Shieldwall].ready);
-	end
-	
-	if healthPerc <= 45 then
-		return MaxDps:GlowCooldown(PR.LastStand, cooldown[PR.LastStand].ready);
-	end
-	
-	if healthPerc <= 65 and rage >= 10 then
-		return MaxDps:GlowCooldown(PR.ImpendingVictory, cooldown[PR.ImpendingVictory].ready);
-	end
-	
-	MaxDps:GlowCooldown(PR.Avatar, cooldown[PR.Avatar].ready);
-	
-	if talents[PR.DragonRoar] and cooldown[PR.DragonRoar].ready then
-		return PR.DragonRoar;
-	end
-	
-	if cooldown[PR.Revenge].ready and buff[PR.RevengeAura].up then
-		return PR.Revenge;
-	end
-	
-	if cooldown[PR.DemoralizingShout].ready then
-		return PR.DemoralizingShout;
-	end
-	
-	if buff[PR.IgnorePain].refreshable and rage >= 40 then
-		MaxDps:GlowCooldown(PR.IgnorePain, cooldown[PR.IgnorePain].ready);
-	end
-	
-	if cooldown[PR.ShieldBlock].ready and not buff[PR.ShieldBlockAura].up then
-		MaxDps:GlowCooldown(PR.ShieldBlock, cooldown[PR.ShieldBlock].ready);
-	end
-	
-	if cooldown[PR.Ravager].ready then
-		return PR.Ravager
-	end
-	
+
 	if cooldown[PR.Shockwave].ready then
-		MaxDps:GlowCooldown(PR.Shockwave, cooldown[PR.Shockwave].ready);
+		return PR.Shockwave;
 	end
-	
-	-- thunder_clap,if=(talent.unstoppable_force.enabled&buff.avatar.up);
+
 	if cooldown[PR.ThunderClap].ready then
 		return PR.ThunderClap;
 	end
 	
 	if cooldown[PR.ShieldSlam].ready then
 		return PR.ShieldSlam;
-	end	
+	end
 
-	if cooldown[PR.Revenge].ready and rage > 55 then
+	if cooldown[PR.Revenge].ready then
 		return PR.Revenge;
 	end
+
+	if cooldown[PR.Execute].ready and target.healthPerc < 20 then
+		return PR.Execute;
+	end
+
+end
+
+function Warrior:ProtectionCooldowns()
+	local fd = MaxDps.FrameData;
+	local cooldown = fd.cooldown;
+	local buff = fd.buff;
+	local talents = fd.talents;
+	local rage = UnitPower('player', PowerTypeRage);
+	local rageMax = UnitPowerMax('player', PowerTypeRage);
+	local rageDeficit = rageMax - rage;
+	local curentHP = UnitHealth('player');
+	local maxHP = UnitHealthMax('player');
+	local healthPerc = (curentHP / maxHP) * 100;
+	local absorb = UnitGetTotalAbsorbs('player');
+	local absorbPerc = (absorb / maxHP) * 100;
+
+	if healthPerc <=30 and cooldown[PR.RallyingCry].ready then
+		return PR.RallyingCry;
+	end
+
+	if healthPerc <= 45 and cooldown[PR.Shieldwall].ready then
+		return PR.Shieldwall;
+	end
+
+	if healthPerc <= 50 and cooldown[PR.LastStand].ready then
+		return PR.LastStand;
+	end
+
+	if healthPerc <= 70 and cooldown[PR.ImpendingVictory].ready then
+		return PR.ImpendingVictory;
+	end
 	
-	if cooldown[PR.Devastate].ready then
-		return PR.Devastate;
+	if rage >= 30 and cooldown[PR.ShieldBlock].ready then
+		return PR.ShieldBlock;
+	end
+	
+	if (rage >= 35 and buff[PR.IgnorePain].refreshable) or (rage >= 35 and absorb <= 50000) then
+		return PR.IgnorePain;
+	end
+
+	if cooldown[PR.Avatar].ready then
+		return PR.Avatar;
+	end
+
+	if cooldown[PR.DemoralizingShout].ready then
+		return PR.DemoralizingShout;
+	end
+
+	if cooldown[PR.Ravager].ready then
+		return PR.Ravager;
+	end
+
+	if cooldown[PR.ThunderousRoar].ready then
+		return PR.ThunderousRoar;
 	end
 
 end

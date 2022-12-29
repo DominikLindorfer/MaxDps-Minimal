@@ -4,7 +4,7 @@
 ## Notes-zhTW: 增強巨集UI，方便編寫巨集並加強功能
 ## Notes-esES: Marco de macros mejorado con herramientas adicionales
 ## Author: Deepac, marciowb, The_Junksterr, Numy
-## Version: v10.0.2-6
+## Version: v10.0.2-8
 ## SavedVariables: MacroToolkitDB
 ## OptionalDeps: ElvUI, Ace3
 ## X-Curse-Project-ID: 47117

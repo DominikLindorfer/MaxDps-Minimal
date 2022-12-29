@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("CoSTrash", "DBM-Party-Legion", 7)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision("20221109022224")
+mod:SetRevision("20221228073436")
 --mod:SetModelID(47785)
 mod:SetOOCBWComms()
 
@@ -45,7 +45,7 @@ local yellImpendingDoomFades		= mod:NewShortFadesYell(397907)
 local specWarnGTFO					= mod:NewSpecialWarningGTFO(209512, nil, nil, nil, 1, 8)
 
 mod:AddBoolOption("SpyHelper", true)
-mod:AddBoolOption("SendToChat", false)
+mod:AddBoolOption("SendToChat2", true)
 
 --Antispam IDs for this mod: 1 run away, 2 dodge, 3 dispel, 4 incoming damage, 5 you/role, 6 generalized, 7 GTFO
 
@@ -115,7 +115,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		specWarnGTFO:Show(args.spellName)
 		specWarnGTFO:Play("watchfeet")
 	elseif spellId == 397907 then
-		warnImpendingDoom:CombinedShow(0.5, args.destname)
+		warnImpendingDoom:CombinedShow(0.5, args.destName)
 		if args:IsPlayer() then
 			specWarnImpendingDoom:Show()
 			specWarnImpendingDoom:Play("scatter")
@@ -257,16 +257,7 @@ do
 		local guid = UnitGUID("target")
 		if not guid then return end
 		local cid = self:GetCIDFromGUID(guid)
-
-		if cid == 106468 then-- Disguise NPC
-			local table = C_GossipInfo.GetOptions()
-			if table[1] and table[1].gossipOptionID then
-				C_GossipInfo.SelectOption(table[1].gossipOptionID)
-				C_GossipInfo.CloseGossip()
-			end
-		end
-
-		if cid == 107486 then-- Suspicious noble
+		if cid == 107486 then--Chatty Rumormonger
 			local table = C_GossipInfo.GetOptions()
 			if table[1] and table[1].gossipOptionID then
 				C_GossipInfo.SelectOption(table[1].gossipOptionID)
@@ -274,11 +265,12 @@ do
 				local clue = clues[C_GossipInfo.GetText()]
 				if clue and not hints[clue] then
 					C_GossipInfo.CloseGossip()
-					if self.Options.SendToChat then
+					if self.Options.SendToChat2 then
+						local text = hintTranslations[clue] or clue
 						if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
-							SendChatMessage(hintTranslations[clue], "INSTANCE_CHAT")
+							SendChatMessage(text, "INSTANCE_CHAT")
 						elseif IsInGroup(LE_PARTY_CATEGORY_HOME) then
-							SendChatMessage(hintTranslations[clue], "PARTY")
+							SendChatMessage(text, "PARTY")
 						end
 					end
 					hints[clue] = true

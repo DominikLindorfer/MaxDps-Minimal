@@ -1,3 +1,3 @@
-# 11.1.4 (2022-12-03)
+# 11.1.7 (2022-12-28)
 
-* Fixed a Lua error with tooltip scanning for unit roles, levels or guilds that occured when there was no valid tooltip data [Issue #596].
+* Fixed a bug with several Shaman totem icons not being shown on totem nameplates [Issue #601].

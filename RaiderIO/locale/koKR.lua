@@ -73,8 +73,7 @@ L["DISABLE_DEBUG_MODE_RELOAD"] = [=[귀하는 디버그 모드를 비활성화�
 --[[ L["DISABLE_RWF_MODE_RELOAD"] = ""--]] 
 L["DPS"] = "|cffFF3636공격전담|r"
 L["DUNGEON_SHORT_NAME_AA"] = "대학"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_AV"] = ""--]] 
+L["DUNGEON_SHORT_NAME_AV"] = "하늘빛"
 L["DUNGEON_SHORT_NAME_COS"] = "별궁"
 L["DUNGEON_SHORT_NAME_DOS"] = "저편"
 L["DUNGEON_SHORT_NAME_GD"] = "정비소"
@@ -84,8 +83,7 @@ L["DUNGEON_SHORT_NAME_HOV"] = "용전"
 L["DUNGEON_SHORT_NAME_ID"] = "선착장"
 L["DUNGEON_SHORT_NAME_LOWR"] = "하층"
 L["DUNGEON_SHORT_NAME_MISTS"] = "티르"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_NO"] = ""--]] 
+L["DUNGEON_SHORT_NAME_NO"] = "노쿠드"
 L["DUNGEON_SHORT_NAME_NW"] = "죽상"
 L["DUNGEON_SHORT_NAME_PF"] = "역병"
 L["DUNGEON_SHORT_NAME_RLP"] = "루비"

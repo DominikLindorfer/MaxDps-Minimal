@@ -49,6 +49,10 @@ L['scout_pack'] = 'Mochilas de Explorador de Expedición'
 L['options_icons_scout_pack'] = 'Mochilas de explorador de expedición'
 L['options_icons_scout_pack_desc'] = 'Muestra dónde están las Mochilas de Explorador de Expedición.'
 
+L['magicbound_chest'] = 'Cofre reforzado con magia'
+L['options_icons_magicbound_chest'] = 'Cofre reforzado con magia'
+L['options_icons_magicbound_chest_desc'] = 'Muestra dónde están los Cofres reforzados con magia.'
+
 L['dr_best'] = 'Tu mejor tiempo:\n - Normal: %.3fs\n - Avanzado: %.3fs'
 L['dr_best_dash'] = 'Tu mejor tiempo:\n - %.3fs'
 L['dr_note'] = 'Objetivo de tiempo:\n - Normal: %ss / %ss\n - Avanzado: %ss / %ss'
@@ -82,8 +86,11 @@ L['options_icons_legendary_album_desc'] = 'Muestra dónde están los personajes 
 ------------------------------- THE AZURE SPAN --------------------------------
 -------------------------------------------------------------------------------
 
+L['blightfur_note'] = 'Habla con {npc:193633} para hacer aparecer al raro.'
 L['brackenhide_rare_note'] = 'Estos raros aparecen en un rotación fija en el siguiente orden: {npc:197344} > {npc:197353} > {npc:197354} > {npc:197356} con una diferencia de 10 minutos.'
 L['fisherman_tinnak_note'] = 'Recoge la |cFFFFFD00Caña de Pescar Rota|r, la |cFFFFFD00Red de Pescar Rota|r y el |cFFFFFD00Arpón Viejo|r para hacer aparecer al raro.'
+L['frostpaw_note'] = 'Después de coger el |cFFFFFD00Martillo de Madera|r, tienes 20 segundos para golpear el |cFFFFFD00Machacagnolls|r en el |cFFFFFD00Tocón|r, y hacer aparecer al raro.'
+L['sharpfang_note'] = 'Ayuda a {npc:192747} a derrotar a los {npc:192748} para hacer aparecer al raro.'
 L['spellwrought_snowman_note'] = 'Consigue 10x {npc:193424} y llévaselas a {npc:193242}.'
 L['trilvarus_loreweaver_note'] = 'Recoge un |cFFFFFD00Fragmento Cantarín|r para conseguir {spell:382076} y usar el |cFFFFFD00Enfoque Descargado|r para hacer aparecer al raro.'
 
@@ -156,7 +163,9 @@ L['mysterious_wand_note'] = 'Coge la |cFFFFFD00Llave de Cristal|r y ponla dentro
 ------------------------------ OHN'AHRAN PLAINS -------------------------------
 -------------------------------------------------------------------------------
 
+L['eaglemaster_niraak_note'] = 'Mata a los {npc:186295} cercanos y a los {npc:186299} para hacer aparecer al raro.'
 L['hunter_of_the_deep_note'] = 'Haz click en el armero y dispara a los peces hasta que aparezca el raro and shoot fish until the rare spawns.'
+L['porta_the_overgrown_note'] = 'Puedes encontrar el {item:194426} en el fondo del lago del |cFFFFFD00Espejo del Cielo|r, en el lado oeste. Bajo el agua, esparce 5x {item:194426} en el {npc:191953} para hacer aparecer al raro.'
 L['scaleseeker_mezeri_note'] = 'Ofrece {item:194681} a {npc:193224} y síguela hasta que te enseñe al raro.'
 L['shade_of_grief_note'] = 'Haz click en {npc:193166} para hacer aparecer al raro.'
 L['windscale_the_stormborn_note'] = 'Mata a los {npc:192367} que están canalizando en los {npc:192357}.'
@@ -185,15 +194,15 @@ L['pt_tailor_silky_surprise_note'] = 'Busca y despoja la |cFFFFFD00Fronda de Hie
 L['lizi_note'] = 'Completa la cadena de misiones |cFFFFFD00El día libre de la iniciada|r comenzando con {quest:65901}. Completa las misiones cada día para curar a Lizi y recibir su montura.\n\nAdemás de los objetos necesarios, todas las misiones requieren 150x {currency:2003} para un total de 750x {currency:2003}.'
 L['lizi_note_day1'] = 'Recoge 20x {item:192615} de los enemigos insecto en las |cFFFFFD00Islas Dragón|r.'
 L['lizi_note_day2'] = 'Recoge 20x {item:192658} de los enemigos planta en las |cFFFFFD00Islas Dragón|r.'
-L['lizi_note_day3'] = 'Recoge 10x {item:194966} pescadas en cualquier masa de agua dulce en las |cFFFFFD00Islas Dragón|r. Se encuentran con más frecuencia en los interiores de las |cFFFFFD00Llanuras de Ohn\'ahran|r.'
-L['lizi_note_day4'] = 'Recoge 20x {item:192636} de los mamuts de las |cFFFFFD00Llanuras de Ohn\'ahran|r.'
+L['lizi_note_day3'] = 'Recoge 10x {item:194966} pescadas en cualquier masa de agua dulce en las |cFFFFFD00Islas Dragón|r. Se encuentran con más frecuencia en los interiores de las |cFFFFFD00Llanuras de Ohn\'ahra|r.'
+L['lizi_note_day4'] = 'Recoge 20x {item:192636} de los mamuts de las |cFFFFFD00Llanuras de Ohn\'ahra|r.'
 L['lizi_note_day5'] = 'Acepta la misión {quest:71195} de {npc:190014} y consigue 1x {item:200598} de {npc:190015} en la tienda al sur de los |cFFFFFD00Manantiales Ohn\'iri|r.'
 
-L['ohnahra_note_start'] = 'Completa la cadena de misiones |cFFFFFD00El día libre de la iniciada|r comenzando con {quest:65901} y entonces aparecerá {npc:190022} en los |cFFFFFD00Manantiales Ohn\'iri|r detrás de la choza del sabio del viento.\n\nReúne los siguientes objetos:'
+L['ohnahra_note_start'] = 'Completa la cadena de misiones diarias {quest:71196} para las {item:192799} en los |cFFFFFD00Manantiales Ohn\'iri|r. Acepta la misión {quest:72512} de {npc:190022} detrás de la choza del sabio del viento en los |cFFFFFD00Manantiales Ohn\'iri|r.\n\nReúne los siguientes objetos:'
 L['ohnahra_note_item1'] = 'Recoge 3x {item:201929} de los {npc:186151}, el boss final de la mazmorra |cFFFFFD00Ofensiva Nokhud|r (dificultad Heroica). No tiene un 100% de caer.'
 L['ohnahra_note_item2'] = 'Compra 1x {item:201323} de {npc:196707} por 50x {currency:2003} y 1x {item:194562}.\n{item:194562} puede ser despojado de los enemigos Perdidos en el Tiempo en |cFFFFFD00Thaldrazsus|r.'
 L['ohnahra_note_item3'] = 'Compra 1x {item:191507} de la Casa de Subastas. (los Alqumistas pueden comprar la {item:191588} a {npc:196707} al llegar a Renombre 22).'
-L['ohnahra_note_end'] = 'Una vez con todos los objetos, vuelve a {npc:190022} y acepta {quest:72512}. Ves a {npc:194796} para entregar la misión y recibir tu montura.'
+L['ohnahra_note_end'] = 'Una vez con todos los objetos, entrega la misión a {npc:194796} para recibir tu montura.'
 
 L['bakar_note'] = '¡Acaricia el perro!'
 L['bakar_ellam_note'] = 'Si jugadores suficientes acarician a esta perra, os guiará a su escondite.'
@@ -212,6 +221,11 @@ L['options_icons_dreamguard_desc'] = 'Muestra dónde están los Guardasueños pa
 L['khadin_note'] = 'Intercambia una {item:191784} por conocimiento de la profesión.'
 L['the_great_swog_note'] = 'Intercambia {item:199338}, {item:199339} y {item:199340} por un {item:202102}.'
 L['hunt_instructor_basku_note'] = 'Entrega {item:200093} para conseguir reputación con |cFFFFFD00Centauros Maruuk|r.'
+L['elder_yusa_note'] = 'Selecciona a la {npc:192818} y haz ' .. ns.color.Orange('/hambre') .. ' para conseguir la receta de cocina.'
+L['initiate_kittileg_note'] = 'Completa la misión {quest:66226} para conseguir el juguete!'
+
+L['quackers_duck_trap_kit'] = 'Para invocar a {npc:192557} primero te hace falta el {item:194740} el cual se puede encontrar en un campamento cercano.\n\nPara convertirlo en una {item:194712} necesitarás los siguientes objetos:'
+L['quackers_spawn'] = 'Ahora necesitas pillar un pato con la {item:194712}, encontrarás algunos cerca del nido. Ahora puedes usar el {item:194739} en el {npc:192581} para invocar a {npc:192557}.'
 
 -------------------------------------------------------------------------------
 --------------------------------- THALDRASZUS ---------------------------------
@@ -220,6 +234,7 @@ L['hunt_instructor_basku_note'] = 'Entrega {item:200093} para conseguir reputaci
 L['ancient_protector_note'] = 'Mata a una {npc:193244} cercana para conseguir un {item:197708}. Combina 5 {item:197708} para crear un {item:197733}. Úsalo para activar los Reactores de los Titanes cercanos.'
 L['blightpaw_note'] = 'Habla con el {npc:193222} y acepta ayudarle.'
 L['corrupted_proto_dragon_note'] = 'Inspecciona el |cFFFFFD00Huevo de Dragón Corrupto|r para hacer aparecer al raro.'
+L['lord_epochbrgl_note'] = 'Haz click en la {npc:193257} para hacer aparecer al raro.'
 L['weeping_vilomah_note'] = 'Habla con {npc:193206} para invocar al raro.'
 L['woofang_note'] = 'Acaricia al {npc:193156} para hacer aparecer al raro.'
 
@@ -261,6 +276,7 @@ L['options_icons_new_perspective_desc'] = 'Muestra dónde están los paisajes pa
 L['ruby_feast_gourmand'] = 'Cada día, un invitado chef al azar sirve distintos platos y bebidas.'
 
 L['sorotis_note'] = 'Entrega {item:199906} para conseguir reputación con |cFFFFFD00Acuerdo de Valdrakken|r.'
+L['lillian_brightmoon_note'] = 'Entrega {item:201412} para conseguir reputación con |cFFFFFD00Expedición Dragontina|r.'
 
 -------------------------------------------------------------------------------
 ------------------------------ THE WAKING SHORE -------------------------------
@@ -359,6 +375,14 @@ L['slumbering_worldsnail_note1'] = [[
 L['slumbering_worldsnail_note2'] = ns.color.Orange('Note: Si mueres perderás el debuff de membresía. Compre un nuevo título de miembro a {npc:193310} por 20x {item:202173} antes de morir o necesitarás entregar más llaves para la oportunidad de sacar un título de miembro del alijo.')
 
 L['magmashell_note'] = 'Despoja {item:201883} de los {npc:193138} alrededor de la |cffffff00Ciudadela Obsidiana|r y llévaselo al {npc:199010}.\n\n' .. ns.color.Orange('Haciendo click en el caracol se canalizará un hechizo durante 20 segundos después de lo cuales conseguirás la montura. Muy recomendable traer a un amigo sanador o usar el juguete {item:200116}.')
+
+L['otto_note_start1'] = 'Consigue unas {item:202042}. Las gafas tienen un 100% de probabilidades de salir del {item:202102} que puede ser comprado a {npc:191608} en las |cFFFFFD00Llanuras de Ohn\'ahra|r.\n\nEl saco se puede comprar con 1x {item:199340} la cual puede ser comprada con 5x {item:199339} que éstas se pueden comprar por 75x {item:199338}. A su vez, estas últimas se pueden pescar alrededor de las |cFFFFFD00Islas Dragón|r o derrotando a enemigos |cFFFFFD00<Morrocotudo>|r en los nodos de pesca.'
+L['otto_note_start2'] = ns.color.Orange('Derrotar enemigos |cFFFFFD00<Morrocotudo>|r requiere Renombre 7 con |cFFFFFD00Colmillarr de Iskaara|r y acceso al {item:194510}.')
+L['otto_note_start3'] = 'Una vez con las {item:202042} ves al bar subacuático |cFFFFFD00El Baño de Burbujas|r en la |cFFFFFD00Gruta Siseante|r y quédate de pie en la plataforma de baile que hay al lado de la barra hasta conseguir el debuff {spell:396539}. Cuando el debuff se acabe te desmayarás y despertarás junto a un barril. Interactúa con él para despojar el {item:202061}. Ahora necesitas llenar el barril con peces para alimentar a {npc:199563}.'
+L['otto_note_item1'] = 'Recoge 100x {item:202072}, un pez con probabilidad alta de ser pescado en las aguas abiertas de |cFFFFFD00Iskaara|r en las |cFFFFFD00Tierras Azures|r. Usar el barril con los peces te dará un {item:202066}.'
+L['otto_note_item2'] = 'Recoge 25x {item:202073}, un pez con probabilidad rara de ser pescado en la lava alrededor de la |cFFFFFD00Ciudadela Obsidiana|r en las |cFFFFFD00Orillas del Despertar|r. Usar el barril con los peces te dará un {item:202068}.'
+L['otto_note_item3'] = 'Recoge 1x {item:202074}, un pez con probabilidad rara de ser pescado en las aguas cerca de |cFFFFFD00Academia Algeth\'ar|r en |cFFFFFD00Thaldraszus|r. Usar el barril con los peces te dará un {item:202069}.'
+L['otto_note_end'] = 'Vuelve a la |cFFFFFD00Gruta Siseante|r en las |cFFFFFD00Orillas del Despertar|r y deja el barril donde lo encontrastes para invocar a {npc:199563} y ¡recibir tu montura!'
 
 L['options_icons_safari'] = '{achievement:16519}'
 L['options_icons_safari_desc'] = 'Muestra dónde están las mascotas de combate para el logro {achievement:16519}.'

@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod("AlgetharAcademyTrash", "DBM-Party-Dragonflight", 5)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision("20221203231852")
+mod:SetRevision("20221226072844")
 --mod:SetModelID(47785)
 mod.isTrashMod = true
 
@@ -98,7 +98,7 @@ function mod:SPELL_AURA_APPLIED(args)
 			yellnViciousAmbush:Yell()
 		end
 	elseif spellId == 387843 then
-		warnAstralBombTargets:Show(args.destName)
+		warnAstralBombTargets:CombinedShow(1, args.destName)
 		if args:IsPlayer() then
 			specWarnAstralBomb:Show()
 			specWarnAstralBomb:Play("runout")

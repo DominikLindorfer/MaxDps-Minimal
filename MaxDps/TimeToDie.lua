@@ -10,7 +10,7 @@ local MathMin = math.min;
 local wipe = wipe;
 
 function MaxDps:InitTTD(maxSamples, interval)
-	print("InitTTD() activated!")
+	-- print("InitTTD() activated!")
 	interval = interval or 0.25;
 	maxSamples = maxSamples or 50;
 

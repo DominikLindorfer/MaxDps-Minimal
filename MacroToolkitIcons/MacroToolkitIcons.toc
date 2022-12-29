@@ -1,7 +1,7 @@
 ## Interface: 100002
 ## Author: Deepac
 ## Title: MacroToolkit Icon Data
-## Version: v10.0.2-6
+## Version: v10.0.2-8
 ## Notes: Load on demand data for MacroToolkit
 ## LoadOnDemand: 1
 ## RequiredDeps: MacroToolkit

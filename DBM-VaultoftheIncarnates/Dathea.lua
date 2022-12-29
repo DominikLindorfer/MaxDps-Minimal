@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(2502, "DBM-VaultoftheIncarnates", nil, 1200)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision("20221220093630")
+mod:SetRevision("20221228062737")
 mod:SetCreatureID(189813)
 mod:SetEncounterID(2635)
 mod:SetUsedIcons(8, 7, 6, 5, 4)
@@ -96,7 +96,7 @@ function mod:OnCombatStart(delay)
 		timerCycloneCD:Start(35.2-delay, 1)
 		timerColaescingStormCD:Start(70-delay, 1)--70-73 (check ito it being 73 consistently on mythic)
 	else
-		timerZephyrSlamCD:Start(9.5-delay, 1)
+		timerZephyrSlamCD:Start(9.4-delay, 1)
 		timerCrosswindsCD:Start(28.9-delay, 1)
 		timerCycloneCD:Start(45.2-delay, 1)
 		timerColaescingStormCD:Start(80-delay, 1)
@@ -140,7 +140,7 @@ function mod:SPELL_CAST_START(args)
 		else
 			timerConductiveMarkCD:Restart(9.7, self.vb.markCount+1)
 			timerZephyrSlamCD:Restart(15.7, self.vb.slamCount+1)
-			timerCrosswindsCD:Restart(35.2, self.vb.crosswindCount+1)
+			timerCrosswindsCD:Restart(34, self.vb.crosswindCount+1)
 			timerColaescingStormCD:Start(86.2, self.vb.stormCount+1)
 		end
 	elseif spellId == 388302 then
@@ -193,7 +193,7 @@ function mod:SPELL_CAST_START(args)
 		end
 	elseif spellId == 385812 then
 		timerAerialSlashCD:Start(nil, args.sourceGUID)
-		if self:IsTanking("player", nil, nil, nil, args.sourceGUID) then
+		if self:IsTanking("player", nil, nil, true, args.sourceGUID) and self:AntiSpam(3, 1) then
 			specWarnAerialSlash:Show()
 			specWarnAerialSlash:Play("defensive")
 		end
@@ -261,7 +261,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		if expireTime then
 			remaining = expireTime-GetTime()
 		end
-		if (not remaining or remaining and remaining < 6.1) and not UnitIsDeadOrGhost("player") and not self:IsHealer() then
+		if amount >= 2 and (not remaining or remaining and remaining < 6.1) and not UnitIsDeadOrGhost("player") and not self:IsHealer() then
 			specWarnZephyrSlamTaunt:Show(args.destName)
 			specWarnZephyrSlamTaunt:Play("tauntboss")
 		else
@@ -300,7 +300,7 @@ mod.SPELL_PERIODIC_MISSED = mod.SPELL_PERIODIC_DAMAGE
 --]]
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
-	if (spellId == 391600 or spellId == 391595) and self:AntiSpam(3, 1) then--391595 confirmed, 391600 i'm keeping for now in case it's used on mythics
+	if (spellId == 391600 or spellId == 391595) and self:AntiSpam(3, 2) then--391595 confirmed, 391600 i'm keeping for now in case it's used on mythics
 		self.vb.markCount = self.vb.markCount + 1
 		timerConductiveMarkCD:Start(self:IsHard() and 25 or 31.5, self.vb.markCount+1)
 	end

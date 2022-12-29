@@ -24,7 +24,7 @@ local spellHistoryBlacklist = {
 };
 
 function MaxDps:OnInitialize()
-	print("OnInitialize() activated!")
+	-- print("OnInitialize() activated!")
 	self.db = LibStub('AceDB-3.0'):New('MaxDpsOptions', self.defaultOptions);
 	-- self:RegisterChatCommand('maxdps', 'ShowMainWindow');
 end
@@ -84,18 +84,25 @@ function MaxDps:DisableRotationTimer()
 end
 
 function MaxDps:OnEnable()
-	print("OnEnable() activated!")
+	-- print("OnEnable() activated!")
 
 	if not self.rotationEnabled then
 		self:Print(self.Colors.Success .. 'Auto enable on combat!');
-		print("Enable Rotations on OnEnable()!")
+		print("Enabling MaxDps Minimal!")
 		self:InitRotations();
 		self:EnableRotation();
 	end
 
+	-- print("Registering Events")
 	-- self:RegisterEvent('PLAYER_TARGET_CHANGED');
 	self:RegisterEvent('NAME_PLATE_UNIT_ADDED');
 	self:RegisterEvent('NAME_PLATE_UNIT_REMOVED');
+	self:RegisterEvent('PLAYER_REGEN_ENABLED');
+	self:RegisterEvent('PLAYER_REGEN_DISABLED');
+
+	if self.timeInCombat == nil then
+		self.timeInCombat = 0;
+	end
 
 	if not self.playerUnitFrame then
 		self.spellHistory = {};
@@ -114,9 +121,27 @@ function MaxDps:OnEnable()
 		end);
 	end
 
-	print("Enabling Done!")
+	-- print("Enabling Done!")
 
 	self:Print(self.Colors.Info .. 'Initialized');
+end
+
+function MaxDps:PLAYER_REGEN_ENABLED()
+	self:CancelTimer(self.combatTimer)
+	self.combatTimerCount = 0
+end
+
+function MaxDps:combatTimerFeedback()
+  self.combatTimerCount = self.combatTimerCount + 0.1;
+end
+
+function MaxDps:PLAYER_REGEN_DISABLED()
+	self.combatTimerCount = 0;
+	self.combatTimer = self:ScheduleRepeatingTimer("combatTimerFeedback", 0.1);
+end
+
+function MaxDps:timeInCombat()
+	return self.combatTimerCount;
 end
 
 MaxDps.visibleNameplates = {};
@@ -161,6 +186,13 @@ function MaxDps:PrepareFrameData()
 	self.FrameData.runeforge = self.LegendaryBonusIds;
 	self.FrameData.spellHistory = self.spellHistory;
 	self.FrameData.timeToDie = self:GetTimeToDie();
+
+	timeInCombat = self:timeInCombat();
+	if timeInCombat ~= nil then
+		self.FrameData.timeInCombat = timeInCombat;
+		-- print(self.FrameData.timeInCombat)
+	end
+
 end
 
 function MaxDps:InvokeNextSpell()
@@ -182,7 +214,7 @@ function MaxDps:InvokeNextSpell()
 end
 
 function MaxDps:InitRotations()
-	print("InitRotations() activated!")
+	-- print("InitRotations() activated!")
 	self:Print(self.Colors.Info .. 'Initializing rotations');
 
 	local _, _, classId = UnitClass('player');
@@ -190,14 +222,12 @@ function MaxDps:InitRotations()
 	self.ClassId = classId;
 	self.Spec = spec;
 
-
 	self:LoadModule();
 end
 
 function MaxDps:LoadModule()
-
-	print("LoadModule() activated!")
-	print(self.ClassId, self.Spec, self.Classes[self.ClassId])
+	-- print("LoadModule() activated!")
+	-- print(self.ClassId, self.Spec, self.Classes[self.ClassId])
 
 	if self.Classes[self.ClassId] == nil then
 		self:Print(self.Colors.Error .. 'Invalid player class, please contact author of addon.');
