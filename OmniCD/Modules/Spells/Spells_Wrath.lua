@@ -355,7 +355,7 @@ E.spell_db = {
 		{ spellID = 7744, duration = 120, type = "racial", race = 5 },
 	},
 	["TRINKET"] = {
-		{ spellID = 44055, duration = 180, type = "trinket", item = 34050 },
+		{ spellID = 44055, duration = 180, type = "trinket", item = 34050, icon = 132344 },
 	},
 }
 

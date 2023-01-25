@@ -1,6 +1,29 @@
 ------------------------------------------------------------------------------
 -- Dragonflight
 --
+v10.0.2.2740
+	Non-PvP talent changes made by non-synced units are now updated instantly
+	Fixed item inspection
+
+v10.0.2.2737
+	version update
+
+v10.0.2.2736
+	Fixed Time Spiral on non-Evoker classes
+	Fixed Lay on Hands, Sprint CD
+	Fixed interrupted spell & marker display for pet interrupts
+	Added Healing potion (doesn't check availability)
+
+v10.0.2.2735
+	Cooldowns will correctly reset inbetween solo shuffle rounds #3
+	Desperate Prayer w/ Angel's Mercy (Talent) has been added to Sync
+		:This is to fix the seemingly random Class/NPC spell damage not adding to CDR (e.g. Pyre, Dragonrage)
+	Fixed Dracthyr racials for Alliance
+	Major movement abilities will show the correct cooldown for new group members with Blessing of the Bronze (Dracthr, Buff)
+	Returned option to exclude player spells on Extra Bars
+	JANUARY 3, 2023 Hotfix to Gift of the Golden Val'kyr applied
+	JANUARY 9, 2023 Hotfix to Shield of Vengeance and Celestial Brew CD applied
+
 v10.0.2.2734
 	New Features
 		Added option panel scaling. (replaces option panel font settings)
@@ -9,7 +32,6 @@ v10.0.2.2734
 	Spells
 		Added Psyfiend (Priest, PvP Talent).
 	Bug Fixes
-		Cooldowns will correctly reset inbetween Solo Shuffle rounds.
 		Fixed text wrapping on progressbar timers.
 		Trucate Name setting will correctly update without reloading UI.
 		Coldthirst (DK, Talent) will correctly reduce the cooldown of Mind Freeze by 3 sec instead of reducing it to 3 sec.
@@ -586,7 +608,15 @@ v2.5.0
 ------------------------------------------------------------------------------
 -- WOTLKC
 --
-v3.4.1.2730
+v3.4.1.2740
+	Fixed Set bonus inspection
+	Added Season 6 tier set bonuses
+
+v3.4.1.2737
+	Fixed dual spec inspection
+	Fixed nil error
+
+v3.4.1.2736
 	Compatibility updates for 3.4.1
 
 v3.4.0.2724
@@ -662,6 +692,12 @@ v2.6.01-bcc
 ------------------------------------------------------------------------------
 -- classic era
 --
+v1.14.3.2740
+	version update
+
+v1.14.3.2737
+	version update
+
 v1.14.3.2724
 	Fixed sync for cross realm group members
 

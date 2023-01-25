@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(1488, "DBM-Party-Legion", 4, 721)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision("20221226072844")
+mod:SetRevision("20230124053246")
 mod:SetCreatureID(95675)
 mod:SetEncounterID(1808)
 mod:SetHotfixNoticeRev(20221127000000)
@@ -28,9 +28,10 @@ mod:RegisterEvents(
  or type = "dungeonencounterstart" or type = "dungeonencounterend"
 --]]
 local warnAegis						= mod:NewTargetNoFilterAnnounce(193783, 1)
-local warnFelblazeRush				= mod:NewTargetAnnounce(193659, 2)
+local warnFelblazeRush				= mod:NewTargetNoFilterAnnounce(193659, 2)
 local warnClaimAegis				= mod:NewSpellAnnounce(194112, 2)
 
+local specWarnFelRush				= mod:NewSpecialWarningYou(193659, nil, nil, nil, 1, 2)
 local yellFelblazeRush				= mod:NewYell(193659)
 local specWarnSavageBlade			= mod:NewSpecialWarningDefensive(193668, "Tank", nil, nil, 1, 2)
 local specWarnRagnarok				= mod:NewSpecialWarningMoveTo(193826, nil, nil, nil, 3, 2)
@@ -43,9 +44,12 @@ local timerRagnarokCD				= mod:NewCDTimer(63.1, 193826, nil, nil, nil, 2, nil, D
 
 function mod:FelblazeRushTarget(targetname, uId)
 	if not targetname then return end
-	warnFelblazeRush:Show(targetname)
 	if targetname == UnitName("player") then
+		specWarnFelRush:Show()
+		specWarnFelRush:Play("targetyou")
 		yellFelblazeRush:Yell()
+	else
+		warnFelblazeRush:Show(targetname)
 	end
 end
 
@@ -126,6 +130,7 @@ end
 
 function mod:OnSync(msg, targetname)
 	if msg == "SkovaldRP" and self:AntiSpam(10, 2) then
-		timerRP:Start()
+--		timerRP:Start()
+		DBM:AddMsg("Old RP timer disabled for Jan 23rd hotfix, new timer will be added soon")
 	end
 end

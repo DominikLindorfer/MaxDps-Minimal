@@ -57,7 +57,7 @@ function Warrior:Protection()
 	local maxHP = UnitHealthMax('player');
 	local healthPerc = (curentHP / maxHP) * 100;
 
-	if cooldown[PR.Shockwave].ready then
+	if talents[PR.Shockwave] and cooldown[PR.Shockwave].ready then
 		return PR.Shockwave;
 	end
 
@@ -125,11 +125,11 @@ function Warrior:ProtectionCooldowns()
 		return PR.DemoralizingShout;
 	end
 
-	if cooldown[PR.Ravager].ready then
+	if talents[PR.Ravager] and cooldown[PR.Ravager].ready then
 		return PR.Ravager;
 	end
 
-	if cooldown[PR.ThunderousRoar].ready then
+	if talents[PR.ThunderousRoar] and cooldown[PR.ThunderousRoar].ready then
 		return PR.ThunderousRoar;
 	end
 

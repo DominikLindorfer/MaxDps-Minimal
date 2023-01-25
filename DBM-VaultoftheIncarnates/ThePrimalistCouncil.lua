@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(2486, "DBM-VaultoftheIncarnates", nil, 1200)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision("20221228062737")
+mod:SetRevision("20230118201728")
 mod:SetCreatureID(187771, 187768, 187772, 187767)
 mod:SetEncounterID(2590)
 mod:SetUsedIcons(1, 2)
@@ -25,10 +25,9 @@ mod:RegisterEventsInCombat(
 --[[
 (ability.id = 373059 or ability.id = 372322 or ability.id = 372056 or ability.id = 372027 or ability.id = 372279 or ability.id = 374038 or ability.id = 375331 or ability.id = 397134) and type = "begincast"
  or (ability.id = 386440 or ability.id = 386375 or ability.id = 386370 or ability.id = 386289) and type = "applybuff"
- or ability.id = 371624 and type = "applydebuff"
 --]]
 --General
-local specWarnGTFO								= mod:NewSpecialWarningGTFO(340324, nil, nil, nil, 1, 8)
+local specWarnGTFO								= mod:NewSpecialWarningGTFO(371514, nil, nil, nil, 1, 8)
 
 --local berserkTimer							= mod:NewBerserkTimer(600)
 --Kadros Icewrath
@@ -37,7 +36,7 @@ local warnFrostTomb								= mod:NewTargetNoFilterAnnounce(371591, 4)
 local warnGlacialConvocation					= mod:NewSpellAnnounce(386440, 4)
 
 local specWarnPrimalBlizzard					= mod:NewSpecialWarningCount(373059, nil, nil, nil, 2, 2)
-local specWarnPrimalBlizzardStack				= mod:NewSpecialWarningStack(373059, nil, 8, nil, nil, 1, 6)
+local specWarnPrimalBlizzardStack				= mod:NewSpecialWarningStack(373059, nil, 7, nil, nil, 1, 6)
 local specWarnFrostSpike						= mod:NewSpecialWarningInterrupt(372315, "HasInterrupt", nil, nil, 1, 2)
 
 local timerPrimalBlizzardCD						= mod:NewCDCountTimer(79.4, 373059, nil, nil, nil, 2)--Can be delayed by many seconds
@@ -130,17 +129,13 @@ local function checkMyAxe(self)
 	if icon then
 		specWarnMeteorAxe:Show(self:IconNumToTexture(icon))
 		specWarnMeteorAxe:Play("mm"..icon)
-		yellMeteorAxe		= mod:NewShortPosYell(374043, nil, nil, nil, "YELL")
-		yellMeteorAxeFades	= mod:NewIconFadesYell(374043, nil, nil, nil, "YELL")
 		yellMeteorAxe:Yell(icon, icon)
 		yellMeteorAxeFades:Countdown(374039, nil, icon)
-	else--No icon setter?
+	else--No icon setter? Just use red icon for both targets
 		specWarnMeteorAxe:Show("")
 		specWarnMeteorAxe:Play("targetyou")
-		yellMeteorAxe	= mod:NewShortYell(374043, nil, nil, nil, "YELL")
-		yellMeteorAxeFades	= mod:NewShortFadesYell(374043, nil, nil, nil, "YELL")
-		yellMeteorAxe:Yell()
-		yellMeteorAxeFades:Countdown(374039)
+		yellMeteorAxe:Yell(7, 7)
+		yellMeteorAxeFades:Countdown(374039, nil, 7)
 	end
 end
 
@@ -156,8 +151,7 @@ function mod:OnCombatStart(delay)
 	if self:IsHard() then
 		--Same on heroic and mythic
 		--Embar Firepath
-		timerSlashingBlazeCD:Start(10.2-delay, 1)
-		timerMeteorAxeCD:Start(23-delay, 1)
+		timerSlashingBlazeCD:Start(10-delay, 1)
 		if self:IsMythic() then
 			difficultyName = "mythic"
 			--Kadros Icewrath
@@ -168,6 +162,8 @@ function mod:OnCombatStart(delay)
 			--Opalfang
 			timerEarthenPillarCD:Start(5-delay, 1)
 			timerCrushCD:Start(28.1-delay, 1)--TODO verify, seems iffy, but maybe delayed by other casts being altered
+			--Embar Firepath
+			timerMeteorAxeCD:Start(22.7-delay, 1)
 		else--Heroic
 			difficultyName = "heroic"
 			--Kadros Icewrath
@@ -178,7 +174,8 @@ function mod:OnCombatStart(delay)
 			--Opalfang
 			timerEarthenPillarCD:Start(6.9-delay, 1)
 			timerCrushCD:Start(18.1-delay, 1)
-
+			--Embar Firepath
+			timerMeteorAxeCD:Start(29.6-delay, 1)
 		end
 	else--Timers are slowed down
 		difficultyName = "normal"
@@ -266,7 +263,7 @@ function mod:SPELL_CAST_START(args)
 		self.vb.meteorCast = self.vb.meteorCast + 1
 		self.vb.meteorTotal = 0
 --		local timer = self:GetFromTimersTable(allTimers, difficultyName, false, spellId, self.vb.meteorCast+1) or 49.7
-		timerMeteorAxeCD:Start(self:IsEasy() and 66 or 39.1, self.vb.meteorCast+1)
+		timerMeteorAxeCD:Start(self:IsEasy() and 66 or self:IsHeroic() and 52.3 or 39.1, self.vb.meteorCast+1)
 	elseif spellId == 375331 then
 		self.vb.markCast = self.vb.markCast + 1
 		specWarnConductiveMarkSpread:Show()
@@ -283,7 +280,7 @@ function mod:SPELL_AURA_APPLIED(args)
 	if spellId == 391599 or spellId == 371836 then--Mythic, Non Mythic
 		local amount = args.amount or 1
 		blizzardStacks[args.destName] = amount
-		if args:IsPlayer() and amount >= 8 then
+		if args:IsPlayer() and amount >= 7 then
 			playerBlizzardHigh = true
 			specWarnPrimalBlizzardStack:Show(amount)
 			specWarnPrimalBlizzardStack:Play("stackhigh")
@@ -337,12 +334,12 @@ function mod:SPELL_AURA_APPLIED(args)
 	elseif spellId == 374039 then
 		self.vb.meteorTotal = self.vb.meteorTotal + 1
 		if self.Options.SetIconOnMeteorAxe then
-			self:SetSortedIcon("tankroster", self.vb.meteorTotal == 2 and 0.1 or 0.4, args.destName, 1, 2, false)
+			self:SetSortedIcon("tankroster", self.vb.meteorTotal == 2 and 0.1 or 1.4, args.destName, 1, 2, false)
 		end
 		if args:IsPlayer() then
-			self:Schedule(self.vb.meteorTotal == 2 and 0.2 or 0.5, checkMyAxe, self)
+			self:Schedule(self.vb.meteorTotal == 2 and 0.2 or 1.5, checkMyAxe, self)
 		end
-		warnMeteorAxe:CombinedShow(self.vb.meteorTotal == 2 and 0.3 or 0.6, args.destName)
+		warnMeteorAxe:CombinedShow(self.vb.meteorTotal == 2 and 0.3 or 1.6, args.destName)
 	elseif spellId == 372027 and not args:IsPlayer() then
 		local uId = DBM:GetRaidUnitId(args.destName)
 		if self:IsTanking(uId) then

@@ -1,5 +1,5 @@
 --[[
-Copyright 2013-2022 João Cardoso
+Copyright 2013-2023 João Cardoso
 ItemSearch is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this library give you permission to embed it
 with independent modules to produce an addon, regardless of the license terms of these
@@ -102,10 +102,7 @@ for i = 0, #ITEM_QUALITY_COLORS do
     Lib.Filters.quality.keywords[i] = _G['ITEM_QUALITY' .. i .. '_DESC']:lower()
 end
 
-
---[[ Modern Exclusive ]]--
-
-if EXPANSION_NAME_0 then
+if LE_EXPANSION_LEVEL_CURRENT > 0 then
     Lib.Filters.expansion = {
         tags = {'e', 'expac', 'expansion'},
         keywords = {},

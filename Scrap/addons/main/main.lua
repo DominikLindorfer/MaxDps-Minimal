@@ -1,5 +1,5 @@
 --[[
-Copyright 2008-2022 João Cardoso
+Copyright 2008-2023 João Cardoso
 Scrap is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -57,7 +57,7 @@ function Scrap:OnSettings()
 	Scrap_CharSets = Scrap_CharSets or {list = {}, auto = {}}
 
 	self.sets, self.charsets = Scrap_Sets, Scrap_CharSets
-	self.junk = setmetatable(self.charsets.share and self.sets.list or self.charsets.list, self.baseList)
+	self.junk = setmetatable(self.charsets.share and self.sets.list or self.charsets.list, self.BaseList)
 
 	-- removes deprecated data. keep until next major game update
 	self.charsets.ml = nil

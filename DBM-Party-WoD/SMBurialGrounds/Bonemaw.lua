@@ -3,7 +3,7 @@ local L		= mod:GetLocalizedStrings()
 
 mod.statTypes = "normal,heroic,mythic,challenge,timewalker"
 
-mod:SetRevision("20221127051031")
+mod:SetRevision("20230122063802")
 mod:SetCreatureID(75452)
 mod:SetEncounterID(1679)
 
@@ -48,7 +48,7 @@ mod.vb.inhaleActive = false
 function mod:OnCombatStart(delay)
 	self.vb.inhaleActive = false
 	timerBodySlamCD:Start(15-delay, UnitName("boss1") or BOSS, UnitGUID("boss1"))--17?
-	timerInhaleCD:Start(27.1-delay)--36.4?
+--	timerInhaleCD:Start(15-delay)--it's like 15-60 variation, disabling for now
 --	timerSubmergeCD:Start(-delay)
 end
 
@@ -114,7 +114,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(uId, _, spellId)
 end
 
 function mod:SPELL_PERIODIC_DAMAGE(_, _, _, _, destGUID, destName, _, _, spellId)
-	if spellId == 153692 and not self.vb.inhaleActive and destGUID == UnitGUID("player") and self:AntiSpam(2, 1) then
+	if spellId == 153692 and not self.vb.inhaleActive and destGUID == UnitGUID("player") and self:AntiSpam(3, 1) then
 		specWarnNecroticPitch:Show()
 		specWarnNecroticPitch:Play("watchfeet")
 	end

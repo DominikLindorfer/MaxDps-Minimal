@@ -1,6 +1,0 @@
-## Interface: 30400
-## Title: FasterLoot
-## Notes: Makes the loot frame instant
-## Version: WOTLK-3.4.0
-## Author: Xarano
-FasterLoot.lua

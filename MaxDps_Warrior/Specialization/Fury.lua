@@ -1,195 +1,178 @@
-local _, addonTable = ...;
+local _, addonTable = ...
 
 --- @type MaxDps
-if not MaxDps then return end
+if not MaxDps then return end 
 
-local Warrior = addonTable.Warrior;
-local MaxDps = MaxDps;
-local UnitPower = UnitPower;
-local PowerTypeRage = Enum.PowerType.Rage;
-
-local Necrolord = Enum.CovenantType.Necrolord;
-local Venthyr = Enum.CovenantType.Venthyr;
-local NightFae = Enum.CovenantType.NightFae;
-local Kyrian = Enum.CovenantType.Kyrian;
+local Warrior = addonTable.Warrior
+---@type MaxDps
+local MaxDps = MaxDps
 
 local FR = {
-	AncientAftershock = 325886,
-	ConquerorsBanner  = 324143,
-	SpearOfBastion    = 307865,
-	Charge            = 100,
-	HeroicLeap        = 6544,
-	Rampage           = 184367,
-	Recklessness      = 1719,
-	RecklessAbandon   = 202751,
-	AngerManagement   = 152278,
-	Massacre          = 206315,
-	MeatCleaver       = 280392,
-	MeatCleaverAura   = 85739,
-	Whirlwind         = 190411,
-	RagingBlow        = 85288,
-	Siegebreaker      = 280772,
-	Enrage            = 184361,
-	Frenzy            = 335077,
-	Condemn           = 330325,
-	Execute           = 5308,
-	ExecuteMassacre   = 280735,
-	Bladestorm        = 46924,
-	Bloodthirst       = 23881,
-	ViciousContempt   = 337302,
-	Cruelty           = 335070,
-	DragonRoar        = 118000,
-	Onslaught         = 315720,
-	SuddenDeathAura   = 280776,
+    Annihilator = 383916,
+    Avatar = 107574,
+    BerserkerStance = 386196,
+    Bloodbath = 335096,
+    Bloodthirst = 23881,
+    Charge = 100,
+    CrushingBlow = 335097,
+    ElysianMight = 386285,
+    Enrage = 184362,
+    Execute = 5308,
+    Execute2 = 280735,
+    Frenzy = 335082,
+    HeroicLeap = 6544,
+    ImprovedWhirlwind = 12950,
+    Massacre = 206315,
+    MeatCleaver = 280392,
+    OdynsFury = 385059,
+    Onslaught = 315720,
+    OverwhelmingRage = 382767,
+    Pummel = 6552,
+    RagingBlow = 85288,
+    Rampage = 184367,
+    Ravager = 228920,
+    Recklessness = 1719,
+    RecklessAbadon = 202751,
+    Slam = 1464,
+    SpearOfBastion = 376079,
+    SuddenDeathAura = 280776,
+    Tenderize = 388933,
+    ThunderousRoar = 384318,
+    TitansTorment = 390135,
+    Whirlwind = 190411,
+    WhirlwindBuff = 85739,
+    WreckingThrow = 384110
+}
 
-	-- leggo
-	WillOfTheBerserkerBonusId = 6966,
-	WillOfTheBerserker = 335597
-};
+setmetatable(FR, Warrior.spellMeta)
 
-setmetatable(FR, Warrior.spellMeta);
+local function inRange(spellId)
+    local slotId = FindSpellBookSlotBySpellID(spellId)
+    if not slotId then
+        return false
+    end
+
+    return UnitExists("target")
+            and UnitCanAttack("player", "target")
+            and IsSpellInRange(slotId, "spell", "target") == 1
+end
 
 function Warrior:Fury()
 	local fd = MaxDps.FrameData;
 	local cooldown = fd.cooldown;
 	local buff = fd.buff;
 	local talents = fd.talents;
-	local covenantId = fd.covenant.covenantId;
-	local targets = MaxDps:SmartAoe();
 	local rage = UnitPower('player', PowerTypeRage);
+	local rageMax = UnitPowerMax('player', PowerTypeRage);
+	local rageDeficit = rageMax - rage;
+	local curentHP = UnitHealth('player');
+	local maxHP = UnitHealthMax('player');
+	local healthPerc = (curentHP / maxHP) * 100;
+	local absorb = UnitGetTotalAbsorbs('player');
+	local absorbPerc = (absorb / maxHP) * 100;
+    local targets = MaxDps:SmartAoe()
+    local gcd = fd.gcd
 
-	fd.rage = rage;
-	fd.targets = targets;
+    local targetHp = MaxDps:TargetPercentHealth() * 100
 
-	-- recklessness;
-	MaxDps:GlowCooldown(FR.Recklessness, cooldown[FR.Recklessness].ready);
+    local canExecute = ((talents[FR.Massacre] and targetHp < 35) or targetHp < 20) or buff[FR.SuddenDeathAura].up   
+    
+    if targets > 1 and (not buff[FR.WhirlwindBuff].up) then
+        return FR.Whirlwind;
+    end
+    
+    if buff[FR.SuddenDeathAura].up then
+        return FR.Execute;
+    end
 
-	if talents[FR.Bladestorm] then
-		MaxDps:GlowCooldown(FR.Bladestorm, cooldown[FR.Bladestorm].ready);
-	end
+    if cooldown[FR.Execute2].ready and canExecute then
+        return FR.Execute;
+    end
 
-	if covenantId == NightFae then
-		MaxDps:GlowCooldown(FR.AncientAftershock, cooldown[FR.AncientAftershock].ready);
-	elseif covenantId == Necrolord then
-		MaxDps:GlowCooldown(FR.ConquerorsBanner, cooldown[FR.ConquerorsBanner].ready);
-	elseif covenantId == Kyrian then
-		MaxDps:GlowCooldown(FR.SpearOfBastion, cooldown[FR.SpearOfBastion].ready);
-	end
+    if talents[FR.Rampage] and rage >= 80 and buff[FR.Enrage].remains < gcd then
+        return FR.Rampage;
+    end
+    
+    if talents[FR.Bloodthirst] and cooldown[FR.Bloodthirst].ready and (not buff[FR.Enrage].up) then
+        return FR.Bloodthirst;
+    end
 
-	-- rampage,if=cooldown.recklessness.remains<3&talent.reckless_abandon.enabled;
-	if rage >= 80 and cooldown[FR.Recklessness].remains < 3 and talents[FR.RecklessAbandon] then
-		return FR.Rampage;
-	end
+    -- if talents[FR.Rampage] and rage >= 80 and (buff[FR.Recklessness].up or buff[FR.Enrage].remains < gcd or (rage > 110 and talents[FR.OverwhelmingRage]) or (rage > 80 and not talents[FR.OverwhelmingRage]) or buff[FR.Frenzy].remains < 1.5) then
+    --     return FR.Rampage;
+    -- end
 
-	-- recklessness,if=gcd.remains=0&((buff.bloodlust.up|talent.anger_management.enabled|raid_event.adds.in>10)|target.time_to_die>100|(talent.massacre.enabled&target.health.pct<35)|target.health.pct<20|target.time_to_die<15&raid_event.adds.in>10)&(spell_targets.whirlwind=1|buff.meat_cleaver.up);
-	--if cooldown[FR.Recklessness].ready and
-	--	(gcdRemains == 0 and ((buff[FR.Bloodlust].up or talents[FR.AngerManagement] or 10) or timeToDie > 100 or (talents[FR.Massacre] and targetHp < 35) or targetHp < 20 or timeToDie < 15 and 10) and (targets == 1 or buff[FR.MeatCleaver].up)) then
-	--	return FR.Recklessness;
-	--end
+    if buff[RecklessAbadon].up and talents[FR.RagingBlow] and cooldown[FR.CrushingBlow].ready and (cooldown[FR.CrushingBlow].charges > 1) then
+        return FR.CrushingBlow;
+    end   
 
-	-- whirlwind,if=spell_targets.whirlwind>1&!buff.meat_cleaver.up|raid_event.adds.in<gcd&!buff.meat_cleaver.up;
-	if targets > 1 and not buff[FR.MeatCleaverAura].up then
-		return FR.Whirlwind;
-	end
+    if buff[RecklessAbadon].up and talents[FR.RagingBlow] and cooldown[FR.RagingBlow].ready and (cooldown[FR.RagingBlow].charges > 1) then
+        return FR.RagingBlow;
+    end
+    
+    if talents[FR.Rampage] and rage >= 80 then
+        return FR.Rampage;
+    end
 
-	-- run_action_list,name=single_target;
-	return Warrior:FurySingleTarget();
+    if buff[RecklessAbadon].up and talents[FR.Bloodthirst] and cooldown[FR.Bloodbath].ready then
+        return FR.Bloodbath;
+    end
+
+    if talents[FR.RagingBlow] and cooldown[FR.CrushingBlow].ready and (cooldown[FR.CrushingBlow].charges > 1) then
+        return FR.CrushingBlow;
+    end   
+
+    if talents[FR.RagingBlow] and cooldown[FR.RagingBlow].ready and (cooldown[FR.RagingBlow].charges > 1) then
+        return FR.RagingBlow;
+    end
+
+    if talents[FR.Bloodthirst] and cooldown[FR.Bloodthirst].ready and (not talents[FR.Annihilator]) then
+        return FR.Bloodthirst;
+    end
+
+    -- slam,if=talent.annihilator
+    if rage >= 20 and talents[FR.Annihilator] then
+        return FR.Slam;
+    end
+    
+    return FR.Whirlwind
 end
 
-function Warrior:FurySingleTarget()
-	local fd = MaxDps.FrameData;
-	local cooldown = fd.cooldown;
-	local buff = fd.buff;
-	local talents = fd.talents;
-	local targets = fd.targets;
-	local runeforge = fd.runeforge;
-	local gcd = fd.gcd;
-	local rage = fd.rage;
-	local covenantId = fd.covenant.covenantId;
-	local conduit = fd.covenant.soulbindConduits;
+function Warrior:FuryCooldowns()
+    local fd = MaxDps.FrameData
+    local cooldown = fd.cooldown
+    local buff = fd.buff
+    local talents = fd.talents
+    local targets = MaxDps:SmartAoe()
+    local timeToDie = fd.timeToDie
+   
+    if talents[FR.Recklessness] and cooldown[FR.Recklessness].ready then
+        return FR.Recklessness;
+    end
 
-	local targetHp = MaxDps:TargetPercentHealth() * 100;
-	local canExecute = rage >= 20 and (
-			(talents[FR.Massacre] and targetHp < 35) or
-			targetHp < 20 or
-			(targetHp > 80 and covenantId == Venthyr)
-		) or
-			buff[FR.SuddenDeathAura].up
-	;
+    if talents[FR.Avatar] and cooldown[FR.Avatar].ready and buff[FR.Recklessness].up then
+        return FR.Avatar;
+    end
+    
+    if talents[FR.Ravager] and cooldown[FR.Ravager].ready and buff[FR.Enrage].up then
+        return FR.Ravager;
+    end
 
-	local Execute = covenantId == Venthyr and FR.Condemn or
-		(talents[FR.Massacre] and FR.ExecuteMassacre or FR.Execute);
+    if talents[FR.OdynsFury] and cooldown[FR.OdynsFury].ready then
+        return FR.OdynsFury;
+    end
+    
+    if talents[FR.SpearOfBastion] and cooldown[FR.SpearOfBastion].ready and buff[FR.Enrage].up then
+        return FR.SpearOfBastion;
+    end
 
-	-- raging_blow,if=runeforge.will_of_the_berserker.equipped&buff.will_of_the_berserker.remains<gcd;
-	if cooldown[FR.RagingBlow].ready and
-		runeforge[FR.WillOfTheBerserkerBonusId] and
-		buff[FR.WillOfTheBerserker].remains < 2
-	then
-		return FR.RagingBlow;
-	end
-
-	-- siegebreaker,if=spell_targets.whirlwind>1|raid_event.adds.in>15;
-	if talents[FR.Siegebreaker] and cooldown[FR.Siegebreaker].ready then
-		return FR.Siegebreaker;
-	end
-
-	-- rampage,if=buff.recklessness.up|(buff.enrage.remains<gcd|rage>90)|buff.frenzy.remains<1.5;
-	if rage >= 80 and
-		(
-			buff[FR.Recklessness].up or
-			(buff[FR.Enrage].remains < 1.5 or rage > 90) or
-			buff[FR.Frenzy].remains < 1.5
-		)
-	then
-		return FR.Rampage;
-	end
-
-	-- condemn;
-	-- execute;
-	if canExecute then
-		return Execute;
-	end
-
-	-- bladestorm,if=buff.enrage.up&(spell_targets.whirlwind>1|raid_event.adds.in>45);
-	--if cooldown[FR.Bladestorm].ready and (buff[FR.Enrage].up and (targets > 1 or 45)) then
-	--	return FR.Bladestorm;
-	--end
-
-	-- bloodthirst,if=buff.enrage.down|conduit.vicious_contempt.rank>5&target.health.pct<35&!talent.cruelty.enabled;
-	if cooldown[FR.Bloodthirst].ready and
-		(
-			not buff[FR.Enrage].up or
-			conduit[FR.ViciousContempt] > 5 and targetHp < 35 and not talents[FR.Cruelty]
-		)
-	then
-		return FR.Bloodthirst;
-	end
-
-	-- dragon_roar,if=buff.enrage.up&(spell_targets.whirlwind>1|raid_event.adds.in>15);
-	if talents[FR.DragonRoar] and cooldown[FR.DragonRoar].ready and buff[FR.Enrage].up then
-		return FR.DragonRoar;
-	end
-
-	-- onslaught;
-	if talents[FR.Onslaught] and cooldown[FR.Onslaught].ready then
-		return FR.Onslaught;
-	end
-
-	-- raging_blow,if=charges=2;
-	if cooldown[FR.RagingBlow].charges >= 2 then
-		return FR.RagingBlow;
-	end
-
-	-- bloodthirst;
-	if cooldown[FR.Bloodthirst].ready then
-		return FR.Bloodthirst;
-	end
-
-	-- raging_blow;
-	if cooldown[FR.RagingBlow].ready then
-		return FR.RagingBlow;
-	end
-
-	-- whirlwind;
-	return FR.Whirlwind;
 end
+
+local function isSpellAvailable(spellId)
+    local slotId = FindSpellBookSlotBySpellID(spellId)
+    if not slotId then
+        return false
+    end
+
+    return select(3, GetSpellBookItemName(slotId, "spell")) == spellId
+end
+

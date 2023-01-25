@@ -20,8 +20,10 @@ function Warrior:Enable()
 	
 	if MaxDps.Spec == 1 then
 		MaxDps.NextSpell = Warrior.Arms;
+		MaxDps.NextCooldown = Warrior.ArmsCooldowns;
 	elseif MaxDps.Spec == 2 then
 		MaxDps.NextSpell = Warrior.Fury;
+		MaxDps.NextCooldown = Warrior.FuryCooldowns;
 	elseif MaxDps.Spec == 3 then
 		MaxDps.NextSpell = Warrior.Protection;
 		MaxDps.NextCooldown = Warrior.ProtectionCooldowns;

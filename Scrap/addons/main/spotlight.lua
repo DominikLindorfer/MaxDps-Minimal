@@ -1,5 +1,5 @@
 --[[
-Copyright 2008-2022 João Cardoso
+Copyright 2008-2023 João Cardoso
 Scrap is distributed under the terms of the GNU General Public License (Version 3).
 As a special exception, the copyright holders of this addon do not give permission to
 redistribute and/or modify it.
@@ -15,6 +15,7 @@ along with the addon. If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 This file is part of Scrap.
 --]]
 
+if Bagnon or Bagnonium then return end
 local Spotlight = Scrap:NewModule('Spotlight')
 local C = LibStub('C_Everywhere').Container
 local R,G,B = GetItemQualityColor(0)

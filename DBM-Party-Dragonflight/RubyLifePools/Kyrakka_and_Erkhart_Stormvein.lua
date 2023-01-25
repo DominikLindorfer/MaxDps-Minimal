@@ -1,12 +1,12 @@
 local mod	= DBM:NewMod(2503, "DBM-Party-Dragonflight", 7, 1202)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision("20221205022223")
+mod:SetRevision("20230120053943")
 mod:SetCreatureID(190484, 190485)
 mod:SetEncounterID(2623)
 --mod:SetUsedIcons(1, 2, 3)
 mod:SetBossHPInfoToHighest()
-mod:SetHotfixNoticeRev(20221126000000)
+mod:SetHotfixNoticeRev(20230109000000)
 --mod:SetMinSyncRevision(20211203000000)
 --mod.respawnTime = 29
 
@@ -15,7 +15,7 @@ mod:RegisterCombat("combat")
 mod:RegisterEventsInCombat(
 	"SPELL_CAST_START 381605 381602 381525 381517 381512 385558 381516",
 	"SPELL_CAST_SUCCESS 381517",
-	"SPELL_AURA_APPLIED 381515 181089",
+	"SPELL_AURA_APPLIED 381515 181089 381862",
 --	"SPELL_AURA_APPLIED_DOSE",
 --	"SPELL_AURA_REMOVED"
 --	"SPELL_PERIODIC_DAMAGE",
@@ -24,8 +24,6 @@ mod:RegisterEventsInCombat(
 --	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 
---TODO, Flamespit, does target scan work?
---TODO, more with winds of change?
 --[[
 (ability.id = 381605 or ability.id = 381602 or ability.id = 381525 or ability.id = 381517 or ability.id = 381512 or ability.id = 385558 or ability.id = 381516) and type = "begincast"
  or type = "death" and (target.id = 193435 or target.id = 190485)
@@ -35,6 +33,7 @@ mod:RegisterEventsInCombat(
 --Kyrakka
 mod:AddTimerLine(DBM:EJ_GetSectionInfo(25365))
 local warnFlamespit								= mod:NewTargetNoFilterAnnounce(381605, 3)
+local warnInfernoCore							= mod:NewYouAnnounce(381862, 4)
 
 local yellFlamespit								= mod:NewYell(381605)
 local specWarnRoaringFirebreath					= mod:NewSpecialWarningDodge(381525, nil, nil, nil, 2, 2)
@@ -45,22 +44,23 @@ local timerFlamespitCD							= mod:NewCDTimer(15.7, 381605, nil, nil, nil, 3)
 local timerRoaringFirebreathCD					= mod:NewCDTimer(18, 381525, nil, nil, nil, 3)
 --Erkhart Stormvein
 mod:AddTimerLine(DBM:EJ_GetSectionInfo(25369))
-local warnWindsofChange							= mod:NewSpellAnnounce(381517, 3)
+local warnWindsofChange							= mod:NewCountAnnounce(381517, 3, nil, nil, 227878)--Not actually a count timer, but has best localized text
 local warnCloudburst							= mod:NewSpellAnnounce(385558, 3)
 
 local specWarnStormslam							= mod:NewSpecialWarningDefensive(381512, nil, nil, nil, 1, 2)
 local specWarnStormslamDispel					= mod:NewSpecialWarningDispel(381512, "RemoveMagic", nil, nil, 1, 2)
 local specWarnInterruptingCloudburst			= mod:NewSpecialWarningCast(381516, "SpellCaster", nil, nil, 2, 2, 4)
 
-local timerWindsofChangeCD						= mod:NewCDTimer(19.3, 381517, nil, nil, nil, 3)
-local timerStormslamCD							= mod:NewCDTimer(9.7, 381512, nil, "Tank|RemoveMagic", nil, 5, nil, DBM_COMMON_L.TANK_ICON..DBM_COMMON_L.MAGIC_ICON)
+local timerWindsofChangeCD						= mod:NewCDCountTimer(19.3, 381517, 227878, nil, nil, 3)--Not actually a count timer, but has best localized text
+local timerStormslamCD							= mod:NewCDTimer(17, 381512, nil, "Tank|RemoveMagic", nil, 5, nil, DBM_COMMON_L.TANK_ICON..DBM_COMMON_L.MAGIC_ICON)
 local timerCloudburstCD							= mod:NewCDTimer(19.3, 385558, nil, nil, nil, 2)--Used for both mythic and non mythic versions of spell
 
 --mod:AddRangeFrameOption("8")
 mod:AddInfoFrameOption(381862, true)--Infernocore
 --mod:AddSetIconOption("SetIconOnStaggeringBarrage", 361018, true, false, {1, 2, 3})
 
---Seems to work?
+mod.vb.windDirection = 0
+
 function mod:SpitTarget(targetname)
 	if not targetname then return end
 	warnFlamespit:Show(targetname)
@@ -69,25 +69,24 @@ function mod:SpitTarget(targetname)
 	end
 end
 
---Seems not to work
---[[
-function mod:BreathTarget(targetname)
-	if not targetname then return end
-	if targetname == UnitName("player") then
-		yellRoaringFirebreath:Yell()
-	end
-end
---]]
+--Count started at 0 because count is incremented in success event not start
+local directions = {
+	[0] = L.North,
+	[1] = L.West,
+	[2] = L.South,
+	[3] = L.East
+}
 
 function mod:OnCombatStart(delay)
+	self.vb.windDirection = 0
 	self:SetStage(1)
 	--Kyrakka
 	timerRoaringFirebreathCD:Start(2.1-delay)
-	timerFlamespitCD:Start(17.1-delay)--Iffy, 17-24?
+	timerFlamespitCD:Start(17.1-delay)--17-24?
 	--Erkhart Stormvein
---	timerWindsofChangeCD:Start(1-delay)--Cast on engage
-	timerStormslamCD:Start(5.8-delay)
+	timerStormslamCD:Start(5-delay)
 	timerCloudburstCD:Start(9.4-delay)
+	timerWindsofChangeCD:Start(17.1-delay, L.North)
 	if self.Options.InfoFrame then
 		DBM.InfoFrame:SetHeader(DBM:GetSpellInfo(381862))
 		DBM.InfoFrame:Show(5, "playerdebuffremaining", 381862)
@@ -105,16 +104,15 @@ end
 
 function mod:SPELL_CAST_START(args)
 	local spellId = args.spellId
-	if spellId == 381605 or spellId == 381602 then--381605 confirmed, 381602 unknown
+	if spellId == 381605 or spellId == 381602 then--One is for bosses split and one is for bosses combined.
 		self:ScheduleMethod(0.2, "BossTargetScanner", args.sourceGUID, "SpitTarget", 0.1, 8, true)
 		timerFlamespitCD:Start(self.vb.phase == 1 and 21.1 or 15)
 	elseif spellId == 381525 then
---		self:ScheduleMethod(0.2, "BossTargetScanner", args.sourceGUID, "BreathTarget", 0.1, 8, true)
 		specWarnRoaringFirebreath:Show()
 		specWarnRoaringFirebreath:Play("breathsoon")
 		timerRoaringFirebreathCD:Start(18)--18-27
 	elseif spellId == 381517 then
-		warnWindsofChange:Show()
+		warnWindsofChange:Show(directions[self.vb.windDirection])
 	elseif spellId == 381512 then
 		if self:IsTanking("player", nil, nil, true, args.sourceGUID) then--Using GUID check because might be boss1 or boss2
 			specWarnStormslam:Show()
@@ -135,7 +133,11 @@ end
 function mod:SPELL_CAST_SUCCESS(args)
 	local spellId = args.spellId
 	if spellId == 381517 then--Here because boss can stutter cast and start cast over
-		timerWindsofChangeCD:Start(17.8)
+		self.vb.windDirection = self.vb.windDirection + 1
+		if self.vb.windDirection == 4 then
+			self.vb.windDirection = 0
+		end
+		timerWindsofChangeCD:Start(17.8, directions[self.vb.windDirection])
 	end
 end
 
@@ -150,6 +152,8 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerFlamespitCD:Restart(2.2)--3.6 now?
 		timerRoaringFirebreathCD:Restart(7.3)--9.7 now?
 		--Rest not reset
+	elseif spellId == 381862 and args:IsPlayer() then
+		warnInfernoCore:Show()
 	end
 end
 --mod.SPELL_AURA_APPLIED_DOSE = mod.SPELL_AURA_APPLIED

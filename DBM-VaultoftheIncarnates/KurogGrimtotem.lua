@@ -1,46 +1,35 @@
 local mod	= DBM:NewMod(2491, "DBM-VaultoftheIncarnates", nil, 1200)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision("20221228072433")
+mod:SetRevision("20230119054852")
 mod:SetCreatureID(184986)
 mod:SetEncounterID(2605)
 mod:SetUsedIcons(1, 2, 3, 4, 5, 6, 7, 8)
-mod:SetHotfixNoticeRev(20221218000000)
+mod:SetHotfixNoticeRev(20230112000000)
 --mod:SetMinSyncRevision(20211203000000)
 --mod.respawnTime = 29
 
 mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
-	"SPELL_CAST_START 390548 373678 382563 373487 374022 372456 375450 374691 374215 376669 397338 374430 374623 374624 374622 391019 392125 392192 392152 391268 393314 393295 393296 392098 393459 394719 393429 395893 394416",
+	"SPELL_CAST_START 390548 373678 382563 373487 374022 372456 375450 374691 374215 376669 397338 374430 374623 374624 374622 391019 392125 392192 392152 391268 393314 393295 393296 392098 393459 394719 393429 395893 394416 393309",
 	"SPELL_CAST_SUCCESS 375825 375828 375824 375792 373415",
-	"SPELL_AURA_APPLIED 371971 372158 373487 372458 372514 372517 374779 374380 374427 391056 390920 391419 396109 396113 396106 396085 396241 391696",
+	"SPELL_AURA_APPLIED 371971 372158 373494 372458 372514 372517 374779 374380 374427 391056 390920 391419 396109 396113 396106 396085 396241 391696",
 	"SPELL_AURA_APPLIED_DOSE 372158 374321",
-	"SPELL_AURA_REMOVED 371971 373487 373494 372458 372514 374779 374380 374427 390920 391419 391056",
+	"SPELL_AURA_REMOVED 371971 373494 372458 372514 374779 374380 374427 390920 391419 391056",
 	"SPELL_PERIODIC_DAMAGE 374554 391555",
 	"SPELL_PERIODIC_MISSED 374554 391555",
 	"UNIT_DIED",
 	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 
---TODO, also add a stack too high warning on https://www.wowhead.com/beta/spell=373535/lightning-crash when strategies and tuning are established
---TODO, See how things play out with WA/BW on handling some of this bosses mechanics, right now drycode is steering clear of computational/solving for things and sticking to just showing them
---TODO, is https://www.wowhead.com/beta/npc=190807/seismic-rupture tangible or invisible script bunny
---TODO, is https://www.wowhead.com/beta/npc=190586/seismic-pillar tangible/in need of killing or no?
---TODO, GTFO https://www.wowhead.com/beta/spell=374705/seismic-rupture ?
---TODO, revisit thunder strike automation. May want to combine warnings to generalized warning instead of saying soak/avoid
---TODO, target scan https://www.wowhead.com/beta/spell=374622/storm-front ?
---TODO, announce https://www.wowhead.com/beta/spell=391555/raging-inferno spawns on mythic? They spawn from Searing
---TODO, smart change checker for https://www.wowhead.com/beta/spell=391272/icy-tempest on mythic
---TODO, verify Dark Clouds mechanic on mythic
---TODO, add https://www.wowhead.com/beta/spell=374321/breaking-gravel if requires an actual tank swap to clear
 --[[
 (ability.id = 390548 or ability.id = 373678 or ability.id = 382563 or ability.id = 392125 or ability.id = 373487 or ability.id = 373329
  or ability.id = 374022 or ability.id = 392192 or ability.id = 392152 or ability.id = 372456 or ability.id = 375450 or ability.id = 395893
  or ability.id = 374691 or ability.id = 376669 or ability.id = 374215 or ability.id = 397338 or ability.id = 374430 or ability.id = 390920
  or ability.id = 374623 or ability.id = 374624 or ability.id = 374622 or ability.id = 391019 or ability.id = 391055
  or ability.id = 391268 or ability.id = 393314 or ability.id = 393309 or ability.id = 393295 or ability.id = 394416
- or ability.id = 393296 or ability.id = 392098 or ability.id = 393459 or ability.id = 394719 or ability.id = 393429) and type = "begincast"
+ or ability.id = 393296 or ability.id = 392098 or ability.id = 393459 or ability.id = 394719 or ability.id = 393429 or ability.id = 397341) and type = "begincast"
  or ability.id = 373415 and type = "cast" or ability.id = 396241 and type = "applybuff"
  or (ability.id = 375828 or ability.id = 375825 or ability.id = 375824 or ability.id = 375792) and type = "cast"
  or ability.id = 374779
@@ -79,8 +68,8 @@ local specWarnSearingCarnage					= mod:NewSpecialWarningDodge(374022, nil, nil, 
 ----Mythic Only (Flamewrought Eradicator)
 local warnRagingInferno							= mod:NewSpellAnnounce(394416, 3)
 
-local specWarnFlamewroughtEradicator			= mod:NewSpecialWarningSwitch(393314, "-Healer", nil, nil, 1, 2)
-local specWarnFlameSmite						= mod:NewSpecialWarningYou(393309, nil, nil, nil, 2, 2)
+local specWarnFlamewroughtEradicator			= mod:NewSpecialWarningSwitch(393314, "-Healer", nil, nil, 1, 2, 4)
+local specWarnFlameSmite						= mod:NewSpecialWarningYou(393309, nil, nil, nil, 2, 2, 4)
 
 local timerFlameSmiteCD							= mod:NewCDTimer(30, 393309, nil, nil, nil, 5)
 local timerRagingInfernoCD						= mod:NewCDTimer(30, 394416, nil, nil, nil, 1)
@@ -102,9 +91,9 @@ mod:AddSetIconOption("SetIconOnAbsoluteZero", 372456, true, false, {1, 2})
 
 mod:GroupSpells(372456, 372514, 372517)--Group all Below Zero mechanics together
 ----Mythic Only (Icebound Dominator)
-local specWarnIceboundDominator					= mod:NewSpecialWarningSwitch(393295, "-Healer", nil, nil, 1, 2)
-local specWarnFreezing							= mod:NewSpecialWarningMoveTo(391419, nil, nil, nil, 1, 2)--Effect of Icy Tempest (391425)
-local specWarnFrostSmite						= mod:NewSpecialWarningYou(393296, nil, nil, nil, 2, 2)
+local specWarnIceboundDominator					= mod:NewSpecialWarningSwitch(393295, "-Healer", nil, nil, 1, 2, 4)
+local specWarnFreezing							= mod:NewSpecialWarningMoveTo(391419, nil, nil, nil, 1, 2, 4)--Effect of Icy Tempest (391425)
+local specWarnFrostSmite						= mod:NewSpecialWarningYou(393296, nil, nil, nil, 2, 2, 4)
 
 local timerFrostSmiteCD							= mod:NewCDTimer(30, 393296, nil, nil, nil, 5)
 local timerFrigidTorrentCD						= mod:NewCDTimer(32.5, 391019, nil, nil, nil, 3, nil, DBM_COMMON_L.MYTHIC_ICON)
@@ -113,12 +102,12 @@ mod:AddTimerLine(DBM:EJ_GetSectionInfo(25064))
 local warnEnvelopingEarth						= mod:NewTargetNoFilterAnnounce(391055, 4, nil, "Healer")
 
 local specWarnEnvelopingEarth					= mod:NewSpecialWarningYou(391055, nil, nil, nil, 1, 2)
-local specWarnEruptingBedrock					= mod:NewSpecialWarningRun(395893, "Melee", nil, nil, 2, 2)--Cast by boss AND Doppelboulder
+local specWarnEruptingBedrock					= mod:NewSpecialWarningRun(395893, nil, nil, 2, 2, 2)--Cast by boss AND Doppelboulder
 local specWarnSeismicRupture					= mod:NewSpecialWarningDodge(374691, nil, nil, nil, 2, 2)
 
 ----Mythic Only (Ironwrought Smasher)
-local specWarnIronwroughtSmasher				= mod:NewSpecialWarningSwitch(392098, "-Healer", nil, nil, 1, 2)
-local specWarnEarthSmite						= mod:NewSpecialWarningSpell(391268, nil, nil, nil, 1, 2)
+local specWarnIronwroughtSmasher				= mod:NewSpecialWarningSwitch(392098, "-Healer", nil, nil, 1, 2, 4)
+local specWarnEarthSmite						= mod:NewSpecialWarningSpell(391268, nil, nil, nil, 1, 2, 4)
 
 local timerEarthSmiteCD							= mod:NewCDTimer(30, 391268, nil, nil, nil, 5)--Ironwrought Smasher
 local timerEruptingBedrockCD					= mod:NewCDTimer(60, 395893, nil, nil, nil, 2, nil, DBM_COMMON_L.MYTHIC_ICON)
@@ -129,9 +118,9 @@ mod:AddTimerLine(DBM:EJ_GetSectionInfo(25068))
 local warnLightningCrash						= mod:NewTargetNoFilterAnnounce(373487, 4)
 local warnShockingBurst							= mod:NewTargetNoFilterAnnounce(390920, 3)
 
-local specWarnLightningCrash					= mod:NewSpecialWarningYouPos(373487, nil, nil, nil, 1, 2)
+local specWarnLightningCrash					= mod:NewSpecialWarningMoveAway(373487, nil, nil, nil, 1, 2)
 local yellLightningCrash						= mod:NewShortPosYell(373487)
-local yellLightningCrashFades					= mod:NewIconFadesYell(373487)
+--local yellLightningCrashFades					= mod:NewIconFadesYell(373487)
 --local specWarnLightningCrashStacks			= mod:NewSpecialWarningStack(373535, nil, 8, nil, nil, 1, 6)
 local specWarnShockingBurst						= mod:NewSpecialWarningMoveAway(390920, nil, nil, nil, 1, 2)
 local yellShockingBurst							= mod:NewShortYell(390920)
@@ -144,8 +133,8 @@ mod:AddSetIconOption("SetIconOnShockingBurst", 390920, false, false, {4, 5})
 ----Mythic Only (Stormwrought Despoiler)
 local warnOrbLightning							= mod:NewSpellAnnounce(394719, 3)
 
-local specWarnStormwroughtDespoiler				= mod:NewSpecialWarningSwitch(393459, "-Healer", nil, nil, 1, 2)
-local specWarnStormSmite						= mod:NewSpecialWarningYou(393429, nil, nil, nil, 2, 2)
+local specWarnStormwroughtDespoiler				= mod:NewSpecialWarningSwitch(393459, "-Healer", nil, nil, 1, 2, 4)
+local specWarnStormSmite						= mod:NewSpecialWarningYou(393429, nil, nil, nil, 2, 2, 4)
 
 local timerOrbLightningCD						= mod:NewCDTimer(48.5, 394719, nil, nil, nil, 3)
 local timerStormSmiteCD							= mod:NewCDTimer(30, 393429, nil, nil, nil, 5)
@@ -445,16 +434,16 @@ function mod:SPELL_AURA_APPLIED(args)
 				warnSplinteredBones:Show(args.destName, amount)
 			end
 		end
-	elseif spellId == 373487 then
+	elseif spellId == 373494 then
 		local icon = self.vb.litCrashIcon
 		if self.Options.SetIconOnLightningCrash and icon < 9 then--On 30 man it's 9 icons :\
 			self:SetIcon(args.destName, icon)
 		end
 		if args:IsPlayer() then
-			specWarnLightningCrash:Show(self:IconNumToTexture(icon))
-			specWarnLightningCrash:Play("mm"..icon)
+			specWarnLightningCrash:Show()
+			specWarnLightningCrash:Play("scatter")
 			yellLightningCrash:Yell(icon, icon)
-			yellLightningCrashFades:Countdown(spellId, nil, icon)
+--			yellLightningCrashFades:Countdown(spellId, nil, icon)
 		end
 		warnLightningCrash:CombinedShow(0.5, args.destName)
 		self.vb.litCrashIcon = self.vb.litCrashIcon + 1
@@ -521,7 +510,7 @@ function mod:SPELL_AURA_APPLIED(args)
 		specWarnFreezing:Cancel()
 		specWarnFreezing:Schedule(2.5, DBM_COMMON_L.ALLIES)--Might adjust timing
 		specWarnFreezing:ScheduleVoice(2.5, "gathershare")
-	elseif spellId == 396241 then
+--	elseif spellId == 396241 then
 		--berserk
 	elseif spellId == 391696 then
 		if args:IsPlayer() then
@@ -542,13 +531,13 @@ function mod:SPELL_AURA_REMOVED(args)
 		if self.Options.NPAuraOnSurge then
 			DBM.Nameplate:Hide(true, args.destGUID, spellId)
 		end
-	elseif spellId == 373487 then
+--	elseif spellId == 373487 then
 --		if self.Options.SetIconOnLightningCrash then
 --			self:SetIcon(args.destName, 0)
 --		end
-		if args:IsPlayer() then
-			yellLightningCrashFades:Cancel()
-		end
+--		if args:IsPlayer() then
+--			yellLightningCrashFades:Cancel()
+--		end
 	elseif spellId == 373494 then--Icon removed off secondary debuff
 		if self.Options.SetIconOnLightningCrash then
 			self:SetIcon(args.destName, 0)
@@ -569,7 +558,11 @@ function mod:SPELL_AURA_REMOVED(args)
 		self.vb.zeroCount = 0
 		self:SetStage(1)
 		timerSunderStrikeCD:Start(11.3)
-		timerPhaseCD:Start(127)
+		if self.vb.stageTotality == 3 then
+			timerPhaseCD:Start(127)--Second intermission
+		else
+			timerPhaseCD:Start(94)--Primal Attunement
+		end
 		timerDamageCD:Start(14.5, "?")
 		timerAvoidCD:Start(22.2, "?")--They fixed the skip bug apparently and it's no longer 68.4
 		timerUltimateCD:Start(45, "?")--if it's seismic rupture it's 53 else 45

@@ -1,0 +1,17 @@
+## Interface: 11403
+## Version: 23.01.23
+## Title: TipTac
+## Author: Aezay (Earthen Ring EU), Frozn45
+## Notes: Highly Customizable Tooltip Enhancement Addon
+## SavedVariables: TipTac_Config
+## X-Category: Tooltip
+## X-Website: https://www.curseforge.com/wow/addons/tiptac-reborn
+## X-Curse-Project-ID: 695153
+embeds.xml
+
+ttCore.lua
+ttStyle.lua
+ttBars.lua
+ttAuras.lua
+ttIcons.lua
+ttHyperlink.lua

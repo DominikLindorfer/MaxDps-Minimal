@@ -1,3 +1,11 @@
+v4.0.1.25
+- replace beastcaller with warrior g21 nokhud
+v4.0.1.24
+- adjust to blizzard academy count fix
+v4.0.1.23
+- More Academy fixes
+v4.0.1.22
+- Agethar Academy + Nokhud Offensive count fixes
 v4.0.1.21
 - add temple packs
 v4.0.1.20

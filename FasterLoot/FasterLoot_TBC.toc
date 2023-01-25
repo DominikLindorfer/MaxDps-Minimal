@@ -1,6 +1,0 @@
-## Interface: 20504
-## Title: FasterLoot
-## Notes: Makes the loot frame instant
-## Version: TBC-2.5.4
-## Author: Xarano
-FasterLoot.lua

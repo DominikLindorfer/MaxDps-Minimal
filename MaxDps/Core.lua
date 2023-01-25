@@ -192,7 +192,6 @@ function MaxDps:PrepareFrameData()
 		self.FrameData.timeInCombat = timeInCombat;
 		-- print(self.FrameData.timeInCombat)
 	end
-
 end
 
 function MaxDps:InvokeNextSpell()

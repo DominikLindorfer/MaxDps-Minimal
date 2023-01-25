@@ -1,7 +1,7 @@
 local mod	= DBM:NewMod(422, "DBM-Party-Vanilla", 4, 231)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision("20221029204017")
+mod:SetRevision("20230117063410")
 mod:SetCreatureID(7800)
 mod:SetEncounterID(382)
 
@@ -35,7 +35,7 @@ function mod:SPELL_CAST_START(args)
 	end
 end
 
-function mod:SPELL_CAST_SUCESS(args)
+function mod:SPELL_CAST_SUCCESS(args)
 	if args.spellId == 74720 then
 		timerSteamBlastCD:Start()
 	end

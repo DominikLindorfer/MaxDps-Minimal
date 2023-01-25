@@ -108,7 +108,7 @@ function TM:Test(key)
 		if not self.indicator then
 			self.indicator = CreateFrame("Frame", nil, UIParent, "OmniCDTemplate")
 			self.indicator.anchor.background:SetColorTexture(0, 0, 0, 1)
-			if E.isDF or E.TocVersion == 30401 then
+			if E.isDF or E.isWOTLKC341 then
 				self.indicator.anchor.background:SetGradient("HORIZONTAL", CreateColor(1, 1, 1, 1), CreateColor(1, 1, 1, 0))
 			else
 				self.indicator.anchor.background:SetGradientAlpha("Horizontal", 1, 1, 1, 1, 1, 1, 1, 0)
@@ -147,7 +147,11 @@ function TM:Test(key)
 		if not activeCustomUF then
 			if E.isDF then
 				if EditModeManagerFrame:IsEditModeActive() then
-					HideUIPanel(EditModeManagerFrame)
+					if UnitAffectingCombat("player") then
+						self:EndTestOOC()
+					else
+						HideUIPanel(EditModeManagerFrame)
+					end
 				end
 			else
 				if CompactRaidFrameContainer and CompactRaidFrameContainer:IsVisible() and (groupSize == 0 or not P:CompactFrameIsActive()) then
@@ -172,20 +176,25 @@ function TM:Test(key)
 end
 
 function TM:EndTestOOC()
-	E.write(L["Test frames will be hidden once player is out of combat"])
+	if not E.isDF then
+		E.write(L["Test frames will be hidden once player is out of combat"])
+	end
 	self:RegisterEvent('PLAYER_REGEN_ENABLED')
 end
 
 function TM:PLAYER_REGEN_ENABLED()
 	if not E.customUF then
-		if IsAddOnLoaded("Blizzard_CompactRaidFrames") and IsAddOnLoaded("Blizzard_CUFProfiles") and (P:GetEffectiveNumGroupMembers() == 0 or not P:CompactFrameIsActive()) then
+		if E.isDF then
+			if EditModeManagerFrame:IsEditModeActive() then
+				HideUIPanel(EditModeManagerFrame)
+			end
+		elseif IsAddOnLoaded("Blizzard_CompactRaidFrames") and IsAddOnLoaded("Blizzard_CUFProfiles") and (P:GetEffectiveNumGroupMembers() == 0 or not P:CompactFrameIsActive()) then
 			CompactRaidFrameManager:Hide()
 			CompactRaidFrameContainer:Hide()
 		end
 	elseif E.customUF.active == "Cell" then
 		Cell:Fire("UpdateVisibility", "solo")
 	end
-
 	self:UnregisterEvent('PLAYER_REGEN_ENABLED')
 end
 

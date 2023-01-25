@@ -475,12 +475,14 @@ local function AppendInterruptExtras(info, srcGUID, spellID, _,_,_, extraSpellId
 	end
 end
 
-local interrupts = {
+
+
+local playerInterrupts = {
 	47528,
-	47482,
 	183752,
 	106839,
-	78675,
+	93985,
+	97547,
 	351338,
 	147362,
 	187707,
@@ -488,16 +490,16 @@ local interrupts = {
 	116705,
 	96231,
 	31935,
-	15487,
+	220543,
 	1766,
 	57994,
-	119898,
 	212619,
+	132409,
 	6552,
 	386071,
 }
 
-for _, id in pairs(interrupts) do
+for _, id in pairs(playerInterrupts) do
 	registeredEvents['SPELL_INTERRUPT'][id] = AppendInterruptExtras
 end
 
@@ -1177,34 +1179,82 @@ local majorMovementAbilities = {
 	["WARLOCK"] = 48020,
 	["WARRIOR"] = 6544,
 }
+E.majorMovementAbilitiesByIDs = {}
+for class, spellID in pairs(majorMovementAbilities) do
+	if type(spellID) == "table" then
+		for _, id in pairs(spellID) do
+			E.majorMovementAbilitiesByIDs[id] = class
+		end
+	else
+		E.majorMovementAbilitiesByIDs[spellID] = class
+	end
+end
 
 registeredEvents['SPELL_AURA_REMOVED'][381748] = function(info)
-	local id = majorMovementAbilities[info.class]
-	local icon = type(id) == "table" and (info.spellIcons[ id[1] ] or info.spellIcons[ id[2] ]) or info.spellIcons[id]
-	if icon and icon.active then
-		P:UpdateCooldown(icon, 0, 1/0.85)
+	if info.auras["isBlessingOfTheBronze"] then
+		local id = majorMovementAbilities[info.class]
+		local icon = type(id) == "table" and (info.spellIcons[ id[1] ] or info.spellIcons[ id[2] ]) or info.spellIcons[id]
+		if icon and icon.active then
+			P:UpdateCooldown(icon, 0, 1/0.85)
+		end
+		info.auras["isBlessingOfTheBronze"] = nil
 	end
-	info.auras["isBlessingOfTheBronze"] = nil
 end
 
 registeredEvents['SPELL_AURA_APPLIED'][381748] = function(info)
-	local id = majorMovementAbilities[info.class]
-	local icon = type(id) == "table" and (info.spellIcons[ id[1] ] or info.spellIcons[ id[2] ]) or info.spellIcons[id]
-	if icon and icon.active then
-		P:UpdateCooldown(icon, 0, 0.85)
+	if not info.auras["isBlessingOfTheBronze"] then
+		local id = majorMovementAbilities[info.class]
+		local icon = type(id) == "table" and (info.spellIcons[ id[1] ] or info.spellIcons[ id[2] ]) or info.spellIcons[id]
+		if icon and icon.active then
+			P:UpdateCooldown(icon, 0, 0.85)
+		end
+		info.auras["isBlessingOfTheBronze"] = true
 	end
-	info.auras["isBlessingOfTheBronze"] = true
 end
+
+registeredEvents['SPELL_AURA_APPLIED'][381748] = registeredEvents['SPELL_AURA_APPLIED'][381748]
 
 
 registeredEvents['SPELL_AURA_REMOVED'][375234] = function(info, srcGUID, spellID, destGUID)
-	info.auras["isTimeSpiral"] = nil
-	RemoveHighlightByCLEU(info, srcGUID, spellID, destGUID)
+	local destInfo = groupInfo[destGUID]
+	if destInfo then
+		destInfo.auras["isTimeSpiral"] = nil
+	end
+	if spellID == 375234 then
+		RemoveHighlightByCLEU(info, srcGUID, spellID, destGUID)
+	end
 end
+registeredEvents['SPELL_AURA_REMOVED'][375226] = registeredEvents['SPELL_AURA_REMOVED'][375234]
+registeredEvents['SPELL_AURA_REMOVED'][375229] = registeredEvents['SPELL_AURA_REMOVED'][375234]
+registeredEvents['SPELL_AURA_REMOVED'][375230] = registeredEvents['SPELL_AURA_REMOVED'][375234]
+registeredEvents['SPELL_AURA_REMOVED'][375238] = registeredEvents['SPELL_AURA_REMOVED'][375234]
+registeredEvents['SPELL_AURA_REMOVED'][375240] = registeredEvents['SPELL_AURA_REMOVED'][375234]
+registeredEvents['SPELL_AURA_REMOVED'][375252] = registeredEvents['SPELL_AURA_REMOVED'][375234]
+registeredEvents['SPELL_AURA_REMOVED'][375253] = registeredEvents['SPELL_AURA_REMOVED'][375234]
+registeredEvents['SPELL_AURA_REMOVED'][375254] = registeredEvents['SPELL_AURA_REMOVED'][375234]
+registeredEvents['SPELL_AURA_REMOVED'][375255] = registeredEvents['SPELL_AURA_REMOVED'][375234]
+registeredEvents['SPELL_AURA_REMOVED'][375256] = registeredEvents['SPELL_AURA_REMOVED'][375234]
+registeredEvents['SPELL_AURA_REMOVED'][375257] = registeredEvents['SPELL_AURA_REMOVED'][375234]
+registeredEvents['SPELL_AURA_REMOVED'][375258] = registeredEvents['SPELL_AURA_REMOVED'][375234]
 
-registeredEvents['SPELL_AURA_APPLIED'][375234] = function(info)
-	info.auras["isTimeSpiral"] = true
+registeredEvents['SPELL_AURA_APPLIED'][375234] = function(info, _,_, destGUID)
+	local destInfo = groupInfo[destGUID]
+	if destInfo then
+		destInfo.auras["isTimeSpiral"] = true
+	end
 end
+registeredEvents['SPELL_AURA_APPLIED'][375226] = registeredEvents['SPELL_AURA_APPLIED'][375234]
+registeredEvents['SPELL_AURA_APPLIED'][375229] = registeredEvents['SPELL_AURA_APPLIED'][375234]
+registeredEvents['SPELL_AURA_APPLIED'][375230] = registeredEvents['SPELL_AURA_APPLIED'][375234]
+registeredEvents['SPELL_AURA_APPLIED'][375238] = registeredEvents['SPELL_AURA_APPLIED'][375234]
+registeredEvents['SPELL_AURA_APPLIED'][375240] = registeredEvents['SPELL_AURA_APPLIED'][375234]
+registeredEvents['SPELL_AURA_APPLIED'][375252] = registeredEvents['SPELL_AURA_APPLIED'][375234]
+registeredEvents['SPELL_AURA_APPLIED'][375253] = registeredEvents['SPELL_AURA_APPLIED'][375234]
+registeredEvents['SPELL_AURA_APPLIED'][375254] = registeredEvents['SPELL_AURA_APPLIED'][375234]
+registeredEvents['SPELL_AURA_APPLIED'][375255] = registeredEvents['SPELL_AURA_APPLIED'][375234]
+registeredEvents['SPELL_AURA_APPLIED'][375256] = registeredEvents['SPELL_AURA_APPLIED'][375234]
+registeredEvents['SPELL_AURA_APPLIED'][375257] = registeredEvents['SPELL_AURA_APPLIED'][375234]
+registeredEvents['SPELL_AURA_APPLIED'][375258] = registeredEvents['SPELL_AURA_APPLIED'][375234]
 
 
 local function ReduceFireBreathCD(info)
@@ -2337,11 +2387,10 @@ end
 
 
 registeredEvents['SPELL_HEAL'][633] = function(info, _,_, destGUID, _,_, amount, overhealing)
-	if info.talentData[326734] then
-		local icon = info.spellIcons[633]
-		if icon then
-			P:StartCooldown(icon, icon.duration)
-
+	local icon = info.spellIcons[633]
+	if icon then
+		P:StartCooldown(icon, icon.duration)
+		if info.talentData[326734] then
 			local unit = UnitTokenFromGUID(destGUID)
 			if unit then
 				local maxHP = UnitHealthMax(unit)
@@ -2703,7 +2752,7 @@ registeredEvents['SPELL_HEAL'][82326] = ReduceHammerOfWrathCD
 registeredEvents['SPELL_DAMAGE'][31935] = function(info)
 	local talentRank = info.talentData[378279]
 	if talentRank then
-		local icon = info.spellIcons[86659]
+		local icon = info.spellIcons[86659] or info.spellIcons[228049]
 		if icon and icon.active then
 			P:UpdateCooldown(icon, 0.5 * talentRank)
 		end
@@ -2956,6 +3005,7 @@ local function ReduceVoidEruptionCD(destInfo, _,_,_,_,_, timestamp)
 		end
 	end
 end
+
 local function ReduceDesperatePrayerCD(destInfo, _,_, amount, overkill)
 	if destInfo.talentData[238100] then
 		local icon = destInfo.spellIcons[19236]
@@ -2963,7 +3013,7 @@ local function ReduceDesperatePrayerCD(destInfo, _,_, amount, overkill)
 			local maxHP = UnitHealthMax(destInfo.unit)
 			if maxHP > 0 then
 				local actualDamage = amount - (overkill or 0)
-				local reducedTime = actualDamage / maxHP * 33
+				local reducedTime = actualDamage / maxHP * 35
 				P:UpdateCooldown(icon, reducedTime)
 			end
 		end
@@ -5218,7 +5268,7 @@ else
 				return
 			end
 			if event == 'SPELL_INTERRUPT' then
-				AppendInterruptExtras(info, spellID, amount, overkill, destRaidFlags)
+				AppendInterruptExtras(info, nil, spellID, nil,nil,nil, amount, overkill, nil,nil, destRaidFlags)
 			elseif event == 'SPELL_DAMAGE' then
 				if critical and P.isInShadowlands and spellID == 83381 then
 					local conduitValue = info.talentData[339704]
@@ -5241,16 +5291,16 @@ function CD:UNIT_PET(unit)
 	end
 
 	local guid = UnitGUID(unit)
-	local info = E.Party.groupInfo[guid]
-	if info and (info.class == "WARLOCK" or info.spec == 253) then
+	local info = groupInfo[guid]
+	if info and (info.class == "WARLOCK" or info.spec == 253 or info.spec == 252) then
 		local petGUID = info.petGUID
 		if petGUID then
-			self.petGUIDS[petGUID] = nil
+			petGUIDS[petGUID] = nil
 		end
 		petGUID = UnitGUID(unitPet)
 		if petGUID then
 			info.petGUID = petGUID
-			self.petGUIDS[petGUID] = guid
+			petGUIDS[petGUID] = guid
 		end
 	end
 end

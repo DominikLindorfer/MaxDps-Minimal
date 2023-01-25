@@ -112,8 +112,7 @@ L["Detach from raid frames and set position manually"] = "Открепить о�
 L["Disable Popup"] = "Выключить всплывающие подсказки"
 L["Disable Reload UI confirmation when using Pixel Perfect borders"] = "Выключить подтверждение перезагрузки интерфейса при использовании Pixel Perfect границ"
 L["Disable to make the icons click through"] = "Выключите для того, чтобы иконки прокликивались насквозь"
---[[Translation missing --]]
-L["Disabled spells will not appear on your bars even if you have them selected here"] = "Disabled spells will not appear on your bars even if you have them selected here"
+L["Disabled spells will not appear on your bars even if you have them selected here"] = "Отключенные заклинания не будут отображаться на Ваших полосах, даже если Вы выбрали их здесь."
 L["Display a glow animation around an icon when it is activated"] = "Обозначить свечением готовность заклинания"
 L["Display custom border around icons"] = "Показывать модифицированные границы вокруг иконок"
 L["Display default border around icons"] = "Показывать стандартную границу вокруг иконок"
@@ -146,14 +145,10 @@ L["Font"] = "Шрифт"
 L["Font Outline"] = "Окантовка шрифта"
 L["Fonts"] = "Шрифты"
 L["Glow Icons"] = "Подсвечивать иконки"
---[[Translation missing --]]
-L["Group member must have OmniCD to detect cooldown reduction by Glyphs."] = "Group member must have OmniCD to detect cooldown reduction by Glyphs."
---[[Translation missing --]]
-L["Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."
---[[Translation missing --]]
-L["Group member must have OmniCD to detect cooldown reduction with a chance to proc."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc."
---[[Translation missing --]]
-L["Group member must have OmniCD to detect Talents."] = "Group member must have OmniCD to detect Talents."
+L["Group member must have OmniCD to detect cooldown reduction by Glyphs."] = "У члена группы должен быть OmniCD, чтобы обнаружить уменьшение времени восстановления с помощью символов."
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."] = "У члена группы должен быть OmniCD, чтобы обнаружить сокращение времени восстановления с шансом срабатывания и связывания душ."
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc."] = "У члена группы должен быть OmniCD, чтобы обнаружить уменьшение перезарядки с шансом срабатывания."
+L["Group member must have OmniCD to detect Talents."] = "Член группы должен иметь OmniCD для обнаружения талантов."
 L["Group Padding"] = "Групповой промежуток"
 L["Group Size"] = "Размер группы"
 L["Group Type"] = "Тип группы"
@@ -194,8 +189,7 @@ L["Inactive"] = "Неактивно"
 L["Inactive Icon Opacity"] = "Прозрачность неактивной иконки"
 L["INNER"] = "ВНУТРИ"
 L["Interrupt Bar"] = "Полоса прерываний"
---[[Translation missing --]]
-L["Interrupt spell types are automatically added to this bar."] = "Interrupt spell types are automatically added to this bar."
+L["Interrupt spell types are automatically added to this bar."] = "Типы прерывающих заклинаний автоматически добавляются на эту панель."
 L["Interrupted Spell Icon"] = "Иконка прервавшей способности"
 L["Interrupted Target Marker"] = "Иконка прерываний по метке"
 L["Interrupts"] = "Прерывания"
@@ -292,12 +286,9 @@ L["Select the highest priority spell type to use as the start of the 2nd row"] =
 L["Select the highest priority spell type to use as the start of the 3rd row"] = "Выбирает с какого типа способностей начинать третью строку иконок"
 L["Select the icon layout"] = "Выбирает расположение иконок"
 L["Select the spell types you want to display on this column."] = "Выбирает типы способностей, которые Вы хотите отображать на этой колонке."
---[[Translation missing --]]
-L["Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."] = "Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."
---[[Translation missing --]]
-L["Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"] = "Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"
---[[Translation missing --]]
-L["Select the spells you want to track."] = "Select the spells you want to track."
+L["Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."] = "Выберите заклинания, которые вы хотите переместить, на вкладке «Рейд CD». Заклинание должно быть активировано на вкладке «Заклинания»."
+L["Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"] = "Выберите заклинания, которые вы хотите отображать на панели рейда 1-8 вместо панели юнитов по умолчанию."
+L["Select the spells you want to track."] = "Выберите заклинания, которые вы хотите отслеживать."
 L["Select the zone setting to use for this zone."] = "Выбирает настройки зоны для этой зоны."
 L["Select the zone you want to copy settings from."] = "Выберите зону, из которой Вы хотите скопировать настройки."
 L["Select your default party frame layout"] = "Выбирает расположение фреймов группы по умолчанию"

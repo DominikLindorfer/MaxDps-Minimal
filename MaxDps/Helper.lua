@@ -142,6 +142,10 @@ end
 function MaxDps:CollectAura(unit, timeShift, output, filter)
 	-- filter = filter and filter or (unit == 'target' and 'PLAYER|HARMFUL' or nil);
 
+	if unit == 'target' then
+		filter = "HARMFUL";
+	end
+
 	local t = GetTime();
 	local i = 1;
 	for k, _ in pairs(output) do
@@ -150,6 +154,9 @@ function MaxDps:CollectAura(unit, timeShift, output, filter)
 
 	while true do
 		local name, _, count, _, duration, expirationTime, _, _, _, id = UnitAura(unit, i, filter);
+        -- local name, icon, count, debuffType, duration, expirationTime, unitCaster, canStealOrPurge, nameplateShowPersonal, spellId = UnitDebuff("target", i)
+		-- print(unit)
+		-- print(name)
 		if not name then
 			break;
 		end
@@ -237,18 +244,44 @@ function MaxDps:SpecName()
 	return currentSpecName;
 end
 
+-- function MaxDps:CheckTalents()
+-- 	self.PlayerTalents = {};
+
+-- 	for talentRow = 1, 7 do
+-- 		for talentCol = 1, 3 do
+-- 			local _, _, _, sel, _, id = GetTalentInfo(talentRow, talentCol, 1);
+-- 			if sel then
+-- 				self.PlayerTalents[id] = 1;
+-- 			end
+-- 		end
+-- 	end
+-- end
+
 function MaxDps:CheckTalents()
 	self.PlayerTalents = {};
 
-	for talentRow = 1, 7 do
-		for talentCol = 1, 3 do
-			local _, _, _, sel, _, id = GetTalentInfo(talentRow, talentCol, 1);
-			if sel then
-				self.PlayerTalents[id] = 1;
+	-- last selected configID or fall back to default spec config
+	local configID = C_ClassTalents.GetActiveConfigID();
+	local configInfo = C_Traits.GetConfigInfo(configID);
+	local treeIDs = configInfo.treeIDs;
+
+	for _, treeID in ipairs(treeIDs) do
+		local nodes = C_Traits.GetTreeNodes(treeID);
+		for _, nodeID in ipairs(nodes) do
+			local nodeInfo = C_Traits.GetNodeInfo(configID, nodeID)
+			if nodeInfo.currentRank and nodeInfo.currentRank > 0 then
+				local entryID = nodeInfo.activeEntry and nodeInfo.activeEntry.entryID and nodeInfo.activeEntry.entryID;
+				local entryInfo = entryID and C_Traits.GetEntryInfo(configID, entryID);
+				local definitionInfo = entryInfo and entryInfo.definitionID and C_Traits.GetDefinitionInfo(entryInfo.definitionID);
+
+				if definitionInfo ~= nil then
+					self.PlayerTalents[definitionInfo.spellID] = 1;
+				end
 			end
 		end
 	end
 end
+
 
 MaxDps.isMelee = false;
 function MaxDps:CheckIsPlayerMelee()
