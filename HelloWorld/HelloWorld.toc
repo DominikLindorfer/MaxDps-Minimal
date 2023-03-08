@@ -1,7 +1,0 @@
-## Interface: 30300 
-## Version: 1.0.0
-## Title: Hello World
-## Notes: My first addon
-## Author: YourName
-
-HelloWorld.lua

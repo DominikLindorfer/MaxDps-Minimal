@@ -1,7 +1,0 @@
-## Interface: 100005
-## Version: 1.0.1
-## Title: iMorph
-## Notes: convert dot commands to iMorph commands
-## Author: darklinux @ ownedcore
-
-iMorph.lua
