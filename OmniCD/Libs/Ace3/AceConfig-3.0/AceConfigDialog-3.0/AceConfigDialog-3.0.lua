@@ -7,7 +7,7 @@
 --- AceConfigDialog-3.0 generates AceGUI-3.0 based windows based on option tables.
 -- @class file
 -- @name AceConfigDialog-3.0
--- @release $Id: AceConfigDialog-3.0.lua 1277 2022-09-08 16:35:10Z nevcairiel $
+-- @release $Id: AceConfigDialog-3.0.lua 1292 2022-09-29 08:00:11Z nevcairiel $
 
 local LibStub = LibStub
 local gui = LibStub("AceGUI-3.0")
@@ -607,8 +607,7 @@ local function OptionOnMouseLeave(widget, event)
 end
 
 local function GetFuncName(option)
-	local type = option.type
-	if type == "execute" then
+	if option.type == "execute" then
 		return "func"
 	else
 		return "set"
@@ -1901,11 +1900,11 @@ function AceConfigDialog:FeedGroup(appName,options,container,rootframe,path, isR
 		]]
 		if container.type ~= "InlineGroup-OmniCD" and container.type ~= "SimpleGroup-OmniCD" then -- <spell list> is 'multiselect'
 			scroll = gui:Create("ScrollFrame-OmniCD")
+			scroll:SetLayout("flow")
 			--[[ s b <spell list>
 			local opt = path[#path-1]
 			scroll:SetLayout(opt and opt:match("list_") and "Flow-Nopadding-OmniCD" or "flow" )
 			]]-- e
-			scroll:SetLayout("flow")
 			scroll.width = "fill"
 			scroll.height = "fill"
 			container:SetLayout("fill")

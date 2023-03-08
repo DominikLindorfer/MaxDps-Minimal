@@ -165,11 +165,6 @@ function iMorphChatHandler(msg, ...)
 		return
 	end
 
-	if command == 'mount' then
-		SetMount(arg)
-		return
-	end
-
 	if command == 'customization' and arg == nil then
 		Customizations()
 		return
@@ -195,6 +190,21 @@ function iMorphChatHandler(msg, ...)
 
 		if command == 'itemset' and tonumber(arg1) ~= nil then
 			SetItemSet(tonumber(arg1), tonumber(arg2))
+			return
+		end
+
+		if command == 'transmog' and tonumber(arg1) ~= nil then
+			SetTransmogSet(tonumber(arg1), tonumber(arg2))
+			return
+		end
+		
+		if command == 'outfit' and tonumber(arg1) ~= nil then
+			SetOutfit(tonumber(arg1), tonumber(arg2))
+			return
+		end
+
+		if command == 'mount' then
+			SetMount(tonumber(arg1), tonumber(arg2))
 			return
 		end
 
@@ -363,8 +373,16 @@ function SetLogging(arg1, arg2)
 	iMorphMiddleware('logging', arg1, arg2)
 end
 
-function SetItemSet(arg1)
-	iMorphMiddleware('itemset', arg1)
+function SetItemSet(arg1, arg2)
+	iMorphMiddleware('itemset', arg1, arg2)
+end
+
+function SetTransmogSet(arg1, arg2)
+	iMorphMiddleware('transmog', arg1, arg2)
+end
+
+function SetOutfit(arg1, arg2)
+	iMorphMiddleware('outfit', arg1, arg2)
 end
 
 function SetMount(arg1, arg2)

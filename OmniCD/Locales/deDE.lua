@@ -3,8 +3,7 @@ local L = LibStub("AceLocale-3.0"):NewLocale("OmniCD", "deDE")
 L = L or {}
 L[ [=[%d: spellID.
 %d-%d: spellID-talentID (Mark spell if talent is selected).]=] ] = "%d: spellID. %d-%d: spellID-talentID (Zauber markieren, wenn Talent ausgewählt ist)."
---[[Translation missing --]]
-L["[Show Numbers for Cooldowns] must be enabled in Blizzard's 'Options/Action Bars' menu when using Blizzard's cooldown numbers."] = "[Show Numbers for Cooldowns] must be enabled in Blizzard's 'Options/Action Bars' menu when using Blizzard's cooldown numbers."
+L["[Show Numbers for Cooldowns] must be enabled in Blizzard's 'Options/Action Bars' menu when using Blizzard's cooldown numbers."] = "[Zahlen für Abklingzeiten anzeigen] muss in Blizzards Menü 'Optionen/Aktionsleisten' aktiviert werden, wenn Blizzards Abklingzahlen verwendet werden."
 L["|cff9d9d9d * Scenarios and Outdoor Zones will use Arena settings."] = "|cff9d9d9d * Szenarien und Outdoor-Zonen verwenden die Arena-Einstellungen."
 L["|cffff2020Friendly CD module must be enabled for the corresponding instance zone."] = "|cffff2020Das freundliche CD Modul muss für die entsprechende Instanzzone aktiviert sein."
 L["|cffff2020Glow and Highlights are never applied on cropped icons. \"Border\" must be enabled."] = "|cffff2020Glühende und hervorgehobene Rahmen werden nie auf beschnittene Symbole angewendet. Die Option \"Rahmen\" muss aktiviert sein."
@@ -20,10 +19,8 @@ L["Add spell to Spell Alerts"] = "Zauber zu den Zauberalarmen hinzufügen"
 L["Add Spells"] = "Zauber hinzufügen"
 L["Add to Alerts"] = "Zu Warnungen hinzufügen"
 L["Addons with raid frame scaling will also cause the icons to scale."] = "Bei Addons mit Raid-Frame-Skalierung werden auch die Symbole skaliert."
---[[Translation missing --]]
 L[ [=[Adjust value until the truncate symbol [...] disappears.
-|cffff20200: Disable option]=] ] = [=[Adjust value until the truncate symbol [...] disappears.
-|cffff20200: Disable option]=]
+|cffff20200: Disable option]=] ] = "Wert anpassen, bis das Abbruchzeichen [...] verschwindet. |cffff20200: Option deaktivieren"
 L["Alerts"] = "Alerts"
 L["All user set values will be lost. Do you want to proceed?"] = "Alle eingestellten Werte gehen verloren. Möchtest Du fortfahren?"
 L["Always attach to Blizzard frames. By default, bars attach to whichever frame is visible, and if both are visible UF addon take precedence over Blizzard"] = "Immer an Blizzard-UI anhängen. Standardmäßig werden die Leisten an den Rahmen angehängt, der sichtbar ist, und wenn beide sichtbar sind, hat das Unit-Frame Addon Vorrang vor der Blizzard-UI"
@@ -37,8 +34,7 @@ L["Animate"] = "Animieren"
 L["Apply 'Icons' alpha settings to the status bar"] = "Anwenden der Alpha-Einstellungen von 'Symbole' auf die Statusleiste"
 L["Ascending"] = "Aufsteigend"
 L["Assign Raid Cooldowns."] = "Abklingzeiten für Schlachtzüge zuweisen."
---[[Translation missing --]]
-L["Attach Name Bar to the left of icon"] = "Attach Name Bar to the left of icon"
+L["Attach Name Bar to the left of icon"] = "Namensleiste links neben dem Symbol anbringen"
 L["Attach to Blizzard Frames"] = "An Blizzard-Rahmen anbringen"
 L["Attachment Point"] = "Befestigungspunkt"
 L["Author"] = "Autor"
@@ -94,8 +90,7 @@ L["Credits"] = "Impressum"
 L["Crop"] = "Zuschnitt"
 L["Crop Icons 1.5:1."] = "Symbole im Verhältnis 1,5:1 zuschneiden."
 L["Crowd Control"] = "Kontrollzauber"
---[[Translation missing --]]
-L["CTRL+click to edit spell."] = "CTRL+click to edit spell."
+L["CTRL+click to edit spell."] = "STRG+Klick zum Bearbeiten des Zaubers."
 L["Current Profile"] = "Aktuelles Profil"
 L["Current Unit Frame Addon"] = "Aktuelles UI Addon"
 L["Custom Priority"] = "Benutzerdefinierte Priorität"
@@ -117,8 +112,7 @@ L["Detach from raid frames and set position manually"] = "Ablösen vom Schlachtz
 L["Disable Popup"] = "Popup deaktivieren"
 L["Disable Reload UI confirmation when using Pixel Perfect borders"] = "Reload UI-Bestätigung bei Verwendung von Pixel Perfekt-Rändern deaktivieren"
 L["Disable to make the icons click through"] = "Deaktivieren, um die Symbole durchklickbar zu machen"
---[[Translation missing --]]
-L["Disabled spells will not appear on your bars even if you have them selected here"] = "Disabled spells will not appear on your bars even if you have them selected here"
+L["Disabled spells will not appear on your bars even if you have them selected here"] = "Deaktivierte Zauber erscheinen nicht auf den Leisten, auch wenn sie hier ausgewählt wurden"
 L["Display a glow animation around an icon when it is activated"] = "Anzeige einer Leuchtanimation um ein Symbol, wenn es aktiviert wird"
 L["Display custom border around icons"] = "Benutzerdefinierten Rahmen um Symbole anzeigen"
 L["Display default border around icons"] = "Standardrahmen um Symbole anzeigen"
@@ -151,14 +145,10 @@ L["Font"] = "Schriftart"
 L["Font Outline"] = "Schriftumriss"
 L["Fonts"] = "Schriftarten"
 L["Glow Icons"] = "Leuchtende Symbole"
---[[Translation missing --]]
-L["Group member must have OmniCD to detect cooldown reduction by Glyphs."] = "Group member must have OmniCD to detect cooldown reduction by Glyphs."
---[[Translation missing --]]
-L["Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."
---[[Translation missing --]]
-L["Group member must have OmniCD to detect cooldown reduction with a chance to proc."] = "Group member must have OmniCD to detect cooldown reduction with a chance to proc."
---[[Translation missing --]]
-L["Group member must have OmniCD to detect Talents."] = "Group member must have OmniCD to detect Talents."
+L["Group member must have OmniCD to detect cooldown reduction by Glyphs."] = "Gruppenmitglieder müssen OmniCD haben, um die Abklingzeitverkürzung durch Glyphen zu erkennen."
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc and Soulbind Conduits."] = "Gruppenmitglieder müssen OmniCD haben, um die Abklingzeitverringerung mit einer Chance beim Proc der Seelenbandverbindungen zu sehen."
+L["Group member must have OmniCD to detect cooldown reduction with a chance to proc."] = "Gruppenmitglieder müssen OmniCD haben, um eine Abklingzeitreduzierung mit einer Proc-chance zu sehen."
+L["Group member must have OmniCD to detect Talents."] = "Gruppenmitglieder müssen über OmniCD verfügen, um Talente zu erkennen."
 L["Group Padding"] = "Gruppenabstand"
 L["Group Size"] = "Gruppengröße"
 L["Group Type"] = "Gruppenart"
@@ -199,15 +189,13 @@ L["Inactive"] = "Inaktiv"
 L["Inactive Icon Opacity"] = "Deckkraft des inaktiven Symbols"
 L["INNER"] = "INNERE"
 L["Interrupt Bar"] = "Unterbrechungsleiste"
---[[Translation missing --]]
-L["Interrupt spell types are automatically added to this bar."] = "Interrupt spell types are automatically added to this bar."
+L["Interrupt spell types are automatically added to this bar."] = "Unterbrechungszauber werden automatisch zu dieser Leiste hinzugefügt."
 L["Interrupted Spell Icon"] = "Unterbrochenes Zauber Symbol"
 L["Interrupted Target Marker"] = "Unterbrochene Zielmarkierung"
 L["Interrupts"] = "Unterbrechungen"
 L["Invalid ID"] = "Ungültige ID"
 L["Invalid Profile"] = "Ungültiges Profil"
---[[Translation missing --]]
-L["Invert Name Bar"] = "Invert Name Bar"
+L["Invert Name Bar"] = "Namensleiste invertieren"
 L["Item ID (Optional)"] = "Gegenstands-ID (Optional)"
 L["Jump to Extra Bars settings"] = "Zu den Einstellungen von Extra Leisten springen"
 L["Layout"] = "Layout"
@@ -277,8 +265,7 @@ L["Reload addon."] = "Addon neu laden."
 L["Reload UI?"] = "UI neu laden?"
 L["Replace default timers with a status bar timer."] = "Ersetze die Standard-Timer durch einen Statusleisten-Timer."
 L["Reset all cooldown timers."] = "Alle Abklingzeiten zurücksetzen."
---[[Translation missing --]]
-L["Reset current bar settings to default"] = "Reset current bar settings to default"
+L["Reset current bar settings to default"] = "Aktuelle Leisteneinstellungen auf Standard zurücksetzen"
 L["Reset current zone settings to default"] = "Aktuelle Zoneneinstellungen auf Standard zurücksetzen"
 L["Reset frame position"] = "Rahmenposition zurücksetzen"
 L["Reset Status Bar Timer settings to default"] = "Timer-Einstellungen der Statusleiste auf Standard zurücksetzen"
@@ -299,12 +286,9 @@ L["Select the highest priority spell type to use as the start of the 2nd row"] =
 L["Select the highest priority spell type to use as the start of the 3rd row"] = "Wähle die Zauberart mit der höchsten Priorität für den Beginn der 3. Reihe"
 L["Select the icon layout"] = "Wähle das Symbol-Layout"
 L["Select the spell types you want to display on this column."] = "Wähle die Zauberarten aus, die in dieser Spalte angezeigt werden sollen."
---[[Translation missing --]]
-L["Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."] = "Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."
---[[Translation missing --]]
-L["Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"] = "Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"
---[[Translation missing --]]
-L["Select the spells you want to track."] = "Select the spells you want to track."
+L["Select the spells you want to move from the 'Raid CD' tab. The spell must be enabled from the 'Spells' tab first."] = "Wähle die zu verschiebenden Zauber bei den 'Raid CDs' aus. Der Zauber muss zuerst bei den \"Zaubern\" aktiviert werden."
+L["Select the spells you want to show on Raid Bar 1-8 instead of the default Unit Bar"] = "Wähle die Zauber aus, die in der Leiste 1-8 anstelle der Standardleiste angezeigt werden soll"
+L["Select the spells you want to track."] = "Wähle die Zauber aus, die verfolgt werden sollen."
 L["Select the zone setting to use for this zone."] = "Wähle die Zoneneinstellung, die für diese Zone verwendet werden soll."
 L["Select the zone you want to copy settings from."] = "Wähle die Zone aus, deren Einstellungen Du kopieren möchtest."
 L["Select your default party frame layout"] = "Wähle dein Standard Gruppenrahmen Layout"
@@ -336,8 +320,7 @@ L["Settings"] = "Einstellungen"
 L["Show Anchor"] = "Ankerpunkt anzeigen"
 L["Show anchor with party/raid numbers"] = "Ankerpunkt mit Gruppen-/Raidnummern anzeigen"
 L["Show Forbearance CD"] = "Vorahnung CD anzeigen"
---[[Translation missing --]]
-L["Show Name"] = "Show Name"
+L["Show Name"] = "Name anzeigen"
 L["Show name on icons"] = "Name auf Symbolen anzeigen"
 L["Show Player"] = "Spieler anzeigen"
 L["Show Player in Extra Bars"] = "Spieler in Extra Leisten anzeigen"
@@ -385,15 +368,13 @@ L["Toggle the grow direction of icon columns"] = "Umschalten der Wachstumsrichtu
 L["Toggle the grow direction of icon rows"] = "Umschalten der Wachstumsrichtung von Symbolreihen"
 L["Tool to copy portions of a profile to another existing profile."] = [=[Werkzeug zum Kopieren von Teilen eines Profils in ein anderes bestehendes Profil.
 ]=]
---[[Translation missing --]]
-L["Tooltips will be enabled for this login session only."] = "Tooltips will be enabled for this login session only."
+L["Tooltips will be enabled for this login session only."] = "Die Tooltips werden nur für diese Sitzung aktiviert."
 L["TOP"] = "OBEN"
 L["TOPLEFT"] = "OBENLINKS"
 L["TOPRIGHT"] = "OBENRECHTS"
 L["Trinket and Racial abilities are excluded from sorting"] = "Schmuckstücke und Rassenfähigkeiten sind von der Sortierung ausgeschlossen."
 L["Trinket Items"] = "Schmuckstücke"
---[[Translation missing --]]
-L["Truncate Name"] = "Truncate Name"
+L["Truncate Name"] = "Name abkürzen"
 L["UI Scale Changed."] = "UI-Skala geändert."
 L["Unit CD bars are limited to 5 man groups unless Blizzard Raid Frames are used."] = "Die CD-Leisten der Spieler sind auf 5-Mann-Gruppen beschränkt, es sei denn, Blizzard Schlachtzug-Frames werden verwendet."
 L["Usage:"] = "Verwendung:"
@@ -416,5 +397,4 @@ L["Vertical + CD Groups"] = "Vertikal + CD Gruppen"
 L["Vertical Groups"] = "Vertikale Gruppen"
 L["Visibility"] = "Sichtbarkeit"
 L["Weak Purple Glow"] = "Schwaches violettes Leuchten"
---[[Translation missing --]]
-L["You must manually enable either the 'Party Frames' or 'Raid Frames' in Blizzard's 'HUD Edit Mode'."] = "You must manually enable either the 'Party Frames' or 'Raid Frames' in Blizzard's 'HUD Edit Mode'."
+L["You must manually enable either the 'Party Frames' or 'Raid Frames' in Blizzard's 'HUD Edit Mode'."] = "Du musst entweder die 'Gruppen Frames' oder die 'Raid Frames' manuell in Blizzards 'UI Edit Modus' aktivieren."

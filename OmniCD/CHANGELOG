@@ -1,6 +1,28 @@
 ------------------------------------------------------------------------------
 -- Dragonflight
 --
+v10.0.5.2743
+	CD resets on encounter end will correctly use the unmodified base cooldown as a reference
+	Icons are now click through while Tooltips are enabled
+	Fixed Army of the Damned CDR by Epidemic
+	Fixed Blessing of Santuary CD
+	Fixed Kleptomania icon texture
+	Feb 6, 2023 Hotfixes
+
+v10.0.5.2742
+	Fixed missing talents after Patch 10.0.5
+	Avatar for Protection spec has been added as a separate spell
+
+v10.0.5.2741
+	Patch 10.0.5 updates
+
+	Fixed PvP Talent modifiers incorrectly being applied in non-PvP areas
+	Fixed Fortifying Brew (BW) spellID that caused CDR by Keg Smash, Tiger Palm, Blackout Combo to be ignored
+	Temp fix to match current bugged state:
+		Tiger Palm reduces all Brew (BM) cooldowns by 0.5 sec instead of 1.0 sec
+		Keg Smash reduces Fortifying Brew's CD by 5 sec instead of 3 sec
+	Tiger Palm and Keg Smash on enemies with Bonedust Brew active will correctly reduce all Brew cooldowns by 1 sec (was reducing Bonedust Brew only)
+
 v10.0.2.2740
 	Non-PvP talent changes made by non-synced units are now updated instantly
 	Fixed item inspection
@@ -608,6 +630,16 @@ v2.5.0
 ------------------------------------------------------------------------------
 -- WOTLKC
 --
+v3.4.1.2743
+	Class abilities with a base cooldown of 2 minutes or more (with some exceptions, such as Reincarnation, Ritual of
+	Doom, Astral Recall, and Lay on Hands) will reset when an encounter ends
+	Added rest of WG pvp trinkets
+	Fixed nil error when Cold Snap is used while Frost Ward isn't being tracked
+	Jan 31, 2023 Hotfixes
+
+v3.4.1.2742
+	Titan-Forged Rune of Determination merged to PvP Trinket
+
 v3.4.1.2740
 	Fixed Set bonus inspection
 	Added Season 6 tier set bonuses
@@ -692,10 +724,7 @@ v2.6.01-bcc
 ------------------------------------------------------------------------------
 -- classic era
 --
-v1.14.3.2740
-	version update
-
-v1.14.3.2737
+v1.14.3.2741
 	version update
 
 v1.14.3.2724

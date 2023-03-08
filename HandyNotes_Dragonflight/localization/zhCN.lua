@@ -56,13 +56,13 @@ L['tuskarr_tacklebox'] = '海象人工具盒'
 L['options_icons_tuskarr_tacklebox'] = '海象人工具盒'
 L['options_icons_tuskarr_tacklebox_desc'] = '显示 {object:海象人工具盒} 可能的位置。'
 
-L['dr_best'] = '最快时间：\n - 普通：%.3f秒\n - 进阶：%.3f秒'
+L['dr_best'] = '最快时间：\n - 普通：%.3f秒\n - 进阶：%.3f秒\n - 反向：%.3f秒'
 L['dr_best_dash'] = '最快时间：\n - %.3f秒'
-L['dr_note'] = '目标时间：\n - 普通：%s秒 / %s秒\n - 进阶：%s秒 / %s秒'
+L['dr_note'] = '目标时间：\n - 普通：%s秒 / %s秒\n - 进阶：%s秒 / %s秒\n - 反向：%s秒 / %s秒'
 L['dr_note_dash'] = '目标时间：\n - %s秒 / %s秒'
 L['dr_bronze'] = '\n\n完成竞速获得 ' .. ns.color.Bronze('青铜') .. '。'
 L['options_icons_dragonrace'] = '驭龙竞速'
-L['options_icons_dragonrace_desc'] = '显示区域内驭龙竞速的位置。'
+L['options_icons_dragonrace_desc'] = '显示区域内全部驭龙竞速的位置。'
 
 L['squirrels_note'] = '必须使用表情 {emote:/爱}，{emote:/love} 给非战斗宠物的小动物。'
 L['options_icons_squirrels'] = '{achievement:16729}'
@@ -90,7 +90,8 @@ L['signal_transmitter_note'] = '{note:需要10点机械头脑\n需要30点新奇
 L['options_icons_signal_transmitter'] = '龙洞发生器信号发射机'
 L['options_icons_signal_transmitter_desc'] = '显示 {item:198156} 的 {object:关闭的信号发射机} 的位置。'
 
-L['spawns_periodically'] = '{note:每隔30分钟可能出现，全服务器同步。（例如：9:00、17:30）}'
+L['rare_14h'] = '此稀有与其他稀有构成14小时的循环，每30分钟可以出现一个稀有。\n\n下次可能出现：{note:%s}（服务器时间）'
+L['time_format'] = '%Y/%m/%d - %H:%M'
 L['spawns_at_night'] = '{note:只可能在夜间出现。（服务器时间18:30准时出现，可能会延迟几分钟）}'
 
 L['elemental_storm'] = '元素风暴'
@@ -117,16 +118,27 @@ L['empowered_mobs_killed_suffix'] = '强化怪物已击杀'
 L['elemental_storm_mythressa_note_start'] = '用 {currency:2118} 换取装备、宠物和坐骑。'
 L['elemental_storm_mythressa_note_end'] = '目前有 %s {currency:2118}。'
 
-L['options_icons_elemental_storm'] = '元素风暴'
-L['options_icons_elemental_storm_desc'] = '显示元素风暴奖励。'
+L['options_icons_elemental_storm'] = '{spell:392768}'
+L['options_icons_elemental_storm_desc'] = '显示 {spell:392768} 奖励。'
+
+L['elusive_creature_note'] = '{object:制皮律法} 中 {object:精通等级 40/40} 将能够制造 {item:193906} 可以用来每天召唤和剥皮每个生物一次。'
+L['options_icons_elusive_creature'] = '{item:193906}'
+L['options_icons_elusive_creature_desc'] = '显示 {item:193906} 召唤的隐秘生物位置。'
+
+L['grand_hunts_label'] = '洪荒狩猎'
+L['longhunter_suffix'] = '狩猎进度已完成'
+L['the_best_at_what_i_do_suffix'] = '首领已击杀'
+
+L['options_icons_grand_hunts'] = '洪荒狩猎'
+L['options_icons_grand_hunts_desc'] = '显示 {object:洪荒狩猎} 的位置和奖励。'
 
 -------------------------------------------------------------------------------
 ------------------------------- THE AZURE SPAN --------------------------------
 -------------------------------------------------------------------------------
 
-L['bisquis_note'] = '在 {location:伊斯卡拉} 的社区盛宴烹饪出传说品质的汤，然后击败 {npc:197557}。 '
+L['bisquis_note'] = '在 {location:伊斯卡拉} 的社区盛宴烹饪出传说品质的汤，然后击败 {npc:197557}。\n\n下次宴会：{note:%s}（服务器时间）'
 L['blightfur_note'] = '和 {npc:193633} 交谈开始召唤稀有。'
-L['brackenhide_rare_note'] = '这些稀有以10分钟计时按固定轮次 {npc:197344} > {npc:197353} > {npc:197354} > {npc:197356} 出现。'
+L['brackenhide_rare_note'] = '这些稀有以10分钟计时按固定轮次 {npc:197344} > {npc:197353} > {npc:197354} > {npc:197356} 出现。\n\n下次可能出现：{note:%s}（服务器时间）'
 L['fisherman_tinnak_note'] = '收集 {object:破损的鱼竿}，{object:扯烂的渔网} 和 {object:旧鱼叉} 后稀有出现。'
 L['frostpaw_note'] = '拿上 {object:木槌} 后有20秒的时间去打 {object:树桩} 上的 {object:打豺狼人}，之后稀有出现。'
 L['sharpfang_note'] = '帮助 {npc:192747} 击败 {npc:192748} 后稀有出现。'
@@ -191,6 +203,31 @@ L['artists_easel_note_step3'] = '{quest:70170}\n{npc:194425} 会要求从 {locat
 L['artists_easel_note_step4'] = '将最后的画作交给 {npc:194323} 并收到玩具！\n\n{note:画作不会从史诗或史诗+地下城中掉落。}'
 
 L['somewhat_stabilized_arcana_note'] = '位于塔顶。\n\n完成从 {npc:197100} 开始的小任务线获得玩具。'
+
+L['stranded_soul_note'] = [[
+击杀 {npc:196900} 后它会爆炸成4个 {npc:196901}。
+需要激活它们来融化冰墙（推荐两个玩家）。
+
+击杀里面的 {npc:197183}，你会得到 {item:200528}。
+]]
+
+L['gethdazr_note'] = [[
+作为 {location:伊姆布} 事件的一部分出现，该事件以吹响 {object:伊姆布巨角}（{dot:Blue}）开始。
+只有在击杀大约30-60分钟出现时间的 {npc:196155} 后，巨角才会变得可点击。
+
+{npc:191143}（{dot:Green}）和其他 NPC 将从 {location:伊姆布} 的东北入口杀出一条血路，直到 {npc:196165} 在悬崖出现。
+NPC 可以在没有帮助的情况下死亡，这将使事件失败。
+
+这可以单独完成，但建议2-3名玩家。
+]]
+
+L['tuskarr_chest'] = '海象人宝箱'
+L['options_icons_tuskarr_chest'] = '海象人宝箱'
+L['options_icons_tuskarr_chest_desc'] = '显示 {object:海象人宝箱} 可能的位置。'
+
+L['community_feast_label'] = '{spell:388961}'
+L['options_icons_community_feast'] = '{spell:388961}'
+L['options_icons_community_feast_desc'] = '显示 {spell:388961} 的位置和奖励。'
 
 -------------------------------------------------------------------------------
 ------------------------------- FORBIDDEN REACH -------------------------------
@@ -297,6 +334,10 @@ L['chest_of_the_flood'] = '洪水宝箱'
 
 L['aylaag_camp_note'] = '{faction:艾拉格氏族} 每3天3小时（75）移动到另一个营地，跟随并在途中保护他们。'
 
+L['clan_chest'] = '氏族宝箱'
+L['options_icons_clan_chest'] = '氏族宝箱'
+L['options_icons_clan_chest_desc'] = '显示 {object:氏族宝箱} 可能的位置。'
+
 -------------------------------------------------------------------------------
 --------------------------------- THALDRASZUS ---------------------------------
 -------------------------------------------------------------------------------
@@ -318,7 +359,7 @@ L['tasty_hatchling_treat_note'] = '在书架后面的一个桶里。'
 L['pm_mining_bridgette_holdug'] = '在长满草的石柱上。'
 L['pm_tailor_elysa_raywinder'] = '在塔的中间的一个壁架上。'
 L['pt_alch_contraband_concoction_note'] = '隐藏在灌木丛中。{note:很难发现。}'
-L['pt_alch_furry_gloop_note'] = '将附近的 {npc:194855} 放入每个大锅中，然后杀死出现的怪物。'
+L['pt_alch_tasty_candy_note'] = '将附近的 {object:丢弃的玩具} 放入每个大锅中，然后杀死出现的怪物。'
 L['pt_ench_fractured_titanic_sphere_note'] = '{location:提尔要塞} 南侧。'
 L['pt_jewel_alexstraszite_cluster_note'] = '{location:提尔要塞} 内。'
 L['pt_jewel_painters_pretty_jewel_note'] = '一盏灯内。'
@@ -335,7 +376,7 @@ L['icecrown_bleu_note'] = '从 {location:匠人集市} 的 {npc:196729} {title:<
 L['dreamwarding_dripbrew_note'] = '从 {location:熬夜实验室} 的 {npc:197872} {title:<咖啡因操控师>} 购买。'
 L['arcanostabilized_provisions_note'] = '从 {location:拜荒者的未来} 内的 {location:时光流汇} 的 {npc:198831} {title:<厨师长>} 购买。'
 L['steamed_scarab_steak_note'] = '从 {location:宁梦温泉} 的 {npc:197586} {title:<温泉调酒师>} 购买。'
-L['craft_creche_crowler_note'] = '从每日随机地图位置的 {npc:187444} {title:<旅行的巨龙陈酿商人>} 位于：{location:红玉新生圣地}、{location:绿鳞旅店}、{location:僻壤营地}、{location:时光流汇} 购买。'
+L['craft_creche_crowler_note'] = '从每日随机地图位置的 {npc:187444} {title:<旅行的巨龙陈酿商人>} 位于：{location:红玉新生圣地}、{location:龙鳞先遣营地}、{location:时光流汇}、{location:格利基尔岗哨}、{location:僻壤营地}、{location:掉链旅店} 和 {location:绿鳞旅店} 购买。'
 L['bivigosas_blood_sausages_note'] = '从 {location:格利基尔岗哨} 的 {npc:188895} {title:<食物和饮料>} 购买。'
 L['rumiastrasza_note'] = '{note:完成从 {location:瓦德拉肯} {quest:71238} 开始的日常任务线，否则无法完成成就。}'
 L['options_icons_specialties'] = '{achievement:16621}'
@@ -354,6 +395,10 @@ L['chest_of_the_elements'] = '元素宝箱'
 
 L['hoard_of_draconic_delicacies_note_start'] = '完成 {npc:189479} 提供的7个以下任务：'
 L['hoard_of_draconic_delicacies_note_end'] = '完成所有任务后，{npc:189479} 将提供 {quest:67071} 以接收食谱。\n\n{note:任务基于 {location:红玉飞地} 的活跃客座厨师，可能不匹配上面列出的顺序。}'
+
+L['brendormi_note_start'] = '用 {item:202039} 和 {currency:2118} 换取装备，宠物和坐骑。'
+L['brendormi_note_item'] = '当前有 %s {item:202039}。'
+L['brendormi_note_currency'] = '当前有 %s {currency:2118}。'
 
 -------------------------------------------------------------------------------
 ------------------------------ THE WAKING SHORE -------------------------------
@@ -386,9 +431,9 @@ L['fullsails_supply_chest'] = '满帆补给箱'
 L['hidden_hornswog_hoard_note'] = [[
 收集3种不同的物品并在 {npc:192362} 附近的 {object:“观察谜题：实地指南”} 处组合它们以获得 {item:200063} 然后喂它。然后它会离开就可以拾取它的宝藏。
 
-{item:200064}
-{item:200065}
-{item:200066}
+{item:200064}{dot:Yellow}
+{item:200065}{dot:Blue}
+{item:200066}{dot:White}
 ]]
 
 L['pm_alch_grigori_vialtry'] = '在俯瞰 {location:闪霜战地} 的平台上。'
@@ -483,3 +528,11 @@ L['loyal_magmammoth_wrathion_quatermaster_note'] = '从 {npc:199020} 或 {npc:18
 L['loyal_magmammoth_sabellian_quatermaster_note'] = '从 {npc:199036} 或 {npc:188623} 购买 {item:201839} ' .. ns.color.Gold('（800 金币）') .. '。'
 L['loyal_magmammoth_harness_note'] = '从 {npc:191135} 购买 {item:201837}。'
 L['loyal_magmammoth_taming_note'] = '在骑乘 {npc:198150} 时使用 {item:201837} 获得坐骑！\n\n{note:报告表明可能只能驾驭在 {location:燃烧高地} 中找到的 {npc:198150}。}'
+
+L['djaradin_cache'] = '贾拉丁宝箱'
+L['options_icons_djaradin_cache'] = '贾拉丁宝箱'
+L['options_icons_djaradin_cache_desc'] = '显示 {object:贾拉丁宝箱} 可能的位置。'
+
+L['dragonbane_siege_label'] = '{spell:388945}'
+L['options_icons_dragonbane_siege'] = '{spell:388945}'
+L['options_icons_dragonbane_siege_desc'] = '显示 {spell:388945} 的位置和奖励。'

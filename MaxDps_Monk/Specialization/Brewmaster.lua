@@ -184,7 +184,7 @@ function Monk:BrewmasterCooldowns()
 	if healthPercent <= 35 and cooldown[BR.FortifyingBrew].ready then
 		return BR.FortifyingBrew;
 	end
-
+	
 	if healthPercent <= 40 and cooldown[BR.HealingElixir].ready then
 		return BR.HealingElixir;
 	end
@@ -197,6 +197,10 @@ function Monk:BrewmasterCooldowns()
 		return BR.DampenHarm;
 	end
 	
+	if cooldown[BR.ExpelHarm].ready and healthPercent <= 77 then
+		return BR.ExpelHarm;
+	end
+
 	if healthPercent <= 86 and cooldown[BR.PurifyingBrew].ready then
 		return BR.PurifyingBrew;
 	end
@@ -217,9 +221,7 @@ function Monk:BrewmasterCooldowns()
 		return BR.BonedustBrew;
 	end
 
-	if cooldown[BR.ExpelHarm].ready and healthPercent <= 50 then
-		return BR.ExpelHarm;
-	end
+	
 
 	-- if talents[BR.HealingElixir] and healthPercent <= 65 and cooldown[BR.HealingElixir].ready then
 	-- 	return BR.HealingElixir;

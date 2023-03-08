@@ -31,8 +31,13 @@ local TT_DefaultConfig = {
 	showRealm = "show",
 	showTarget = "last",
 	targetYouText = "<<YOU>>",
-	showCurrentUnitSpeed = false,
+	showCurrentUnitSpeed = true,
 	showMythicPlusDungeonScore = true,
+	showMount = true,
+	showMountCollected = true,
+	showMountIcon = true,
+	showMountText = true,
+	showMountSpeed = true,
 	
 	showBattlePetTip = true,
 	gttScale = 1,
@@ -41,39 +46,53 @@ local TT_DefaultConfig = {
 	hidePvpText = true,
 	hideFactionText = false,
 	
-	colorGuildByReaction = true,
+	-- colors
+	colorName = { 1, 1, 1, 1 },
+	colorNameByReaction = true,
+	colorNameByClass = false,
+	
 	colorGuild = { 0, 0.5, 0.8, 1 },
 	colorSameGuild = { 1, 0.2, 1, 1 },
-	colorRace = { 1, 1, 1, 1},
-	colorLevel = { 0.75, 0.75, 0.75, 1},
-	colorNameByClass = false,
+	colorGuildByReaction = true,
+	
+	colorRace = { 1, 1, 1, 1 },
+	colorLevel = { 0.75, 0.75, 0.75, 1 },
+	
 	classColoredBorder = true,
 	
+	-- reactions
+	reactColoredBorder = false,
+	reactIcon = false,
+	
 	reactText = false,
-	["colorReactText" .. LFF_UNIT_REACTION_INDEX.tapped] = { 0.75, 0.75, 0.75, 1},
-	["colorReactText" .. LFF_UNIT_REACTION_INDEX.hostile] = { 1, 0, 0, 1},
+	colorReactText = { 1, 1, 1, 1 },
+	reactColoredText = true,
+	
+	["colorReactText" .. LFF_UNIT_REACTION_INDEX.tapped] = { 0.75, 0.75, 0.75, 1 },
+	["colorReactText" .. LFF_UNIT_REACTION_INDEX.hostile] = { 1, 0, 0, 1 },
 	["colorReactText" .. LFF_UNIT_REACTION_INDEX.caution] = { 1, 0.5, 0, 1 },
 	["colorReactText" .. LFF_UNIT_REACTION_INDEX.neutral] = { 1, 1, 0, 1 },
 	["colorReactText" .. LFF_UNIT_REACTION_INDEX.friendlyPlayer] = { 0.15, 0.76, 0.92, 1 },
 	["colorReactText" .. LFF_UNIT_REACTION_INDEX.friendlyPvPPlayer] = { 0, 1, 0, 1},
-	["colorReactText" .. LFF_UNIT_REACTION_INDEX.friendlyNPC] = { 0.1, 1, 0, 1},
-	["colorReactText" .. LFF_UNIT_REACTION_INDEX.honoredNPC] = { 0, 0.4, 0.9, 1},
-	["colorReactText" .. LFF_UNIT_REACTION_INDEX.reveredNPC] = { 0, 0.4, 0.9, 1},
-	["colorReactText" .. LFF_UNIT_REACTION_INDEX.exaltedNPC] = { 0.6, 0.2, 0.9, 1},
+	["colorReactText" .. LFF_UNIT_REACTION_INDEX.friendlyNPC] = { 0, 0.76, 0, 1 },
+	["colorReactText" .. LFF_UNIT_REACTION_INDEX.honoredNPC] = { 0, 0.76, 0.36, 1 },
+	["colorReactText" .. LFF_UNIT_REACTION_INDEX.reveredNPC] = { 0, 0.76, 0.56, 1 },
+	["colorReactText" .. LFF_UNIT_REACTION_INDEX.exaltedNPC] = { 0, 0.76, 0.76, 1 },
 	["colorReactText" .. LFF_UNIT_REACTION_INDEX.dead] = { 0.5, 0.5, 0.5, 1 },
 	
+	-- bg color
 	reactColoredBackdrop = false,
-	reactColoredBorder = false,
+	
 	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.tapped] = { 0.2, 0.2, 0.2, 1 },
 	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.hostile] = { 0.3, 0, 0, 1 },
 	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.caution] = { 0.3, 0.15, 0, 1 },
 	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.neutral] = { 0.3, 0.3, 0, 1 },
 	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.friendlyPlayer] = { 0, 0.2, 0.3, 1 },
 	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.friendlyPvPPlayer] = { 0, 0.3, 0, 1 },
-	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.friendlyNPC] = { 0, 0.3, 0, 1 },
-	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.honoredNPC] = { 0, 0.1, 0.3, 1 },
-	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.reveredNPC] = { 0, 0.1, 0.3, 1 },
-	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.exaltedNPC] = { 0.2, 0, 0.3, 1 },
+	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.friendlyNPC] = { 0, 0.2, 0, 1 },
+	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.honoredNPC] = { 0, 0.2, 0.1, 1 },
+	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.reveredNPC] = { 0, 0.2, 0.15, 1 },
+	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.exaltedNPC] = { 0, 0.2, 0.2, 1 },
 	["colorReactBack" .. LFF_UNIT_REACTION_INDEX.dead] = { 0.1, 0.1, 0.1, 1 },
 	
 	enableBackdrop = true,
@@ -143,6 +162,7 @@ local TT_DefaultConfig = {
 	iconAnchor = "TOPLEFT",
 	iconSize = 24,
 	
+	enableAnchor = true,
 	anchorWorldUnitType = "normal",
 	anchorWorldUnitPoint = "BOTTOMRIGHT",
 	anchorWorldTipType = "normal",
@@ -191,27 +211,30 @@ local TT_DefaultConfig = {
 	showHiddenModifierKey = "shift"
 };
 
+-- extended config
+local TT_ExtendedConfig = {};
+
 -- original GameTooltip fonts
-local TT_Config_OldGameTooltipText = {        -- set during tt:ApplyConfig()
+TT_ExtendedConfig.oldGameTooltipText = {        -- set during tt:ApplyConfig()
 	fontFace = "",
 	fontSize = 0,
 	fontFlags = ""
 };
-local TT_Config_OldGameTooltipHeaderText = {  -- set during tt:ApplyConfig()
+TT_ExtendedConfig.oldGameTooltipHeaderText = {  -- set during tt:ApplyConfig()
 	fontFace = "",
 	fontSize = 0,
 	fontFlags = ""
 };
-local TT_Config_OldGameTooltipTextSmall = {   -- set during tt:ApplyConfig()
+TT_ExtendedConfig.oldGameTooltipTextSmall = {   -- set during tt:ApplyConfig()
 	fontFace = "",
 	fontSize = 0,
 	fontFlags = ""
 };
 
-local TT_Config_OldGameTooltipFontsRemembered = false;
+TT_ExtendedConfig.oldGameTooltipFontsRemembered = false;
 
 -- tooltip backdrop config (examples see "Backdrop.lua")
-local TT_Config_TipBackdrop = {
+TT_ExtendedConfig.tipBackdrop = {
 	bgFile = "",                                           -- set during event ADDON_LOADED and tt:ApplyConfig()
 	edgeFile = "",                                         -- set during event ADDON_LOADED and tt:ApplyConfig()
 	tile = true,
@@ -221,11 +244,11 @@ local TT_Config_TipBackdrop = {
 	insets = { left = 0, right = 0, top = 0, bottom = 0 }  -- set during event ADDON_LOADED and tt:ApplyConfig()
 };
 
-local TT_Config_TipBackdrop_BackdropColor = CreateColor(0, 0, 0, 0);        -- set during event ADDON_LOADED and tt:ApplyConfig()
-local TT_Config_TipBackdrop_BackdropBorderColor = CreateColor(0, 0, 0, 0);  -- set during event ADDON_LOADED and tt:ApplyConfig()
+TT_ExtendedConfig.backdropColor = CreateColor(0, 0, 0, 0);        -- set during event ADDON_LOADED and tt:ApplyConfig()
+TT_ExtendedConfig.backdropBorderColor = CreateColor(0, 0, 0, 0);  -- set during event ADDON_LOADED and tt:ApplyConfig()
 
 -- tooltip padding config for GameTooltip
-local TT_Config_TipPaddingForGameTooltip = {
+TT_ExtendedConfig.tipPaddingForGameTooltip = {
 	right = 0,   -- set during event ADDON_LOADED and tt:ApplyConfig()
 	bottom = 0,  -- set during event ADDON_LOADED and tt:ApplyConfig()
 	left = 0,    -- set during event ADDON_LOADED and tt:ApplyConfig()
@@ -234,8 +257,8 @@ local TT_Config_TipPaddingForGameTooltip = {
 };
 
 -- tooltip default anchor type and anchor point
-local TT_Config_Default_Anchor_Type = "normal";
-local TT_Config_Default_Anchor_Point = "BOTTOMRIGHT";
+TT_ExtendedConfig.defaultAnchorType = "normal";
+TT_ExtendedConfig.defaultAnchorPoint = "BOTTOMRIGHT";
 
 -- tips to modify in appearance and hooking config. other mods can use TipTac:AddModifiedTip(tip, noHooks) or TipTac:AddModifiedTipExtended(tip, tipParams) to register their own tooltips.
 --
@@ -251,14 +274,14 @@ local TT_Config_Default_Anchor_Point = "BOTTOMRIGHT";
 -- applyAppearance                true if appearance should be applied, false/nil otherwise.
 -- applyScaling                   true if scaling should be applied, false/nil otherwise.
 -- applyAnchor                    true if anchoring should be applied, false/nil otherwise.
--- scalingFactor                  optional. optional scaling factor if "applyScaling = true", nil otherwise. #test: not used yet
 -- waitSecondsForLookupFrameName  optional. float with number of seconds to wait before looking up frame name, nil otherwise.
 -- noHooks                        optional. true if no hooks should be applied to the frame directly, false/nil otherwise.
 -- hookFnForFrame                 optional. individual function for hooking for frame, nil otherwise. parameters: TT_CacheForFrames, tip
 -- waitSecondsForHooking          optional. float with number of seconds to wait before hooking for frame, nil otherwise.
+-- isFromLibQTip                  optional. true if frame belongs to LibQTip, false/nil otherwise.
 --
 -- hint: determined frames will be added to TT_CacheForFrames with key as resolved real frame. The params will be added under ".config", the frame name under ".frameName".
-local TT_Config_TipsToModify = {
+TT_ExtendedConfig.tipsToModify = {
 	[MOD_NAME] = {
 		frames = {
 			["GameTooltip"] = { applyAppearance = true, applyScaling = true, applyAnchor = true },
@@ -267,8 +290,8 @@ local TT_Config_TipsToModify = {
 			["ItemRefTooltip"] = {
 				applyAppearance = true, applyScaling = true, applyAnchor = false,
 				hookFnForFrame = function(TT_CacheForFrames, tip)
+					-- HOOK: DisplayDungeonScoreLink() to set class colors to backdrop border, see "ItemRef.lua"
 					if (DisplayDungeonScoreLink) then
-						-- HOOK: DisplayDungeonScoreLink() to set class colors to backdrop border, see "ItemRef.lua"
 						hooksecurefunc("DisplayDungeonScoreLink", function(link)
 							if (cfg.classColoredBorder) and (tip:IsShown()) then
 								local splits = StringSplitIntoTable(":", link);
@@ -285,7 +308,32 @@ local TT_Config_TipsToModify = {
 							end
 						end);
 					end
-
+					
+					-- HOOK: ItemRefTooltipMixin:ItemRefSetHyperlink() to adjust padding for close button if needed. additionally considering TextRight1 here.
+					if (ItemRefTooltip.ItemRefSetHyperlink) then
+						hooksecurefunc(ItemRefTooltip, "ItemRefSetHyperlink", function(self, link)
+							-- get current display parameters
+							local frameParams = TT_CacheForFrames[self];
+							
+							if (not frameParams) then
+								return;
+							end
+							
+							local currentDisplayParams = frameParams.currentDisplayParams;
+							
+							-- adjust padding for close button if needed. additionally considering TextRight1 here.
+							local titleRight = _G[self:GetName() .. "TextRight1"];
+							local titleLeft = _G[self:GetName() .. "TextLeft1"];
+							
+							if (titleRight) and (titleRight:GetText()) and (titleRight:GetRight() - self.CloseButton:GetLeft() > 0) or (titleLeft) and (titleLeft:GetRight() - self.CloseButton:GetLeft() > 0) then
+								local xPadding = 16;
+								currentDisplayParams.extraPaddingRightForCloseButton = xPadding;
+								
+								-- set padding to tip
+								tt:SetPaddingToTip(self);
+							end
+						end);
+					end
 				end
 			},
 			["ItemRefShoppingTooltip1"] = { applyAppearance = true, applyScaling = true, applyAnchor = false },
@@ -309,7 +357,7 @@ local TT_Config_TipsToModify = {
 			["PlaterNamePlateAuraTooltip"] = { applyAppearance = true, applyScaling = true, applyAnchor = true }
 		},
 		hookFnForAddOn = function(TT_CacheForFrames)
-			-- LibQTip-1.0
+			-- LibQTip-1.0, e.g. used by addon Broker_Location
 			local LibQTip = LibStub("LibQTip-1.0", true);
 			
 			if (LibQTip) then
@@ -318,9 +366,94 @@ local TT_Config_TipsToModify = {
 				LibQTip.Acquire = function(self, key, ...)
 					local tooltip = oldLibQTipAcquire(self, key, ...);
 					
-					tt:AddModifiedTip(tooltip, true);
+					tt:AddModifiedTipExtended(tooltip, {
+						applyAppearance = true,
+						applyScaling = true,
+						applyAnchor = false,
+						noHooks = noHooks,
+						isFromLibQTip = true
+					});
 					
 					return tooltip;
+				end
+				
+				-- disable error message on HookScript()
+				LibQTip.tipPrototype.HookScript = nil;
+			end
+			
+			-- LibDropdown-1.0, e.g used by addon Recount
+			local LibDropdown = LibStub("LibDropdown-1.0", true);
+			
+			if (LibDropdown) then
+				local oldLibDropdownOpenAce3Menu = LibDropdown.OpenAce3Menu;
+				local LDDOAMBhooked = {};
+				
+				LibDropdown.OpenAce3Menu = function(self, t, parent, ...)
+					local openMenu = oldLibDropdownOpenAce3Menu(self, t, parent, ...);
+					
+					if (openMenu) then
+						local function hookLibDropdownButtons(frame)
+							for _, button in ipairs(frame.buttons) do
+								if (not LDDOAMBhooked[button]) then
+									button:HookScript("OnEnter", function(button)
+										local frame = button.groupFrame;
+										
+										if (not frame) then
+											return;
+										end
+										
+										tt:AddModifiedTip(frame);
+										hookLibDropdownButtons(frame);
+									end);
+									
+									LDDOAMBhooked[button] = true;
+								end
+							end
+						end
+						
+						tt:AddModifiedTip(openMenu);
+						hookLibDropdownButtons(openMenu);
+					end
+					
+					return openMenu;
+				end
+			end
+			
+			-- LibDropdownMC-1.0, e.g used by addon Outfitter
+			local LibDropdownMC = LibStub("LibDropdownMC-1.0", true);
+			
+			if (LibDropdownMC) then
+				local oldLibDropdownMCOpenAce3Menu = LibDropdownMC.OpenAce3Menu;
+				local LDDMCOAMBhooked = {};
+				
+				LibDropdownMC.OpenAce3Menu = function(self, t, parent, ...)
+					local openMenu = oldLibDropdownMCOpenAce3Menu(self, t, parent, ...);
+					
+					if (openMenu) then
+						local function hookLibDropdownMCButtons(frame)
+							for _, button in ipairs(frame.buttons) do
+								if (not LDDMCOAMBhooked[button]) then
+									button:HookScript("OnEnter", function(button)
+										local frame = button.groupFrame;
+										
+										if (not frame) then
+											return;
+										end
+										
+										tt:AddModifiedTip(frame);
+										hookLibDropdownMCButtons(frame);
+									end);
+									
+									LDDMCOAMBhooked[button] = true;
+								end
+							end
+						end
+						
+						tt:AddModifiedTip(openMenu);
+						hookLibDropdownMCButtons(openMenu);
+					end
+					
+					return openMenu;
 				end
 			end
 			
@@ -441,7 +574,7 @@ local TT_Config_TipsToModify = {
 };
 
 for i = 1, UIDROPDOWNMENU_MAXLEVELS do -- see "UIDropDownMenu.lua"
-	TT_Config_TipsToModify[MOD_NAME].frames["DropDownList" .. i] = { applyAppearance = true, applyScaling = false, applyAnchor = true }; -- #test: switch applyScaling from "false" to "true", but needed more coding to consider call of SetScale() in ToggleDropDownMenu() in "UIDropDownMenu.lua"
+	TT_ExtendedConfig.tipsToModify[MOD_NAME].frames["DropDownList" .. i] = { applyAppearance = true, applyScaling = false, applyAnchor = true }; -- #test: switch applyScaling from "false" to "true", but needed more coding to consider call of SetScale() in ToggleDropDownMenu() in "UIDropDownMenu.lua"
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -466,7 +599,7 @@ local TT_COLOR = {
 --
 -- key = real frame
 --
--- params: see params for 3rd key from TT_Config_TipsToModify
+-- params: see params for 3rd key from "TT_ExtendedConfig.tipsToModify"
 --
 -- hint: frames will be added to TT_CacheForFrames. The params will be added under ".config", the frame name under ".frameName".
 local TT_TipsToModifyFromOtherMods = {};
@@ -477,7 +610,7 @@ local TT_TipsToModifyFromOtherMods = {};
 --
 -- params for 1st key:
 -- frameName             frame name, nil for anonymous frames without a parent.
--- config                see params from TT_Config_TipsToModify
+-- config                see params from "TT_ExtendedConfig.tipsToModify"
 -- currentDisplayParams  current display parameters
 -- gradient              optional. gradient texture for frame
 
@@ -495,9 +628,11 @@ local TT_TipsToModifyFromOtherMods = {};
 -- lockedBackdropColor                       locked backdrop color, nil otherwise.
 -- lockedBackdropBorderColor                 locked backdrop border color, nil otherwise.
 --
+-- extraPaddingRightForCloseButton           value for extra padding right to fit close button, nil otherwise.
 -- extraPaddingBottomForBars                 value for extra padding bottom to fit health/power bars, nil otherwise.
 --
 -- defaultAnchored                           true if tip is default anchored, false otherwise.
+-- defaultAnchoredParentFrame                tip's parent frame if default anchored, nil otherwise.
 -- anchorFrameName                           anchor frame name of tip, values "WorldUnit", "WorldTip", "FrameUnit", "FrameTip"
 -- anchorType                                anchor type for tip
 -- anchorPoint                               anchor point for tip
@@ -532,7 +667,7 @@ local TT_TipsToModifyFromOtherMods = {};
 -- tipLineTargetedByIndex                    line index of ttStyle's target by for tip, nil otherwise.
 -- petLineLevelIndex                         line index of ttStyle's level for pet, nil otherwise.
 --
--- hint: resolved frames from TT_Config_TipsToModify will be added here. frames from other mods added with TipTac:AddModifiedTip(tip, noHooks) will be added here, too.
+-- hint: resolved frames from "TT_ExtendedConfig.tipsToModify" will be added here. frames from other mods added with TipTac:AddModifiedTip(tip, noHooks) will be added here, too.
 local TT_CacheForFrames = {};
 
 -- tip content
@@ -612,7 +747,7 @@ end);
 
 -- register for group events
 LibFroznFunctions:RegisterForGroupEvents(MOD_NAME, {
-	OnConfigLoaded = function(self, TT_CacheForFrames, cfg)
+	OnConfigLoaded = function(self, TT_CacheForFrames, cfg, TT_ExtendedConfig)
 		-- set position of TipTac anchor
 		if (cfg.left) and (cfg.top) then
 			tt:ClearAllPoints();
@@ -646,7 +781,7 @@ function tt:ADDON_LOADED(event, addOnName)
 	-- inform group that the config has been loaded
 	TT_IsConfigLoaded = true;
 	
-	LibFroznFunctions:FireGroupEvent(MOD_NAME, "OnConfigLoaded", TT_CacheForFrames, cfg);
+	LibFroznFunctions:FireGroupEvent(MOD_NAME, "OnConfigLoaded", TT_CacheForFrames, cfg, TT_ExtendedConfig);
 end
 
 -- EVENT: player login (one-time-event)
@@ -657,7 +792,7 @@ function tt:PLAYER_LOGIN(event)
 	self:ApplyConfig();
 	
 	-- inform group that the tooltip's appearance and hooking needs to be applied
-	LibFroznFunctions:FireGroupEvent(MOD_NAME, "OnApplyTipAppearanceAndHooking", TT_CacheForFrames, cfg);
+	LibFroznFunctions:FireGroupEvent(MOD_NAME, "OnApplyTipAppearanceAndHooking", TT_CacheForFrames, cfg, TT_ExtendedConfig);
 	
 	-- cleanup
 	self:UnregisterEvent(event);
@@ -679,10 +814,10 @@ tt:RegisterEvent("PLAYER_LOGIN");
 -- group events: TipTac (see MOD_NAME)
 --
 -- eventName                           description                                                 additional payload
--- ----------------------------------  ----------------------------------------------------------  --------------------------
--- OnConfigLoaded                      config has been loaded                                      TT_CacheForFrames, cfg
--- OnApplyConfig                       config settings needs to be applied                         TT_CacheForFrames, cfg
--- OnApplyTipAppearanceAndHooking      every tooltip's appearance and hooking needs to be applied  TT_CacheForFrames, cfg
+-- ----------------------------------  ----------------------------------------------------------  ------------------------------------------------------------
+-- OnConfigLoaded                      config has been loaded                                      TT_CacheForFrames, cfg, TT_ExtendedConfig
+-- OnApplyConfig                       config settings needs to be applied                         TT_CacheForFrames, cfg, TT_ExtendedConfig
+-- OnApplyTipAppearanceAndHooking      every tooltip's appearance and hooking needs to be applied  TT_CacheForFrames, cfg, TT_ExtendedConfig
 --
 -- OnTipAddedToCache                   tooltip has been added to cache for frames                  TT_CacheForFrames, tooltip
 --
@@ -776,7 +911,7 @@ function tt:UpdatePixelPerfectScale()
 	TT_PhysicalScreenWidth, TT_PhysicalScreenHeight = GetPhysicalScreenSize();
 	TT_UIUnitFactor = 768.0 / TT_PhysicalScreenHeight;
 	TT_UIScale = UIParent:GetEffectiveScale();
-	TT_MouseOffsetX, TT_MouseOffsetY = self:GetNearestPixelSize(currentConfig.mouseOffsetX), self:GetNearestPixelSize(currentConfig.mouseOffsetX);
+	TT_MouseOffsetX, TT_MouseOffsetY = self:GetNearestPixelSize(currentConfig.mouseOffsetX), self:GetNearestPixelSize(currentConfig.mouseOffsetY);
 end
 
 tt:UpdatePixelPerfectScale();
@@ -837,27 +972,27 @@ function tt:SetTipBackdropConfig()
 	local currentConfig = TT_IsConfigLoaded and cfg or TT_DefaultConfig;
 	
 	if (currentConfig.tipBackdropBG == "nil") then
-		TT_Config_TipBackdrop.bgFile = nil;
+		TT_ExtendedConfig.tipBackdrop.bgFile = nil;
 	else
-		TT_Config_TipBackdrop.bgFile = currentConfig.tipBackdropBG;
+		TT_ExtendedConfig.tipBackdrop.bgFile = currentConfig.tipBackdropBG;
 	end
 	if (currentConfig.tipBackdropEdge == "nil") then
-		TT_Config_TipBackdrop.edgeFile = nil;
+		TT_ExtendedConfig.tipBackdrop.edgeFile = nil;
 	else
-		TT_Config_TipBackdrop.edgeFile = currentConfig.tipBackdropEdge;
+		TT_ExtendedConfig.tipBackdrop.edgeFile = currentConfig.tipBackdropEdge;
 	end
 	
 	local edgeSize = ((currentConfig.pixelPerfectBackdrop and self:GetNearestPixelSize(currentConfig.backdropEdgeSize, true)) or currentConfig.backdropEdgeSize);
-	TT_Config_TipBackdrop.edgeSize = edgeSize;
+	TT_ExtendedConfig.tipBackdrop.edgeSize = edgeSize;
 	
 	local insets = ((currentConfig.pixelPerfectBackdrop and self:GetNearestPixelSize(currentConfig.backdropInsets, true)) or currentConfig.backdropInsets);
-	TT_Config_TipBackdrop.insets.left = insets;
-	TT_Config_TipBackdrop.insets.right = insets;
-	TT_Config_TipBackdrop.insets.top = insets;
-	TT_Config_TipBackdrop.insets.bottom = insets;
+	TT_ExtendedConfig.tipBackdrop.insets.left = insets;
+	TT_ExtendedConfig.tipBackdrop.insets.right = insets;
+	TT_ExtendedConfig.tipBackdrop.insets.top = insets;
+	TT_ExtendedConfig.tipBackdrop.insets.bottom = insets;
 	
-	TT_Config_TipBackdrop_BackdropColor:SetRGBA(unpack(currentConfig.tipColor));
-	TT_Config_TipBackdrop_BackdropBorderColor:SetRGBA(unpack(currentConfig.tipBorderColor));
+	TT_ExtendedConfig.backdropColor:SetRGBA(unpack(currentConfig.tipColor));
+	TT_ExtendedConfig.backdropBorderColor:SetRGBA(unpack(currentConfig.tipBorderColor));
 	
 	-- set tooltip padding config for GameTooltip
 	self:SetTipPaddingConfig();
@@ -865,7 +1000,18 @@ end
 
 -- set tooltip padding config for GameTooltip
 function tt:SetTipPaddingConfig()
-	TT_Config_TipPaddingForGameTooltip.right, TT_Config_TipPaddingForGameTooltip.bottom, TT_Config_TipPaddingForGameTooltip.left, TT_Config_TipPaddingForGameTooltip.top = TT_Config_TipBackdrop.insets.right + TT_Config_TipPaddingForGameTooltip.offset, TT_Config_TipBackdrop.insets.bottom + TT_Config_TipPaddingForGameTooltip.offset, TT_Config_TipBackdrop.insets.left + TT_Config_TipPaddingForGameTooltip.offset, TT_Config_TipBackdrop.insets.top + TT_Config_TipPaddingForGameTooltip.offset;
+	local currentConfig = TT_IsConfigLoaded and cfg or TT_DefaultConfig;
+	
+	if (currentConfig.enableBackdrop) then
+		TT_ExtendedConfig.tipPaddingForGameTooltip.right, TT_ExtendedConfig.tipPaddingForGameTooltip.bottom, TT_ExtendedConfig.tipPaddingForGameTooltip.left, TT_ExtendedConfig.tipPaddingForGameTooltip.top = TT_ExtendedConfig.tipBackdrop.insets.right + TT_ExtendedConfig.tipPaddingForGameTooltip.offset, TT_ExtendedConfig.tipBackdrop.insets.bottom + TT_ExtendedConfig.tipPaddingForGameTooltip.offset, TT_ExtendedConfig.tipBackdrop.insets.left + TT_ExtendedConfig.tipPaddingForGameTooltip.offset, TT_ExtendedConfig.tipBackdrop.insets.top + TT_ExtendedConfig.tipPaddingForGameTooltip.offset;
+		
+		if (LibFroznFunctions.isWoWFlavor.ClassicEra) or (LibFroznFunctions.isWoWFlavor.BCC) or (LibFroznFunctions.isWoWFlavor.WotLKC) then
+			TT_ExtendedConfig.tipPaddingForGameTooltip.left = 0;
+			TT_ExtendedConfig.tipPaddingForGameTooltip.top = 0;
+		end
+	else
+		TT_ExtendedConfig.tipPaddingForGameTooltip.right, TT_ExtendedConfig.tipPaddingForGameTooltip.bottom, TT_ExtendedConfig.tipPaddingForGameTooltip.left, TT_ExtendedConfig.tipPaddingForGameTooltip.top = 0, 0, 0, 0;
+	end
 end
 
 ----------------------------------------------------------------------------------------------------
@@ -896,23 +1042,23 @@ function tt:ApplyConfig()
 	self:ResolveTipsToModify();
 	
 	-- unregister event "ADDON_LOADED" if all tips to modify are resolved
-	if (LibFroznFunctions:IsTableEmpty(TT_Config_TipsToModify)) then
+	if (LibFroznFunctions:IsTableEmpty(TT_ExtendedConfig.tipsToModify)) then
 		self:UnregisterEvent("ADDON_LOADED");
 	end
 	
 	-- inform group that the config has been applied
-	LibFroznFunctions:FireGroupEvent(MOD_NAME, "OnApplyConfig", TT_CacheForFrames, cfg);
+	LibFroznFunctions:FireGroupEvent(MOD_NAME, "OnApplyConfig", TT_CacheForFrames, cfg, TT_ExtendedConfig);
 end
 
 -- set font to GameTooltip
 function tt:SetFontToGameTooltip()
 	-- remember original GameTooltip fonts
-	if (not TT_Config_OldGameTooltipFontsRemembered) then
-		TT_Config_OldGameTooltipText.fontFace, TT_Config_OldGameTooltipText.fontSize, TT_Config_OldGameTooltipText.fontFlags = GameTooltipText:GetFont();
-		TT_Config_OldGameTooltipHeaderText.fontFace, TT_Config_OldGameTooltipHeaderText.fontSize, TT_Config_OldGameTooltipHeaderText.fontFlags = GameTooltipHeaderText:GetFont();
-		TT_Config_OldGameTooltipTextSmall.fontFace, TT_Config_OldGameTooltipTextSmall.fontSize, TT_Config_OldGameTooltipTextSmall.fontFlags = GameTooltipTextSmall:GetFont();
+	if (not TT_ExtendedConfig.oldGameTooltipFontsRemembered) then
+		TT_ExtendedConfig.oldGameTooltipText.fontFace, TT_ExtendedConfig.oldGameTooltipText.fontSize, TT_ExtendedConfig.oldGameTooltipText.fontFlags = GameTooltipText:GetFont();
+		TT_ExtendedConfig.oldGameTooltipHeaderText.fontFace, TT_ExtendedConfig.oldGameTooltipHeaderText.fontSize, TT_ExtendedConfig.oldGameTooltipHeaderText.fontFlags = GameTooltipHeaderText:GetFont();
+		TT_ExtendedConfig.oldGameTooltipTextSmall.fontFace, TT_ExtendedConfig.oldGameTooltipTextSmall.fontSize, TT_ExtendedConfig.oldGameTooltipTextSmall.fontFlags = GameTooltipTextSmall:GetFont();
 		
-		TT_Config_OldGameTooltipFontsRemembered = true;
+		TT_ExtendedConfig.oldGameTooltipFontsRemembered = true;
 	end
 	
 	-- set font to GameTooltip
@@ -928,14 +1074,14 @@ function tt:SetFontToGameTooltip()
 		GameTooltipHeaderText:SetFont(cfg.fontFace, cfg.fontSize + cfg.fontSizeDeltaHeader, cfg.fontFlags);
 		GameTooltipTextSmall:SetFont(cfg.fontFace, cfg.fontSize + cfg.fontSizeDeltaSmall, cfg.fontFlags);
 	else
-		if (LibFroznFunctions:FontExists(TT_Config_OldGameTooltipText.fontFace)) then
-			GameTooltipText:SetFont(TT_Config_OldGameTooltipText.fontFace, TT_Config_OldGameTooltipText.fontSize, TT_Config_OldGameTooltipText.fontFlags);
+		if (LibFroznFunctions:FontExists(TT_ExtendedConfig.oldGameTooltipText.fontFace)) then
+			GameTooltipText:SetFont(TT_ExtendedConfig.oldGameTooltipText.fontFace, TT_ExtendedConfig.oldGameTooltipText.fontSize, TT_ExtendedConfig.oldGameTooltipText.fontFlags);
 		end
-		if (LibFroznFunctions:FontExists(TT_Config_OldGameTooltipHeaderText.fontFace)) then
-			GameTooltipHeaderText:SetFont(TT_Config_OldGameTooltipHeaderText.fontFace, TT_Config_OldGameTooltipHeaderText.fontSize, TT_Config_OldGameTooltipHeaderText.fontFlags);
+		if (LibFroznFunctions:FontExists(TT_ExtendedConfig.oldGameTooltipHeaderText.fontFace)) then
+			GameTooltipHeaderText:SetFont(TT_ExtendedConfig.oldGameTooltipHeaderText.fontFace, TT_ExtendedConfig.oldGameTooltipHeaderText.fontSize, TT_ExtendedConfig.oldGameTooltipHeaderText.fontFlags);
 		end
-		if (LibFroznFunctions:FontExists(TT_Config_OldGameTooltipTextSmall.fontFace)) then
-			GameTooltipTextSmall:SetFont(TT_Config_OldGameTooltipTextSmall.fontFace, TT_Config_OldGameTooltipTextSmall.fontSize, TT_Config_OldGameTooltipTextSmall.fontFlags);
+		if (LibFroznFunctions:FontExists(TT_ExtendedConfig.oldGameTooltipTextSmall.fontFace)) then
+			GameTooltipTextSmall:SetFont(TT_ExtendedConfig.oldGameTooltipTextSmall.fontFace, TT_ExtendedConfig.oldGameTooltipTextSmall.fontSize, TT_ExtendedConfig.oldGameTooltipTextSmall.fontFlags);
 		end
 	end
 	
@@ -973,7 +1119,7 @@ function tt:ResolveTipsToModify()
 	end;
 	
 	-- tips to modify
-	for addOnName, addOnConfig in pairs(TT_Config_TipsToModify) do
+	for addOnName, addOnConfig in pairs(TT_ExtendedConfig.tipsToModify) do
 		if (LibFroznFunctions:IsAddOnFinishedLoading(addOnName)) then
 			if (addOnConfig.frames) then
 				for frameName, tipParams in pairs(addOnConfig.frames) do
@@ -999,7 +1145,7 @@ function tt:ResolveTipsToModify()
 			
 			-- remove addon config from tips to modify
 			wipe(addOnConfig);
-			TT_Config_TipsToModify[addOnName] = nil;
+			TT_ExtendedConfig.tipsToModify[addOnName] = nil;
 		end
 	end
 	
@@ -1041,6 +1187,9 @@ function tt:AddTipToCache(tip, frameName, tipParams)
 		
 		if (not tipParams.noHooks) then
 			LibFroznFunctions:CallFunctionDelayed(tipParams.waitSecondsForHooking, function()
+				-- tip:HookScript("OnSizeChanged", function(tip, ...)
+					-- tip.OnBackdropSizeChanged(tip, ...);
+				-- end);
 				tip:HookScript("OnSizeChanged", tip.OnBackdropSizeChanged);
 			end);
 		end
@@ -1099,6 +1248,10 @@ function tt:AddTipToCache(tip, frameName, tipParams)
 				end);
 				
 				tip:HookScript("OnTooltipCleared", function(tip)
+					if (tip:IsShown()) and (tip:GetObjectType() == "GameTooltip") and (tip.shouldRefreshData) then
+						return;
+					end
+					
 					tt:ResetCurrentDisplayParams(tip);
 					
 					if (tip:IsShown()) then
@@ -1249,9 +1402,34 @@ function tt:SetScaleToTip(tip)
 		return;
 	end
 	
+	-- calculate new scale for tip
+	local tipScale = tip:GetScale();
+	local tipEffectiveScale = tip:GetEffectiveScale();
+	
+	local newTipScale = cfg.gttScale * TT_UIScale / (tipEffectiveScale / tipScale); -- consider applied SetIgnoreParentScale() on tip regarding scaling
+	local newTipEffectiveScale = tipEffectiveScale * newTipScale / tipScale;
+	
+	-- reduce scale if tip exceeds UIParent width/height
+	if (tipParams.isFromLibQTip) then
+		local LibQTip = LibStub("LibQTip-1.0", true);
+		
+		if (LibQTip) then
+			LibQTip.layoutCleaner:CleanupLayouts();
+		end
+	end
+	
+	local tipWidthWithNewScaling = tip:GetWidth() * newTipEffectiveScale;
+	local tipHeightWithNewScaling = tip:GetHeight() * newTipEffectiveScale;
+	
+	local UIParentWidth = UIParent:GetWidth() * TT_UIScale;
+	local UIParentHeight = UIParent:GetHeight() * TT_UIScale;
+	
+	if (tipWidthWithNewScaling > UIParentWidth) or (tipHeightWithNewScaling > UIParentHeight) then
+        newTipScale = newTipScale / math.max(tipWidthWithNewScaling / UIParentWidth, tipHeightWithNewScaling / UIParentHeight) * 0.95; -- 95% of maximum UIParent width/height
+	end
+	
 	-- set scale to tip
-	tip:SetScale(cfg.gttScale * TT_UIScale);
-	tip:SetIgnoreParentScale(true);
+	tip:SetScale(newTipScale);
 end
 
 -- set gradient to tip
@@ -1300,8 +1478,8 @@ function tt:SetGradientToTip(tip)
 		gradientForFrame:SetVertexColor(unpack(cfg.gradientColor));
 	end
 	
-	gradientForFrame:SetPoint("TOPLEFT", TT_Config_TipBackdrop.insets.left, -TT_Config_TipBackdrop.insets.top);
-	gradientForFrame:SetPoint("BOTTOMRIGHT", tip, "TOPRIGHT", -TT_Config_TipBackdrop.insets.right, -cfg.gradientHeight);
+	gradientForFrame:SetPoint("TOPLEFT", TT_ExtendedConfig.tipBackdrop.insets.left, -TT_ExtendedConfig.tipBackdrop.insets.top);
+	gradientForFrame:SetPoint("BOTTOMRIGHT", tip, "TOPRIGHT", -TT_ExtendedConfig.tipBackdrop.insets.right, -cfg.gradientHeight);
 	
 	gradientForFrame:Show();
 end
@@ -1318,7 +1496,7 @@ end
 
 -- add modified tip extended from other mods. they can "register" tooltips or frames to be modified by TipTac.
 --
--- tipParams: see params for 3rd key from TT_Config_TipsToModify
+-- tipParams: see params for 3rd key from "TT_ExtendedConfig.tipsToModify"
 function tt:AddModifiedTipExtended(tipNameOrFrame, tipParams)
 	local tip;
 	
@@ -1341,6 +1519,14 @@ function tt:AddModifiedTipExtended(tipNameOrFrame, tipParams)
 	self:ApplyConfig();
 end
 
+-- register for group events
+LibFroznFunctions:RegisterForGroupEvents(MOD_NAME, {
+	OnTipSetStyling = function(self, TT_CacheForFrames, tip, currentDisplayParams, tipContent)
+		-- reapply scale to tip
+		tt:SetScaleToTip(tip);
+	end
+}, MOD_NAME .. " - Apply Config");
+
 ----------------------------------------------------------------------------------------------------
 --                                        Tooltip Backdrop                                        --
 ----------------------------------------------------------------------------------------------------
@@ -1355,6 +1541,8 @@ function tt:SetBackdropToTip(tip)
 	if (isSettingBackdropToTip) then
 		return;
 	end
+	
+	isSettingBackdropToTip = false;
 	
 	-- get tip parameters
 	local frameParams = TT_CacheForFrames[tip];
@@ -1423,7 +1611,7 @@ function tt:SetBackdropToTip(tip)
 	
 	-- set backdrop to tip
 	isSettingBackdropToTip = true;
-	self:SetBackdropLocked(tip, TT_Config_TipBackdrop);
+	self:SetBackdropLocked(tip, TT_ExtendedConfig.tipBackdrop);
 	isSettingBackdropToTip = false;
 	
 	-- set backdrop and backdrop border color to tip
@@ -1444,6 +1632,8 @@ function tt:SetBackdropAndBackdropBorderColorToTip(tip)
 		return;
 	end
 	
+	isSettingBackdropAndBackdropBorderColorToTip = false;
+	
 	-- get tip parameters
 	local frameParams = TT_CacheForFrames[tip];
 	
@@ -1459,8 +1649,8 @@ function tt:SetBackdropAndBackdropBorderColorToTip(tip)
 	end
 	
 	-- set backdrop and backdrop border color to tip
-	local backdropColor = frameParams.currentDisplayParams.lockedBackdropColor and frameParams.currentDisplayParams.lockedBackdropColor or TT_Config_TipBackdrop_BackdropColor;
-	local backdropBorderColor = frameParams.currentDisplayParams.lockedBackdropBorderColor and frameParams.currentDisplayParams.lockedBackdropBorderColor or TT_Config_TipBackdrop_BackdropBorderColor;
+	local backdropColor = frameParams.currentDisplayParams.lockedBackdropColor and frameParams.currentDisplayParams.lockedBackdropColor or TT_ExtendedConfig.backdropColor;
+	local backdropBorderColor = frameParams.currentDisplayParams.lockedBackdropBorderColor and frameParams.currentDisplayParams.lockedBackdropBorderColor or TT_ExtendedConfig.backdropBorderColor;
 	
 	isSettingBackdropAndBackdropBorderColorToTip = true;
 	self:SetBackdropColorLocked(tip, backdropColor:GetRGBA());
@@ -1478,6 +1668,8 @@ function tt:SetPaddingToTip(tip)
 	if (isSettingPaddingToTip) then
 		return;
 	end
+	
+	isSettingPaddingToTip = false;
 	
 	-- SetPadding() isn't available for e.g. BattlePetTooltip, FloatingBattlePetTooltip, PetJournalPrimaryAbilityTooltip, PetJournalSecondaryAbilityTooltip, FloatingPetBattleAbilityTooltip, EncounterJournalTooltip and DropDownList
 	if (tip:GetObjectType() ~= "GameTooltip") then
@@ -1516,8 +1708,9 @@ function tt:SetPaddingToTip(tip)
 		newPaddingRight, newPaddingBottom, newPaddingLeft, newPaddingTop = 0, 0, 0, 0;
 	end
 	
-	newPaddingRight, newPaddingBottom, newPaddingLeft, newPaddingTop = newPaddingRight + TT_Config_TipPaddingForGameTooltip.right, newPaddingBottom + TT_Config_TipPaddingForGameTooltip.bottom, newPaddingLeft + TT_Config_TipPaddingForGameTooltip.left, newPaddingTop + TT_Config_TipPaddingForGameTooltip.top;
+	newPaddingRight, newPaddingBottom, newPaddingLeft, newPaddingTop = newPaddingRight + TT_ExtendedConfig.tipPaddingForGameTooltip.right, newPaddingBottom + TT_ExtendedConfig.tipPaddingForGameTooltip.bottom, newPaddingLeft + TT_ExtendedConfig.tipPaddingForGameTooltip.left, newPaddingTop + TT_ExtendedConfig.tipPaddingForGameTooltip.top;
 	
+	newPaddingRight = newPaddingRight + (frameParams.currentDisplayParams.extraPaddingRightForCloseButton or 0);
 	newPaddingBottom = newPaddingBottom + (frameParams.currentDisplayParams.extraPaddingBottomForBars or 0);
 	
 	if (math.abs(newPaddingRight - oldPaddingRight) <= 0.5) and (math.abs(newPaddingBottom - oldPaddingBottom) <= 0.5) and (math.abs(newPaddingLeft - oldPaddingLeft) <= 0.5) and (math.abs(newPaddingTop - oldPaddingTop) <= 0.5) then
@@ -1529,9 +1722,9 @@ function tt:SetPaddingToTip(tip)
 	
 	if (isItemTooltipShown) then
 		if (isBottomFontStringShown) then
-			itemTooltip:SetPoint("BOTTOMLEFT", tip.BottomFontString, "TOPLEFT", 0 + TT_Config_TipPaddingForGameTooltip.left, 10 + TT_Config_TipPaddingForGameTooltip.bottom);
+			itemTooltip:SetPoint("BOTTOMLEFT", tip.BottomFontString, "TOPLEFT", 0 + TT_ExtendedConfig.tipPaddingForGameTooltip.left, 10 + TT_ExtendedConfig.tipPaddingForGameTooltip.bottom);
 		else
-			itemTooltip:SetPoint("BOTTOMLEFT", 10 + TT_Config_TipPaddingForGameTooltip.left, 13 + TT_Config_TipPaddingForGameTooltip.bottom);
+			itemTooltip:SetPoint("BOTTOMLEFT", 10 + TT_ExtendedConfig.tipPaddingForGameTooltip.left, 13 + TT_ExtendedConfig.tipPaddingForGameTooltip.bottom);
 		end
 	end
 	
@@ -1540,21 +1733,13 @@ end
 
 -- register for group events
 LibFroznFunctions:RegisterForGroupEvents(MOD_NAME, {
-	OnApplyTipAppearanceAndHooking = function(self, TT_CacheForFrames, cfg)
-		-- HOOK: NineSliceUtil.ApplyLayout() and SharedTooltip_SetBackdropStyle() to reapply backdrop and padding if necessary (e.g. needed for OnTooltipSetItem() or AreaPOIPinMixin:OnMouseEnter() on world map (e.g. Torghast) or VignettePin on world map (e.g. weekly event in Maw))
-		hooksecurefunc(NineSliceUtil, "ApplyLayout", function(container, userLayout, textureKit)
-			for tip, frameParams in pairs(TT_CacheForFrames) do
-				if ((tip == container) or (tip.NineSlice == container)) then
-					tt:SetBackdropToTip(tip);
-				end
-			end
-		end);
-
+	OnApplyTipAppearanceAndHooking = function(self, TT_CacheForFrames, cfg, TT_ExtendedConfig)
+		-- HOOK: SharedTooltip_SetBackdropStyle() to reapply backdrop and padding if necessary (e.g. needed for OnTooltipSetItem() or AreaPOIPinMixin:OnMouseEnter() on world map (e.g. Torghast) or VignettePin on world map (e.g. weekly event in Maw))
 		hooksecurefunc("SharedTooltip_SetBackdropStyle", function(self, style, embedded)
 			for tip, frameParams in pairs(TT_CacheForFrames) do
 				if (tip == self) then
-					-- set padding to tip
-					tt:SetPaddingToTip(tip);
+					-- set backdrop to tip
+					tt:SetBackdropToTip(tip);
 				end
 			end
 		end);
@@ -1574,21 +1759,22 @@ LibFroznFunctions:RegisterForGroupEvents(MOD_NAME, {
 	end,
 	OnTipResetCurrentDisplayParams = function(self, TT_CacheForFrames, tip, currentDisplayParams)
 		-- reset current display parameters for backdrop
-		currentDisplayParams.lockedBackdropInfo = TT_Config_TipBackdrop;
+		currentDisplayParams.lockedBackdropInfo = TT_ExtendedConfig.tipBackdrop;
 		
 		if (currentDisplayParams.lockedBackdropColor) then
-			currentDisplayParams.lockedBackdropColor:SetRGBA(TT_Config_TipBackdrop_BackdropColor:GetRGBA());
+			currentDisplayParams.lockedBackdropColor:SetRGBA(TT_ExtendedConfig.backdropColor:GetRGBA());
 		else
-			currentDisplayParams.lockedBackdropColor = CreateColor(TT_Config_TipBackdrop_BackdropColor:GetRGBA());
+			currentDisplayParams.lockedBackdropColor = CreateColor(TT_ExtendedConfig.backdropColor:GetRGBA());
 		end
 		
 		if (currentDisplayParams.lockedBackdropBorderColor) then
-			currentDisplayParams.lockedBackdropBorderColor:SetRGBA(TT_Config_TipBackdrop_BackdropBorderColor:GetRGBA());
+			currentDisplayParams.lockedBackdropBorderColor:SetRGBA(TT_ExtendedConfig.backdropBorderColor:GetRGBA());
 		else
-			currentDisplayParams.lockedBackdropBorderColor = CreateColor(TT_Config_TipBackdrop_BackdropBorderColor:GetRGBA());
+			currentDisplayParams.lockedBackdropBorderColor = CreateColor(TT_ExtendedConfig.backdropBorderColor:GetRGBA());
 		end
 		
 		-- reset current display parameters for padding
+		currentDisplayParams.extraPaddingRightForCloseButton = nil;
 		currentDisplayParams.extraPaddingBottomForBars = nil;
 	end,
 	OnTipPostResetCurrentDisplayParams = function(self, TT_CacheForFrames, tip, currentDisplayParams)
@@ -1744,6 +1930,8 @@ function tt:SetBackdropLocked(tip, backdropInfo)
 		return;
 	end
 	
+	isSettingBackdropLocked = false;
+	
 	-- set backdrop locked
 	local frameParams = TT_CacheForFrames[tip];
 	
@@ -1767,6 +1955,8 @@ function tt:SetBackdropColorLocked(tip, r, g, b, a)
 	if (isSettingBackdropColorLocked) then
 		return;
 	end
+	
+	isSettingBackdropColorLocked = false;
 	
 	-- set backdrop color locked
 	local frameParams = TT_CacheForFrames[tip];
@@ -1795,6 +1985,8 @@ function tt:SetBackdropBorderColorLocked(tip, r, g, b, a)
 		return;
 	end
 	
+	isSettingBackdropBorderColorLocked = false;
+	
 	-- set backdrop border color locked
 	local frameParams = TT_CacheForFrames[tip];
 	
@@ -1822,6 +2014,8 @@ function tt:SetCenterColorLocked(tip, r, g, b, a)
 		return;
 	end
 	
+	isSettingCenterColorLocked = false;
+	
 	-- set center color locked
 	local frameParams = TT_CacheForFrames[tip];
 	
@@ -1848,6 +2042,8 @@ function tt:SetBorderColorLocked(tip, r, g, b, a)
 	if (isSettingBorderColorLocked) then
 		return;
 	end
+	
+	isSettingBorderColorLocked = false;
 	
 	-- set border color locked
 	local frameParams = TT_CacheForFrames[tip];
@@ -1888,17 +2084,19 @@ function tt:SetAnchorToTip(tip)
 	local tipParams = frameParams.config;
 	
 	-- set anchor to tip not possible
-	if (not tipParams.applyAnchor) then
+	if (not cfg.enableAnchor) or (not tipParams.applyAnchor) then
 		return;
 	end
 	
 	-- tip not default anchored
-	if (not frameParams.currentDisplayParams.defaultAnchored) then
+	local currentDisplayParams = frameParams.currentDisplayParams;
+	
+	if (not currentDisplayParams.defaultAnchored) then
 		return;
 	end
 	
 	-- set anchor type and anchor point
-	local anchorFrameName, anchorType, anchorPoint = frameParams.currentDisplayParams.anchorFrameName, frameParams.currentDisplayParams.anchorType or TT_Config_Default_Anchor_Type, frameParams.currentDisplayParams.anchorPoint or TT_Config_Default_Anchor_Point;
+	local anchorFrameName, anchorType, anchorPoint = currentDisplayParams.anchorFrameName, currentDisplayParams.anchorType or TT_ExtendedConfig.defaultAnchorType, currentDisplayParams.anchorPoint or TT_ExtendedConfig.defaultAnchorPoint;
 	
 	-- set anchor to tip
 	if (tip:GetObjectType() == "GameTooltip") then
@@ -1929,7 +2127,7 @@ function tt:SetAnchorToTip(tip)
 	elseif (anchorType == "parent") then
 		tip:ClearAllPoints();
 		
-		local parentFrame = tip:GetParent();
+		local parentFrame = currentDisplayParams.defaultAnchoredParentFrame;
 		
 		if (parentFrame ~= UIParent) then
 			-- anchor to the opposite edge of the parent frame
@@ -1940,6 +2138,65 @@ function tt:SetAnchorToTip(tip)
 			tip:SetPoint(anchorPoint, UIParent, offsetX, offsetY);
 		end
 	end
+	
+	-- refresh anchoring of shopping tooltips after re-anchoring of tip to prevent overlapping tooltips
+	LibFroznFunctions:RefreshAnchorShoppingTooltips(tip);
+end
+
+-- anchor tip to mouse position
+function tt:AnchorTipToMouse(tip)
+	-- get frame parameters
+	local frameParams = TT_CacheForFrames[tip];
+	
+	if (not frameParams) then
+		return;
+	end
+
+	local tipParams = frameParams.config;
+	
+	-- set anchor to tip not possible
+	if (not cfg.enableAnchor) or (not tipParams.applyAnchor) then
+		return;
+	end
+	
+	-- tip not default anchored
+	local currentDisplayParams = frameParams.currentDisplayParams;
+	
+	if (not currentDisplayParams.defaultAnchored) then
+		return;
+	end
+	
+	-- set anchor type and anchor point
+	local anchorFrameName, anchorType, anchorPoint = currentDisplayParams.anchorFrameName, currentDisplayParams.anchorType or TT_ExtendedConfig.defaultAnchorType, currentDisplayParams.anchorPoint or TT_ExtendedConfig.defaultAnchorPoint;
+	
+	-- set anchor to tip
+	if (tip:GetObjectType() == "GameTooltip") then
+		local tipAnchorType = tip:GetAnchorType();
+		
+		-- ignore world tips
+		if (tipAnchorType == "ANCHOR_CURSOR") or (tipAnchorType == "ANCHOR_CURSOR_RIGHT") then
+			return;
+		end
+		
+		-- set anchor type to tip
+		if (anchorType == "mouse") then
+			if (tipAnchorType ~= "ANCHOR_NONE") then
+				tip:SetAnchorType("ANCHOR_NONE");
+			end
+		end
+	end
+	
+	-- anchor tip to mouse position
+	if (anchorType == "mouse") then
+		local x, y = GetCursorPosition();
+		local effScale = tip:GetEffectiveScale();
+		
+		tip:ClearAllPoints();
+		tip:SetPoint(anchorPoint, UIParent, "BOTTOMLEFT", (x / effScale + TT_MouseOffsetX), (y / effScale + TT_MouseOffsetY));
+	end
+	
+	-- refresh anchoring of shopping tooltips after re-anchoring of tip to prevent overlapping tooltips
+	LibFroznFunctions:RefreshAnchorShoppingTooltips(tip);
 end
 
 -- get anchor position
@@ -1975,55 +2232,11 @@ function tt:GetAnchorPosition(tip)
 					"ChatFrame(%d+)",
 					(LibFroznFunctions:IsAddOnFinishedLoading("Blizzard_Communities") and CommunitiesFrame.Chat.MessageFrame)
 				}, 1)) then
-			return cfg.anchorOverrideCFType, cfg.anchorOverrideCFPoint;
+			return anchorFrameName, cfg.anchorOverrideCFType, cfg.anchorOverrideCFPoint;
 		end
 	end
 	
 	return anchorFrameName, anchorType, anchorPoint;
-end
-
--- anchor tip to mouse position
-function tt:AnchorTipToMouse(tip)
-	-- get frame parameters
-	local frameParams = TT_CacheForFrames[tip];
-	
-	if (not frameParams) then
-		return;
-	end
-	
-	-- tip not default anchored
-	if (not frameParams.currentDisplayParams.defaultAnchored) then
-		return;
-	end
-	
-	-- set anchor type and anchor point
-	local anchorFrameName, anchorType, anchorPoint = frameParams.currentDisplayParams.anchorFrameName, frameParams.currentDisplayParams.anchorType or TT_Config_Default_Anchor_Type, frameParams.currentDisplayParams.anchorPoint or TT_Config_Default_Anchor_Point;
-	
-	-- set anchor to tip
-	if (tip:GetObjectType() == "GameTooltip") then
-		local tipAnchorType = tip:GetAnchorType();
-		
-		-- ignore world tips
-		if (tipAnchorType == "ANCHOR_CURSOR") or (tipAnchorType == "ANCHOR_CURSOR_RIGHT") then
-			return;
-		end
-		
-		-- set anchor type to tip
-		if (anchorType == "mouse") then
-			if (tipAnchorType ~= "ANCHOR_NONE") then
-				tip:SetAnchorType("ANCHOR_NONE");
-			end
-		end
-	end
-	
-	-- anchor tip to mouse position
-	if (anchorType == "mouse") then
-		local x, y = GetCursorPosition();
-		local effScale = tip:GetEffectiveScale();
-		
-		tip:ClearAllPoints();
-		tip:SetPoint(anchorPoint, UIParent, "BOTTOMLEFT", (x / effScale + TT_MouseOffsetX), (y / effScale + TT_MouseOffsetY));
-	end
 end
 
 -- HOOK: tip's OnUpdate for anchoring to mouse
@@ -2045,6 +2258,7 @@ function tt:SetDefaultAnchorHook(tip, parent)
 	
 	-- set current display params for anchoring
 	frameParams.currentDisplayParams.defaultAnchored = true;
+	frameParams.currentDisplayParams.defaultAnchoredParentFrame = parent;
 	
 	-- set anchor to tip
 	tt:SetAnchorToTip(tip);
@@ -2087,10 +2301,18 @@ LibFroznFunctions:RegisterForGroupEvents(MOD_NAME, {
 		-- set anchor to tip
 		tt:SetAnchorToTip(tip);
 	end,
-	OnApplyTipAppearanceAndHooking = function(self, TT_CacheForFrames, cfg)
+	OnApplyTipAppearanceAndHooking = function(self, TT_CacheForFrames, cfg, TT_ExtendedConfig)
 		-- HOOK: GameTooltip_SetDefaultAnchor() for re-anchoring
 		hooksecurefunc("GameTooltip_SetDefaultAnchor", function(tip, parent)
 			tt:SetDefaultAnchorHook(tip, parent);
+		end);
+		
+		-- HOOK: GameTooltip_ShowCompareItem() to refresh anchoring of shopping tooltips after re-anchoring of tip to prevent overlapping tooltips
+		hooksecurefunc("GameTooltip_ShowCompareItem", function(self, anchorFrame)
+			-- refresh anchoring of shopping tooltips after re-anchoring of tip to prevent overlapping tooltips
+			local tip = self or GameTooltip;
+			
+			LibFroznFunctions:RefreshAnchorShoppingTooltips(tip);
 		end);
 	end,
 	SetDefaultAnchorHook = function(self, tip, parent)
@@ -2101,6 +2323,7 @@ LibFroznFunctions:RegisterForGroupEvents(MOD_NAME, {
 		-- reset current display params for anchoring
 		if (not tip:IsShown()) then
 			currentDisplayParams.defaultAnchored = false;
+			currentDisplayParams.defaultAnchoredParentFrame = nil;
 		end
 		
 		currentDisplayParams.anchorFrameName, currentDisplayParams.anchorType, currentDisplayParams.anchorPoint = nil, nil, nil;
@@ -2168,18 +2391,18 @@ function tt:SetUnitRecordFromTip(tip)
 		if (msp) then
 			local field = "NA"; -- Name
 			
-			msp:Request(name, field);
+			msp:Request(unitRecord.name, field);
 			
-			if (msp.char[name] ~= nil) and (msp.char[playername].field[field] ~= "") then
-				unitRecord.rpName = msp.char[name].field[field];
+			if (msp.char[unitRecord.name] ~= nil) and (msp.char[unitRecord.name].field[field] ~= "") then
+				unitRecord.rpName = msp.char[unitRecord.name].field[field];
 			end
 		elseif (msptrp) then
 			local field = "NA"; -- Name
 			
-			msptrp:Request(name, field);
+			msptrp:Request(unitRecord.name, field);
 			
-			if (msptrp.char[name] ~= nil) and (msptrp.char[playername].field[field] ~= "") then
-				unitRecord.rpName = msptrp.char[name].field[field];
+			if (msptrp.char[unitRecord.name] ~= nil) and (msptrp.char[unitRecord.name].field[field] ~= "") then
+				unitRecord.rpName = msptrp.char[unitRecord.name].field[field];
 			end
 		end
 	end
@@ -2192,11 +2415,6 @@ end
 
 -- set unit appearance to tip
 function tt:SetUnitAppearanceToTip(tip, first)
-	-- check if we're already setting unit appearance to tip
-	if (isSettingUnitAppearanceToTip) then
-		return;
-	end
-	
 	-- get frame parameters
 	local frameParams = TT_CacheForFrames[tip];
 	
@@ -2251,6 +2469,52 @@ function tt:SetUnitAppearanceToTip(tip, first)
 	self:SetPaddingToTip(tip);
 end
 
+-- update unit appearance to tip
+function tt:UpdateUnitAppearanceToTip(tip)
+	-- get frame parameters
+	local frameParams = TT_CacheForFrames[tip];
+	
+	if (not frameParams) then
+		return;
+	end
+	
+	-- no unit appearance
+	local timestampStartUnitAppearance = frameParams.currentDisplayParams.timestampStartUnitAppearance;
+	
+	if (not timestampStartUnitAppearance) then
+		return;
+	end
+	
+	-- no unit record
+	local currentDisplayParams = frameParams.currentDisplayParams;
+	local unitRecord = currentDisplayParams.unitRecord;
+	
+	if (not unitRecord) then
+		return;
+	end
+	
+	-- consider update interval
+	if (GetTime() - timestampStartUnitAppearance < cfg.updateFreq) then
+		return;
+	end
+	
+	-- inform group that the tip has to be checked if it needs to be hidden
+	LibFroznFunctions:FireGroupEvent(MOD_NAME, "OnTipSetHidden", TT_CacheForFrames, tip, currentDisplayParams, currentDisplayParams.tipContent);
+	
+	-- tip will be hidden
+	if (currentDisplayParams.hideTip) then
+		tt:HideTip(tip);
+		return;
+	end
+	
+	-- update unit record
+	LibFroznFunctions:UpdateUnitRecord(unitRecord);
+	
+	-- set unit appearance to tip
+	tt:SetUnitAppearanceToTip(tip);
+	currentDisplayParams.timestampStartUnitAppearance = GetTime();
+end
+
 -- register for group events
 LibFroznFunctions:RegisterForGroupEvents(MOD_NAME, {
 	OnTipAddedToCache = function(self, TT_CacheForFrames, tip)
@@ -2276,48 +2540,7 @@ LibFroznFunctions:RegisterForGroupEvents(MOD_NAME, {
 		-- HOOK: tip's OnUpdate to update unit appearance
 		LibFroznFunctions:CallFunctionDelayed(tipParams.waitSecondsForHooking, function()
 			tip:HookScript("OnUpdate", function(tip)
-				-- get frame parameters
-				local frameParams = TT_CacheForFrames[tip];
-				
-				if (not frameParams) then
-					return;
-				end
-				
-				-- no unit appearance
-				local timestampStartUnitAppearance = frameParams.currentDisplayParams.timestampStartUnitAppearance;
-				
-				if (not timestampStartUnitAppearance) then
-					return;
-				end
-				
-				-- no unit record
-				local currentDisplayParams = frameParams.currentDisplayParams;
-				local unitRecord = currentDisplayParams.unitRecord;
-				
-				if (not unitRecord) then
-					return;
-				end
-				
-				-- consider update interval
-				if (GetTime() - timestampStartUnitAppearance < cfg.updateFreq) then
-					return;
-				end
-				
-				-- inform group that the tip has to be checked if it needs to be hidden
-				LibFroznFunctions:FireGroupEvent(MOD_NAME, "OnTipSetHidden", TT_CacheForFrames, tip, currentDisplayParams, currentDisplayParams.tipContent);
-				
-				-- tip will be hidden
-				if (currentDisplayParams.hideTip) then
-					tt:HideTip(tip);
-					return;
-				end
-				
-				-- update unit record
-				LibFroznFunctions:UpdateUnitRecord(unitRecord);
-				
-				-- set unit appearance to tip
-				tt:SetUnitAppearanceToTip(tip);
-				currentDisplayParams.timestampStartUnitAppearance = GetTime();
+				tt:UpdateUnitAppearanceToTip(tip);
 			end);
 		end);
 	end,
@@ -2480,7 +2703,7 @@ end
 local eventsForHideWorldTipsHooked = false;
 
 LibFroznFunctions:RegisterForGroupEvents(MOD_NAME, {
-	OnApplyConfig = function(self, TT_CacheForFrames, cfg)
+	OnApplyConfig = function(self, TT_CacheForFrames, cfg, TT_ExtendedConfig)
 		if (cfg.hideWorldTips) then
 			if (not eventsForHideWorldTipsHooked) then
 				tt:RegisterEvent(LibFroznFunctions.isWoWFlavor.ClassicEra and "CURSOR_UPDATE" or "CURSOR_CHANGED");

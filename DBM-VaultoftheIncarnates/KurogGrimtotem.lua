@@ -1,22 +1,22 @@
 local mod	= DBM:NewMod(2491, "DBM-VaultoftheIncarnates", nil, 1200)
 local L		= mod:GetLocalizedStrings()
 
-mod:SetRevision("20230119054852")
+mod:SetRevision("20230215072037")
 mod:SetCreatureID(184986)
 mod:SetEncounterID(2605)
-mod:SetUsedIcons(1, 2, 3, 4, 5, 6, 7, 8)
-mod:SetHotfixNoticeRev(20230112000000)
---mod:SetMinSyncRevision(20211203000000)
+mod:SetUsedIcons(1, 2, 3, 4, 5)
+mod:SetHotfixNoticeRev(20230205000000)
+mod:SetMinSyncRevision(20230205000000)
 --mod.respawnTime = 29
 
 mod:RegisterCombat("combat")
 
 mod:RegisterEventsInCombat(
-	"SPELL_CAST_START 390548 373678 382563 373487 374022 372456 375450 374691 374215 376669 397338 374430 374623 374624 374622 391019 392125 392192 392152 391268 393314 393295 393296 392098 393459 394719 393429 395893 394416 393309",
+	"SPELL_CAST_START 390548 373678 382563 374022 372456 375450 374691 374215 376669 397338 374430 374623 374624 374622 391019 392125 392192 392152 391268 393314 393295 393296 392098 393459 394719 393429 395893 394416 393309",
 	"SPELL_CAST_SUCCESS 375825 375828 375824 375792 373415",
 	"SPELL_AURA_APPLIED 371971 372158 373494 372458 372514 372517 374779 374380 374427 391056 390920 391419 396109 396113 396106 396085 396241 391696",
 	"SPELL_AURA_APPLIED_DOSE 372158 374321",
-	"SPELL_AURA_REMOVED 371971 373494 372458 372514 374779 374380 374427 390920 391419 391056",
+	"SPELL_AURA_REMOVED 371971 372458 372514 374779 374380 374427 390920 391419 391056",
 	"SPELL_PERIODIC_DAMAGE 374554 391555",
 	"SPELL_PERIODIC_MISSED 374554 391555",
 	"UNIT_DIED",
@@ -55,7 +55,6 @@ local timerUltimateCD							= mod:NewTimer(60, "timerUltimateCD", 374680, nil, n
 local timerAddEnrageCD							= mod:NewTimer(60, "timerAddEnrageCD", 28131, nil, nil, 5, nil, DBM_COMMON_L.DAMAGE_ICON)
 
 --mod:AddInfoFrameOption(361651, true)
-mod:AddSetIconOption("SetIconOnLightningCrash", 373487, false, false, {1, 2, 3, 4, 5, 6, 7, 8})
 mod:AddNamePlateOption("NPAuraOnSurge", 371971, true)
 
 mod:GroupSpells(390548, 372158)--Tank cast with tank debuff
@@ -87,7 +86,7 @@ local yellAbsoluteZeroFades						= mod:NewIconFadesYell(372456)
 
 local timerFrostBite							= mod:NewBuffFadesTimer(30, 372514, nil, false, nil, 5)
 
-mod:AddSetIconOption("SetIconOnAbsoluteZero", 372456, true, false, {1, 2})
+mod:AddSetIconOption("SetIconOnAbsoluteZero", 372456, true, 9, {1, 2})
 
 mod:GroupSpells(372456, 372514, 372517)--Group all Below Zero mechanics together
 ----Mythic Only (Icebound Dominator)
@@ -102,7 +101,7 @@ mod:AddTimerLine(DBM:EJ_GetSectionInfo(25064))
 local warnEnvelopingEarth						= mod:NewTargetNoFilterAnnounce(391055, 4, nil, "Healer")
 
 local specWarnEnvelopingEarth					= mod:NewSpecialWarningYou(391055, nil, nil, nil, 1, 2)
-local specWarnEruptingBedrock					= mod:NewSpecialWarningRun(395893, nil, nil, 2, 2, 2)--Cast by boss AND Doppelboulder
+local specWarnEruptingBedrock					= mod:NewSpecialWarningDodge(395893, nil, nil, 2, 2, 2)--Cast by boss AND Doppelboulder
 local specWarnSeismicRupture					= mod:NewSpecialWarningDodge(374691, nil, nil, nil, 2, 2)
 
 ----Mythic Only (Ironwrought Smasher)
@@ -119,7 +118,7 @@ local warnLightningCrash						= mod:NewTargetNoFilterAnnounce(373487, 4)
 local warnShockingBurst							= mod:NewTargetNoFilterAnnounce(390920, 3)
 
 local specWarnLightningCrash					= mod:NewSpecialWarningMoveAway(373487, nil, nil, nil, 1, 2)
-local yellLightningCrash						= mod:NewShortPosYell(373487)
+local yellLightningCrash						= mod:NewShortYell(373487)
 --local yellLightningCrashFades					= mod:NewIconFadesYell(373487)
 --local specWarnLightningCrashStacks			= mod:NewSpecialWarningStack(373535, nil, 8, nil, nil, 1, 6)
 local specWarnShockingBurst						= mod:NewSpecialWarningMoveAway(390920, nil, nil, nil, 1, 2)
@@ -166,7 +165,7 @@ local timerFreezingTempestCD					= mod:NewCDTimer(37.7, 374624, nil, nil, nil, 2
 local timerAbsoluteZeroCD						= mod:NewCDCountTimer(24.3, 372456, nil, nil, nil, 3, nil, DBM_COMMON_L.MYTHIC_ICON)--Mythic Add version
 
 ----Blazing Fiend
-mod:AddTimerLine(DBM:EJ_GetSectionInfo(25079))
+--mod:AddTimerLine(DBM:EJ_GetSectionInfo(25079))--Since searing gets bunbled with cast, it leaves category empty
 local timerSearingCarnageCD						= mod:NewCDTimer(23, 374022, nil, nil, nil, 3, nil, DBM_COMMON_L.MYTHIC_ICON)--Mythic Add version
 
 ----Thundering Destroyer
@@ -185,8 +184,6 @@ mod:GroupSpells(374622, 391696)--Storm Break and it's sub debuff Lethal Current
 
 
 mod.vb.chillCast = 0
-mod.vb.litCrashIcon = 1
-mod.vb.zeroIcon = 1
 mod.vb.curAltar = false
 mod.vb.damageSpell = "?"
 mod.vb.avoidSpell = "?"
@@ -195,9 +192,9 @@ mod.vb.damageCount = 0
 mod.vb.damageTimer = 30
 mod.vb.avoidTimer = 60
 mod.vb.ultTimer = 60
-mod.vb.zeroCount = 0
 local castsPerGUID = {}
 local groundShatterTargets = {}
+local zeroIcons = {}
 local updateAltar
 
 function mod:OnCombatStart(delay)
@@ -251,8 +248,6 @@ function mod:SPELL_CAST_START(args)
 	elseif spellId == 382563 or spellId == 392125 then--Non Mythic, Mythic
 		specWarnMagmaBurst:Show()
 		specWarnMagmaBurst:Play("watchstep")
-	elseif spellId == 373487 then
-		self.vb.litCrashIcon = 1
 	elseif spellId == 374022 or spellId == 392192 or spellId == 392152 then--Normal/Heroic, LFR, Mythic (assumed)
 		specWarnSearingCarnage:Show()
 		specWarnSearingCarnage:Play("watchstep")
@@ -260,7 +255,7 @@ function mod:SPELL_CAST_START(args)
 			timerSearingCarnageCD:Start()
 		end
 	elseif spellId == 372456 or spellId == 375450 then--Hard, easy (assumed)
-		self.vb.zeroIcon = 1
+		table.wipe(zeroIcons)
 		if args:GetSrcCreatureID() ~= 184986 then--Mythic Add
 			self.vb.zeroCount = self.vb.zeroCount + 1
 			timerAbsoluteZeroCD:Start(nil, self.vb.zeroCount+1)
@@ -300,16 +295,20 @@ function mod:SPELL_CAST_START(args)
 		warnStormBreak:Show()
 		timerStormBreakCD:Start(nil, args.sourceGUID)
 	elseif spellId == 391019 then
-		specWarnFrigidTorrent:Show()
-		specWarnFrigidTorrent:Play("watchorb")
+		if self:AntiSpam(3, 1) then
+			specWarnFrigidTorrent:Show()
+			specWarnFrigidTorrent:Play("watchorb")
+		end
 		if args:GetSrcCreatureID() ~= 184986 then--Mythic Add
 			timerFrigidTorrentCD:Start()
 		end
 --	elseif spellId == 391055 then
 
 	elseif spellId == 395893 then
-		specWarnEruptingBedrock:Show()
-		specWarnEruptingBedrock:Play("justrun")
+		if self:AntiSpam(3, 2) then
+			specWarnEruptingBedrock:Show()
+			specWarnEruptingBedrock:Play("watchstep")
+		end
 		if args:GetSrcCreatureID() ~= 184986 then--Mythic Add
 			timerEruptingBedrockCD:Start(nil, args.sourceGUID)
 		end
@@ -435,31 +434,31 @@ function mod:SPELL_AURA_APPLIED(args)
 			end
 		end
 	elseif spellId == 373494 then
-		local icon = self.vb.litCrashIcon
-		if self.Options.SetIconOnLightningCrash and icon < 9 then--On 30 man it's 9 icons :\
-			self:SetIcon(args.destName, icon)
-		end
 		if args:IsPlayer() then
 			specWarnLightningCrash:Show()
 			specWarnLightningCrash:Play("scatter")
-			yellLightningCrash:Yell(icon, icon)
+			yellLightningCrash:Yell()
 --			yellLightningCrashFades:Countdown(spellId, nil, icon)
 		end
 		warnLightningCrash:CombinedShow(0.5, args.destName)
-		self.vb.litCrashIcon = self.vb.litCrashIcon + 1
 	elseif spellId == 372458 then
-		local icon = self.vb.zeroIcon
-		if self.Options.SetIconOnAbsoluteZero then
-			self:SetIcon(args.destName, icon)
+		zeroIcons[#zeroIcons+1] = args.destName
+		if #zeroIcons == 2 or DBM:NumRealAlivePlayers() < 2 then
+			table.sort(zeroIcons, DBM.SortByTankRoster)
+			for i = 1, #zeroIcons do
+				local name = zeroIcons[i]
+				if self.Options.SetIconOnAbsoluteZero then
+					self:SetIcon(name, i)
+				end
+				if name == DBM:GetMyPlayerInfo() then
+					specWarnAbsoluteZero:Show(self:IconNumToTexture(i))
+					specWarnAbsoluteZero:Play("mm"..i)
+					yellAbsoluteZero:Yell(i, i)
+					yellAbsoluteZeroFades:Countdown(spellId, nil, i)
+				end
+			end
+			warnAbsoluteZero:Show(table.concat(zeroIcons, "<, >"))
 		end
-		if args:IsPlayer() then
-			specWarnAbsoluteZero:Show(self:IconNumToTexture(icon))
-			specWarnAbsoluteZero:Play("mm"..icon)
-			yellAbsoluteZero:Yell(icon, icon)
-			yellAbsoluteZeroFades:Countdown(spellId, nil, icon)
-		end
-		warnAbsoluteZero:CombinedShow(0.5, args.destName)
-		self.vb.zeroIcon = self.vb.zeroIcon + 1
 	elseif spellId == 372514 and args:IsPlayer() then
 		timerFrostBite:Start()
 	elseif spellId == 372517 then
@@ -532,16 +531,9 @@ function mod:SPELL_AURA_REMOVED(args)
 			DBM.Nameplate:Hide(true, args.destGUID, spellId)
 		end
 --	elseif spellId == 373487 then
---		if self.Options.SetIconOnLightningCrash then
---			self:SetIcon(args.destName, 0)
---		end
 --		if args:IsPlayer() then
 --			yellLightningCrashFades:Cancel()
 --		end
-	elseif spellId == 373494 then--Icon removed off secondary debuff
-		if self.Options.SetIconOnLightningCrash then
-			self:SetIcon(args.destName, 0)
-		end
 	elseif spellId == 372458 then
 		if self.Options.SetIconOnAbsoluteZero then
 			self:SetIcon(args.destName, 0)

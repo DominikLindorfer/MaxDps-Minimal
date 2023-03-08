@@ -281,6 +281,7 @@ end
 
 
 local specIDs = { [71]=true,[72]=true,[73]=true,[65]=true,[66]=true,[70]=true,[253]=true,[254]=true,[255]=true,[259]=true,[260]=true,[261]=true,[256]=true,[257]=true,[258]=true,[250]=true,[251]=true,[252]=true,[262]=true,[263]=true,[264]=true,[62]=true,[63]=true,[64]=true,[265]=true,[266]=true,[267]=true,[268]=true,[269]=true,[270]=true,[102]=true,[103]=true,[104]=true,[105]=true,[577]=true,[581]=true,[1467]=true,[1468]=true, }
+local covenantIDs = { [321076]=true,[321079]=true,[321077]=true,[321078]=true, }
 
 
 function P:IsSpecAndTalentForPvpStatus(talentID, info)
@@ -298,6 +299,9 @@ function P:IsSpecAndTalentForPvpStatus(talentID, info)
 	else
 		if specIDs[talentID] then
 			return info.spec == talentID
+		end
+		if covenantIDs[talentID] and not self.isInShadowlands then
+			return
 		end
 		local talent = info.talentData[talentID]
 		if talent == "PVP" then
@@ -319,6 +323,9 @@ function P:IsSpecOrTalentForPvpStatus(talentID, info, isLearnedLevel)
 	else
 		if specIDs[talentID] then
 			return isLearnedLevel and info.spec == talentID
+		end
+		if covenantIDs[talentID] and not self.isInShadowlands then
+			return
 		end
 		local talent = info.talentData[talentID]
 		if talent == "PVP" then

@@ -70,6 +70,9 @@ local INSTANCETYPE_EVENTS = E.preCata and {
 		'PLAYER_REGEN_DISABLED',
 	}
 }
+if E.isWOTLKC then
+	INSTANCETYPE_EVENTS.raid = { 'ENCOUNTER_END' }
+end
 
 function P:UnregisterZoneEvents()
 	local registeredZoneEvents = self.currentZoneEvents

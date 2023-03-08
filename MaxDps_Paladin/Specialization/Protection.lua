@@ -20,14 +20,22 @@ local PR = {
 	AvengersShield           = 31935,
 	AvengersValor            = 197561,
 	BlessedHammer            = 204019,
-	BastionOfLight           = 204035,
+	BastionOfLight           = 378974,
 	HammerOfTheRighteous     = 53595,
 	HammerOfWrath            = 24275,
 	WordOfGlory              = 85673,
 	ArdentDefender = 31850,
-	DivineToll = 304971,
+	-- DivineToll = 304971,
+	DivineToll = 375576,
 	GuardianOfAncientKings = 86659,
+	-- ShiningLight = 327510,
+	-- ShiningLight = 182104,
 	ShiningLight = 327510,
+	EyeOfTyr = 387174,
+	DivineShield = 642,
+	Sentinel = 389539,
+	LayOnHands = 633,
+	Forbereance = 25771,
 };
 
 setmetatable(PR, Paladin.spellMeta);
@@ -45,51 +53,18 @@ function Paladin:Protection()
 	local healthMax = UnitHealthMax('player');
 	local healthPercent = (health / healthMax) * 100;
 	local holyPower = UnitPower('player', HolyPower);
-	
-	-- Essences
-	MaxDps:GlowEssences();
-	
-	-- Cooldowns
-	
-	if healthPercent <= 50 then
-		MaxDps:GlowCooldown(PR.ArdentDefender, cooldown[PR.ArdentDefender].ready);
-	end
-	
-	if healthPercent <= 30 then
-		MaxDps:GlowCooldown(PR.GuardianOfAncientKings, cooldown[PR.GuardianOfAncientKings].ready);
-	end
-	
-	if buff[PR.ShiningLight].up and healthPercent <= 75 then
-		MaxDps:GlowCooldown(PR.WordOfGlory, cooldown[PR.WordOfGlory].ready);
-	end
-	
-	if healthPercent <= 65 and holyPower > 2 then
-		MaxDps:GlowCooldown(PR.WordOfGlory, cooldown[PR.WordOfGlory].ready);
-	end
-	
-	MaxDps:GlowCooldown(PR.AvengingWrath, cooldown[PR.AvengingWrath].ready);
-
-	if talents[PR.Seraphim] then
-		MaxDps:GlowCooldown(PR.Seraphim, cooldown[PR.Seraphim].ready);
-	end
-		
-	if holyPower > 2 then
-		MaxDps:GlowCooldown(PR.ShieldOfTheRighteous, not buff[PR.ShieldOfTheRighteousAura].up);
-	end
-	
-	if holyPower > 4 then
-		MaxDps:GlowCooldown(PR.ShieldOfTheRighteous, cooldown[PR.ShieldOfTheRighteous].ready);
-	end
-		
-	--Paladin:ProtectionCooldowns();
 		
 	if cooldown[PR.Consecration].ready and (not consecrationUp) then
 		return PR.Consecration;
 	end
 	
-	--if cooldown[PR.DivineToll].ready then
-		--return PR.DivineToll;
-	--end
+	if cooldown[PR.AvengersShield].ready then
+		return PR.AvengersShield;
+	end
+	
+	if cooldown[PR.HammerOfWrath].ready and buff[PR.Sentinel].up then
+		return PR.HammerOfWrath;
+	end
 	
 	if cooldown[PR.Judgment].ready then
 		return PR.Judgment;
@@ -99,16 +74,8 @@ function Paladin:Protection()
 		return PR.HammerOfWrath;
 	end
 
-	if cooldown[PR.AvengersShield].ready then
-		return PR.AvengersShield;
-	end
-
 	if talents[PR.BlessedHammer] and cooldown[PR.BlessedHammer].ready then
 		return PR.BlessedHammer;
-	end
-
-	if cooldown[PR.HammerOfTheRighteous].ready then
-		return PR.HammerOfTheRighteous;
 	end
 
 	if cooldown[PR.Consecration].ready then
@@ -125,23 +92,57 @@ function Paladin:ProtectionCooldowns()
 	local healthMax = UnitHealthMax('player');
 	local healthPercent = (health / healthMax) * 100;
 	local holyPower = UnitPower('player', 9);
-	MaxDps:GlowEssences();
 
-	if not buff[PR.ShieldOfTheRighteousAura].up and holyPower == 5 then
-		MaxDps:GlowCooldown(PR.ShieldOfTheRighteous);
+	if healthPercent <= 8 and cooldown[PR.LayOnHands].ready then
+		return PR.LayOnHands;
 	end
 
-	if healthPercent <= 70 and holyPower > 2 then
-		MaxDps:GlowCooldown(PR.WordOfGlory);
+	if healthPercent <= 15 and cooldown[PR.DivineShield].ready then
+		return PR.DivineShield;
+	end
+	
+	if (buff[PR.ShiningLight].up or buff[PR.BastionOfLight].up) and healthPercent <= 50 then
+		return PR.WordOfGlory;
 	end
 
-	MaxDps:GlowCooldown(PR.AvengingWrath, cooldown[PR.AvengingWrath].ready);
-
-	if talents[PR.Seraphim] then
-		MaxDps:GlowCooldown(PR.Seraphim, cooldown[PR.Seraphim].ready);
+	if not buff[PR.DivineShield].up and healthPercent <= 28 and cooldown[PR.GuardianOfAncientKings].ready then
+		return PR.GuardianOfAncientKings;
 	end
 
-	if talents[PR.BastionOfLight] then
-		MaxDps:GlowCooldown(PR.BastionOfLight, cooldown[PR.BastionOfLight].ready and (cooldown[PR.ShieldOfTheRighteous].charges <= 0.5));
+	if not (buff[PR.DivineShield].up or buff[PR.GuardianOfAncientKings].up) and healthPercent <= 45 and cooldown[PR.ArdentDefender].ready then
+		return PR.ArdentDefender;
 	end
+
+	-- if talents[PR.BastionOfLight] and cooldown[PR.BastionOfLight].ready and healthPercent <= 60 then
+		-- return PR.BastionOfLight;
+	-- end
+
+	if healthPercent <= 75 and holyPower > 2 then
+		return PR.WordOfGlory;
+	end
+	
+	if buff[PR.ShieldOfTheRighteousAura].remains <= 8 and holyPower >= 3 then
+		return PR.ShieldOfTheRighteous;
+	end
+
+	if cooldown[PR.EyeOfTyr].ready then
+		return PR.EyeOfTyr;
+	end
+
+	if not buff[PR.ShieldOfTheRighteousAura].up and holyPower >= 3 then
+		return PR.ShieldOfTheRighteous;
+	end
+
+	if talents[PR.DivineToll] and cooldown[PR.DivineToll].ready then
+		return PR.DivineToll;
+	end
+
+	if cooldown[PR.Sentinel].ready then
+		return PR.Sentinel;
+	end
+
+	-- if talents[PR.Seraphim] and cooldown[PR.Seraphim].ready then
+	-- 	return PR.Seraphim;
+	-- end
+
 end

@@ -16,7 +16,8 @@ local UnitPowerMax = UnitPowerMax;
 local PowerTypeRage = Enum.PowerType.Rage;
 
 local PR = {
-	Avatar            = 107574,
+	-- Avatar            = 107574,
+	Avatar            = 401150,
 	ThunderClap       = 6343,
 	UnstoppableForce  = 275336,
 	ShieldBlock       = 2565,
@@ -93,19 +94,19 @@ function Warrior:ProtectionCooldowns()
 	local absorb = UnitGetTotalAbsorbs('player');
 	local absorbPerc = (absorb / maxHP) * 100;
 
-	if healthPerc <=30 and cooldown[PR.RallyingCry].ready then
+	if healthPerc <=15 and cooldown[PR.RallyingCry].ready then
 		return PR.RallyingCry;
 	end
 
-	if healthPerc <= 45 and cooldown[PR.Shieldwall].ready then
+	if healthPerc <= 25 and cooldown[PR.Shieldwall].ready then
 		return PR.Shieldwall;
 	end
 
-	if healthPerc <= 50 and cooldown[PR.LastStand].ready then
+	if healthPerc <= 35 and cooldown[PR.LastStand].ready then
 		return PR.LastStand;
 	end
 
-	if healthPerc <= 70 and cooldown[PR.ImpendingVictory].ready then
+	if healthPerc <= 85 and cooldown[PR.ImpendingVictory].ready then
 		return PR.ImpendingVictory;
 	end
 	

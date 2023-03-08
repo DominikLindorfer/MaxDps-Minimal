@@ -41,7 +41,8 @@ local FR = {
     TitansTorment = 390135,
     Whirlwind = 190411,
     WhirlwindBuff = 85739,
-    WreckingThrow = 384110
+    WreckingThrow = 384110,
+	ImpendingVictory = 202168,
 }
 
 setmetatable(FR, Warrior.spellMeta)
@@ -76,7 +77,7 @@ function Warrior:Fury()
     local targetHp = MaxDps:TargetPercentHealth() * 100
 
     local canExecute = ((talents[FR.Massacre] and targetHp < 35) or targetHp < 20) or buff[FR.SuddenDeathAura].up   
-    
+
     if targets > 1 and (not buff[FR.WhirlwindBuff].up) then
         return FR.Whirlwind;
     end
@@ -87,6 +88,10 @@ function Warrior:Fury()
 
     if cooldown[FR.Execute2].ready and canExecute then
         return FR.Execute;
+    end
+
+    if talents[FR.Onslaught] and cooldown[FR.Onslaught].ready then
+        return FR.Onslaught;
     end
 
     if talents[FR.Rampage] and rage >= 80 and buff[FR.Enrage].remains < gcd then
@@ -101,11 +106,13 @@ function Warrior:Fury()
     --     return FR.Rampage;
     -- end
 
-    if buff[RecklessAbadon].up and talents[FR.RagingBlow] and cooldown[FR.CrushingBlow].ready and (cooldown[FR.CrushingBlow].charges > 1) then
+    -- if buff[RecklessAbadon].up and talents[FR.RagingBlow] and cooldown[FR.CrushingBlow].ready and (cooldown[FR.CrushingBlow].charges > 1) then
+    if buff[RecklessAbadon].up and talents[FR.RagingBlow] and cooldown[FR.CrushingBlow].ready then
         return FR.CrushingBlow;
     end   
 
-    if buff[RecklessAbadon].up and talents[FR.RagingBlow] and cooldown[FR.RagingBlow].ready and (cooldown[FR.RagingBlow].charges > 1) then
+    -- if buff[RecklessAbadon].up and talents[FR.RagingBlow] and cooldown[FR.RagingBlow].ready and (cooldown[FR.RagingBlow].charges > 1) then
+    if buff[RecklessAbadon].up and talents[FR.RagingBlow] and cooldown[FR.RagingBlow].ready then
         return FR.RagingBlow;
     end
     
@@ -117,11 +124,13 @@ function Warrior:Fury()
         return FR.Bloodbath;
     end
 
-    if talents[FR.RagingBlow] and cooldown[FR.CrushingBlow].ready and (cooldown[FR.CrushingBlow].charges > 1) then
+    -- if talents[FR.RagingBlow] and cooldown[FR.CrushingBlow].ready and (cooldown[FR.CrushingBlow].charges > 1) then
+    if talents[FR.RagingBlow] and cooldown[FR.CrushingBlow].ready then
         return FR.CrushingBlow;
     end   
 
-    if talents[FR.RagingBlow] and cooldown[FR.RagingBlow].ready and (cooldown[FR.RagingBlow].charges > 1) then
+    -- if talents[FR.RagingBlow] and cooldown[FR.RagingBlow].ready and (cooldown[FR.RagingBlow].charges > 1) then
+    if talents[FR.RagingBlow] and cooldown[FR.RagingBlow].ready then
         return FR.RagingBlow;
     end
 
@@ -144,7 +153,14 @@ function Warrior:FuryCooldowns()
     local talents = fd.talents
     local targets = MaxDps:SmartAoe()
     local timeToDie = fd.timeToDie
-   
+    local curentHP = UnitHealth('player');
+	local maxHP = UnitHealthMax('player');
+	local healthPerc = (curentHP / maxHP) * 100;
+    
+    if healthPerc <= 30 and cooldown[FR.ImpendingVictory].ready then
+		return FR.ImpendingVictory;
+	end
+
     if talents[FR.Recklessness] and cooldown[FR.Recklessness].ready then
         return FR.Recklessness;
     end
@@ -164,7 +180,10 @@ function Warrior:FuryCooldowns()
     if talents[FR.SpearOfBastion] and cooldown[FR.SpearOfBastion].ready and buff[FR.Enrage].up then
         return FR.SpearOfBastion;
     end
-
+    
+    if talents[FR.ThunderousRoar] and cooldown[FR.ThunderousRoar].ready and buff[FR.Enrage].up then
+        return FR.ThunderousRoar;
+    end
 end
 
 local function isSpellAvailable(spellId)

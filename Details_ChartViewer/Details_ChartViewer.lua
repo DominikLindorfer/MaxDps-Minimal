@@ -5,13 +5,13 @@ local _string_len = string.len
 local UnitGroupRolesAssigned = UnitGroupRolesAssigned
 local ipairs = ipairs
 
---> Create the plugin Object
+--Create the plugin Object
 local ChartViewer = _detalhes:NewPluginObject ("Details_ChartViewer", DETAILSPLUGIN_ALWAYSENABLED)
---> Main Frame
+--Main Frame
 local CVF = ChartViewer.Frame
 
---> desc
-ChartViewer:SetPluginDescription (Loc ["STRING_PLUGIN_DESC"])
+--desc
+ChartViewer:SetPluginDescription(Loc ["STRING_PLUGIN_DESC"])
 
 local plugin_version = "v3.00"
 
@@ -35,7 +35,7 @@ local function CreatePluginFrames (data)
 	function ChartViewer:OnDetailsEvent (event)
 
 		if (event == "HIDE") then
-			--> in case the welcome is shown when hiding the main panel
+			--in case the welcome is shown when hiding the main panel
 			if (ChartViewer.welcome_panel) then
 				ChartViewer.welcome_panel:Hide()
 			end
@@ -62,7 +62,7 @@ local function CreatePluginFrames (data)
 			end
 
 		elseif (event ==  "DETAILS_STARTED") then
-			--> craete icon
+			--craete icon
 			ChartViewer:CanShowOrHideButton()
 
 		elseif (event ==  "DETAILS_DATA_RESET") then
@@ -96,7 +96,7 @@ local function CreatePluginFrames (data)
 	end
 
 
-----------> Check Combat
+----------Check Combat
 function ChartViewer:CheckFor_CreateNewTabForCombat()
 
 	if (not ChartViewer.db.options.auto_create) then
@@ -120,7 +120,7 @@ function ChartViewer:CheckFor_CreateNewTabForCombat()
 			--print ("IS ARENA COMBAT", has_arena_tab)
 
 			if (not has_arena_tab) then
-				--> auto create an arena tab (two actually)
+				--auto create an arena tab (two actually)
 				local presets = ChartViewer:GetChartsForIType ("arena", true)
 				--print ("FOUND:", #presets, "presets.")
 				for _, preset_name in ipairs (presets) do
@@ -158,7 +158,7 @@ function ChartViewer:CheckFor_CreateNewTabForCombat()
 	end
 end
 
-----------> Tabs
+----------Tabs
 	local titlecase = function (first, rest)
 		return first:upper()..rest:lower()
 	end
@@ -390,7 +390,7 @@ end
 			C_Timer.After (1, check_for_boss)
 		end
 
-----------> Icon show functions
+----------Icon show functions
 		function ChartViewer:ShowButton()
 			if (not ChartViewer.ToolbarButton:IsShown()) then
 				ChartViewer:ShowToolbarIcon (ChartViewer.ToolbarButton, "star")
@@ -420,17 +420,17 @@ end
 				return
 			end
 
-			if (self.options.show_method == 1) then --> always show
+			if (self.options.show_method == 1) then --always show
 				ChartViewer:ShowButton()
 
-			elseif (self.options.show_method == 2) then --> group
+			elseif (self.options.show_method == 2) then --group
 				if (IsInGroup() or IsInRaid()) then
 					ChartViewer:ShowButton()
 				else
 					ChartViewer:HideButton()
 				end
 
-			elseif (self.options.show_method == 3) then --> inside instances
+			elseif (self.options.show_method == 3) then --inside instances
 				local _, instanceType = GetInstanceInfo()
 				if (instanceType == "raid") then
 					ChartViewer:ShowButton()
@@ -438,7 +438,7 @@ end
 					ChartViewer:HideButton()
 				end
 
-			elseif (self.options.show_method == 4) then --> automatic
+			elseif (self.options.show_method == 4) then --automatic
 
 				local segments = ChartViewer:GetCombatSegments()
 				local segments_start_index = 1
@@ -482,13 +482,13 @@ end
 			end
 		end
 
-----------> Graphic Frame
+----------Graphic Frame
 
 	--graphic
 		local frame = _G.ChartViewerWindowFrame
 		frame:SetToplevel (true)
 
-		--> using details framework
+		--using details framework
 		local chart_panel = ChartViewer:GetFramework():CreateChartPanel (frame, frame:GetWidth()-20, frame:GetHeight()-20, "ChartViewerWindowFrameChartFrame")
 		chart_panel:SetPoint ("topleft", frame, "topleft", 8, -65)
 		chart_panel:SetTitle ("")
@@ -587,7 +587,7 @@ end
 				local i = 1
 				for name, t in pairs (combat.TimeData) do
 					if (charts [name] and t.max_value and t.max_value > 0) then
-						--> mostrar
+						--mostrar
 						local color = colors [i] or colors [1]
 						if (options) then
 							if (options.colors and options.colors [name]) then
@@ -608,7 +608,7 @@ end
 				local i = 1
 				for name, t in pairs (combat.TimeData) do
 					if (name:find (capture_name) and t.max_value and t.max_value > 0) then
-						--> mostrar
+						--mostrar
 						local data_name = name:gsub ((".*%~"), "")
 						data_name = data_name:gsub (("%-.*"), "")
 						tinsert (data, {t, colors [i] or colors [1], elapsed_time, data_name, texture})
@@ -651,7 +651,7 @@ end
 							if (capture_name:find ("PRESET_")) then --current
 								for name, t in pairs (combat.TimeData) do
 									if (name:find (capture_name) and t.max_value and t.max_value > 0) then
-										--> mostrar
+										--mostrar
 										local data_name
 										if (boss_index == 1) then
 											data_name = name:gsub ((".*%~"), "")
@@ -699,7 +699,7 @@ end
 
 			if (#data > 0) then
 				for index, chart in ipairs (data) do
-					--> get the tables and color
+					--get the tables and color
 					local chart_data = chart [1]
 					local chart_color = chart [2]
 					local combat_time = chart [3]
@@ -712,7 +712,7 @@ end
 
 		end
 
-----------> Window Functions
+----------Window Functions
 
 		function ChartViewer.RefreshWindow()
 			local segments = ChartViewer:GetCombatSegments()
@@ -760,7 +760,7 @@ end
 		end
 
 
-----------> Create the icon
+----------Create the icon
 
 	local cooltip_menu = function()
 
@@ -964,7 +964,7 @@ local create_add_tab_panel = function()
 	titlebar:SetBackdrop ({edgeFile = [[Interface\Buttons\WHITE8X8]], edgeSize = 1, bgFile = [[Interface\AddOns\Details\images\background]], tileSize = 64, tile = true})
 	titlebar:SetBackdropColor (.5, .5, .5, 1)
 	titlebar:SetBackdropBorderColor (0, 0, 0, 1)
-	--> title
+	--title
 	local titleLabel = _detalhes.gump:NewLabel (titlebar, titlebar, nil, "titulo", "Add Chart", "GameFontHighlightLeft", 12, {227/255, 186/255, 4/255})
 	titleLabel:SetPoint ("center", titlebar , "center")
 	titleLabel:SetPoint ("top", titlebar , "top", 0, -5)
@@ -1186,15 +1186,15 @@ function ChartViewer:OnEvent (_, event, ...)
 
 			if (_G._detalhes) then
 
-				--> register player damage done chart data
-				ChartViewer:TimeDataRegister ("Player Damage Done", ChartViewer.PlayerDamageDoneChartCode, nil, "Chart Viewer", "1.0", [[Interface\ICONS\Ability_MeleeDamage]], true)
+				--register player damage done chart data
+				ChartViewer:TimeDataRegister("Player Damage Done", ChartViewer.PlayerDamageDoneChartCode, nil, "Chart Viewer", "1.0", [[Interface\ICONS\Ability_MeleeDamage]], true)
 
-				--> create widgets
+				--create widgets
 				CreatePluginFrames()
 
 				local MINIMAL_DETAILS_VERSION_REQUIRED = 76
 
-				--> Install
+				--Install
 				local install, saveddata, is_enabled = _G._detalhes:InstallPlugin ("TOOLBAR", Loc ["STRING_PLUGIN_NAME"], [[Interface\Addons\Details_ChartViewer\icon]], ChartViewer, "DETAILS_PLUGIN_CHART_VIEWER", MINIMAL_DETAILS_VERSION_REQUIRED, "Details! Team", plugin_version)
 				if (type (install) == "table" and install.error) then
 					print (Loc ["STRING_PLUGIN_NAME"], install.errortext)
@@ -1202,7 +1202,7 @@ function ChartViewer:OnEvent (_, event, ...)
 				end
 				-- /run DETAILS_PLUGIN_CHART_VIEWER:ShowButton()
 				if (not saveddata.tabs) then
-					--> first run
+					--first run
 					local welcome = CreateFrame ("frame", nil, ChartViewerFrame, "BackdropTemplate")
 					welcome:SetFrameStrata ("TOOLTIP")
 					welcome:SetPoint ("center", ChartViewerFrame, "center")
@@ -1222,12 +1222,12 @@ function ChartViewer:OnEvent (_, event, ...)
 					close_button:SetPoint ("bottom", welcome, "bottom", 0, 10)
 				end
 
-				--> detect 1.x versions
+				--detect 1.x versions
 				if (saveddata.tabs and saveddata.tabs[1] and saveddata.tabs[1].captures) then
 					table.wipe (saveddata.tabs)
 				end
 
-				--> build tab container
+				--build tab container
 				saveddata.tabs = saveddata.tabs or {}
 				saveddata.options = saveddata.options or {show_method = 4, window_scale = 1.0}
 				if (saveddata.options.auto_create == nil) then
@@ -1247,7 +1247,7 @@ function ChartViewer:OnEvent (_, event, ...)
 					ChartViewer.tabs [3] = {name = "Raid Damage", segment_type = 2, data = "Raid Damage Done", texture = "line", version = "v2.0"}
 				end
 
-				--> register wow events
+				--register wow events
 				CVF:RegisterEvent ("GROUP_ROSTER_UPDATE")
 				CVF:RegisterEvent ("ZONE_CHANGED_NEW_AREA")
 				CVF:RegisterEvent ("PLAYER_ENTERING_WORLD")
@@ -1258,7 +1258,7 @@ function ChartViewer:OnEvent (_, event, ...)
 					ChartViewer:HideButton()
 				end
 
-				--> register details events
+				--register details events
 				_G._detalhes:RegisterEvent (ChartViewer, "DETAILS_DATA_RESET")
 
 				_G._detalhes:RegisterEvent (ChartViewer, "COMBAT_PLAYER_LEAVE")
@@ -1275,16 +1275,16 @@ function ChartViewer:OnEvent (_, event, ...)
 
 				ChartViewer.NewTabPanel:Hide()
 
-				--> replace the built-in frame with the outside frame
+				--replace the built-in frame with the outside frame
 				ChartViewer.Frame = _G.ChartViewerWindowFrame
 
-				--> embed the plugin into the plugin window
+				--embed the plugin into the plugin window
 				if (DetailsPluginContainerWindow) then
 					DetailsPluginContainerWindow.EmbedPlugin (ChartViewer, ChartViewerWindowFrame)
 				end
 
 				C_Timer.After (5, function()
-					--> adjust the size of the chart frame
+					--adjust the size of the chart frame
 					local height = ChartViewerWindowFrame:GetHeight()
 					ChartViewerWindowFrameChartFrame:SetSize (ChartViewerWindowFrame:GetWidth()-20, height-100)
 
@@ -1487,13 +1487,13 @@ function ChartViewer:BuildAndAddPresetFunction (preset_name)
 end
 
 
---> player damage done chart code
+--player damage done chart code
 ChartViewer.PlayerDamageDoneChartCode = [[
 
 	-- the goal of this script is get the current combat then get your character and extract your damage done.
 	-- the first thing to do is get the combat, so, we use here the command "_detalhes:GetCombat ( "overall" "current" or "segment number")"
 
-	local current_combat = _detalhes:GetCombat ("current") --> getting the current combat
+	local current_combat = _detalhes:GetCombat ("current") --getting the current combat
 
 	-- the next step is request your character from the combat
 	-- to do this, we take the combat which here we named "current_combat" and tells what we want inside parentheses.
@@ -1572,7 +1572,7 @@ return overheal
 }
 
 ChartViewer.PlayerIndividualChartCode = [[
-	local current_combat = _detalhes:GetCombat ("current") --> getting the current combat
+	local current_combat = _detalhes:GetCombat ("current") --getting the current combat
 	local my_self = current_combat (DETAILS_ATTRIBUTE_DAMAGE, UnitName ("player"))
 	if (not my_self) then
 		return 0

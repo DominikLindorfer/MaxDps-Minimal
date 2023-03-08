@@ -1,0 +1,7 @@
+## Interface: 100005
+## Title: Khes'yc iLvl
+## Author: A. L. Hardy
+## Version: 4.1.230128
+##SavedVariables: ki_addLine, ki_showSpec, ki_useClassColors
+
+Khesyc_iLvl.lua

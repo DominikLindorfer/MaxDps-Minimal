@@ -278,8 +278,7 @@ local function OmniCDCastingBarFrame_OnHide(self)
 
 	local icon = statusBar.icon
 	if icon.tooltipID then
-		local iconTexture = GetSpellTexture(self.spellID)
-		statusBar.icon.icon:SetTexture(iconTexture)
+		statusBar.icon.icon:SetTexture(icon.iconTexture)
 		icon.tooltipID = nil
 		if not E.db.icons.showTooltip then
 			icon:EnableMouse(false)

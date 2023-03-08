@@ -57,9 +57,9 @@ L['tuskarr_tacklebox'] = 'Boîte d\'appâts de pêche roharts'
 L['options_icons_tuskarr_tacklebox'] = 'Boîtes d\'appâts de pêche roharts'
 L['options_icons_tuskarr_tacklebox_desc'] = 'Afficher les emplacements possibles des {object:Boîtes d\'appâts de pêche roharts}.'
 
-L['dr_best'] = 'Votre meilleur temps :\n - Normal : %.3fs\n - Avancé : %.3fs'
+L['dr_best'] = 'Votre meilleur temps :\n - Normal : %.3fs\n - Avancé : %.3fs\n - Inversé : %.3fs'
 L['dr_best_dash'] = 'Votre meilleur temps :\n - %.3fs'
-L['dr_note'] = 'Temps imparti :\n - Normal : %ss / %ss\n - Avancé : %ss / %ss'
+L['dr_note'] = 'Temps imparti :\n - Normal : %ss / %ss\n - Avancé : %ss / %ss\n - Inversé : %ss / %ss'
 L['dr_note_dash'] = 'Temps imparti :\n - %ss / %ss'
 L['dr_bronze'] = '\n\nTerminez la course pour obtenir ' .. ns.color.Bronze('Bronze') .. '.'
 L['options_icons_dragonrace'] = 'Courses du Vol à dos de dragon'
@@ -91,7 +91,8 @@ L['signal_transmitter_note'] = '{note:Requiert 10 points dans Esprit mécanique\
 L['options_icons_signal_transmitter'] = 'Transmetteurs de signaux du Générateur de trou de wyrm'
 L['options_icons_signal_transmitter_desc'] = 'Afficher les emplacements des {object:Transmetteurs de signaux désactivés} pour le {item:198156}.'
 
-L['spawns_periodically'] = '{note:Apparitions possibles toutes les 30 minutes, synchronisées sur l\'ensemble du serveur. (Exemple : 9:00, 17:30)}'
+L['rare_14h'] = 'Ce rare fait partie d\'une rotation de 14 heures avec les autres rares, un rare apparaissant toutes les 30 minutes.\n\nProchaine apparition possible : {note:%s} (heure du serveur)'
+L['time_format'] = '%H:%M - %d/%m/%Y'
 L['spawns_at_night'] = '{note:Apparaît uniquement la nuit. (Après 18:30, heure du serveur)}'
 
 L['elemental_storm'] = 'Tempête élémentaire'
@@ -118,16 +119,27 @@ L['empowered_mobs_killed_suffix'] = 'Monstres Imprégnés tués'
 L['elemental_storm_mythressa_note_start'] = 'Échangez vos {currency:2118} contre de l\'équipement, des mascottes et une monture.'
 L['elemental_storm_mythressa_note_end'] = 'Vous avez actuellement %s {currency:2118}.'
 
-L['options_icons_elemental_storm'] = 'Tempêtes élémentaires'
-L['options_icons_elemental_storm_desc'] = 'Afficher les récompenses pour les Tempêtes élementaires.'
+L['options_icons_elemental_storm'] = '{spell:392768}'
+L['options_icons_elemental_storm_desc'] = 'Afficher les récompenses pour les {spell:392768}.'
+
+L['elusive_creature_note'] = 'Le {object:Niveau de Maîtrise 40/40} en {object:Fabrication d’appâts} vous permet de créer des {item:193906} qui peuvent être utilisés pour invoquer et dépecer chaque créature une fois par jour.'
+L['options_icons_elusive_creature'] = '{item:193906}'
+L['options_icons_elusive_creature_desc'] = 'Afficher les emplacements des créatures insaisissables invoquées grâce aux {item:193906}.'
+
+L['grand_hunts_label'] = 'Grande Chasse'
+L['longhunter_suffix'] = 'étapes de chasse terminées'
+L['the_best_at_what_i_do_suffix'] = 'boss tués'
+
+L['options_icons_grand_hunts'] = 'Grandes Chasses'
+L['options_icons_grand_hunts_desc'] = 'Afficher les emplacements et les récompenses pour les {object:Grandes Chasses}.'
 
 -------------------------------------------------------------------------------
 ------------------------------- THE AZURE SPAN --------------------------------
 -------------------------------------------------------------------------------
 
-L['bisquis_note'] = 'Cuisiner une soupe légendaire au festin tribal {location:d’Iskaara}, puis vaincre {npc:197557}.'
+L['bisquis_note'] = 'Cuisiner une soupe légendaire au festin tribal {location:d’Iskaara}, puis vaincre {npc:197557}.\n\nProchain festin : {note:%s} (heure du serveur)'
 L['blightfur_note'] = 'Parlez à {npc:193633} pour invoquer le rare.'
-L['brackenhide_rare_note'] = 'Ces rares apparaissent selon une rotation fixe comme suit : {npc:197344} > {npc:197353} > {npc:197354} > {npc:197356} avec un intervalle de 10 minutes entre chacun.'
+L['brackenhide_rare_note'] = 'Ces rares apparaissent selon une rotation fixe comme suit : {npc:197344} > {npc:197353} > {npc:197354} > {npc:197356} avec un intervalle de 10 minutes entre chacun.\n\nProchaine apparition possible : {note:%s} (heure du serveur)'
 L['fisherman_tinnak_note'] = 'Récupérez la {object:Canne à pêche cassée}, le {object:Filet de pêche déchiré} et le {object:Vieux harpon} pour faire apparaître le rare.'
 L['frostpaw_note'] = 'Après avoir pris le {object:Marteau en bois}, vous avez 20 secondes pour frapper le {object:Jeu du Gnoll} sur la {object:Souche d\'arbre}, et faire apparaître le rare.'
 L['sharpfang_note'] = 'Aidez {npc:192747} à vaincre les {npc:192748s} pour faire apparaître le rare.'
@@ -192,6 +204,31 @@ L['artists_easel_note_step3'] = '{quest:70170}\n{npc:194425} vous demandera de c
 L['artists_easel_note_step4'] = 'Apportez les tableaux finaux à {npc:194323} et vous recevrez votre jouet!\n\n{note:Les tableaux ne sont pas récupérables dans les donjons en difficulté Mythique ou Mythique+.}'
 
 L['somewhat_stabilized_arcana_note'] = 'Situé au sommet de la tour.\n\nComplétez la courte suite de quêtes débutée par {npc:197100} pour obtenir le jouet.'
+
+L['stranded_soul_note'] = [[
+Après avoir tué l'{npc:196900}, il explose en 4 {npc:196901s}.
+Vous devez les activer pour faire fondre le mur de glace (deux joueurs sont recommandés).
+
+Tuez l'{npc:197183} à l'intérieur et vous recevrez le {item:200528}.
+]]
+
+L['gethdazr_note'] = [[
+Apparaît lors d'un événement à {location:Imbou} qui commence en soufflant dans la {object:Grande corne d’Imbou}({dot:Blue}).
+La corne ne devient cliquable qu'après avoir tué l'{npc:196155} qui a un temps de réapparition d'environ 30 à 60 minutes.
+
+{npc:191143}({dot:Green}) et d'autres PNJ se frayeront un chemin depuis l'entrée nord-est d'{location:Imbou} jusqu'à la falaise où {npc:196165} apparaîtra.
+Les PNJ peuvent mourir sans aide, ce qui fera échouer l'événement.
+
+Cela peut être accompli en solo mais 2 ou 3 joueurs sont recommandés.
+]]
+
+L['tuskarr_chest'] = 'Coffre rohart'
+L['options_icons_tuskarr_chest'] = 'Coffres roharts'
+L['options_icons_tuskarr_chest_desc'] = 'Afficher les emplacements possibles des {object:Coffres roharts}.'
+
+L['community_feast_label'] = '{spell:388961}'
+L['options_icons_community_feast'] = '{spell:388961}'
+L['options_icons_community_feast_desc'] = 'Afficher les emplacements et les récompenses pour le {spell:388961}.'
 
 -------------------------------------------------------------------------------
 ------------------------------- FORBIDDEN REACH -------------------------------
@@ -287,16 +324,20 @@ L['hunt_instructor_basku_note'] = 'Échangez vos {item:200093} pour obtenir de l
 L['elder_yusa_note'] = 'Ciblez l\'{npc:192818} et utilisez l\'emote {emote:/faim} pour obtenir la recette de cuisine.'
 L['initiate_kittileg_note'] = 'Complétez {quest:66226} pour obtenir le jouet !'
 
-L['quackers_duck_trap_kit'] = 'Pour invoquer {npc:192557}, vous avez d\'abord besoin du {item:194740} que vous pouvez trouver dans un {location:campement du Clan des Aylaags} voisin.{dot:Blue}\n\nPour faire un {item:194712}, vous avez besoin des matériaux suivants :'
+L['quackers_duck_trap_kit'] = 'Pour invoquer {npc:192557}, vous avez d\'abord besoin du {item:194740} que vous pouvez trouver dans un campement du {faction:Clan des Aylaags} voisin.{dot:Blue}\n\nPour faire un {item:194712}, vous avez besoin des matériaux suivants :'
 L['quackers_spawn'] = 'Ensuite, vous devez attraper un canard près du nid avec le {item:194712}. Utilisez le {item:194739} au {npc:192581} pour invoquer {npc:192557}.'
 
-L['knew_you_nokhud_do_it_note'] = '{note:Les 3 objets sont uniques (vous ne pouvez en avoir qu\'un seul dans votre inventaire) et ont une durée de vie de 30 minutes.}\n\nRécupérez {item:200184}, {item:200194}, et {item:200196} sur les {npc:185357}, {npc:185353}, et {npc:185168} situés au {location:Bastion Nokhudon}.\n\nCombinez les 3 objets pour créer une {item:200201}, utilise-la et parlez à la {npc:197884} pour commencer le programme de formation.\n\nUtilisez votre Bouton d\'action supplémentaire pour terminer le cours et obtenir votre haut-fait.\n\n{note:Compléter ce haut-fait en étant dans un groupe de raid pendant une Tempête élémentaire rend l\'obtention des objets beaucoup plus facile.}'
+L['knew_you_nokhud_do_it_note'] = '{note:Les 3 objets sont uniques (vous ne pouvez en avoir qu\'un seul dans votre inventaire) et ont une durée de vie de 30 minutes.}\n\nRécupérez {item:200184}, {item:200194}, et {item:200196} sur les {npc:185357}, {npc:185353}, et {npc:185168} situés au {location:Bastion Nokhudon}.\n\nCombinez les 3 objets pour créer une {item:200201}, utilise-la et parlez à la {npc:197884} pour commencer le programme de formation.\n\nUtilisez votre {object:Bouton d\'action supplémentaire} pour terminer le cours et obtenir votre haut-fait.\n\n{note:Compléter ce haut-fait en étant dans un groupe de raid pendant une Tempête élémentaire rend l\'obtention des objets beaucoup plus facile.}'
 L['options_icons_nokhud_do_it'] = '{achievement:16583}'
 L['options_icons_nokhud_do_it_desc'] = 'Afficher des informations utiles pour obtenir le haut-fait {achievement:16583}.'
 
 L['chest_of_the_flood'] = 'Coffre du déluge'
 
 L['aylaag_camp_note'] = 'Le {faction:Clan des Aylaags} se déplace vers un autre campement tous les 3 jours et 3 heures (75), suivez-les et défendez-les sur leur chemin.'
+
+L['clan_chest'] = 'Coffre clanique'
+L['options_icons_clan_chest'] = 'Coffres claniques'
+L['options_icons_clan_chest_desc'] = 'Afficher les emplacements possibles des {object:Coffres claniques}.'
 
 -------------------------------------------------------------------------------
 --------------------------------- THALDRASZUS ---------------------------------
@@ -319,7 +360,7 @@ L['tasty_hatchling_treat_note'] = 'Dans un tonneau derrière l\'étagère.'
 L['pm_mining_bridgette_holdug'] = 'Au sommet d\'un pilier de roche couvert d\'herbe.'
 L['pm_tailor_elysa_raywinder'] = 'Sur une corniche à mi-hauteur de la tour.'
 L['pt_alch_contraband_concoction_note'] = 'Caché dans les buissons. {note:Difficile à voir}.'
-L['pt_alch_furry_gloop_note'] = 'Jetez un {npc:194855} proche dans chaque chaudron puis tuez le monstre qui apparaît.'
+L['pt_alch_tasty_candy_note'] = 'Jetez un {object:Jouet abandonné} proche dans chaque chaudron puis tuez le monstre qui apparaît.'
 L['pt_ench_fractured_titanic_sphere_note'] = 'Au sud du {location:Bastion de Tyr}.'
 L['pt_jewel_alexstraszite_cluster_note'] = 'Au {location:Bastion de Tyr}.'
 L['pt_jewel_painters_pretty_jewel_note'] = 'A l\'intérieur d\'une lanterne.'
@@ -336,7 +377,7 @@ L['icecrown_bleu_note'] = 'Achetez auprès de {npc:196729} {title:<Fromager>} au
 L['dreamwarding_dripbrew_note'] = 'Achetez auprès de {npc:197872} {title:<Caféinomancien>} au {location:Laboratoire de nuit}.'
 L['arcanostabilized_provisions_note'] = 'Achetez auprès de {npc:198831} {title:<Cuisinière en chef>} à la {location:Confluence Temporelle} dans {location:L’avenir des Primalistes}.'
 L['steamed_scarab_steak_note'] = 'Achetez auprès de {npc:197586} {title:<Tavernière du spa>} au {location:Spa « Rêves sereins »}.'
-L['craft_creche_crowler_note'] = 'Achetez auprès de {npc:187444} {title:<Vendeur de breuvages draconiques itinérant>} étant situé dans ces zones aléatoires chaque jour : {location:Sanctuaire de l’Essence rubis}, {location:Auberge Vertécaille}, {location:Camp Nulle-Part}, {sanctuary:Confluence Temporelle}.'
+L['craft_creche_crowler_note'] = 'Achetez auprès de {npc:187444} {title:<Vendeur de breuvages draconiques itinérant>} étant situé dans ces zones aléatoires chaque jour : {location:Sanctuaire de l’Essence rubis}, {location:Auberge Vertécaille}, {location:Camp Nulle-Part}, {sanctuary:Confluence Temporelle}, {location:Auberge de la Charnière égarée}, {location:Poste Gelikyr} et {location:Camp de base du Dracaret}.'
 L['bivigosas_blood_sausages_note'] = 'Achetez auprès de l\'{npc:188895} {title:<Nourriture et boissons>} au {location:Poste Gelikyr}.'
 L['rumiastrasza_note'] = '{note:Terminez la suite de quêtes journalières commençant par {quest:71238} à {location:Valdrakken}, sinon le haut-fait ne pourra pas être accompli.}'
 L['options_icons_specialties'] = '{achievement:16621}'
@@ -356,11 +397,15 @@ L['chest_of_the_elements'] = 'Coffre des éléments'
 L['hoard_of_draconic_delicacies_note_start'] = 'Terminez les 7 quêtes suivantes données par {npc:189479} :'
 L['hoard_of_draconic_delicacies_note_end'] = 'Une fois toutes les quêtes terminées, {npc:189479} proposera {quest:67071} pour recevoir votre recette.\n\n{note:Les quêtes sont basées sur le chef invité actuel à l\'{location:Enclave de Rubis} et peuvent ne pas correspondre à l\'ordre indiqué ci-dessus.}'
 
+L['brendormi_note_start'] = 'Échangez vos {item:202039} et {currency:2118} contre de l\'équipement, une mascotte, un jouet et une monture.'
+L['brendormi_note_item'] = 'Vous avez actuellement %s {item:202039}.'
+L['brendormi_note_currency'] = 'Vous avez actuellement %s {currency:2118}.'
+
 -------------------------------------------------------------------------------
 ------------------------------ THE WAKING SHORE -------------------------------
 -------------------------------------------------------------------------------
 
-L['brundin_the_dragonbane_note'] = 'La Troupe Qalashi voyage sur leur {npc:192737} jusqu\'à cette tour.'
+L['brundin_the_dragonbane_note'] = 'La {npc:Troupe Qalashi} voyage sur leur {npc:192737} jusqu\'à cette tour.'
 L['captain_lancer_note'] = 'Apparaît immédiatement après avoir terminé l\'événement du {spell:388945}.'
 L['enkine_note'] = 'Tuez des {npc:193137}, {npc:193138} ou {npc:193139} le long de la rivière de lave pour obtenir les {item:201092}, utilisez-les et pêchez près de la {npc:191866} dans la lave.'
 L['lepidoralia_note'] = 'Situé dans la {location:Caverne Bruissante}. Aidez le {npc:193342} à attraper des {npc:193274s} jusqu\'à ce que le rare apparaisse.'
@@ -387,9 +432,9 @@ L['fullsails_supply_chest'] = 'Clé de coffre de fournitures des Gréements'
 L['hidden_hornswog_hoard_note'] = [[
 Récupérez trois items différents et combinez-les à {object:"l\'Énigmes sagaces : un guide de poche"} près du {npc:192362} pour obtenir une {item:200063} et le nourrir. Elle s'écartera alors du chemin pour que vous puissiez récupérer son trésor.
 
-{item:200064}
-{item:200065}
-{item:200066}
+{item:200064}{dot:Yellow}
+{item:200065}{dot:Blue}
+{item:200066}{dot:White}
 ]]
 
 L['pm_alch_grigori_vialtry'] = 'Sur une corniche surplombant l\'{location:Assaut de Givréclair}.'
@@ -484,3 +529,11 @@ L['loyal_magmammoth_wrathion_quatermaster_note'] = 'Achetez les {item:201840} ' 
 L['loyal_magmammoth_sabellian_quatermaster_note'] = 'Achetez les {item:201839} ' .. ns.color.Gold('(800 po)') .. ' à {npc:199036} ou {npc:188623}.'
 L['loyal_magmammoth_harness_note'] = 'Achetez le {item:201837} à {npc:191135}.'
 L['loyal_magmammoth_taming_note'] = 'Utilisez le {item:201837} tout en chevauchant un {npc:198150} pour obtenir votre monture !\n\n{note:Il a été signalé qu\'il ne serait apparemment possible d\'harnacher qu\'un seul {npc:198150}, trouvé dans l\'{location:Éminence Ardente}.}'
+
+L['djaradin_cache'] = 'Cache djaradine'
+L['options_icons_djaradin_cache'] = 'Cache djaradine'
+L['options_icons_djaradin_cache_desc'] = 'Afficher les emplacements possibles des {object:Caches djaradines}.'
+
+L['dragonbane_siege_label'] = '{spell:388945}'
+L['options_icons_dragonbane_siege'] = '{spell:388945}'
+L['options_icons_dragonbane_siege_desc'] = 'Afficher les emplacements et les récompenses pour le {spell:388945}.'

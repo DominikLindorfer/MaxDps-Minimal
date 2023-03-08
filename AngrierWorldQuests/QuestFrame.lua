@@ -951,6 +951,10 @@ local function QuestFrame_Update()
 		return
 	end
 
+	if (Config.hideQuestList) then
+		return
+	end
+
 	local questsCollapsed = Config.collapsed
 
 	local firstButton, storyButton, prevButton
@@ -1206,7 +1210,9 @@ function Mod:Blizzard_WorldMap()
 	end
 	for _,of in ipairs(WorldMapFrame.overlayFrames) do
 		if of.OnLoad and of.OnLoad == WorldMapTrackingOptionsButtonMixin.OnLoad then
-			hooksecurefunc(of, "OnSelection", QuestMapFrame_UpdateAll)
+			hooksecurefunc(of, "OnSelection", function()
+				QuestMapFrame_UpdateAll()
+			end)
 		end
 	end
 end

@@ -132,6 +132,8 @@ function E:Refresh(arg)
 		end
 	end
 
+	self.TooltipID:SetHooks()
+
 	if arg == "OnProfileReset" then
 		self.global.disableElvMsg = nil
 	end

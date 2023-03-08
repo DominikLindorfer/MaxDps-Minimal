@@ -51,38 +51,29 @@ L["DISABLE_RWF_MODE_BUTTON"] = "Deaktivieren"
 L["DISABLE_RWF_MODE_BUTTON_TOOLTIP"] = "Klicke hier, um den Wettrennen Welt 1.-Modus zu deaktivieren. Dadurch wird deine Benutzeroberfläche neu geladen."
 L["DISABLE_RWF_MODE_RELOAD"] = "Du deaktivierst den Wettrennen Welt 1.-Modus. Durch Klicken auf Bestätigung wird deine Benutzeroberfläche neu geladen."
 L["DPS"] = "DPS"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_AA"] = ""--]] 
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_AV"] = ""--]] 
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_COS"] = ""--]] 
+L["DUNGEON_SHORT_NAME_AA"] = "Akademie von Algeth'ar"
+L["DUNGEON_SHORT_NAME_AV"] = "Azurblaue Gewölbe"
+L["DUNGEON_SHORT_NAME_COS"] = "Hof der Sterne"
 L["DUNGEON_SHORT_NAME_DOS"] = "Die Andre Seite"
 L["DUNGEON_SHORT_NAME_GD"] = "Das Grimmgleisdepot"
 L["DUNGEON_SHORT_NAME_GMBT"] = "Tazavesh So'leahs Schachzug"
 L["DUNGEON_SHORT_NAME_HOA"] = "Hallen der Sühne"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_HOV"] = ""--]] 
+L["DUNGEON_SHORT_NAME_HOV"] = "Hallen der Tapferkeit"
 L["DUNGEON_SHORT_NAME_ID"] = "Die Eisendocks"
 L["DUNGEON_SHORT_NAME_LOWR"] = "Untere Rückkehr nach Karazhan"
 L["DUNGEON_SHORT_NAME_MISTS"] = "Nebel von Tirna Scithe"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_NO"] = ""--]] 
+L["DUNGEON_SHORT_NAME_NO"] = "Angriff der Nokhud"
 L["DUNGEON_SHORT_NAME_NW"] = "Nekrotische Schneise"
 L["DUNGEON_SHORT_NAME_PF"] = "Seuchensturz"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_RLP"] = ""--]] 
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_SBG"] = ""--]] 
+L["DUNGEON_SHORT_NAME_RLP"] = "Rubinlebensbecken"
+L["DUNGEON_SHORT_NAME_SBG"] = "Schattenmondgrabstätte"
 L["DUNGEON_SHORT_NAME_SD"] = "Blutigen Tiefen"
 L["DUNGEON_SHORT_NAME_SOA"] = "Spitzen des Aufstiegs"
 L["DUNGEON_SHORT_NAME_STRT"] = "Tazavesh Wundersame Straßen"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_TJS"] = ""--]] 
+L["DUNGEON_SHORT_NAME_TJS"] = "Tempel der Jadeschlange"
 L["DUNGEON_SHORT_NAME_TOP"] = "Theater der Schmerzen"
 L["DUNGEON_SHORT_NAME_UPPR"] = "Obere Rückkehr nach Karazhan"
---[[Translation missing --]]
---[[ L["DUNGEON_SHORT_NAME_VOTW"] = ""--]] 
+L["DUNGEON_SHORT_NAME_VOTW"] = "Verlies der Wächterinnen"
 L["DUNGEON_SHORT_NAME_WORK"] = "Operation Mechagon - Werkstatt"
 L["DUNGEON_SHORT_NAME_YARD"] = "Operation Mechagon - Schrottplatz"
 L["ENABLE_AUTO_FRAME_POSITION"] = "Positioniert den Raider.IO Profilrahmen automatisch"
@@ -206,22 +197,14 @@ L["RAID_BOSS_SOD_6"] = "Leidensschmied Raznal"
 L["RAID_BOSS_SOD_7"] = "Wächter der Ersten"
 L["RAID_BOSS_SOD_8"] = "Schicksalsschreiber Roh-Kalo"
 L["RAID_BOSS_SOD_9"] = "Kel'Thuzad"
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_1"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_2"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_3"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_4"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_5"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_6"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_7"] = ""--]] 
---[[Translation missing --]]
---[[ L["RAID_BOSS_VOTI_8"] = ""--]] 
+L["RAID_BOSS_VOTI_1"] = "Eranog"
+L["RAID_BOSS_VOTI_2"] = "Terros"
+L["RAID_BOSS_VOTI_3"] = "Der Primalistenrat"
+L["RAID_BOSS_VOTI_4"] = "Sennarth, der kalte Atem"
+L["RAID_BOSS_VOTI_5"] = "Dathea, die Aufgestiegene"
+L["RAID_BOSS_VOTI_6"] = "Kurog Grimmtotem"
+L["RAID_BOSS_VOTI_7"] = "Bruthüterin Diurna"
+L["RAID_BOSS_VOTI_8"] = "Raszageth die Sturmfresserin"
 L["RAID_DIFFICULTY_NAME_HEROIC"] = "Heroisch"
 L["RAID_DIFFICULTY_NAME_MYTHIC"] = "Mythisch"
 L["RAID_DIFFICULTY_NAME_NORMAL"] = "Normal"

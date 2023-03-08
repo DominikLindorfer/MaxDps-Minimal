@@ -55,9 +55,15 @@ if (C_PlayerInfo.GetPlayerMythicPlusRatingSummary) then
 	ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "Check", var = "showMythicPlusDungeonScore", label = "Show Mythic+ Dungeon Score", tip = "This will show the mythic+ dungeon score of the player." };
 end
 
+ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "Check", var = "showMount", label = "Show Mount", tip = "This will show the current mount of the player.", y = 16 };
+ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "Check", var = "showMountCollected", label = "Collected", tip = "This option makes the tip show an icon indicating if you already have collected the mount.", x = 122 };
+ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "Check", var = "showMountIcon", label = "Icon", tip = "This option makes the tip show the mount icon.", x = 210 };
+ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "Check", var = "showMountText", label = "Text", tip = "This option makes the tip show the mount text.", x = 122 };
+ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "Check", var = "showMountSpeed", label = "Speed", tip = "This option makes the tip show the mount speed.", x = 210 };
+
 ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "DropDown", var = "nameType", label = "Name & Title", list = { ["Name only"] = "normal", ["Name + title"] = "title", ["Copy from original tip"] = "original", ["Mary Sue Protocol"] = "marysueprot" }, y = 16 };
-ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "DropDown", var = "showRealm", label = "Show Unit Realm", list = { ["Do not show realm"] = "none", ["Show realm"] = "show", ["Show (*) instead"] = "asterisk" } };
-ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "DropDown", var = "showTarget", label = "Show Unit Target", list = { ["Do not show target"] = "none", ["First line"] = "first", ["Second line"] = "second", ["Last line"] = "last" } };
+ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "DropDown", var = "showRealm", label = "Show Unit Realm", list = { ["|cffffa0a0Do not show realm"] = "none", ["Show realm"] = "show", ["Show (*) instead"] = "asterisk" } };
+ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "DropDown", var = "showTarget", label = "Show Unit Target", list = { ["|cffffa0a0Do not show target"] = "none", ["First line"] = "first", ["Second line"] = "second", ["Last line"] = "last" } };
 ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "Text", var = "targetYouText", label = "Targeting You Text", y = 16 };
 ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "Check", var = "showGuildRank", label = "Show Player Guild Rank Title", tip = "In addition to the guild name, with this option on, you will also see their guild rank by title and/or level", y = 16 };
 ttOptionsGeneral[#ttOptionsGeneral + 1] = { type = "DropDown", var = "guildRankFormat", label = "Format", list = { ["Title only"] = "title", ["Title + level"] = "both", ["Level only"] = "level" }, y = 8 };
@@ -81,19 +87,29 @@ local options = {
 	-- Colors
 	{
 		[0] = "Colors",
-		{ type = "Check", var = "colorGuildByReaction", label = "Color Guild by Reaction", tip = "Guild color will have the same color as the reacion" },
-		{ type = "Color", var = "colorGuild", label = "Guild Color", tip = "Color of the guild name, when not using the option to make it the same as reaction color", y = 8 },
+		{ type = "Color", var = "colorName", label = "Name Color", tip = "Color of the name, when not using the option to make it the same as reaction color" },
+		{ type = "Check", var = "colorNameByReaction", label = "Color Name by Reaction", tip = "Name color will have the same color as the reaction\nNOTE: This option is overridden by class colored name for players" },
+		{ type = "Check", var = "colorNameByClass", label = "Color Player Names by Class Color", tip = "With this option on, player names are colored by their class color\nNOTE: This option overrides reaction colored name for players" },
+		
+		{ type = "Color", var = "colorGuild", label = "Guild Color", tip = "Color of the guild name, when not using the option to make it the same as reaction color", y = 20 },
 		{ type = "Color", var = "colorSameGuild", label = "Your Guild Color", tip = "To better recognise players from your guild, you can configure the color of your guild name individually", x = 120 },
-		{ type = "Color", var = "colorRace", label = "Race & Creature Type Color", tip = "The color of the race and creature type text", y = 8 },
+		{ type = "Check", var = "colorGuildByReaction", label = "Color Guild by Reaction", tip = "Guild color will have the same color as the reacion" },
+		
+		{ type = "Color", var = "colorRace", label = "Race & Creature Type Color", tip = "The color of the race and creature type text", y = 20 },
 		{ type = "Color", var = "colorLevel", label = "Neutral Level Color", tip = "Units you cannot attack will have their level text shown in this color" },
-		{ type = "Check", var = "colorNameByClass", label = "Color Player Names by Class Color", tip = "With this option on, player names are colored by their class color, otherwise they will be colored by reaction", y = 12 },
-		{ type = "Check", var = "classColoredBorder", label = "Color Tip Border by Class Color", tip = "For players, the border color will be colored to match the color of their class\nNOTE: This option overrides reaction colored border" },
+		
+		{ type = "Check", var = "classColoredBorder", label = "Color Tip Border by Class Color", tip = "For players, the border color will be colored to match the color of their class\nNOTE: This option overrides reaction colored border", y = 12 },
 	},
 	-- Reactions
 	{
 		[0] = "Reactions",
 		{ type = "Check", var = "reactColoredBorder", label = "Color border based on the unit's reaction", tip = "Same as the above option, just for the border\nNOTE: This option is overridden by class colored border" },
-		{ type = "Check", var = "reactText", label = "Show the unit's reaction as text", tip = "With this option on, the reaction of the unit will be shown as text on the last line" },
+		{ type = "Check", var = "reactIcon", label = "Show the unit's reaction as icon", tip = "This option makes the tip show the unit's reaction as an icon right behind the level" },
+		
+		{ type = "Check", var = "reactText", label = "Show the unit's reaction as text", tip = "With this option on, the reaction of the unit will be shown as text on the last line", y = 12 },
+		{ type = "Color", var = "colorReactText", label = "Color of unit's reaction as text", tip = "Color of the unit's reaction as text, when not using the option to make it the same as reaction color", y = 8 },
+		{ type = "Check", var = "reactColoredText", label = "Color unit's reaction as text based on unit's reaction", tip = "With this option on, the unit's reaction as text will be based on unit's reaction" },
+		
 		{ type = "Color", var = "colorReactText" .. LFF_UNIT_REACTION_INDEX.tapped, label = "Tapped Color", y = 20 },
 		{ type = "Color", var = "colorReactText" .. LFF_UNIT_REACTION_INDEX.hostile, label = "Hostile Color" },
 		{ type = "Color", var = "colorReactText" .. LFF_UNIT_REACTION_INDEX.caution, label = "Caution Color" },
@@ -110,6 +126,7 @@ local options = {
 	{
 		[0] = "BG Color",
 		{ type = "Check", var = "reactColoredBackdrop", label = "Color backdrop based on the unit's reaction", tip = "If you want the tip's background color to be determined by the unit's reaction towards you, enable this. With the option off, the background color will be the one selected on the 'Backdrop' page" },
+		
 		{ type = "Color", var = "colorReactBack" .. LFF_UNIT_REACTION_INDEX.tapped, label = "Tapped Color", y = 20 },
 		{ type = "Color", var = "colorReactBack" .. LFF_UNIT_REACTION_INDEX.hostile, label = "Hostile Color" },
 		{ type = "Color", var = "colorReactBack" .. LFF_UNIT_REACTION_INDEX.caution, label = "Caution Color" },
@@ -215,7 +232,8 @@ local options = {
 	-- Anchors
 	{
 		[0] = "Anchors",
-		{ type = "DropDown", var = "anchorWorldUnitType", label = "World Unit Type", list = DROPDOWN_ANCHORTYPE },
+		{ type = "Check", var = "enableAnchor", label = "Enable Anchor Modifications", tip = "Turns on or off all modifications of the anchor" },
+		{ type = "DropDown", var = "anchorWorldUnitType", label = "World Unit Type", list = DROPDOWN_ANCHORTYPE, y = 12 },
 		{ type = "DropDown", var = "anchorWorldUnitPoint", label = "World Unit Point", list = DROPDOWN_ANCHORPOS },
 		{ type = "DropDown", var = "anchorWorldTipType", label = "World Tip Type", list = DROPDOWN_ANCHORTYPE, y = 12 },
 		{ type = "DropDown", var = "anchorWorldTipPoint", label = "World Tip Point", list = DROPDOWN_ANCHORPOS },
@@ -275,7 +293,7 @@ local options = {
 		{ type = "Check", var = "hideTipsInCombatActionTips", label = "Hide Other Action Bar Tips", tip = "When you have this option checked, other Action Bar Tips will be hidden in combat." },
 		
 		{ type = "Header", label = "Others", y = 12 },
-		{ type = "DropDown", var = "showHiddenModifierKey", label = "Still Show Hidden Tips\nwhen Holding\nModifier Key", list = { ["Shift"] = "shift", ["Ctrl"] = "ctrl", ["Alt"] = "alt", ["None"] = "none" }, y = 8 },
+		{ type = "DropDown", var = "showHiddenModifierKey", label = "Still Show Hidden Tips\nwhen Holding\nModifier Key", list = { ["Shift"] = "shift", ["Ctrl"] = "ctrl", ["Alt"] = "alt", ["|cffffa0a0None"] = "none" }, y = 8 },
 		{ type = "TextOnly", label = "", y = -14 }, -- spacer for multi-line label above
 	},
 	-- Layouts
@@ -319,7 +337,8 @@ if (TipTacTalents) then
 	
 	tttOptions[#tttOptions + 1] = { type = "Header", label = "Average Item Level", y = 12 };
 	tttOptions[#tttOptions + 1] = { type = "Check", var = "t_showAverageItemLevel", label = "Show Average Item Level (AIL)", tip = "This option makes the tip show the average item level (AIL) of other players" };
-	tttOptions[#tttOptions + 1] = { type = "Check", var = "t_colorAILTextByQuality", label = "Color Average Item Level Text by Quality Color", tip = "With this option on, average item level text is colored by the average quality of the items" };
+	tttOptions[#tttOptions + 1] = { type = "Check", var = "t_showGearScore", label = "Show TipTac's GearScore", tip = "This option makes the tip show TipTac's GearScore of other players.\nNOTE: TipTac's own implementation to simply calculate the GearScore is used here. This is the sum of all item levels weighted by performance per item level above/below base level of first tier set of current expansion, inventory type and item quality. Inventory slots for shirt, tabard and ranged are excluded." };
+	tttOptions[#tttOptions + 1] = { type = "Check", var = "t_colorAILAndGSTextByQuality", label = "Color Average Item Level and GearScore Text\nby Quality Color", tip = "With this option on, average item level and GearScore text is colored by the average quality of the items" };
 	
 	options[#options + 1] = {
 		[0] = "Talents/AIL",
@@ -349,8 +368,13 @@ if (TipTacItemRef) then
 		{ type = "Check", var = "if_showSpellIdAndRank", label = "Show Spell ID & Rank", tip = "For spell tooltips, show their spellID and spellRank" },
 		{ type = "Check", var = "if_auraSpellColoredBorder", label = "Show Aura Tips with Colored Border", tip = "When enabled and the tip is showing a buff or debuff, the tip border will have the standard spell color" },
 		{ type = "Check", var = "if_showAuraSpellIdAndRank", label = "Show Aura Spell ID & Rank", tip = "For buff and debuff tooltips, show their spellID and spellRank" },
-		{ type = "Check", var = "if_showAuraCaster", label = "Show Aura Tooltip Caster", tip = "When showing buff and debuff tooltips, it will add an extra line, showing who cast the specific aura" },
 		{ type = "Check", var = "if_showMawPowerId", label = "Show Maw Power ID", tip = "For spell and aura tooltips, show their mawPowerID" },
+		
+		{ type = "Check", var = "if_showAuraCaster", label = "Show Aura Tooltip Caster", tip = "When showing buff and debuff tooltips, it will add an extra line, showing who cast the specific aura", y = 12 },
+		{ type = "Check", var = "if_colorAuraCasterByReaction", label = "Color Aura Tooltip Caster by Reaction", tip = "Aura tooltip caster color will have the same color as the reaction\nNOTE: This option is overridden by class colored aura tooltip caster for players" },
+		{ type = "Check", var = "if_colorAuraCasterByClass", label = "Color Aura Tooltip Caster for Player by Class Color", tip = "With this option on, color aura tooltip caster for players are colored by their class color\nNOTE: This option overrides reaction colored aura tooltip caster for players" },
+		
+		{ type = "Check", var = "if_showMountId", label = "Show Mount ID", tip = "For item, spell and aura tooltips, show their mountID", y = 12 },
 
 		{ type = "Check", var = "if_questDifficultyBorder", label = "Show Quest Tips with Difficulty Colored Border", tip = "When enabled and the tip is showing a quest, the tip border will have the color of the quest's difficulty", y = 12 },
 		{ type = "Check", var = "if_showQuestLevel", label = "Show Quest Level", tip = "For quest tooltips, show their questLevel (Combines with questID)" },
@@ -398,7 +422,8 @@ if (TipTacItemRef) then
 		{ type = "Header", label = "Icon", tip = "Settings about tooltip icon", y = 12 },
 		{ type = "Check", var = "if_showIcon", label = "Show Icon Texture and Stack Count (when available)", tip = "Shows an icon next to the tooltip. For items, the stack count will also be shown" },
 		{ type = "Check", var = "if_smartIcons", label = "Smart Icon Appearance", tip = "When enabled, TipTacItemRef will determine if an icon is needed, based on where the tip is shown. It will not be shown on actionbars or bag slots for example, as they already show an icon" },
-		{ type = "DropDown", var = "if_stackCountToTooltip", label = "Show Stack Count in\nTooltip", list = { ["Do not show"] = "none", ["Always"] = "always", ["Only if icon is not shown"] = "noicon" }, y = 8 },
+		{ type = "DropDown", var = "if_stackCountToTooltip", label = "Show Stack Count in\nTooltip", list = { ["|cffffa0a0Do not show"] = "none", ["Always"] = "always", ["Only if icon is not shown"] = "noicon" }, y = 8 },
+		{ type = "Check", var = "if_showIconId", label = "Show Icon ID", tip = "For tooltips with icon, show their iconID" },
 		{ type = "Check", var = "if_borderlessIcons", label = "Borderless Icons", tip = "Turn off the border on icons", y = 8 },
 		{ type = "Slider", var = "if_iconSize", label = "Icon Size", min = 16, max = 128, step = 1 },
 		{ type = "DropDown", var = "if_iconAnchor", label = "Icon Anchor", tip = "The anchor of the icon", list = DROPDOWN_ANCHORPOS },

@@ -1,4 +1,5 @@
-# 11.1.10 (2023-01-24)
+# 11.1.15 (2023-02-26)
 
-* Fixed a bug in the option dialog where unavailable options where shown in Classic WoW.
-* Updated TOC version for Wrath Classic Patch 3.4.1.
+* Healer Tracker no longer is disabled in arenas and open-world [Issue #622].
+* Enabled spec-based profiles for Wrath Classic [Comment #6903].
+* Upgrade integrated libraries (LibDualSpec v1.22.0).

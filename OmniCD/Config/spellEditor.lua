@@ -564,13 +564,14 @@ local SpellEditor = {
 				tooltipID = {
 					order = 1,
 					name = L["Show Spell ID in Tooltips"],
-					desc = L["Tooltips will be enabled for this login session only."],
+
+
 					descStyle = "inline",
 					width = "full",
 					type = "toggle",
-					get = function() return E.TooltipID.enabled end,
+					get = function() return E.profile.tooltipID end,
 					set = function(_, state)
-						E.TooltipID.enabled = state
+						E.profile.tooltipID = state
 						E.TooltipID:SetHooks()
 					end,
 				},

@@ -1,7 +1,7 @@
 local E = select(2, ...):unpack()
 local P = E.Party
 
-local MIN_RESET_DURATION = E.TocVersion > 90100 and 120 or 180
+local MIN_RESET_DURATION = (E.isWOTLKC or E.TocVersion > 90100) and 120 or 180
 
 function P:ResetCooldown(icon)
 	local info = self.groupInfo[icon.guid]
@@ -237,11 +237,10 @@ function P:StartCooldown(icon, cd, isRecharge, noGlow)
 	end
 end
 
-
 function P:ResetAllIcons(reason)
 	for guid, info in pairs(self.groupInfo) do
 		for spellID, icon in pairs(info.spellIcons) do
-			if reason ~= "encounterEnd" or (not E.spell_noreset_onencounterend[spellID] and icon.duration >= MIN_RESET_DURATION) then
+			if reason ~= "encounterEnd" or (not E.spell_noreset_onencounterend[spellID] and icon.baseCooldown >= MIN_RESET_DURATION) then
 				local statusBar = icon.statusBar
 				if icon.active then
 

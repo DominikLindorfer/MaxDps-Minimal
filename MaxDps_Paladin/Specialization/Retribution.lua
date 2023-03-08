@@ -54,60 +54,60 @@ function Paladin:Retribution()
 	local healthMax = UnitHealthMax('player');
 	local healthPercent = ( health / healthMax ) * 100;
 
-	-- Essences
-	MaxDps:GlowEssences();
+	-- -- Essences
+	-- MaxDps:GlowEssences();
 
-	-- Cooldowns
-	MaxDps:GlowCooldown(RT.FlashOfLight, talents[RT.SelflessHealer] and buff[RT.SelflessHealer].count > 3 and healthPercent < 80);
+	-- -- Cooldowns
+	-- MaxDps:GlowCooldown(RT.FlashOfLight, talents[RT.SelflessHealer] and buff[RT.SelflessHealer].count > 3 and healthPercent < 80);
 
-	if talents[RT.Crusade] then
-		MaxDps:GlowCooldown(RT.Crusade, cooldown[RT.Crusade].ready);
-	else MaxDps:GlowCooldown(RT.AvengingWrath, cooldown[RT.AvengingWrath].ready);
-	end
+	-- if talents[RT.Crusade] then
+	-- 	MaxDps:GlowCooldown(RT.Crusade, cooldown[RT.Crusade].ready);
+	-- else MaxDps:GlowCooldown(RT.AvengingWrath, cooldown[RT.AvengingWrath].ready);
+	-- end
 
-	if talents[RT.FinalReckoning] and holyPower >=3 then
-		MaxDps:GlowCooldown(RT.FinalReckoning, cooldown[RT.FinalReckoning].ready);
-	end
+	-- if talents[RT.FinalReckoning] and holyPower >=3 then
+	-- 	MaxDps:GlowCooldown(RT.FinalReckoning, cooldown[RT.FinalReckoning].ready);
+	-- end
 
-	if talents[RT.HolyAvenger] then
-		MaxDps:GlowCooldown(RT.HolyAvenger, cooldown[RT.HolyAvenger].ready);
-	end
+	-- if talents[RT.HolyAvenger] then
+	-- 	MaxDps:GlowCooldown(RT.HolyAvenger, cooldown[RT.HolyAvenger].ready);
+	-- end
 
-	--- Spenders
+	-- --- Spenders
 	
-	if talents[RT.Seraphim] and holyPower >=3 then
-		MaxDps:GlowCooldown(RT.Seraphim, cooldown[RT.Seraphim].ready);
-	end
+	-- if talents[RT.Seraphim] and holyPower >=3 then
+	-- 	MaxDps:GlowCooldown(RT.Seraphim, cooldown[RT.Seraphim].ready);
+	-- end
 
-	if talents[RT.ExecutionSentence] and holyPower >= 3 and cooldown[RT.ExecutionSentence].ready then
-		return RT.ExecutionSentence;
-	end
+	-- if talents[RT.ExecutionSentence] and holyPower >= 3 and cooldown[RT.ExecutionSentence].ready then
+	-- 	return RT.ExecutionSentence;
+	-- end
 
-	if holyPower >= 3 and targets =< 3 then
-		return RT.TemplarsVerdict;
-	elseif buff[RT.DivinePurpose].up then
-		return RT.TemplarsVerdict;
-	end
+	-- if holyPower >= 3 and targets =< 3 then
+	-- 	return RT.TemplarsVerdict;
+	-- if buff[RT.DivinePurpose].up then
+	-- 	return RT.TemplarsVerdict;
+	-- end
 
-	-- Generators
-	if (cooldown[RT.HammerOfWrath].ready and buff[RT.FinalVerdictBuff].up) or (cooldown[RT.HammerOfWrath].ready and targetHp <= 20) or (cooldown[RT.HammerOfWrath].ready and buff[RT.AvengingWrath].up) then
-		return RT.HammerOfWrath;
-	end
+	-- -- Generators
+	-- if (cooldown[RT.HammerOfWrath].ready and buff[RT.FinalVerdictBuff].up) or (cooldown[RT.HammerOfWrath].ready and targetHp <= 20) or (cooldown[RT.HammerOfWrath].ready and buff[RT.AvengingWrath].up) then
+	-- 	return RT.HammerOfWrath;
+	-- end
 	
-	if cooldown[RT.WakeOfAshes].ready and holyPower <= 2 then
-		return RT.WakeOfAshes;
-	end
+	-- if cooldown[RT.WakeOfAshes].ready and holyPower <= 2 then
+	-- 	return RT.WakeOfAshes;
+	-- end
 		
-	if cooldown[RT.BladeOfJustice].ready and holyPower <= 3 then
-		return RT.BladeOfJustice;
-	end
+	-- if cooldown[RT.BladeOfJustice].ready and holyPower <= 3 then
+	-- 	return RT.BladeOfJustice;
+	-- end
 	
-	if cooldown[RT.Judgment].ready and holyPower <= 4 then
-		return RT.Judgment;
-	end
+	-- if cooldown[RT.Judgment].ready and holyPower <= 4 then
+	-- 	return RT.Judgment;
+	-- end
 
-	if cooldown[RT.CrusaderStrike].ready and holyPower <= 4 then
-		return RT.CrusaderStrike;
-	end
+	-- if cooldown[RT.CrusaderStrike].ready and holyPower <= 4 then
+	-- 	return RT.CrusaderStrike;
+	-- end
 
 end

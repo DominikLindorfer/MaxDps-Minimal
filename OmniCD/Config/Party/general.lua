@@ -86,8 +86,8 @@ local general = {
 		},
 		showTooltip = {
 			name = L["Show Tooltip"],
-			desc = format("%s. %s", L["Show spell information when you mouseover an icon"],
-			L["Disable to make the icons click through"]),
+
+			desc = L["Show spell information when you mouseover an icon"],
 			order = 13,
 			type = "toggle",
 			get = P.getIcons,

@@ -4,6 +4,7 @@ G.loginMessage = false
 G.notifyNew = false
 G.optionPanelScale = 1
 
+C.tooltipID = false
 C.Party = {
 	["visibility"] = {
 		["arena"] = true,

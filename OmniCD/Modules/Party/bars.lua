@@ -74,8 +74,10 @@ local function CooldownBarFrame_OnEvent(self, event, ...)
 			return
 		end
 
-		if spellID == 384255 and not CM.syncedGroupMembers[guid] then
-			CM:EnqueueInspect(nil, guid)
+		if spellID == 384255 then
+			if not CM.syncedGroupMembers[guid] then
+				CM:EnqueueInspect(nil, guid)
+			end
 		elseif P.spell_enabled[spellID] or E.spell_modifiers[spellID] then
 			E.ProcessSpell(spellID, guid)
 		end
@@ -352,6 +354,7 @@ local function GetIcon(barFrame, iconIndex)
 		icon.cooldown:SetScript("OnHide", OmniCDCooldown_OnHide)
 		icon:SetScript("OnEnter", OmniCDIcon_OnEnter)
 		icon:SetScript("OnLeave", OmniCDIcon_OnLeave)
+		icon:SetPassThroughButtons("LeftButton", "RightButton")
 	end
 
 	icon:SetParent(barFrame.container)
@@ -517,6 +520,7 @@ function P:UpdateUnitBar(guid, isUpdateBarsOrGRU)
 					if not E.preCata or not self.isInArena or cd < 900 then
 						local category, buffID, iconTexture = spell.class, spell.buff, spell.icon
 						local ch = self:GetValueByType(spell.charges, guid) or 1
+						local baseCooldown = cd
 						if isInspectedUnit then
 							if i == 6 then
 								local modData = E.spell_cdmod_talents[spellID]
@@ -571,7 +575,7 @@ function P:UpdateUnitBar(guid, isUpdateBarsOrGRU)
 								if modData then
 									for j = 1, #modData, 2 do
 										local tal = modData[j]
-										local rank = info.talentData[tal]
+										local rank = self:IsTalentForPvpStatus(tal, info)
 										if rank then
 											local mult = modData[j+1]
 											mult = type(mult) == "table" and (mult[rank] or mult[1]) or mult
@@ -671,9 +675,11 @@ function P:UpdateUnitBar(guid, isUpdateBarsOrGRU)
 						icon.category = category
 						icon.buff = buffID
 						icon.duration = cd
+						icon.baseCooldown = baseCooldown
 						icon.maxcharges = ch
 						icon.count:SetText(ch or (spellID == 323436 and info.auras.purifySoulStacks) or "")
 						icon.icon:SetTexture(iconTexture)
+						icon.iconTexture = iconTexture
 						icon.active = nil
 						icon.tooltipID = nil
 

@@ -483,7 +483,7 @@ function P:ApplyExSettings(key)
 		count:SetScale(chargeScale)
 
 
-		icon:EnableMouse(showTooltip)
+		self:SetTooltip(icon, showTooltip)
 	end
 end
 

@@ -1,7 +1,6 @@
 # Details_ChartViewer (plugin)
 
-## [v10.0.0.076](https://github.com/Tercioo/ChartViewer/tree/v10.0.0.076) (2022-10-29)
-[Full Changelog](https://github.com/Tercioo/ChartViewer/compare/v10.0.0.075...v10.0.0.076) 
+## [v10.0.5.077](https://github.com/Tercioo/ChartViewer/tree/v10.0.5.077) (2023-01-26)
+[Full Changelog](https://github.com/Tercioo/ChartViewer/compare/v10.0.0.076...v10.0.5.077) 
 
-- Toc Update for Wago release  
-- Create release.yml  
+- ToC Update  
