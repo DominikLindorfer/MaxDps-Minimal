@@ -143,8 +143,11 @@ function Monk:BrewmasterCooldowns()
 	local targetHealthPercent = MaxDps:TargetPercentHealth();
 	local targetHealth = UnitHealth('target');
 	local staggerAmount = UnitStagger('player');
+	if staggerAmount == nil then
+		staggerAmount = 0
+	end
 	local staggerPercent = (staggerAmount / healthMax) * 100;
-	
+
 	if healthPercent <= 35 and cooldown[BR.FortifyingBrew].ready then
 		return BR.FortifyingBrew;
 	end
