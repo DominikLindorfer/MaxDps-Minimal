@@ -57,9 +57,28 @@ function Warrior:Protection()
 	local curentHP = UnitHealth('player');
 	local maxHP = UnitHealthMax('player');
 	local healthPerc = (curentHP / maxHP) * 100;
+	local absorb = UnitGetTotalAbsorbs('player');
+	local absorbPerc = (absorb / maxHP) * 100;
+    local targetHp = MaxDps:TargetPercentHealth() * 100
 
-	if talents[PR.Shockwave] and cooldown[PR.Shockwave].ready then
-		return PR.Shockwave;
+	if healthPerc <= 75 and cooldown[PR.ImpendingVictory].ready and rage >= 10 then
+		return PR.ImpendingVictory;
+	end	
+
+	if rage >= 30 and cooldown[PR.ShieldBlock].ready then
+		return PR.ShieldBlock;
+	end
+	
+	if (rage >= 35 and buff[PR.IgnorePain].refreshable) or (rage >= 35 and absorb <= 50000) then
+		return PR.IgnorePain;
+	end
+
+	if cooldown[PR.DemoralizingShout].ready then
+		return PR.DemoralizingShout;
+	end
+
+	if talents[PR.Ravager] and cooldown[PR.Ravager].ready then
+		return PR.Ravager;
 	end
 
 	if cooldown[PR.ThunderClap].ready then
@@ -70,11 +89,11 @@ function Warrior:Protection()
 		return PR.ShieldSlam;
 	end
 
-	if cooldown[PR.Revenge].ready then
+	if cooldown[PR.Revenge].ready and rage >= 20 then
 		return PR.Revenge;
 	end
 
-	if cooldown[PR.Execute].ready and target.healthPerc < 20 then
+	if cooldown[PR.Execute].ready and targetHp < 20 then
 		return PR.Execute;
 	end
 
@@ -105,33 +124,17 @@ function Warrior:ProtectionCooldowns()
 	if healthPerc <= 35 and cooldown[PR.LastStand].ready then
 		return PR.LastStand;
 	end
-
-	if healthPerc <= 85 and cooldown[PR.ImpendingVictory].ready then
-		return PR.ImpendingVictory;
-	end
 	
-	if rage >= 30 and cooldown[PR.ShieldBlock].ready then
-		return PR.ShieldBlock;
-	end
-	
-	if (rage >= 35 and buff[PR.IgnorePain].refreshable) or (rage >= 35 and absorb <= 50000) then
-		return PR.IgnorePain;
-	end
-
 	if cooldown[PR.Avatar].ready then
 		return PR.Avatar;
 	end
 
-	if cooldown[PR.DemoralizingShout].ready then
-		return PR.DemoralizingShout;
-	end
-
-	if talents[PR.Ravager] and cooldown[PR.Ravager].ready then
-		return PR.Ravager;
-	end
-
 	if talents[PR.ThunderousRoar] and cooldown[PR.ThunderousRoar].ready then
 		return PR.ThunderousRoar;
+	end
+
+	if talents[PR.Shockwave] and cooldown[PR.Shockwave].ready then
+		return PR.Shockwave;
 	end
 
 end

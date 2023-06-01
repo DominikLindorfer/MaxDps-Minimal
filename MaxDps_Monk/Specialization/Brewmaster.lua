@@ -69,7 +69,10 @@ function Monk:Brewmaster()
 		return nil;
 	end
 
-	if cooldown[BR.KegSmash].ready and cooldown[BR.KegSmash].charges == 2 and energy >= 40 then
+	-- if cooldown[BR.KegSmash].ready and cooldown[BR.KegSmash].charges == 2 and energy >= 40 then
+	-- 	return BR.KegSmash;
+	-- end
+	if cooldown[BR.KegSmash].ready and energy >= 40 then
 		return BR.KegSmash;
 	end
 
@@ -101,10 +104,6 @@ function Monk:Brewmaster()
 
 	if cooldown[BR.BreathofFire].ready then
 		return BR.BreathofFire;
-	end
-
-	if cooldown[BR.KegSmash].ready and energy >= 40 then
-		return BR.KegSmash;
 	end
 
 	if cooldown[BR.BlackoutKick].ready then

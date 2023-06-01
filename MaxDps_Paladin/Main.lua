@@ -23,7 +23,8 @@ function Paladin:Enable()
 		MaxDps.NextCooldown = Paladin.ProtectionCooldowns;
 		MaxDps:Print(MaxDps.Colors.Info .. 'Paladin Protection');
 	elseif MaxDps.Spec == 3 then
-		-- MaxDps.NextSpell = Paladin.Retribution;
+		MaxDps.NextSpell = Paladin.Retribution;
+		MaxDps.NextCooldown = Paladin.RetributionCooldowns;
 		MaxDps:Print(MaxDps.Colors.Info .. 'Paladin Retribution');
 	end
 

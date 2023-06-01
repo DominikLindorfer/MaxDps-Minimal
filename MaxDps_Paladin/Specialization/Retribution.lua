@@ -35,6 +35,9 @@ local RT = {
 	FlashOfLight      = 19750,
 	EmpyreanPowerBuff = 326733,
 	FinalVerdictBuff = 337228,
+	TemplarStrike = 407480,
+	TemplarSlash = 406647,
+	DivineToll = 375576,
 };
 setmetatable(RT, Paladin.spellMeta);
 
@@ -54,60 +57,70 @@ function Paladin:Retribution()
 	local healthMax = UnitHealthMax('player');
 	local healthPercent = ( health / healthMax ) * 100;
 
-	-- -- Essences
-	-- MaxDps:GlowEssences();
+	if holyPower == 5 and targets > 1 then
+		return RT.DivineStorm;
+	end
 
-	-- -- Cooldowns
-	-- MaxDps:GlowCooldown(RT.FlashOfLight, talents[RT.SelflessHealer] and buff[RT.SelflessHealer].count > 3 and healthPercent < 80);
+	if holyPower == 5 and targets == 1 then
+		return RT.TemplarsVerdict;
+	end
 
-	-- if talents[RT.Crusade] then
-	-- 	MaxDps:GlowCooldown(RT.Crusade, cooldown[RT.Crusade].ready);
-	-- else MaxDps:GlowCooldown(RT.AvengingWrath, cooldown[RT.AvengingWrath].ready);
-	-- end
+	if cooldown[RT.WakeOfAshes].ready and holyPower <= 2 then
+		return RT.WakeOfAshes;
+	end
 
-	-- if talents[RT.FinalReckoning] and holyPower >=3 then
-	-- 	MaxDps:GlowCooldown(RT.FinalReckoning, cooldown[RT.FinalReckoning].ready);
-	-- end
+	if cooldown[RT.DivineToll].ready then
+		return RT.DivineToll;
+	end
 
-	-- if talents[RT.HolyAvenger] then
-	-- 	MaxDps:GlowCooldown(RT.HolyAvenger, cooldown[RT.HolyAvenger].ready);
-	-- end
+	if cooldown[RT.Judgment].ready and holyPower <= 3 then
+		return RT.Judgment;
+	end
 
-	-- --- Spenders
+	if cooldown[RT.BladeOfJustice].ready and holyPower <= 3 then
+		return RT.BladeOfJustice;
+	end
+
+	if holyPower == 4 and targets > 1 then
+		return RT.DivineStorm;
+	end
+
+	if holyPower == 4 and targets == 1 then
+		return RT.TemplarsVerdict;
+	end
 	
-	-- if talents[RT.Seraphim] and holyPower >=3 then
-	-- 	MaxDps:GlowCooldown(RT.Seraphim, cooldown[RT.Seraphim].ready);
-	-- end
+	if cooldown[RT.HammerOfWrath].ready and targetHp <= 20 then
+		return RT.HammerOfWrath;
+	end
 
-	-- if talents[RT.ExecutionSentence] and holyPower >= 3 and cooldown[RT.ExecutionSentence].ready then
-	-- 	return RT.ExecutionSentence;
-	-- end
+	if cooldown[RT.TemplarStrike].ready then
+		return RT.TemplarStrike;
+	end
 
-	-- if holyPower >= 3 and targets =< 3 then
-	-- 	return RT.TemplarsVerdict;
-	-- if buff[RT.DivinePurpose].up then
-	-- 	return RT.TemplarsVerdict;
-	-- end
+	if cooldown[RT.TemplarSlash].ready then
+		return RT.TemplarSlash;
+	end
 
-	-- -- Generators
-	-- if (cooldown[RT.HammerOfWrath].ready and buff[RT.FinalVerdictBuff].up) or (cooldown[RT.HammerOfWrath].ready and targetHp <= 20) or (cooldown[RT.HammerOfWrath].ready and buff[RT.AvengingWrath].up) then
-	-- 	return RT.HammerOfWrath;
-	-- end
-	
-	-- if cooldown[RT.WakeOfAshes].ready and holyPower <= 2 then
-	-- 	return RT.WakeOfAshes;
-	-- end
-		
-	-- if cooldown[RT.BladeOfJustice].ready and holyPower <= 3 then
-	-- 	return RT.BladeOfJustice;
-	-- end
-	
-	-- if cooldown[RT.Judgment].ready and holyPower <= 4 then
-	-- 	return RT.Judgment;
-	-- end
+end
 
-	-- if cooldown[RT.CrusaderStrike].ready and holyPower <= 4 then
-	-- 	return RT.CrusaderStrike;
-	-- end
+
+
+function Paladin:RetributionCooldowns()
+	local fd = MaxDps.FrameData;
+	fd.targets = MaxDps:SmartAoe();
+	local holyPower = UnitPower('player', HolyPower);
+	fd.holyPower = holyPower;
+	local cooldown = fd.cooldown;
+	local buff = fd.buff;
+	local debuff = fd.debuff;
+	local talents = fd.talents;
+	local targets = fd.targets;
+	local gcd = fd.gcd;
+	local targetHp = MaxDps:TargetPercentHealth() * 100;
+	local health = UnitHealth('player');
+	local healthMax = UnitHealthMax('player');
+	local healthPercent = ( health / healthMax ) * 100;
+
+	return 1
 
 end

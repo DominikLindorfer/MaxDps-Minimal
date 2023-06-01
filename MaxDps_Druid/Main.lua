@@ -26,6 +26,7 @@ function Druid:Enable()
 		Druid:RegisterEvent('UNIT_SPELLCAST_SUCCEEDED');
 	elseif MaxDps.Spec == 3 then
 		MaxDps.NextSpell = Druid.Guardian;
+		MaxDps.NextCooldown = Druid.GuardianCooldowns;
 		MaxDps:Print(MaxDps.Colors.Info .. 'Druid Guardian');
 	elseif MaxDps.Spec == 4 then
 		MaxDps.NextSpell = Druid.Restoration;

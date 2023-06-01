@@ -10,18 +10,6 @@ local MaxDps = MaxDps;
 local UnitPower = UnitPower;
 local UnitPowerMax = UnitPowerMax;
 
---local GR = {
---	Mangle               = 33917,
---	MangleProc           = 93622,
---	ThrashGuard          = 77758,
---	Ironfur              = 192081,
---	FrenziedRegeneration = 22842,
---	MarkOfUrsol          = 192083,
---	RageOfTheSleeper     = 200851,
---	GalacticGuardian     = 203964,
---	GalacticGuardianBuff = 213708,
---	Swipe                = 213771,
---};
 local GR = {
 	Maul                 = 6807,
 	Ironfur              = 192081,
@@ -44,190 +32,128 @@ local GR = {
 	FrenziedRegeneration = 22842,
 	Renewal = 108238,
 	GuardiansWrath       = 279541,
+	HeartOfTheWild = 319454,
+	RageOfTheSleeper = 200851,
+	ToothAndClaw = 135286,
+	DreamOfCenarius = 372152
 
-	--ConflictAndStrife = 23,
 };
 
-local A = {
-	LayeredMane = 279552,
-};
-
-setmetatable(A, Druid.spellMeta);
 setmetatable(GR, Druid.spellMeta);
 
 function Druid:Guardian()
 	local fd = MaxDps.FrameData;
+	local talents = fd.talents;
 	local targets = MaxDps:SmartAoe();
 	local rage = UnitPower('player', Enum.PowerType.Rage);
 	local rageMax = UnitPowerMax('player', Enum.PowerType.Rage);
 	local rageDeficit = rageMax - rage;
-	fd.targets = targets;
-	fd.rage = rage;
-	fd.rageMax = rageMax;
-	fd.rageDeficit = rageDeficit;
-
-	-- call_action_list,name=cooldowns;
-	Druid:GuardianCooldowns();
-
-	-- call_action_list,name=cleave,if=active_enemies<=2;
-	-- call_action_list,name=multi,if=active_enemies>=3;
-	if targets <= 2 then
-		return Druid:GuardianCleave();
-	else
-		return Druid:GuardianMulti();
-	end
-end
-
-function Druid:GuardianCleave()
-	local fd = MaxDps.FrameData;
-	local cooldown = fd.cooldown;
-	local buff = fd.buff;
+	local targetHp = MaxDps:TargetPercentHealth() * 100;
+	local health = UnitHealth('player');
+	local healthMax = UnitHealthMax('player');
+	local healthPercent = (health / healthMax) * 100;
 	local debuff = fd.debuff;
-	local talents = fd.talents;
-	local targets = fd.targets;
-	local rage = fd.rage;
-	local rageDeficit = fd.rageDeficit;
-	
-	-- pulverize,target_if=dot.thrash_bear.stack=dot.thrash_bear.max_stacks;
+	local buff = fd.buff;	
+	local cooldown = fd.cooldown;
+
 	if talents[GR.Pulverize] and cooldown[GR.Pulverize].ready and debuff[GR.ThrashDot].count >= 2 then
 		return GR.Pulverize;
-	end
+	end	
 	
-	-- maul,if=rage.deficit<=10;
-	if rage >= 40 and rageDeficit <= 10 then
-		return GR.Maul;
-	end
-
-	-- moonfire,target_if=!dot.moonfire.ticking;
 	if not debuff[GR.MoonfireDot].up then
 		return GR.Moonfire;
 	end
 
-	-- fix for dropping trash debuff
-	if cooldown[GR.Thrash].ready and debuff[GR.ThrashDot].remains < 4 then
-		return GR.Thrash;
+	if targets >= 3 then
+		if cooldown[GR.Thrash].ready then
+			return GR.Thrash;
+		end	
 	end
 
-	-- mangle,if=dot.thrash_bear.ticking;
-	if cooldown[GR.Mangle].ready and debuff[GR.ThrashDot].remains > 5 then
-		return GR.Mangle;
+	if buff[GR.ToothAndClaw].up then
+		return GR.Maul;
 	end
+
+	-- if cooldown[GR.Thrash].ready and debuff[GR.ThrashDot].remains < 3 then
+	-- 	return GR.Thrash;
+	-- end
+	if cooldown[GR.Thrash].ready then
+		return GR.Thrash;
+	end	
 
 	-- moonfire,target_if=buff.galactic_guardian.up&active_enemies=1|dot.moonfire.refreshable;
-	if buff[GR.GalacticGuardianBuff].up and targets <= 1 or debuff[GR.MoonfireDot].refreshable then
+	-- if buff[GR.GalacticGuardianBuff].up and targets <= 1 or debuff[GR.MoonfireDot].refreshable then
+	if buff[GR.GalacticGuardianBuff].up then
 		return GR.Moonfire;
 	end
 
-	-- maul;
+	if targets >= 3 then
+		return GR.Swipe;
+	end
+
+	if cooldown[GR.Mangle].ready then
+		return GR.Mangle;
+	end
+	
 	if rage >= 40 then
 		return GR.Maul;
 	end
 
-	-- thrash;
-	if cooldown[GR.Thrash].ready then
-		return GR.Thrash;
-	end
-
-	-- swipe;
 	return GR.Swipe;
 end
 
 function Druid:GuardianCooldowns()
 	local fd = MaxDps.FrameData;
-	local cooldown = fd.cooldown;
-	local debuff = fd.debuff;
 	local talents = fd.talents;
-	local targets = fd.targets;
-	local rage = fd.rage;
-	
+	local targets = MaxDps:SmartAoe();
+	local rage = UnitPower('player', Enum.PowerType.Rage);
+	local rageMax = UnitPowerMax('player', Enum.PowerType.Rage);
+	local rageDeficit = rageMax - rage;
 	local targetHp = MaxDps:TargetPercentHealth() * 100;
 	local health = UnitHealth('player');
 	local healthMax = UnitHealthMax('player');
-	local healthPercent = (health / healthMax) * 100;
-		
-	if healthPercent <= 40 then
-		MaxDps:GlowCooldown(GR.SurvivalInstincts, cooldown[GR.SurvivalInstincts].ready);
-	end
-	
-	if healthPercent <= 45 then
-		MaxDps:GlowCooldown(GR.Renewal, cooldown[GR.Renewal].ready);
-	end
-	
-	if healthPercent <= 70 then
-		MaxDps:GlowCooldown(GR.Barkskin, cooldown[GR.Barkskin].ready);
-	end
-	
-	if healthPercent <= 75 then
-		MaxDps:GlowCooldown(GR.FrenziedRegeneration, cooldown[GR.FrenziedRegeneration].ready);
-	end
-	
-	-- barkskin,if=buff.bear_form.up;
-	if healthPercent <= 90 then
-		MaxDps:GlowCooldown(GR.Ironfur, cooldown[GR.Ironfur].ready and rage >= 40);
-	end
-		
-	-- lunar_beam,if=buff.bear_form.up;
-	if talents[GR.LunarBeam] then
-		MaxDps:GlowCooldown(GR.LunarBeam, cooldown[GR.LunarBeam].ready);
-	end
-
-	-- bristling_fur,if=buff.bear_form.up;
-	if talents[GR.BristlingFur] then
-		MaxDps:GlowCooldown(GR.BristlingFur, cooldown[GR.BristlingFur].ready);
-	end
-
-	-- incarnation,if=(dot.moonfire.ticking|active_enemies>1)&dot.thrash_bear.ticking;
-	if talents[GR.Incarnation] then
-		MaxDps:GlowCooldown(GR.Incarnation, cooldown[GR.Incarnation].ready and (
-			(debuff[GR.MoonfireDot].up or targets > 1) and debuff[GR.ThrashDot].up)
-		);
-	end
-	
-	-- pulverize,target_if=dot.thrash_bear.stack=dot.thrash_bear.max_stacks;
-	--if talents[GR.Pulverize] and cooldown[GR.Pulverize].ready and debuff[GR.ThrashDot].count >= 2 then
-	--	MaxDps:GlowCooldown(GR.Pulverize, cooldown[GR.Pulverize].ready);
-	--end
-end
-
-function Druid:GuardianMulti()
-	local fd = MaxDps.FrameData;
-	local cooldown = fd.cooldown;
-	local azerite = fd.azerite;
-	local buff = fd.buff;
+	local healthPercent = (health / healthMax) * 100;	
 	local debuff = fd.debuff;
-	local targets = fd.targets;
-	local rage = fd.rage;
-	local rageDeficit = fd.rageDeficit;
+	local buff = fd.buff;
+	local cooldown = fd.cooldown;
 
-	-- maul,if=essence.conflict_and_strife.major&!buff.sharpened_claws.up;
-	-- cannot detect
-	--if rage >= 40 and (MaxDps.AzeriteEssences.major == GR.ConflictAndStrife and not buff[GR.SharpenedClaws].up) then
-	--	return GR.Maul;
-	--end
-
-	-- ironfur,if=(rage>=cost&azerite.layered_mane.enabled)|rage.deficit<10;
-	--if cooldown[GR.Ironfur].ready and rage >= 40 and ((rage >= cooldown[GR.Ironfur].cost and azerite[A.LayeredMane] > 0) or rageDeficit < 10) then
-	--	return GR.Ironfur;
-	--end
-
-	-- thrash,if=(buff.incarnation.up&active_enemies>=4)|cooldown.thrash_bear.up;
-	if (buff[GR.Incarnation].up and targets >= 4) or cooldown[GR.ThrashBear].ready then
-		return GR.Thrash;
+	if talents[GR.Renewal] and cooldown[GR.Renewal].ready and healthPercent <= 35 then
+		return GR.Renewal;
 	end
 
-	-- mangle,if=buff.incarnation.up&active_enemies=3&dot.thrash_bear.ticking;
-	if cooldown[GR.Mangle].ready and (buff[GR.Incarnation].up and targets == 3 and debuff[GR.ThrashDot].up) then
-		return GR.Mangle;
+	if buff[GR.DreamOfCenarius].up and healthPercent <= 95 then
+		return GR.DreamOfCenarius;
 	end
 
-	-- moonfire,if=dot.moonfire.refreshable&active_enemies<=4;
-	if debuff[GR.MoonfireDot].refreshable and targets <= 4 then
-		return GR.Moonfire;
+	if cooldown[GR.SurvivalInstincts].ready and healthPercent <= 50 then
+		return GR.SurvivalInstincts;
+	end
+	
+	if cooldown[GR.Barkskin].ready and healthPercent <= 70 then
+		return GR.Barkskin;
+	end
+	
+	if cooldown[GR.FrenziedRegeneration].ready and healthPercent <= 75 and rage >= 10 then
+		return GR.FrenziedRegeneration;
+	end
+	
+	if rage >= 40 and healthPercent <= 90 then
+		return GR.Ironfur;
 	end
 
-	-- swipe,if=buff.incarnation.down;
-	if not buff[GR.Incarnation].up then
-		return GR.Swipe;
+	if talents[GR.RageOfTheSleeper] and cooldown[GR.RageOfTheSleeper].ready then
+		return GR.RageOfTheSleeper;
 	end
+
+	if talents[GR.Incarnation] and cooldown[GR.Incarnation].ready then
+		return GR.Incarnation;
+	end
+
+	if talents[GR.HeartOfTheWild] and cooldown[GR.HeartOfTheWild].ready then
+		return GR.HeartOfTheWild;
+	end
+
 end
+
+
 
