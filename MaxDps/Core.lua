@@ -98,7 +98,8 @@ function MaxDps:OnEnable()
 	self:RegisterEvent('NAME_PLATE_UNIT_ADDED');
 	self:RegisterEvent('NAME_PLATE_UNIT_REMOVED');
 	self:RegisterEvent('PLAYER_REGEN_ENABLED');
-	self:RegisterEvent('PLAYER_REGEN_DISABLED');
+	self:RegisterEvent('PLAYER_REGEN_DISABLED');	
+	self:RegisterEvent('PLAYER_TALENT_UPDATE');
 
 	if self.timeInCombat == nil then
 		self.timeInCombat = 0;

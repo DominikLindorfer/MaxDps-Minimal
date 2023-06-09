@@ -35,8 +35,9 @@ local GR = {
 	HeartOfTheWild = 319454,
 	RageOfTheSleeper = 200851,
 	ToothAndClaw = 135286,
-	DreamOfCenarius = 372152
-
+	DreamOfCenarius = 372152,
+	Regrowth = 8936,
+	Gore = 93622,
 };
 
 setmetatable(GR, Druid.spellMeta);
@@ -70,9 +71,7 @@ function Druid:Guardian()
 		end	
 	end
 
-	if buff[GR.ToothAndClaw].up then
-		return GR.Maul;
-	end
+
 
 	-- if cooldown[GR.Thrash].ready and debuff[GR.ThrashDot].remains < 3 then
 	-- 	return GR.Thrash;
@@ -85,6 +84,14 @@ function Druid:Guardian()
 	-- if buff[GR.GalacticGuardianBuff].up and targets <= 1 or debuff[GR.MoonfireDot].refreshable then
 	if buff[GR.GalacticGuardianBuff].up then
 		return GR.Moonfire;
+	end
+
+	if buff[GR.ToothAndClaw].up then
+		return GR.Maul;
+	end
+	
+	if buff[GR.Gore].up then
+		return GR.Mangle;
 	end
 
 	if targets >= 3 then
@@ -121,8 +128,8 @@ function Druid:GuardianCooldowns()
 		return GR.Renewal;
 	end
 
-	if buff[GR.DreamOfCenarius].up and healthPercent <= 95 then
-		return GR.DreamOfCenarius;
+	if buff[GR.DreamOfCenarius].up and healthPercent <= 70 then
+		return GR.Regrowth;
 	end
 
 	if cooldown[GR.SurvivalInstincts].ready and healthPercent <= 50 then
@@ -137,6 +144,10 @@ function Druid:GuardianCooldowns()
 		return GR.FrenziedRegeneration;
 	end
 	
+	if rage >= 40 and buff[GR.Ironfur].count <= 2 then
+		return GR.Ironfur;
+	end
+
 	if rage >= 40 and healthPercent <= 90 then
 		return GR.Ironfur;
 	end
@@ -151,6 +162,10 @@ function Druid:GuardianCooldowns()
 
 	if talents[GR.HeartOfTheWild] and cooldown[GR.HeartOfTheWild].ready then
 		return GR.HeartOfTheWild;
+	end
+
+	if rage >= 90 and not buff[GR.Ironfur].up then
+		return GR.Ironfur;
 	end
 
 end

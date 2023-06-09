@@ -42,6 +42,7 @@ local BR = {
 	DampenHarm = 122278,
 	BonedustBrew = 386276,
 	TierBuff = 394797,
+	ExplodingKeg = 325153,
 };
 
 function Monk:Brewmaster()
@@ -81,15 +82,23 @@ function Monk:Brewmaster()
 			return BR.TigerPalm;
 		end
 	end
+	
+	if buff[BR.RushingJadeWind].refreshable and cooldown[BR.RushingJadeWind].ready then
+		return BR.RushingJadeWind;
+	end
+	
+	if cooldown[BR.BreathofFire].ready then
+		return BR.BreathofFire;
+	end
+
+	if cooldown[BR.BlackoutKick].ready then
+		return BR.BlackoutKick;
+	end
 
 	if targets > 1 and energy >= 25 then
 		if (buff[BR.TierBuff].refreshable and cooldown[BR.SpinningCraneKick].ready) or (buff[BR.TierBuff].count < 4 and cooldown[BR.SpinningCraneKick].ready) then
 			return BR.SpinningCraneKick;
 		end
-	end
-
-	if buff[BR.RushingJadeWind].refreshable and cooldown[BR.RushingJadeWind].ready then
-		return BR.RushingJadeWind;
 	end
 
 	if targets > 3 then
@@ -100,14 +109,6 @@ function Monk:Brewmaster()
 
 	if cooldown[BR.RisingSunKick].ready then
 		return BR.RisingSunKick;
-	end
-
-	if cooldown[BR.BreathofFire].ready then
-		return BR.BreathofFire;
-	end
-
-	if cooldown[BR.BlackoutKick].ready then
-		return BR.BlackoutKick;
 	end
 	
 	if targets > 1 and energy >= 25 then
@@ -134,6 +135,7 @@ function Monk:BrewmasterCooldowns()
 	local targets = MaxDps:SmartAoe();
 	local gcd = fd.gcd;
 	local timeToDie = fd.timeToDie;
+	local timeInCombat = fd.timeInCombat;
 	local energy = UnitPower('player', Energy);
 	local energyRegen = GetPowerRegen();
 	local health = UnitHealth('player');
@@ -183,12 +185,17 @@ function Monk:BrewmasterCooldowns()
 		return BR.WeaponsOfOrder;
 	end
 
-	if cooldown[BR.BonedustBrew].ready then
-		return BR.BonedustBrew;
+	if timeInCombat >= 2.5 then
+		if talents[BR.ExplodingKeg] and cooldown[BR.ExplodingKeg].ready then
+			return BR.ExplodingKeg;
+		end
 	end
 
-	
-
+	if timeInCombat >= 2 then
+		if talents[BR.BonedustBrew] and cooldown[BR.BonedustBrew].ready then
+			return BR.BonedustBrew;
+		end
+	end
 	-- if talents[BR.HealingElixir] and healthPercent <= 65 and cooldown[BR.HealingElixir].ready then
 	-- 	return BR.HealingElixir;
 	-- end

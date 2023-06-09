@@ -73,9 +73,9 @@ function DeathKnight:Blood()
 	fd.runes = runes;
 	fd.runicPower = runicPower;
 	
-	if covenantId == NightFae then
-		BL.DeathAndDecay = BL.DeathAndDecay;
-	end
+	-- if covenantId == NightFae then
+	-- 	BL.DeathAndDecay = BL.DeathAndDecay;
+	-- end
 
 	-- Death and Decay
 	if cooldown[BL.DeathAndDecay].ready and not buff[BL.DeathAndDecayBuff].up then
