@@ -21,6 +21,7 @@ function DemonHunter:Enable()
 		MaxDps:Print(MaxDps.Colors.Info .. 'DemonHunter - Havoc');
 	elseif MaxDps.Spec == 2 then
 		MaxDps.NextSpell = DemonHunter.Vengeance;
+		MaxDps.NextCooldown = DemonHunter.VengeanceCooldowns;
 		MaxDps:Print(MaxDps.Colors.Info .. 'DemonHunter - Vengeance');
 	end
 
