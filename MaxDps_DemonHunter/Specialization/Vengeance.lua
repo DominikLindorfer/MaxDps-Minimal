@@ -15,6 +15,7 @@ local VG = {
 	BulkExtraction = 320341,
 	DemonSpikes = 203720,
 	DemonSpikesBuff = 203819,
+	Elysiandecree = 390163,
 	Fallout = 227174,
 	Felblade = 232893,
 	FelDevastation = 212084,
@@ -75,8 +76,9 @@ function DemonHunter:Vengeance()
 		shear = VG.Fracture
 	end	
 
-	if debuff[VG.Frailty].up and debuff[VG.Frailty].count >= 3 and cooldown[VG.TheHunt].ready then
-		return VG.TheHunt;
+	channeling = MaxDps:IsPlayerChanneling()
+	if channeling then
+		return nil;
 	end
 
 	if debuff[VG.Frailty].up and debuff[VG.Frailty].count >= 6 and cooldown[VG.SoulCarver].ready then
@@ -113,10 +115,6 @@ function DemonHunter:Vengeance()
 		return VG.ImmolationAura;
 	end
 
-	if fury >= 50 and cooldown[VG.FelDevastation].ready then
-		return VG.FelDevastation;
-	end
-
 	if cooldown[VG.SigilOfFlame].ready and furyDeficit >= 30 and (not talents[VG.SoulSigils] or soulFragments <= 4) then
 		return VG.SigilOfFlame;
 	end
@@ -142,6 +140,11 @@ function DemonHunter:VengeanceCooldowns()
 	local healthMax = UnitHealthMax('player');
 	local healthPercent = (health / healthMax) * 100;
 
+	channeling = MaxDps:IsPlayerChanneling()
+	if channeling then
+		return nil;
+	end
+
 	if cooldown[VG.FieryBrand].ready then
 		return VG.FieryBrand
 	end
@@ -152,6 +155,18 @@ function DemonHunter:VengeanceCooldowns()
 
 	if healthPercent <= 30 then
 		return VG.Metamorphosis;
+	end
+	
+	if fury >= 50 and cooldown[VG.FelDevastation].ready then
+		return VG.FelDevastation;
+	end
+
+	if cooldown[VG.Elysiandecree].ready then
+		return VG.Elysiandecree;
+	end	
+
+	if debuff[VG.Frailty].up and debuff[VG.Frailty].count >= 3 and cooldown[VG.TheHunt].ready then
+		return VG.TheHunt;
 	end
 
 end
