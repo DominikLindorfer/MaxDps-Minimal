@@ -99,7 +99,22 @@ function MaxDps:OnEnable()
 	self:RegisterEvent('NAME_PLATE_UNIT_REMOVED');
 	self:RegisterEvent('PLAYER_REGEN_ENABLED');
 	self:RegisterEvent('PLAYER_REGEN_DISABLED');	
-	self:RegisterEvent('PLAYER_TALENT_UPDATE');
+	-- self:RegisterEvent('ACTIVE_TALENT_GROUP_CHANGED');
+	-- self:RegisterEvent('PLAYER_TALENT_UPDATE');
+
+	local f = CreateFrame('frame')
+	f:RegisterEvent'PLAYER_ENTERING_WORLD'
+	f:RegisterEvent'PLAYER_LEAVING_WORLD'
+
+	f:SetScript("OnEvent", function(self, event, ...)
+		if event == "PLAYER_ENTERING_WORLD" then
+			self:RegisterEvent("PLAYER_TALENT_UPDATE")
+		elseif event == "PLAYER_LEAVING_WORLD" then
+			self:UnregisterEvent("PLAYER_TALENT_UPDATE")
+		elseif event == "PLAYER_TALENT_UPDATE" then
+			-- Talent stuff.
+		end
+	end)
 
 	if self.timeInCombat == nil then
 		self.timeInCombat = 0;
