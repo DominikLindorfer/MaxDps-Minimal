@@ -139,6 +139,7 @@ function DemonHunter:VengeanceCooldowns()
 	local health = UnitHealth('player');
 	local healthMax = UnitHealthMax('player');
 	local healthPercent = (health / healthMax) * 100;
+	local timeInCombat = fd.timeInCombat;
 
 	channeling = MaxDps:IsPlayerChanneling()
 	if channeling then
@@ -161,9 +162,11 @@ function DemonHunter:VengeanceCooldowns()
 		return VG.FelDevastation;
 	end
 
-	if cooldown[VG.Elysiandecree].ready then
-		return VG.Elysiandecree;
-	end	
+	if timeInCombat > 2.5 then
+		if cooldown[VG.Elysiandecree].ready then
+			return VG.Elysiandecree;
+		end	
+	end
 
 	if debuff[VG.Frailty].up and debuff[VG.Frailty].count >= 3 and cooldown[VG.TheHunt].ready then
 		return VG.TheHunt;
