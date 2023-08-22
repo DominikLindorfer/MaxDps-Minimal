@@ -1,6 +1,6 @@
 # MaxDps-Minimal
 
-MaxDps-Minimal is a hackable and easily accessible fork from @kaminaris' MaxDps (https://github.com/kaminaris/MaxDps), which was created for WoW 10.0 while the latter project was discontinued. 
+MaxDps-Minimal is a hackable and more easily accessible fork from @kaminaris' MaxDps (https://github.com/kaminaris/MaxDps), which was created for WoW 10.0 while the latter project was discontinued. 
 
 ## Purpose and WeakAura
 MaxDps-Minimal serves a simple purpose: show your rotation's spells and cooldown separately in a customized WeakAura as shown below:
