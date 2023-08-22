@@ -25,11 +25,9 @@ function Monk:Enable()
 		MaxDps.NextCooldown = Monk.BrewmasterCooldowns;
 		MaxDps:Print(MaxDps.Colors.Info .. 'Monk Brewmaster');
 	elseif MaxDps.Spec == 2 then
-		MaxDps.NextSpell = Monk.Mistweaver;
-		MaxDps:Print(MaxDps.Colors.Info .. 'Monk Mistweaver');
+		MaxDps:Print(MaxDps.Colors.Info .. 'Monk Mistweaver not implemented!');
 	elseif MaxDps.Spec == 3 then
-		MaxDps.NextSpell = Monk.Windwalker;
-		MaxDps:Print(MaxDps.Colors.Info .. 'Monk Windwalker');
+		MaxDps:Print(MaxDps.Colors.Info .. 'Monk Windwalker not implemented!');
 	end
 
 	return true;

@@ -18,19 +18,15 @@ Druid.spellMeta = {
 function Druid:Enable()
 	Druid:UnregisterEvent('UNIT_SPELLCAST_SUCCEEDED');
 	if MaxDps.Spec == 1 then
-		MaxDps.NextSpell = Druid.Balance;
 		MaxDps:Print(MaxDps.Colors.Info .. 'Druid Balance');
 	elseif MaxDps.Spec == 2 then
-		MaxDps.NextSpell = Druid.Feral;
-		MaxDps:Print(MaxDps.Colors.Info .. 'Druid Feral');
-		Druid:RegisterEvent('UNIT_SPELLCAST_SUCCEEDED');
+		MaxDps:Print(MaxDps.Colors.Info .. 'Druid Feral not implemented!');
 	elseif MaxDps.Spec == 3 then
 		MaxDps.NextSpell = Druid.Guardian;
 		MaxDps.NextCooldown = Druid.GuardianCooldowns;
-		MaxDps:Print(MaxDps.Colors.Info .. 'Druid Guardian');
+		MaxDps:Print(MaxDps.Colors.Info .. 'Druid Guardian not implemented!');
 	elseif MaxDps.Spec == 4 then
-		MaxDps.NextSpell = Druid.Restoration;
-		MaxDps:Print(MaxDps.Colors.Info .. 'Druid Restoration');
+		MaxDps:Print(MaxDps.Colors.Info .. 'Druid Restoration not implemented!');
 	end
 
 	return true;

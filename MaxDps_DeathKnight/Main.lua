@@ -40,11 +40,9 @@ function DeathKnight:Enable()
 		MaxDps.NextCooldown = DeathKnight.BloodCooldowns;
 		MaxDps:Print(MaxDps.Colors.Info .. 'Death Knight Blood');
 	elseif MaxDps.Spec == 2 then
-		MaxDps.NextSpell = DeathKnight.Frost;
-		MaxDps:Print(MaxDps.Colors.Info .. 'Death Knight Frost');
+		MaxDps:Print(MaxDps.Colors.Info .. 'Death Knight Frost not implemented!');
 	elseif MaxDps.Spec == 3 then
-		MaxDps.NextSpell = DeathKnight.Unholy;
-		MaxDps:Print(MaxDps.Colors.Info .. 'Death Knight Unholy');
+		MaxDps:Print(MaxDps.Colors.Info .. 'Death Knight Unholy not implemented!');
 	end
 
 	return true;
