@@ -1,7 +1,7 @@
 ## Title: MaxDps-Minimal
-## Notes: Rotation helper framework.
+## Notes: WoW-RotBot Rotation Framework.
 ## Version: 10.0
-## Author: Dominik Lindorfer
+## Author: Dominik Lindorfer - Forked from https://github.com/kaminaris/MaxDps while MaxDps was discontinued during 9.0 and 10.0
 ## Interface: 100000
 ## SavedVariables: MaxDpsOptions
 
