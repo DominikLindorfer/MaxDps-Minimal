@@ -16,8 +16,7 @@ Paladin.spellMeta = {
 
 function Paladin:Enable()
 	if MaxDps.Spec == 1 then
-		-- MaxDps.NextSpell = Paladin.Holy;
-		MaxDps:Print(MaxDps.Colors.Info .. 'Paladin Holy');
+		MaxDps:Print(MaxDps.Colors.Info .. 'Paladin Holy not implemented!');
 	elseif MaxDps.Spec == 2 then
 		MaxDps.NextSpell = Paladin.Protection;
 		MaxDps.NextCooldown = Paladin.ProtectionCooldowns;
