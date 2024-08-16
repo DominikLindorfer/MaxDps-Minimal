@@ -18,6 +18,7 @@ local RT = {
 	DivineStorm       = 53385,
 	DivinePurpose     = 223817,
 	TemplarsVerdict   = 85256,
+	FinalVerdict      = 383328,
 	HammerOfWrath     = 24275,
 	WakeOfAshes       = 255937,
 	BladeOfJustice    = 184575,
@@ -38,6 +39,9 @@ local RT = {
 	TemplarStrike = 407480,
 	TemplarSlash = 406647,
 	DivineToll = 375576,
+	DivineProtection = 403876,
+	HammerOfJustice = 853,
+	WordOfGlory = 85673,
 };
 setmetatable(RT, Paladin.spellMeta);
 
@@ -57,12 +61,19 @@ function Paladin:Retribution()
 	local healthMax = UnitHealthMax('player');
 	local healthPercent = ( health / healthMax ) * 100;
 
+	print("DEBUG: Retribution Rotation")
+	print(holyPower, targets)
+
+	if cooldown[RT.ExecutionSentence].ready then
+		return RT.ExecutionSentence;
+	end
+
 	if holyPower == 5 and targets > 1 then
 		return RT.DivineStorm;
 	end
 
 	if holyPower == 5 and targets == 1 then
-		return RT.TemplarsVerdict;
+		return RT.FinalVerdict;
 	end
 
 	if cooldown[RT.WakeOfAshes].ready and holyPower <= 2 then
@@ -93,13 +104,21 @@ function Paladin:Retribution()
 		return RT.HammerOfWrath;
 	end
 
-	if cooldown[RT.TemplarStrike].ready then
-		return RT.TemplarStrike;
+	if cooldown[RT.Judgment].ready then
+		return RT.Judgment;
 	end
 
-	if cooldown[RT.TemplarSlash].ready then
-		return RT.TemplarSlash;
+	if cooldown[RT.Judgment].ready then
+		return RT.Judgment;
 	end
+
+	-- if cooldown[RT.TemplarStrike].ready then
+	-- 	return RT.TemplarStrike;
+	-- end
+
+	-- if cooldown[RT.TemplarSlash].ready then
+	-- 	return RT.TemplarSlash;
+	-- end
 
 end
 
@@ -121,6 +140,33 @@ function Paladin:RetributionCooldowns()
 	local healthMax = UnitHealthMax('player');
 	local healthPercent = ( health / healthMax ) * 100;
 
-	return 1
+
+	if healthPercent <= 10 and cooldown[RT.DivineShield].ready then
+		return RT.DivineShield;
+	end
+
+	if healthPercent <= 5 and cooldown[RT.LayOnHands].ready then
+		return RT.LayOnHands;
+	end
+
+	if healthPercent <= 50 and cooldown[RT.ShieldOfVengeance].ready then
+		return RT.ShieldOfVengeance;
+	end
+
+	if healthPercent <= 60 and cooldown[RT.DivineProtection].ready then
+		return RT.DivineProtection;
+	end
+
+	-- if cooldown[RT.HammerOfJustice].ready and targetHp >= 60 then
+	-- 	return RT.HammerOfJustice;
+	-- end
+
+	if cooldown[RT.AvengingWrath].ready then
+		return RT.AvengingWrath;
+	end
+
+	if holyPower >= 3 and healthPercent <= 65 then
+		return RT.WordOfGlory;
+	end
 
 end

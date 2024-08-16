@@ -1,13 +1,11 @@
 ## Title: MaxDps_Paladin
-## Version: 9.0.0
-## Author: Kaminaris
-## Interface: 90001
+## Version: 11.0.2
+## Author: Dominik Lindorfer - Forked from https://github.com/kaminaris/MaxDps while MaxDps was discontinued during 9.0 and 10.0
+## Interface: 110002
 ## Dependencies: MaxDps
 ## LoadOnDemand: 1
-## X-Curse-Project-ID: 98895
-## X-WoWI-ID: 24646
 
 Main.lua
-Specialization\Holy.lua
+## Specialization\Holy.lua
 Specialization\Protection.lua
 Specialization\Retribution.lua

@@ -15,9 +15,10 @@ local IsPlayerSpell = IsPlayerSpell;
 local UnitClass = UnitClass;
 local GetSpecialization = GetSpecialization;
 local CreateFrame = CreateFrame;
-local GetAddOnInfo = GetAddOnInfo;
-local IsAddOnLoaded = IsAddOnLoaded;
-local LoadAddOn = LoadAddOn;
+
+local GetAddOnInfo = C_AddOns.GetAddOnInfo or GetAddOnInfo
+local IsAddOnLoaded = C_AddOns.IsAddOnLoaded or IsAddOnLoaded;
+local LoadAddOn = C_AddOns.LoadAddOn or LoadAddOn;
 
 local spellHistoryBlacklist = {
 	[75] = true; -- Auto shot
@@ -39,7 +40,7 @@ function MaxDps:Print(...)
 end
 
 function MaxDps:EnableRotation()
-	print("EnableRotation() activated!")
+	-- print("EnableRotation() activated!")
 	
 	self:CheckTalents();
 	self:GetCovenantInfo();
@@ -49,6 +50,8 @@ function MaxDps:EnableRotation()
 end
 
 function MaxDps:EnableRotationTimer()
+	-- print(self.db.global.interval)
+	self.db.global.interval = 0.01
 	self.RotationTimer = self:ScheduleRepeatingTimer('InvokeNextSpell', self.db.global.interval);
   	-- self.timerCount = 0
 	-- self.RotationTimer = self:ScheduleRepeatingTimer("TimerFeedback", 0.1)
@@ -242,7 +245,7 @@ end
 
 function MaxDps:LoadModule()
 	-- print("LoadModule() activated!")
-	-- print(self.ClassId, self.Spec, self.Classes[self.ClassId])
+	print(self.ClassId, self.Spec, self.Classes[self.ClassId])
 
 	if self.Classes[self.ClassId] == nil then
 		self:Print(self.Colors.Error .. 'Invalid player class, please contact author of addon.');

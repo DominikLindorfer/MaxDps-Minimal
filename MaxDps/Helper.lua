@@ -16,7 +16,8 @@ local _Exhaustion = 57723;
 local _Bloodlusts = { _Bloodlust, _TimeWrap, _Heroism, _AncientHysteria, _Netherwinds, _DrumsOfFury };
 
 -- Global functions
-local UnitAura = UnitAura;
+local UnitAura = C_UnitAuras.GetAuraDataByIndex;
+-- local UnitAura = UnitAura;
 local pairs = pairs;
 local ipairs = ipairs;
 local StringSplit = strsplit;
@@ -31,13 +32,13 @@ local C_AzeriteEssence = C_AzeriteEssence;
 local FindSpellOverrideByID = FindSpellOverrideByID;
 local UnitCastingInfo = UnitCastingInfo;
 local GetTime = GetTime;
-local GetSpellCooldown = GetSpellCooldown;
-local GetSpellInfo = GetSpellInfo;
+local GetSpellCooldown = C_Spell and C_Spell.GetSpellCooldown;
+local GetSpellInfo = C_Spell and C_Spell.GetSpellInfo;
 local UnitGUID = UnitGUID;
 local GetSpellBaseCooldown = GetSpellBaseCooldown;
 local IsSpellInRange = IsSpellInRange;
 local UnitSpellHaste = UnitSpellHaste;
-local GetSpellCharges = GetSpellCharges;
+local GetSpellCharges = C_Spell and C_Spell.GetSpellCharges or GetSpellCharges;
 local UnitPower = UnitPower;
 local UnitPowerMax = UnitPowerMax;
 local UnitHealth = UnitHealth;
@@ -102,7 +103,11 @@ function MaxDps:IntUnitAura(unit, nameOrId, filter, timeShift)
 	local t = GetTime();
 
 	while true do
-		local name, _, count, _, duration, expirationTime, _, _, _, id = UnitAura(unit, i, filter);
+
+		local aura = UnitAura(unit, i, filter);
+		local name, count, duration, expirationTime, id = aura.name, aura.charges, aura.duration, aura.expirationTime, aura.spellId
+
+		-- local name, _, count, _, duration, expirationTime, _, _, _, id = UnitAura(unit, i, filter);
 		if not name then
 			break;
 		end
@@ -153,10 +158,20 @@ function MaxDps:CollectAura(unit, timeShift, output, filter)
 	end
 
 	while true do
-		local name, _, count, _, duration, expirationTime, _, _, _, id = UnitAura(unit, i, filter);
-        -- local name, icon, count, debuffType, duration, expirationTime, unitCaster, canStealOrPurge, nameplateShowPersonal, spellId = UnitDebuff("target", i)
+		
+		local auraData = UnitAura(unit, i, filter)
+        local name = auraData and auraData.name
+        local count = auraData and auraData.applications
+        local duration = auraData and auraData.duration
+        local expirationTime = auraData and auraData.expirationTime
+        local id = auraData and auraData.spellId
+        local maxstacks = auraData and auraData.maxCharges
+        local value = auraData and auraData.points and auraData.points[1]
+
+		-- local name, _, count, _, duration, expirationTime, _, _, _, id = UnitAura(unit, i, filter);
+		-- local name, icon, count, debuffType, duration, expirationTime, unitCaster, canStealOrPurge, nameplateShowPersonal, spellId = UnitDebuff("target", i)
 		-- print(unit)
-		-- print(name)
+		-- print(name, count, duration, expirationTime, id)
 		if not name then
 			break;
 		end
@@ -829,8 +844,8 @@ end
 
 function MaxDps:DumpAzeriteTraits()
 	for id, rank in pairs(self.AzeriteTraits) do
-		local n = GetSpellInfo(id);
-		print(n .. ' (' .. id .. '): ' .. rank);
+		-- local n = GetSpellInfo(id);
+		-- print(n .. ' (' .. id .. '): ' .. rank);
 	end
 end
 
@@ -874,7 +889,8 @@ function MaxDps:EndCast(target)
 
 	-- we can only check player global cooldown
 	if target == 'player' then
-		local gstart, gduration = GetSpellCooldown(_GlobalCooldown);
+		local spellCooldownInfo = GetSpellCooldown(_GlobalCooldown);
+		local gstart, gduration = spellCooldownInfo.startTime, spellCooldownInfo.duration
 		gcd = gduration - (t - gstart);
 
 		if gcd < 0 then
@@ -919,7 +935,9 @@ end
 -----------------------------------------------------------------
 
 function MaxDps:ItemCooldown(itemId, timeShift)
-	local start, duration, enabled = GetItemCooldown(itemId);
+	local spellCooldownInfo = GetSpellCooldown(itemId);
+	local start, duration, enabled = spellCooldownInfo.startTime, spellCooldownInfo.duration, spellCooldownInfo.isEnabled
+	-- local start, duration, enabled = GetItemCooldown(itemId);
 
 	local t = GetTime();
 	local remains = 100000;
@@ -942,11 +960,17 @@ function MaxDps:CooldownConsolidated(spellId, timeShift)
 	local t = GetTime();
 
 	local enabled;
-	local charges, maxCharges, start, duration = GetSpellCharges(spellId);
+	local chargeInfo = spellId and GetSpellCharges(spellId);
+	charges = chargeInfo and chargeInfo.currentCharges
+	maxCharges = chargeInfo and chargeInfo.maxCharges
+	start = chargeInfo and chargeInfo.cooldownStartTime
+	duration = chargeInfo and chargeInfo.cooldownDuration
+	-- local charges, maxCharges, start, duration = GetSpellCharges(spellId);
 	local fullRecharge, partialRecharge = 0, 0;
 
 	if charges == nil then
-		start, duration, enabled = GetSpellCooldown(spellId);
+		spellCooldownInfo = GetSpellCooldown(spellId);
+		start, duration, enabled = spellCooldownInfo.startTime, spellCooldownInfo.duration, spellCooldownInfo.isEnabled
 		maxCharges = 1;
 
 		if enabled and duration == 0 and start == 0 then
@@ -989,7 +1013,9 @@ end
 
 -- @deprecated
 function MaxDps:Cooldown(spell, timeShift)
-	local start, duration, enabled = GetSpellCooldown(spell);
+	
+	local spellCooldownInfo = GetSpellCooldown(spell);
+	local start, duration, enabled = spellCooldownInfo.startTime, spellCooldownInfo.duration, spellCooldownInfo.isEnabled
 	if enabled and duration == 0 and start == 0 then
 		return 0;
 	elseif enabled then
@@ -1001,7 +1027,8 @@ end
 
 -- @deprecated
 function MaxDps:SpellCharges(spell, timeShift)
-	local currentCharges, maxCharges, cooldownStart, cooldownDuration = GetSpellCharges(spell);
+	chargeInfo = GetSpellCharges(spellId);
+	local currentcharges, maxCharges, cooldownStart, cooldownDuration = chargeInfo.currentCharges, chargeInfo.maxCharges, chargeInfo.cooldownStartTime, chargeInfo.cooldownDuration;
 
 	if currentCharges == nil then
 		local cd = MaxDps:Cooldown(spell, timeShift);
@@ -1117,7 +1144,9 @@ end
 
 MaxDps.Spellbook = {};
 function MaxDps:FindSpellInSpellbook(spell)
-	local spellName = GetSpellInfo(spell);
+
+	local spellInfo = spell and GetSpellInfo(spell);
+	spellName = spellInfo.name;
 	if MaxDps.Spellbook[spellName] then
 		return MaxDps.Spellbook[spellName];
 	end
