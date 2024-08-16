@@ -61,8 +61,8 @@ function Paladin:Retribution()
 	local healthMax = UnitHealthMax('player');
 	local healthPercent = ( health / healthMax ) * 100;
 
-	print("DEBUG: Retribution Rotation")
-	print(holyPower, targets)
+	-- print("DEBUG: Retribution Rotation")
+	-- print(holyPower, targets)
 
 	if cooldown[RT.ExecutionSentence].ready then
 		return RT.ExecutionSentence;
