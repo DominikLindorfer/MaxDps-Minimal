@@ -35,13 +35,16 @@ local RT = {
 	SelflessHealer	  = 85804,
 	FlashOfLight      = 19750,
 	EmpyreanPowerBuff = 326733,
-	FinalVerdictBuff = 337228,
+	-- FinalVerdictBuff = 337228,
+	-- FinalVerdictBuff = 414949,
+	FinalVerdictBuff = 383329,
 	TemplarStrike = 407480,
 	TemplarSlash = 406647,
 	DivineToll = 375576,
 	DivineProtection = 403876,
 	HammerOfJustice = 853,
 	WordOfGlory = 85673,
+	DivineShield = 642,
 };
 setmetatable(RT, Paladin.spellMeta);
 
@@ -71,6 +74,14 @@ function Paladin:Retribution()
 	if holyPower == 5 and targets > 1 then
 		return RT.DivineStorm;
 	end
+	
+	if cooldown[RT.HammerOfWrath].ready and buff[RT.FinalVerdictBuff].up then
+		return RT.HammerOfWrath;
+	end
+
+	if cooldown[RT.HammerOfWrath].ready and buff[RT.AvengingWrath].up then
+		return RT.HammerOfWrath;
+	end
 
 	if holyPower == 5 and targets == 1 then
 		return RT.FinalVerdict;
@@ -99,7 +110,7 @@ function Paladin:Retribution()
 	if holyPower == 4 and targets == 1 then
 		return RT.TemplarsVerdict;
 	end
-	
+
 	if cooldown[RT.HammerOfWrath].ready and targetHp <= 20 then
 		return RT.HammerOfWrath;
 	end
@@ -108,8 +119,12 @@ function Paladin:Retribution()
 		return RT.Judgment;
 	end
 
-	if cooldown[RT.Judgment].ready then
-		return RT.Judgment;
+	if cooldown[RT.BladeOfJustice].ready then
+		return RT.BladeOfJustice;
+	end
+
+	if cooldown[RT.WakeOfAshes].ready then
+		return RT.WakeOfAshes;
 	end
 
 	-- if cooldown[RT.TemplarStrike].ready then
