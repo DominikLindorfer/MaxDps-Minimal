@@ -36,6 +36,8 @@ local PR = {
 	Sentinel = 389539,
 	LayOnHands = 633,
 	Forbereance = 25771,
+	SacredWeapon = 432472,
+	HolyBulwark = 432459,
 };
 
 setmetatable(PR, Paladin.spellMeta);
@@ -139,6 +141,14 @@ function Paladin:ProtectionCooldowns()
 
 	if cooldown[PR.Sentinel].ready then
 		return PR.Sentinel;
+	end
+
+	if cooldown[PR.HolyBulwark].ready then
+		return PR.HolyBulwark;
+	end
+
+	if cooldown[PR.SacredWeapon].ready then
+		return PR.SacredWeapon;
 	end
 
 	-- if talents[PR.Seraphim] and cooldown[PR.Seraphim].ready then
